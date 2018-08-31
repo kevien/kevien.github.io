@@ -1,0 +1,1230 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="概述DLL远程注入dll的注入和卸载关键性代码如下: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DLL注入">
+<meta property="og:url" content="http://kevien.github.io/2017/07/16/windows DLL注入/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="概述DLL远程注入dll的注入和卸载关键性代码如下: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/1.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/2.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/3.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/4.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/5.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/dependency.png">
+<meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/dumpbin.png">
+<meta property="og:updated_time" content="2017-09-15T04:26:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DLL注入">
+<meta name="twitter:description" content="概述DLL远程注入dll的注入和卸载关键性代码如下: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091">
+<meta name="twitter:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2017/07/16/windows DLL注入/"/>
+
+
+
+
+
+  <title>DLL注入 | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/07/16/windows DLL注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                DLL注入
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T10:13:25+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/windows安全/" itemprop="url" rel="index">
+                    <span itemprop="name">windows安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><h4 id="DLL远程注入"><a href="#DLL远程注入" class="headerlink" title="DLL远程注入"></a>DLL远程注入</h4><p>dll的注入和卸载<br><img src="/2017/07/16/windows DLL注入/1.png" alt=""><br>关键性代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">VOID CInjectDllDlg::InjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    char *pFunName = &quot;LoadLibraryA&quot;;</div><div class="line"></div><div class="line">    // 打开目标进程</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 计算欲注入DLL文件完整路径的长度</div><div class="line">    int nDllLen = lstrlen(szDllName) + sizeof(char);</div><div class="line"></div><div class="line">    // 在目标进程申请一块长度为nDllLen大小的内存空间</div><div class="line">    PVOID pDllAddr = VirtualAllocEx(hProcess,</div><div class="line">                                    NULL, nDllLen,</div><div class="line">                                    MEM_COMMIT,</div><div class="line">                                    PAGE_READWRITE);</div><div class="line"></div><div class="line">    if ( pDllAddr == NULL )</div><div class="line">    &#123;</div><div class="line">        CloseHandle(hProcess);</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line"></div><div class="line">    // 将欲注入DLL文件的完整路径写入在目标进程中申请的空间内</div><div class="line">    WriteProcessMemory(hProcess, pDllAddr, szDllName, </div><div class="line">                       nDllLen, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 获得LoadLibraryA()函数的地址</div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    // 创建远程线程</div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess,</div><div class="line">                         NULL, 0,</div><div class="line">                         (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                         pDllAddr, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void CInjectDllDlg::OnBtnUninject() </div><div class="line">&#123;</div><div class="line">    // TODO: Add your control notification handler code here</div><div class="line">    char szDllName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    char szProcessName[MAXBYTE] = &#123; 0 &#125;;</div><div class="line">    DWORD dwPid = 0;</div><div class="line">    </div><div class="line">    GetDlgItemText(IDC_EDIT_DLLFILE, szDllName, MAX_PATH);</div><div class="line">    GetDlgItemText(IDC_EDIT_PROCESSNAME, szProcessName, MAXBYTE);</div><div class="line">    </div><div class="line">    // 由进程名获得PID</div><div class="line">    dwPid = GetProcId(szProcessName);</div><div class="line">    </div><div class="line">    // 注入szDllName到dwPid</div><div class="line">    UnInjectDll(dwPid, szDllName);</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CInjectDllDlg::UnInjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hSnap = CreateToolhelp32Snapshot(</div><div class="line">                            TH32CS_SNAPMODULE, </div><div class="line">                            dwPid);</div><div class="line"></div><div class="line">    MODULEENTRY32 me32;</div><div class="line">    me32.dwSize = sizeof(me32);</div><div class="line"></div><div class="line">    // 查找匹配的进程名称</div><div class="line">    BOOL bRet = Module32First(hSnap, &amp;me32);</div><div class="line">    while ( bRet )</div><div class="line">    &#123;</div><div class="line">        if ( lstrcmp(strupr(me32.szExePath), </div><div class="line">                     strupr(szDllName)) == 0 )</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        bRet = Module32Next(hSnap, &amp;me32);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    CloseHandle(hSnap);</div><div class="line"></div><div class="line">    char *pFunName = &quot;FreeLibrary&quot;;</div><div class="line"></div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, </div><div class="line">                                        (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                                        me32.hModule, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 整个注入与卸载的过程其实就是让远程线程执行一次LoadLibrary()函数或FreeLibrary()函数。</p>
+<h4 id="无DLL的代码注入"><a href="#无DLL的代码注入" class="headerlink" title="无DLL的代码注入"></a>无DLL的代码注入</h4><p>  <img src="/2017/07/16/windows DLL注入/2.png" alt=""><br>关键性代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">typedef struct _DATA</div><div class="line">&#123;</div><div class="line">    DWORD dwLoadLibrary;</div><div class="line">    DWORD dwGetProcAddress;</div><div class="line">    DWORD dwGetModuleHandle;</div><div class="line">    DWORD dwGetModuleFileName;</div><div class="line"></div><div class="line">    char User32Dll[STRLEN];</div><div class="line">    char MessageBox[STRLEN];</div><div class="line">    char Str[STRLEN];</div><div class="line">&#125;DATA, *PDATA;</div><div class="line"></div><div class="line">DWORD WINAPI RemoteThreadProc(LPVOID lpParam)</div><div class="line">&#123;</div><div class="line">    PDATA pData = (PDATA)lpParam;</div><div class="line"></div><div class="line">    // 定义API函数原型</div><div class="line">    HMODULE (__stdcall *MyLoadLibrary)(LPCTSTR);</div><div class="line">    FARPROC (__stdcall *MyGetProcAddress)(HMODULE, LPCSTR);</div><div class="line">    HMODULE (__stdcall *MyGetModuleHandle)(LPCTSTR);</div><div class="line">    int (__stdcall *MyMessageBox)(HWND, LPCTSTR, LPCTSTR, UINT);</div><div class="line">    DWORD (__stdcall *MyGetModuleFileName)(HMODULE, LPTSTR, DWORD);</div><div class="line"></div><div class="line">    MyLoadLibrary = (HMODULE (__stdcall *)(LPCTSTR))</div><div class="line">                                            pData-&gt;dwLoadLibrary;</div><div class="line">    MyGetProcAddress = (FARPROC (__stdcall *)(HMODULE, LPCSTR))</div><div class="line">                                            pData-&gt;dwGetProcAddress;</div><div class="line">    MyGetModuleHandle = (HMODULE (__stdcall *)(LPCSTR))</div><div class="line">                                            pData-&gt;dwGetModuleHandle;</div><div class="line">    MyGetModuleFileName = (DWORD (__stdcall *)(HMODULE, LPTSTR, DWORD))</div><div class="line">                                            pData-&gt;dwGetModuleFileName;</div><div class="line"></div><div class="line">    HMODULE hModule = MyLoadLibrary(pData-&gt;User32Dll);</div><div class="line">    MyMessageBox = (int (__stdcall *)(HWND, LPCTSTR, LPCTSTR, UINT))</div><div class="line">                                  MyGetProcAddress(hModule, pData-&gt;MessageBox);</div><div class="line"></div><div class="line">    char szModuleFileName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    MyGetModuleFileName(NULL, szModuleFileName, MAX_PATH);</div><div class="line"></div><div class="line">    MyMessageBox(NULL, pData-&gt;Str, szModuleFileName, MB_OK);</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CNoDllInjectDlg::InjectCode(DWORD dwPid)</div><div class="line">&#123;</div><div class="line">    // 打开进程并获取进程句柄</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DATA Data = &#123; 0 &#125;;</div><div class="line"></div><div class="line">    // 获取kernel32.dll中相关的导出函数</div><div class="line">    Data.dwLoadLibrary = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;LoadLibraryA&quot;);</div><div class="line">    Data.dwGetProcAddress = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetProcAddress&quot;);</div><div class="line">    Data.dwGetModuleHandle = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleHandleA&quot;);</div><div class="line">    Data.dwGetModuleFileName = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleFileNameA&quot;);</div><div class="line"></div><div class="line">    // 需要的其他DLL和导出函数</div><div class="line">    lstrcpy(Data.User32Dll, &quot;user32.dll&quot;);</div><div class="line">    lstrcpy(Data.MessageBox, &quot;MessageBoxA&quot;);</div><div class="line">    // MessageBoxA()弹出的字符串</div><div class="line">    lstrcpy(Data.Str, &quot;Inject Code !!!&quot;);</div><div class="line"></div><div class="line">    // 在目标进程申请空间</div><div class="line">    LPVOID lpData = VirtualAllocEx(hProcess, NULL, sizeof(Data),</div><div class="line">                                   MEM_COMMIT | MEM_RESERVE,</div><div class="line">                                   PAGE_READWRITE);</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line">    WriteProcessMemory(hProcess, lpData, &amp;Data, </div><div class="line">                       sizeof(Data), &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 在目标进程空间申请的用于保存代码的长度</div><div class="line">    DWORD dwFunSize = 0x1000;</div><div class="line">    LPVOID lpCode = VirtualAllocEx(hProcess, NULL, dwFunSize,</div><div class="line">                                   MEM_COMMIT, </div><div class="line">                                   PAGE_EXECUTE_READWRITE);</div><div class="line"></div><div class="line">    BOOL bRet = WriteProcessMemory(hProcess, lpCode, &amp;RemoteThreadProc, </div><div class="line">                       dwFunSize, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    if ( bRet == FALSE )</div><div class="line">    &#123;</div><div class="line">        int n = GetLastError();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0,</div><div class="line">                                        (LPTHREAD_START_ROUTINE)lpCode,</div><div class="line">                                        lpData, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过peid可以查看DLL的导出函数<br><img src="/2017/07/16/windows DLL注入/3.png" alt=""><br>还可以通过vc6自带的dependency Walker以及CFF Explorer<br><img src="/2017/07/16/windows DLL注入/4.png" alt=""><br><img src="/2017/07/16/windows DLL注入/5.png" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这种方式是直接把想要使用的API函数以及API函数所在的DLL文件都封装在一个结构体中，直接写入目标进程的空间中，最后调用CreateRemoteThread()函数即可将其运行。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>通过windows自带工具运行DLL的两种方法<br>1.通过regsvr32.exe 调用  例如 regsvr32  /i  c:\test.dll<br>2.通过rundll32.exe 调用  例如 rundll32.exe  “c:\test.dll” ,RundllFunc FunParam<br>3.通过Dependency Walker工具查看应用程序所使用到的动态链接库文件,此外还可以使用dumpbin工具<br><img src="/2017/07/16/windows DLL注入/dependency.png" alt=""><br><img src="/2017/07/16/windows DLL注入/dumpbin.png" alt=""></p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-66452.htm" target="_blank" rel="external">神奇的马甲Dll By 海风月影</a><br><a href="http://www.freebuf.com/articles/system/94693.html" target="_blank" rel="external">DLL注入的几种姿势（二）：CreateRemoteThread And More</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/16/机器学习资源收集/" rel="next" title="机器学习资源收集">
+                <i class="fa fa-chevron-left"></i> 机器学习资源收集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/08/s2-048漏洞分析/" rel="prev" title="s2-048漏洞分析">
+                s2-048漏洞分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DLL远程注入"><span class="nav-number">2.</span> <span class="nav-text">DLL远程注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无DLL的代码注入"><span class="nav-number">3.</span> <span class="nav-text">无DLL的代码注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips"><span class="nav-number">4.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

