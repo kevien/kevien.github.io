@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2018-09-26T10:17:00.815Z</updated>
+  <updated>2018-09-26T10:21:23.773Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2018-09-26T10:17:00.815Z</updated>
+    <updated>2018-09-26T10:21:23.773Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -34,7 +34,7 @@
 <p>以上是基本的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
 <h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
 <li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分常用容器，非常方便修改和使用。且设计比较合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来非常的方便，基本就是docker-compose bulid 和docker-compose up -d 两条命令的事儿。</li>
-<li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat命令的；<br>我们可以直接使用 yum -y install net-tools 即可</li>
+<li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat命令，可以直接使用 yum -y install net-tools 安装即可</li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up查看是具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加执行权限。chmod + x</li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了</li>
