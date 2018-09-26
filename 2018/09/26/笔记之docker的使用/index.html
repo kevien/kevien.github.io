@@ -113,7 +113,7 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-09-26T06:32:42.783Z">
+<meta property="og:updated_time" content="2018-09-26T06:35:17.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
@@ -405,7 +405,7 @@
 </li>
 </ul>
 <p>以上是基本的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本的操作没什么问题。</p>
-<h4 id="tips-主要是Dockerfile和docker-compose"><a href="#tips-主要是Dockerfile和docker-compose" class="headerlink" title="tips 主要是Dockerfile和docker-compose"></a>tips 主要是Dockerfile和docker-compose</h4><ul>
+<h4 id="tips-之Dockerfile和docker-compose"><a href="#tips-之Dockerfile和docker-compose" class="headerlink" title="tips 之Dockerfile和docker-compose"></a>tips 之Dockerfile和docker-compose</h4><ul>
 <li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分的容器，非常方便修改和使用。且其设计非常合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来也非常的方便。</li>
 <li>开始的时候不要使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。</li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up查看是具体是哪里出问题了。</li>
@@ -663,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简述"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本常用命令"><span class="nav-number">3.</span> <span class="nav-text">基本常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips-主要是Dockerfile和docker-compose"><span class="nav-number">4.</span> <span class="nav-text">tips 主要是Dockerfile和docker-compose</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finally"><span class="nav-number">5.</span> <span class="nav-text">finally</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简述"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本常用命令"><span class="nav-number">3.</span> <span class="nav-text">基本常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips-之Dockerfile和docker-compose"><span class="nav-number">4.</span> <span class="nav-text">tips 之Dockerfile和docker-compose</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finally"><span class="nav-number">5.</span> <span class="nav-text">finally</span></a></li></ol></div>
             
 
           </div>
