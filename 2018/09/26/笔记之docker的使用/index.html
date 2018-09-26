@@ -113,7 +113,7 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-09-26T06:45:17.393Z">
+<meta property="og:updated_time" content="2018-09-26T06:51:35.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
@@ -404,16 +404,17 @@
 <li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="external">在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker images 查看当前的镜像</div><div class="line">docker ps -a 查看当前的容器</div><div class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</div><div class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</div><div class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</div><div class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</div><div class="line">停止和删除所有容器命令</div><div class="line">docker stop $(docker ps -aq)</div><div class="line">docker rm $(docker ps -aq)    </div><div class="line"></div><div class="line">删除所有镜像</div><div class="line">docker rmi $(docker images -q)</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>以上是基本的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本的操作没什么问题。</p>
+<p>以上是基本的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
 <h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
-<li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分的容器，非常方便修改和使用。且其设计非常合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来也非常的方便。</li>
-<li>开始的时候不要使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。</li>
+<li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分常用容器，非常方便修改和使用。且设计比较合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来非常的方便，基本就是docker-compose bulid 和docker-compose up -d 两条命令的事儿。</li>
+<li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。</li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up查看是具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加执行权限。chmod + x</li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了</li>
 <li>把宿主机的一个目录挂载到容器中的一个目录，当访问容器中的这个目录时，出现如下问题： ls: cannot open directory .: Permission denied 这个问题可以参考文章<a href="https://blog.csdn.net/CHENYUFENG1991/article/details/79842459" target="_blank" rel="external">docker挂载目录失败/权限拒绝 解决方案</a></li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT [“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
-<li>还有就是有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝也可以。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li>还有就是有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝也可以。</li>
+<li>在centos7可能会遇到Docker error IPv4 forwarding is disabled的问题，<a href="http://mbacchi.github.io/2017/09/29/docker-ipv4-forwarding-disabled.html" target="_blank" rel="external">参考链接</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现搭建漏洞环境very棒：P</li>
 </ul>
 
