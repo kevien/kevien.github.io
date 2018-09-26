@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2018-09-26T06:35:17.720Z</updated>
+  <updated>2018-09-26T06:37:05.328Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2018-09-26T06:35:17.720Z</updated>
+    <updated>2018-09-26T06:37:05.328Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -32,7 +32,7 @@
 </li>
 </ul>
 <p>以上是基本的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本的操作没什么问题。</p>
-<h4 id="tips-之Dockerfile和docker-compose"><a href="#tips-之Dockerfile和docker-compose" class="headerlink" title="tips 之Dockerfile和docker-compose"></a>tips 之Dockerfile和docker-compose</h4><ul>
+<h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
 <li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分的容器，非常方便修改和使用。且其设计非常合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来也非常的方便。</li>
 <li>开始的时候不要使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。</li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up查看是具体是哪里出问题了。</li>
@@ -40,7 +40,7 @@
 <li>有时候mysql硬是起不来 这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了</li>
 <li>把宿主机的一个目录挂载到容器中的一个目录，当访问容器中的这个目录时，出现如下问题： ls: cannot open directory .: Permission denied 这个问题可以参考文章<a href="https://blog.csdn.net/CHENYUFENG1991/article/details/79842459" target="_blank" rel="external">docker挂载目录失败/权限拒绝 解决方案</a></li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT [“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
-<li>还有就是有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝也可以。<h4 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h4></li>
+<li>还有就是有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝也可以。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现搭建漏洞环境very棒：P</li>
 </ul>
 ]]></content>
