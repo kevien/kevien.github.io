@@ -113,7 +113,7 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-09-26T06:29:43.428Z">
+<meta property="og:updated_time" content="2018-09-26T06:32:42.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：( 前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流">
@@ -410,7 +410,7 @@
 <li>开始的时候不要使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。</li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up查看是具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加执行权限。chmod + x</li>
-<li>有时候mysql硬是起不来 这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考</a>，docker volume  rm 就可以删除对应的数据库了</li>
+<li>有时候mysql硬是起不来 这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了</li>
 <li>把宿主机的一个目录挂载到容器中的一个目录，当访问容器中的这个目录时，出现如下问题： ls: cannot open directory .: Permission denied 这个问题可以参考文章<a href="https://blog.csdn.net/CHENYUFENG1991/article/details/79842459" target="_blank" rel="external">docker挂载目录失败/权限拒绝 解决方案</a></li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT [“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
 <li>还有就是有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝也可以。<h4 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h4></li>
