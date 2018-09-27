@@ -113,7 +113,7 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：(   前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-09-26T10:42:33.741Z">
+<meta property="og:updated_time" content="2018-09-27T05:35:01.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任">
@@ -400,7 +400,7 @@
 <li>好久没有更新了，主要比较忙：(   前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。<h4 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h4></li>
 <li>什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><img src="/2018/09/26/笔记之docker的使用/itdevelop.png" alt=""></li>
 <li>如上图所示计算机的发展经历了从物理机到虚拟机的过程，最后出现了共享底层OS的容器。</li>
-<li>docker里面有两个概念需要稍微理解一下，一个是Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
+<li>docker里面有两个概念需要稍微理解一下，Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
 <li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="external">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">docker images 查看当前的镜像</div><div class="line">docker ps -a 查看当前的容器</div><div class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</div><div class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</div><div class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</div><div class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</div><div class="line">docker stop $(docker ps -aq) 停止所有容器</div><div class="line">docker rm $(docker ps -aq)  删除所有容器</div><div class="line">docker rmi $(docker images -q) 删除所有镜像</div><div class="line">docker search xxx 查找xxx镜像</div><div class="line">docker pull xxx 获取xxx镜像 默认是latest</div></pre></td></tr></table></figure>
 </li>
 </ul>
