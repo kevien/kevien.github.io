@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2018-09-27T05:36:14.042Z</updated>
+  <updated>2018-09-27T05:39:30.407Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2018-09-27T05:36:14.042Z</updated>
+    <updated>2018-09-27T05:39:30.407Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -43,7 +43,7 @@
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat命令，可以直接使用 yum -y install net-tools 安装即可。</li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
-<li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS项目、Etcd项目 and  more。。</li>
+<li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes项目、CoreOS项目、Etcd项目 and  more。。</li>
 </ul>
 ]]></content>
     
@@ -62,7 +62,7 @@
     <link href="http://kevien.github.io/2018/07/15/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/</id>
     <published>2018-07-15T05:30:41.000Z</published>
-    <updated>2018-08-31T17:10:20.427Z</updated>
+    <updated>2018-10-18T02:12:07.546Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
@@ -73,7 +73,8 @@
 </li>
 <li>使用pyenv install  3.6.* 安装特定版本的python（建议安装个python2 和python3的环境即可）</li>
 <li>查看已安装的版本 pyenv versions<br><img src="/2018/07/15/python虚拟环境安装和使用/pyenvversions.png" alt=""></li>
-<li>python环境切换 使用pyenv global xxx 或者pyenv local ,其中前者是全局的设置，而后者是针对当前项目python环境的设置。<h4 id="配置pycharm"><a href="#配置pycharm" class="headerlink" title="配置pycharm"></a>配置pycharm</h4></li>
+<li>python环境切换 使用pyenv global xxx 或者pyenv local ,其中前者是全局的设置，而后者是针对当前项目python环境的设置。</li>
+<li>在进行版本切换的时候，可能会出现AttributeError: module ‘enum’ has no attribute ‘IntFlag’这个错误，这个时候使用unset PYTHONPATH解决出错问题。<h4 id="配置pycharm"><a href="#配置pycharm" class="headerlink" title="配置pycharm"></a>配置pycharm</h4></li>
 <li>现实中我们往往可能需要使用pycharm这种IDE进行python的开发，那么如何在pycharm中进行python版本的自由切换呢？</li>
 <li>其实pycharm 和idea都属于 jetbrains家族产品，使用上面很是类似。</li>
 <li>打开一个项目，选择file-&gt; Default Settings-&gt; Python Interpreter-&gt; show ALL -&gt; +号 -&gt; Existing environment -&gt; 进行下拉框的选择就OK<br><img src="/2018/07/15/python虚拟环境安装和使用/setpycharm.png" alt=""></li>

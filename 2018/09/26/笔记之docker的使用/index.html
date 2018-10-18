@@ -113,7 +113,7 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：(   前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-09-27T05:36:14.042Z">
+<meta property="og:updated_time" content="2018-09-27T05:39:30.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   前段时间深入接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任">
@@ -416,7 +416,7 @@
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat命令，可以直接使用 yum -y install net-tools 安装即可。</li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
-<li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS项目、Etcd项目 and  more。。</li>
+<li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes项目、CoreOS项目、Etcd项目 and  more。。</li>
 </ul>
 
       
