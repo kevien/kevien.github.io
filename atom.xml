@@ -232,7 +232,7 @@
     <link href="http://kevien.github.io/2018/03/22/BSS%E6%AE%B5%E7%9A%84%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB/"/>
     <id>http://kevien.github.io/2018/03/22/BSS段的溢出攻击/</id>
     <published>2018-03-21T17:30:17.000Z</published>
-    <updated>2018-07-17T15:02:50.938Z</updated>
+    <updated>2018-11-19T15:50:00.385Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至seebug</div><div class="line">https://paper.seebug.org/548/</div></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -246,12 +246,12 @@
 <li><p>如上的代码片段中用一个函数指针保存了上次玩了哪个游戏，这个指针保存在user的结构体中，且被声明为全局变量，这意味着user这个结构体变量保存在bss数据段。其中结构体中固定为100字节的name变量保存了用户的姓名，且这个name是可以被input_name()这个函数所控制的，如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">void input_name() &#123;</div><div class="line">   char *name_ptr, input_char=&apos;\n&apos;;</div><div class="line">   while(input_char == &apos;\n&apos;)    // Flush any leftover </div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // newline chars.</div><div class="line">   </div><div class="line">   name_ptr = (char *) &amp;(player.name); // name_ptr = player name&apos;s address</div><div class="line">   while(input_char != &apos;\n&apos;) &#123;  // Loop until newline.</div><div class="line">      *name_ptr = input_char;   // Put the input char into name field.</div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // Get the next char.</div><div class="line">      name_ptr++;               // Increment the name pointer.</div><div class="line">   &#125;</div><div class="line">   *name_ptr = 0;  // Terminate the string.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>这个函数会接收用户输入的名字直到遇到换行符，所以这里并没有有效的限制用户输入，就意味着可以被利用，此外我们覆盖之后还需要程序去调用这个函数指针，这个功能可以发生在下面代码的6、8或者10行以及play_the_game()函数中，代码片段如下：</p>
+<li><p>这个函数会接收用户输入的名字直到遇到换行符，所以这里并没有有效的限制用户输入，就意味着有可能被利用，此外我们覆盖之后还需要程序去调用这个函数指针，这个功能可以发生在下面代码的6、8或者10行以及play_the_game()函数中，代码片段如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">if((choice &lt; 1) || (choice &gt; 7))</div><div class="line">       printf(&quot;\n[!!] The number %d is an invalid selection.\n\n&quot;, choice);</div><div class="line">    else if (choice &lt; 4) &#123;  // Othewise, choice was a game of some sort.</div><div class="line">          if(choice != last_game) &#123; // If the function ptr isn&apos;t set</div><div class="line">             if(choice == 1)        // then point it at the selected game </div><div class="line">                player.current_game = pick_a_number;   </div><div class="line">             else if(choice == 2)                     </div><div class="line">                player.current_game = dealer_no_match;</div><div class="line">             else</div><div class="line">                player.current_game = find_the_ace;</div><div class="line">             last_game = choice;   // and set last_game.</div><div class="line">          &#125;</div><div class="line">          play_the_game();   // Play the game.</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ul>
-<li>如果last_game 未设置，函数指针current_game 会被指向成0或者-1，这时不会触发漏洞，后面last_game被设置成1，当修改完名字完成对current_game覆盖再玩游戏1的时候，进入play_the_game()函数,play_the_game()会有current_game指针变量的调用，此时漏洞即触发！！！<br><img src="/2018/03/22/BSS段的溢出攻击/gamemain.png" alt=""></li>
+<li>如果last_game 未设置，函数指针current_game 会被指向成0或者-1，这时不会触发漏洞，后面last_game被设置成1，当修改完名字完成对current_game覆盖再玩游戏1的时候，进入play_the_game()函数,play_the_game()会有current_game指针变量的调用，此时漏洞即触发！<br><img src="/2018/03/22/BSS段的溢出攻击/gamemain.png" alt=""></li>
 <li>我们可以通过ctrl+z挂起当前的进程(这个时候last_game变量被设置成了1(因为刚才玩的是游戏choice是1))，我们找到可以被溢出的变量name，然后通过简单调试看一下name和current_game指针在内存中的位置关系。<br><img src="/2018/03/22/BSS段的溢出攻击/distance.png" alt=""></li>
 <li>如上图所示，正好是100个字节，通过以上我们可以进行如下的覆盖尝试<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;A&quot;x100 . &quot;BBBB&quot; . &quot;\n&quot;&apos;</div><div class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</div></pre></td></tr></table></figure>
 </li>
@@ -297,14 +297,14 @@
     <link href="http://kevien.github.io/2018/03/18/malloc%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/03/18/malloc的系统调用/</id>
     <published>2018-03-17T17:27:46.000Z</published>
-    <updated>2018-03-19T04:52:22.000Z</updated>
+    <updated>2018-11-19T15:55:39.627Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="external">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="external">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
 <li>先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。<br><img src="/2018/03/18/malloc的系统调用/maps.png" alt=""><h4 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h4></li>
 <li>brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。</li>
 <li>当ASLR关闭的时候，start_brk和brk都是指向bss段的尾部的</li>
-<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，ah</li>
+<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，a ha ：D</li>
 <li>如上图虚拟内存地址空间分布图所示，start_brk即是堆空间的开始，brk即是堆空间的结束。</li>
 <li><p>!注意，后面的测试均是关闭ASLR后测试输出，此外测试系统使用的是ubuntu14.04.1X64操作系统。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">关闭ASLR的方法</div><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
@@ -314,7 +314,7 @@
 </li>
 <li><p>输出分析：</p>
 </li>
-<li>在brk之前，我们可以看到是没有进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
+<li>在brk之前，我们可以看到进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
 <li>当程序执行brk调用的时候，如下的输出，我们看到有了堆块,因此 start_brk=end_data=0x602000,此时</li>
 <li>start_brk=end_data=0x602000</li>
 <li>brk = 0x603000<br><img src="/2018/03/18/malloc的系统调用/brkafter.png" alt=""></li>
@@ -350,13 +350,13 @@
     <link href="http://kevien.github.io/2018/02/26/%E9%80%9A%E8%BF%87return-to-libc%E7%BB%95%E8%BF%87NX-bit/"/>
     <id>http://kevien.github.io/2018/02/26/通过return-to-libc绕过NX-bit/</id>
     <published>2018-02-26T15:13:31.000Z</published>
-    <updated>2018-02-26T15:39:45.000Z</updated>
+    <updated>2018-11-19T15:59:02.802Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>读此文章之前建议先读一下这篇文章<a href="https://kevien.github.io/2017/08/16/linux%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux栈溢出学习笔记</a></li>
 <li>本次的测试环境是ubuntu14.04（X86).</li>
 <li>为了缓解攻击者的行为，专家们想出了一项缓解缓冲区溢出漏洞利用的措施叫做“NX Bit”.</li>
-<li>什么是NX(No-eXecute) Bit，<a href="https://www.wikiwand.com/en/NX_bit" target="_blank" rel="external">wiki</a>,它是一项让某个特定区域的内存代码变得不可执行不可修改的技术，例如，数据区域、栈空间和堆空间是不可执行的，代码区是不可写入的。当NX bit开启的时候，我们之前的缓冲区溢出利用将会失败，因为我们之前的shellcode会被复制到栈中然后我们的返回地址会被指向我们的shellcode从而执行我们的shellcode，但是自从栈中的代码不可以执行之后，我们的exploit会失败，但是这种缓解措施并不是一劳永逸的，因此这篇文章将介绍如何绕过NX Bit！<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> //vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"> char buf[256]; /* [1] */ </div><div class="line"> strcpy(buf,argv[1]); /* [2] */</div><div class="line"> printf(&quot;%s\n&quot;,buf); /* [3] */</div><div class="line"> fflush(stdout);  /* [4] */</div><div class="line"> return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>什么是NX(No-eXecute) Bit，<a href="https://www.wikiwand.com/en/NX_bit" target="_blank" rel="external">wiki</a>,它是一项让某个特定区域的内存代码变得不可执行不可修改的技术，例如，数据区域、栈空间和堆空间是不可执行的，代码区是不可写入的。当NX bit开启的时候，我们之前的缓冲区溢出利用将会失败，因为我们之前的shellcode会被复制到栈中然后我们的返回地址会被指向我们的shellcode从而执行我们的shellcode，但是自从栈中的代码不可以执行之后，我们的exploit会失败，但是这种缓解措施并不是一劳永逸的，这篇文章就将介绍如何绕过NX Bit！<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> //vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"> char buf[256]; /* [1] */ </div><div class="line"> strcpy(buf,argv[1]); /* [2] */</div><div class="line"> printf(&quot;%s\n&quot;,buf); /* [3] */</div><div class="line"> fflush(stdout);  /* [4] */</div><div class="line"> return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div><div class="line">$gcc -g -fno-stack-protector -o vuln vuln.c</div><div class="line">$sudo chown root vuln</div><div class="line">$sudo chgrp root vuln</div><div class="line">$sudo chmod +s vuln</div></pre></td></tr></table></figure>
@@ -635,7 +635,7 @@
     <link href="http://kevien.github.io/2018/01/16/%E4%BB%8E%E4%B8%80%E9%81%93pentesterlab%E7%9A%84%E9%A2%98%E7%9B%AE%E8%AF%B4%E8%B5%B7/"/>
     <id>http://kevien.github.io/2018/01/16/从一道pentesterlab的题目说起/</id>
     <published>2018-01-16T14:04:50.000Z</published>
-    <updated>2018-07-29T10:14:53.237Z</updated>
+    <updated>2018-11-19T16:06:28.332Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template Injection)的题目,目标是要执行任意命令，之前也没分析过SSTI的漏洞，所以简单看了下没搞定,后来有其它的事情就没看，这两天又看了下，觉得还是挺有意思的，就记录一下。<h4 id="method1"><a href="#method1" class="headerlink" title="method1"></a>method1</h4></li>
@@ -645,9 +645,9 @@
 </li>
 <li><p>这里是通过file.read()方法直接读文件，然后直接显示在页面上的。但是如何实现命令执行反弹shell呢?</p>
 </li>
-<li>通过列举当前object下的子类可以发现有subprocess的Popen类，大家应该知道Popen是直接可以执行命令的，要索引类Popen，使用index不行（原因不明），但也可以通过笨方法自己索引<br><img src="/2018/01/16/从一道pentesterlab的题目说起/subprocess.png" alt=""></li>
+<li>通过列举当前object下的子类可以发现有subprocess的Popen类，大家应该知道Popen是直接可以执行命令的，要索引类Popen，使用index不行（原因不明），但也可以通过笨方法索引<br><img src="/2018/01/16/从一道pentesterlab的题目说起/subprocess.png" alt=""></li>
 <li><img src="/2018/01/16/从一道pentesterlab的题目说起/indexpopen.png" alt=""></li>
-<li>索引233，后面就可以执行命令了，但是不能回显，所以可以把我们的命令执行后结果写入到文件，然后再通过读文件读出来。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/writecommand.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</div><div class="line">[233](&quot;id &gt;/tmp/M0rk.txt&quot;,shell=True) &#125;&#125;</div></pre></td></tr></table></figure>
+<li>索引233，后面就可以执行命令了，但是不能回显，这个时候可以把我们的命令执行后结果写入到文件，然后再通过读文件读出来。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/writecommand.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</div><div class="line">[233](&quot;id &gt;/tmp/M0rk.txt&quot;,shell=True) &#125;&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2018/01/16/从一道pentesterlab的题目说起/readfile.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40]</div><div class="line">(&apos;/tmp/M0rk.txt&apos;).read() &#125;&#125;</div></pre></td></tr></table></figure></p>
@@ -688,7 +688,7 @@
     <link href="http://kevien.github.io/2017/12/24/CVE-2017-17562%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%82%B9/"/>
     <id>http://kevien.github.io/2017/12/24/CVE-2017-17562的一些零碎点/</id>
     <published>2017-12-24T08:10:00.000Z</published>
-    <updated>2018-01-19T10:57:08.477Z</updated>
+    <updated>2018-11-19T16:08:44.020Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1247)以及shellshock漏洞(CVE-2014-6271),前两天只是简单的看了一下，今天有时间就整理一下，留个备忘。</li>
@@ -706,7 +706,7 @@
 <li>之前简单研究过nginx的提权漏洞，和这次的漏洞有一些像，也用到了环境变量，nginx的这个漏洞用到了写入恶意动态链接库路径到/etc/ld.so.preload。<h4 id="漏洞引申2-有关shellshock"><a href="#漏洞引申2-有关shellshock" class="headerlink" title="漏洞引申2-有关shellshock"></a>漏洞引申2-有关shellshock</h4></li>
 <li>对比shellshock，这个漏洞要需要的条件苛刻很多，shellshock简单粗暴，而且shellshock的影响范围也更广。<br><a href="http://www.vuln.cn/6476" target="_blank" rel="external">Shellshock漏洞回顾与分析测试 - Debug_Orz</a><h4 id="漏洞引申3-其它"><a href="#漏洞引申3-其它" class="headerlink" title="漏洞引申3-其它"></a>漏洞引申3-其它</h4></li>
 <li>在github上看这个项目的一些cve issue <br><br><a href="https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed" target="_blank" rel="external">https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed</a><br><br>还是有很多东西值得学习的(基本上可以看到开发一个web服务器可能会遇到的安全问题）<br><br>比如这个issue <a href="https://github.com/embedthis/goahead/issues/241" target="_blank" rel="external">https://github.com/embedthis/goahead/issues/241</a>中，某位安全研究员提的报告<br><a href="https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html" target="_blank" rel="external">https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html</a></li>
-<li>As I’m a fan of looking at the source    –author <br><br>向作者学习，安全有个好处就是我们可以透过现象看本质，研究原理很有意思。</li>
+<li>As I’m a fan of looking at the source    –author <br><br>向作者学习，安全研究有个好处就是我们可以透过现象看本质，研究原理很有意思。</li>
 <li>有关patch，原文中作者也说了，漏洞的修复只是过滤了几个特殊的参数名，有可能会被绕过，期待大牛们绕过的思路。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://www.elttam.com.au/blog/goahead/" target="_blank" rel="external">REMOTE LD_PRELOAD EXPLOITATION</a></li>
 </ul>
 ]]></content>
@@ -726,9 +726,9 @@
     <link href="http://kevien.github.io/2017/11/29/NuGet%E5%92%8Ctravis%E5%AE%9E%E8%B7%B5/"/>
     <id>http://kevien.github.io/2017/11/29/NuGet和travis实践/</id>
     <published>2017-11-29T10:56:16.000Z</published>
-    <updated>2017-12-02T09:21:36.000Z</updated>
+    <updated>2018-11-19T16:10:10.372Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
+    <content type="html"><![CDATA[<h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
 <h4 id="vs-Solution实际测试"><a href="#vs-Solution实际测试" class="headerlink" title="vs Solution实际测试"></a>vs Solution实际测试</h4><ul>
 <li>下面就以openssl库为例进行一下测试。</li>
 <li><p>首先需要在项目的根目录下创建一个NuGet.Config 的文件,这个应该是方便vs的NuGet进行索引</p>
@@ -758,7 +758,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;S-CR&quot;&gt;&lt;a href=&quot;#S-CR&quot; class=&quot;headerlink&quot; title=&quot;S;CR&quot;&gt;&lt;/a&gt;S;CR&lt;/h4&gt;&lt;p&gt;工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson
+      &lt;h4 id=&quot;S-CR&quot;&gt;&lt;a href=&quot;#S-CR&quot; class=&quot;headerlink&quot; title=&quot;S;CR&quot;&gt;&lt;/a&gt;S;CR&lt;/h4&gt;&lt;p&gt;工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的
     
     </summary>
     

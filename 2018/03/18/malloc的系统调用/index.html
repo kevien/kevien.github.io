@@ -118,7 +118,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/mmapbefore.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/mmapafter.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/aftermunmap.png">
-<meta property="og:updated_time" content="2018-03-19T04:52:22.000Z">
+<meta property="og:updated_time" content="2018-11-19T15:55:39.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="malloc的系统调用">
 <meta name="twitter:description" content="TL;DR 在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是brk和mmap。/prco/$pid/maps文件 先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。brk brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。 当ASLR关闭的时候，star">
@@ -405,7 +405,7 @@
 <li>先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。<br><img src="/2018/03/18/malloc的系统调用/maps.png" alt=""><h4 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h4></li>
 <li>brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。</li>
 <li>当ASLR关闭的时候，start_brk和brk都是指向bss段的尾部的</li>
-<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，ah</li>
+<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，a ha ：D</li>
 <li>如上图虚拟内存地址空间分布图所示，start_brk即是堆空间的开始，brk即是堆空间的结束。</li>
 <li><p>!注意，后面的测试均是关闭ASLR后测试输出，此外测试系统使用的是ubuntu14.04.1X64操作系统。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">关闭ASLR的方法</div><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
@@ -415,7 +415,7 @@
 </li>
 <li><p>输出分析：</p>
 </li>
-<li>在brk之前，我们可以看到是没有进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
+<li>在brk之前，我们可以看到进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
 <li>当程序执行brk调用的时候，如下的输出，我们看到有了堆块,因此 start_brk=end_data=0x602000,此时</li>
 <li>start_brk=end_data=0x602000</li>
 <li>brk = 0x603000<br><img src="/2018/03/18/malloc的系统调用/brkafter.png" alt=""></li>

@@ -104,13 +104,13 @@
 
 
 
-<meta name="description" content="S;CR工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根">
+<meta name="description" content="S;CR工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根目">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NuGet和travis实践">
 <meta property="og:url" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="S;CR工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根">
+<meta property="og:description" content="S;CR工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根目">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/projectwithui.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/ui.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/out.png">
@@ -124,10 +124,10 @@
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/8.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/9.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/10.png">
-<meta property="og:updated_time" content="2017-12-02T09:21:36.000Z">
+<meta property="og:updated_time" content="2018-11-19T16:10:10.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NuGet和travis实践">
-<meta name="twitter:description" content="S;CR工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根">
+<meta name="twitter:description" content="S;CR工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根目">
 <meta name="twitter:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/projectwithui.png">
 
 
@@ -406,7 +406,7 @@
       
 
       
-        <h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上编译是通过vs2015编译的，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
+        <h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
 <h4 id="vs-Solution实际测试"><a href="#vs-Solution实际测试" class="headerlink" title="vs Solution实际测试"></a>vs Solution实际测试</h4><ul>
 <li>下面就以openssl库为例进行一下测试。</li>
 <li><p>首先需要在项目的根目录下创建一个NuGet.Config 的文件,这个应该是方便vs的NuGet进行索引</p>
