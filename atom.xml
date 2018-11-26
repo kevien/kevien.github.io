@@ -843,9 +843,10 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2018-11-26T10:57:41.867Z</updated>
+    <updated>2018-11-26T11:03:34.355Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
+    <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
+<h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
 <li>当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。</li>
 <li>这节中我们主要介绍一些常见的linux的权限提升的技巧<br>这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
 <li>我之前用三个脚本来枚举一个机器的基本信息，这三个脚本有些不同，但是输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
@@ -860,6 +861,7 @@
 </ul>
 <h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div></pre></td></tr></table></figure>
 <ul>
+<li>其中dirty-cow脏牛可以搞定大多的内核。</li>
 <li>能不用内核漏洞提权尽量就不要用，因为他可能会导致系统崩溃或者使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
 <li>这个方法的原理就是如果一个服务是以root权限运行的，那么你可以让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
 <li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"></div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
@@ -942,8 +944,8 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Brief&quot;&gt;&lt;a href=&quot;#Brief&quot; class=&quot;headerlink&quot; title=&quot;Brief&quot;&gt;&lt;/a&gt;Brief&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等
+      &lt;p&gt;&lt;img src=&quot;/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Brief&quot;&gt;&lt;a href=&quot;#Brief&quot; class=&quot;headerlink&quot; title=&quot;Brief
     
     </summary>
     
