@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="M0rk's Blog">
 <meta property="og:description" content="Brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg">
-<meta property="og:updated_time" content="2018-11-26T11:03:34.355Z">
+<meta property="og:updated_time" content="2018-11-26T11:05:31.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux权限提升">
 <meta name="twitter:description" content="Brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这节中我们主要介绍一些常见的linux的权限提升的技巧这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装载的文">
@@ -455,7 +455,7 @@
 </li>
 <li><p>nmap</p>
 </li>
-<li>低版本的nmap3.x 有–interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</li>
+<li>低版本的nmap3.x 有interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</li>
 <li>python<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo python</div><div class="line">import os</div><div class="line">os.system(&quot;/bin/bash&quot;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
