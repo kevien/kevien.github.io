@@ -104,19 +104,20 @@
 
 
 
-<meta name="description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localg">
+<meta name="description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/local">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows权限提升(二)">
 <meta property="og:url" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localg">
+<meta property="og:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/local">
+<meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/wmic.png">
-<meta property="og:updated_time" content="2018-11-28T08:23:36.836Z">
+<meta property="og:updated_time" content="2018-11-28T08:29:19.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows权限提升(二)">
-<meta name="twitter:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/localg">
-<meta name="twitter:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/wmic.png">
+<meta name="twitter:description" content="基本系统信息枚举 在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。123456789101112131415161718192021222324252627282930313233# Basicssysteminfohostname# Who am I?whoamiecho %username%# What users/local">
+<meta name="twitter:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png">
 
 
 
@@ -394,7 +395,8 @@
       
 
       
-        <h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2><ul>
+        <p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
+<h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2><ul>
 <li>在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"># Basics</div><div class="line">systeminfo</div><div class="line">hostname</div><div class="line"></div><div class="line"># Who am I?</div><div class="line">whoami</div><div class="line">echo %username%</div><div class="line"></div><div class="line"># What users/localgroups are on the machine?</div><div class="line">net users</div><div class="line">net localgroups</div><div class="line"></div><div class="line"># More info about a specific user. Check if user has privileges.</div><div class="line">net user user1</div><div class="line"></div><div class="line"># View Domain Groups</div><div class="line">net group /domain</div><div class="line"></div><div class="line"># View Members of Domain Group</div><div class="line">net group /domain &lt;Group Name&gt;</div><div class="line"></div><div class="line"># Firewall</div><div class="line">netsh firewall show state</div><div class="line">netsh firewall show config</div><div class="line"></div><div class="line"># Network</div><div class="line">ipconfig /all</div><div class="line">route print</div><div class="line">arp -A</div><div class="line"></div><div class="line"># How well patched is the system?</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB..&quot; /C:&quot;KB..&quot; - to find specific KBs</div></pre></td></tr></table></figure>
 </li>
 </ul>
