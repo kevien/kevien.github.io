@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
+    
+    <lastmod>2018-12-04T09:47:45.114Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://kevien.github.io/2017/09/14/UAC%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2018-12-02T15:36:31.936Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
     
     <lastmod>2018-12-01T13:32:48.295Z</lastmod>
@@ -145,13 +159,6 @@
     <loc>http://kevien.github.io/tags/index.html</loc>
     
     <lastmod>2018-07-29T10:39:56.570Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
-    
-    <lastmod>2018-07-26T06:41:15.441Z</lastmod>
     
   </url>
   
@@ -313,13 +320,6 @@
     <loc>http://kevien.github.io/2017/07/05/unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-10-11T06:42:24.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://kevien.github.io/2017/09/14/UAC%E5%8E%9F%E7%90%86/</loc>
-    
-    <lastmod>2017-10-08T11:32:12.000Z</lastmod>
     
   </url>
   

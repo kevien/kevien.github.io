@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2018-12-04T09:47:45.114Z</lastmod>
+    <data>
+        <display>
+        <title>windows域安全(持续更新)</title>
+        <pubTime>2017-09-28T06:40:42.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kevien.github.io/2017/09/14/UAC%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2018-12-02T15:36:31.936Z</lastmod>
+    <data>
+        <display>
+        <title>UAC原理</title>
+        <pubTime>2017-09-14T05:35:42.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
     <lastmod>2018-12-01T13:32:48.295Z</lastmod>
     <data>
@@ -296,21 +326,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2018-07-26T06:41:15.441Z</lastmod>
-    <data>
-        <display>
-        <title>windows域安全(持续更新)</title>
-        <pubTime>2017-09-28T06:40:42.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/</loc>
@@ -640,21 +655,6 @@
         <display>
         <title>unix环境高级编程笔记</title>
         <pubTime>2017-07-05T02:46:10.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/09/14/UAC%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2017-10-08T11:32:12.000Z</lastmod>
-    <data>
-        <display>
-        <title>UAC原理</title>
-        <pubTime>2017-09-14T05:35:42.000Z</pubTime>
         
          
            
