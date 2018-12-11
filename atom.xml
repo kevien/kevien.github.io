@@ -1183,7 +1183,7 @@
     <link href="http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/"/>
     <id>http://kevien.github.io/2017/09/28/windows域安全/</id>
     <published>2017-09-28T06:40:42.000Z</published>
-    <updated>2018-12-10T10:32:50.356Z</updated>
+    <updated>2018-12-11T09:56:23.178Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>域安全的知识太多了，整理起来估计都够写一本书了。这边简单整理一些自己笔记的内容。<h2 id="域"><a href="#域" class="headerlink" title="域"></a>域</h2></li>
@@ -1199,7 +1199,11 @@
 </li>
 </ul>
 <p><a href="https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/" target="_blank" rel="external">更多</a></p>
-<h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><h3 id="SMB共享枚举"><a href="#SMB共享枚举" class="headerlink" title="SMB共享枚举"></a>SMB共享枚举</h3><ul>
+<h2 id="域内信息搜集"><a href="#域内信息搜集" class="headerlink" title="域内信息搜集"></a>域内信息搜集</h2><h3 id="windows中的Credential-Manager的信息获取"><a href="#windows中的Credential-Manager的信息获取" class="headerlink" title="windows中的Credential Manager的信息获取"></a>windows中的Credential Manager的信息获取</h3><ul>
+<li>Credential Manager，中文翻译为凭据管理器，用来存储凭据(例如网站登录和主机远程连接的用户名密码)。</li>
+<li>如果用户选择存储凭据，那么当用户再次使用对应的操作，系统会自动填入凭据，实现自动登录<br><img src="/2017/09/28/windows域安全/cmdkey.png" alt=""></li>
+<li>凭据类别包含两种，分别为Domain Credentials和Generic Credentials。</li>
+<li>凭据读取 mimikatz和powershell脚本<br><img src="/2017/09/28/windows域安全/mimikatzdumpcredman.png" alt=""><br>更多可参考<a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E4%B8%ADCredential-Manager%E7%9A%84%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" target="_blank" rel="external">Windows中Credential Manager的信息获取</a><h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><h3 id="SMB共享枚举"><a href="#SMB共享枚举" class="headerlink" title="SMB共享枚举"></a>SMB共享枚举</h3></li>
 <li><p><a href="https://github.com/ShawnDEvans/smbmap" target="_blank" rel="external">SMBMap</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">root@kali:/# smbmap -H [ip] -d [domain] -u [user] -p [password]</div><div class="line">[+] Finding open SMB ports....</div><div class="line">[+] User SMB session establishd on [ip]...</div><div class="line">[+] IP: [ip]:445        Name: [ip]                                      </div><div class="line">        Disk                                                    Permissions</div><div class="line">        ----                                                    -----------</div><div class="line">        ADMIN$                                                  NO ACCESS</div><div class="line">        C$                                                      NO ACCESS</div><div class="line">        IPC$                                                    NO ACCESS</div><div class="line">        NETLOGON                                                READ ONLY</div><div class="line">        Replication                                             READ ONLY</div><div class="line">        SYSVOL                                                  READ ONLY</div></pre></td></tr></table></figure>
 </li>
