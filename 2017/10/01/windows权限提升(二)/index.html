@@ -116,11 +116,12 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/unquoted.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/AlwaysInstallElevated.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/backdoor.png">
+<meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/TrustedInstaller.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/psexec-admintosystem.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/sc-admintosystem.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/xpn-admintosystem.jpg">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/windowskernelexploit.png">
-<meta property="og:updated_time" content="2018-12-13T06:43:08.922Z">
+<meta property="og:updated_time" content="2018-12-13T07:04:11.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows权限提升(二)">
 <meta name="twitter:description" content="TL;DR A privilege is the right of an account, such as a user or group account, to perform various system-related operations on the local computer, such as shutting down the system, loading device dri">
@@ -523,7 +524,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">time</div><div class="line"># Now we set the time we want the system CMD to start. Probably one minuter after the time.</div><div class="line">at 01:23 /interactive cmd.exe</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后system权限的cmd就出现了。</p>
-<h3 id="vista之后或者更新的系统"><a href="#vista之后或者更新的系统" class="headerlink" title="vista之后或者更新的系统"></a>vista之后或者更新的系统</h3></li>
+</li>
+<li>这里有个问题，就是system权限是windows最高的权限，那么是不是就可以“为所欲为”？，那么你可以尝试删除一下c:\windows\system32目录下的某个文件，发现竟然删除不了。<br><img src="/2017/10/01/windows权限提升(二)/TrustedInstaller.png" alt=""></li>
+<li>Files in System32 are typically owned by “TrustedInstaller” and are locked down really tightly. If you really, absolutely feel you must do this, the easiest way is to boot from a Linux LiveCD or a Windows install disk.<br><a href="https://superuser.com/questions/744589/cant-delete-system-files-from-system32-drivers-need-permission" target="_blank" rel="external">stackoverflow</a><br><a href="https://helpdeskgeek.com/windows-7/windows-7-how-to-delete-files-protected-by-trustedinstaller/" target="_blank" rel="external">Windows 7/8/10 – How to Delete Files Protected by TrustedInstaller</a><h3 id="vista之后或者更新的系统"><a href="#vista之后或者更新的系统" class="headerlink" title="vista之后或者更新的系统"></a>vista之后或者更新的系统</h3></li>
 <li>你首先需要上传一个psexec.exe 然后运行如下的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">psexec -i -s cmd.exe</div></pre></td></tr></table></figure>
 </li>
 </ul>
