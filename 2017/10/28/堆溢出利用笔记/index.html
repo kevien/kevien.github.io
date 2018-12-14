@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/nulloverflow.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/testfile.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/final.png">
-<meta property="og:updated_time" content="2018-03-17T11:46:32.000Z">
+<meta property="og:updated_time" content="2018-12-14T11:26:31.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个简单的堆溢出">
 <meta name="twitter:description" content="漏洞代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;fcntl.h&amp;gt;#in">
@@ -422,7 +422,7 @@
 <ul>
 <li>如上图所示，通过堆溢出成功添加了账号并登陆。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
 <li>这里只是举例了一个发生在堆内存上的溢出漏洞，并没有涉及到像是unlink或者UAF等技巧（后面有时间再研究分享），但像是通过写/etc/passwd以及软链接的trick还是不错的。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
-<li>《hacking the art of exploitation》chapter 0x340<br><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="external">Dance In Heap（二）：一些堆利用的方法（上） </a><br><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="external">堆溢出之unlink的利用</a><br><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="external">Linux堆内存管理深入分析</a></li>
+<li>《hacking the art of exploitation》chapter 0x340<br><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="external">Dance In Heap（二）：一些堆利用的方法（上） </a><br><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="external">堆溢出之unlink的利用</a><br><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="external">Linux堆内存管理深入分析</a><br><a href="https://github.com/LunaM00n/LOL-Sec-Collection/tree/master/Notes/the-heap" target="_blank" rel="external">The Heap</a></li>
 </ul>
 </li>
 </ul>
