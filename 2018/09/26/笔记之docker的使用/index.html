@@ -113,7 +113,8 @@
 <meta property="og:description" content="TL;DR 好久没有更新了，主要比较忙：(   以前只是简单的使用，前段时间相对较”近距离”接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-friends.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
-<meta property="og:updated_time" content="2018-12-19T16:50:25.352Z">
+<meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-compose-version.png">
+<meta property="og:updated_time" content="2019-01-02T09:23:53.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   以前只是简单的使用，前段时间相对较”近距离”接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到">
@@ -406,6 +407,14 @@
 </ul>
 <p>以上是常用的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="external">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
 <h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
+<li><p>docker-compose helloworld版</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dockerfile</div><div class="line">FROM centos:centos7</div><div class="line">CMD [&quot;/sbin/init&quot;]   //注意这里这个一定要有，否则docker-compose up -d 的时候会马上退出</div><div class="line"></div><div class="line">docker-compose.yml</div><div class="line">version: &apos;2&apos;</div><div class="line">services:</div><div class="line">  helloworld:</div><div class="line">    build: .</div><div class="line">    container_name: helloworld</div></pre></td></tr></table></figure>
+</li>
+<li><p>在一个docker-compose可以开启多个相同image的service,例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">version: &apos;2&apos;</div><div class="line"></div><div class="line">services:</div><div class="line">  c1:</div><div class="line">    image: centos:7</div><div class="line">    command: /usr/sbin/init</div><div class="line">  c2:</div><div class="line">    image: centos:7</div><div class="line">    command: /usr/sbin/init</div></pre></td></tr></table></figure>
+</li>
+<li><p>docker-compose.yml 中version的释义就是compose的高版本需要高版本的docker engine支持，docker engine版本可以通过docker version命令查看。具体的对版本表见下图<br><img src="/2018/09/26/笔记之docker的使用/docker-compose-version.png" alt=""></p>
+</li>
 <li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分常用应用，非常方便修改和使用。且设计比较合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来非常的方便，基本就是docker-compose bulid 和docker-compose up -d 两条命令的事儿：)</li>
 <li>把宿主机的一个目录挂载到容器中，当访问容器中的这个目录时，出现如下问题： ls: cannot open directory .: Permission denied 这个问题可以参考文章<a href="https://blog.csdn.net/CHENYUFENG1991/article/details/79842459" target="_blank" rel="external">docker挂载目录失败/权限拒绝 解决方案</a></li>
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up通过查看log信息看具体是哪里出问题了。</li>
@@ -692,7 +701,7 @@
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
