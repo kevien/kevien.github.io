@@ -113,7 +113,7 @@
 <meta property="og:description" content="1原文链接：&amp;lt;https://0x00sec.org/t/super-stealthy-droppers/3715&amp;gt; TL;DR 几周之前我看了这篇文章,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里linux进程注入)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话 1The current payload in us">
 <meta property="og:image" content="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/xeye.png">
 <meta property="og:image" content="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/lsof.png">
-<meta property="og:updated_time" content="2018-07-22T03:05:19.848Z">
+<meta property="og:updated_time" content="2019-01-04T17:18:50.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux一种无文件后门技巧(译文)">
 <meta name="twitter:description" content="1原文链接：&amp;lt;https://0x00sec.org/t/super-stealthy-droppers/3715&amp;gt; TL;DR 几周之前我看了这篇文章,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里linux进程注入)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话 1The current payload in us">
@@ -402,7 +402,7 @@
 </li>
 <li><p>我之前没有听过memfd_create和fexecve…就是这里引发了我的好奇，我决定学习和研究一下。</p>
 </li>
-<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们的系统更加安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
+<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们系统更加的安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
 <li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="external">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
 <li>memfd_create 能做同样的事情，但是它在内存中的存储并不会被映射到文件系统中，因此不能简单的通过ls命令进行查看。</li>
 <li>第二个函数，fexecve同样的功能很强大，它能使我们执行一个程序（同execve），但是传递给这个函数的是文件描述符，而不是文件的绝对路径，也就是说搭配起来memfd_create使用简直完美！</li>
@@ -421,7 +421,7 @@
 <h4 id="调用memfd-create"><a href="#调用memfd-create" class="headerlink" title="调用memfd_create"></a>调用memfd_create</h4></li>
 <li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="external">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
 <li>首先我们需要找到memfd_create在系统调用中的索引，通过一些在线的系统调用表，这个索引在不同的架构下是不同的，如果你想将上面的代码应用在ARM和MIPS上,可能需要不同的索引，在X86_64系统架构下的索引是319.</li>
-<li>我使用了libc的syscall去对memfd_create进行了封装。</li>
+<li>我使用了libc的syscall去对memfd_create进行了简单封装。</li>
 <li>这个程序主要做了下面的事情</li>
 <li>1.创建了一个TCP socket</li>
 <li><p>2，使用AF_INET连接了127.0.0.1的0x1111端口，我们可以把这些所有的打包到一个变量里面这样可以使我们的代码看起来更短一点儿，同样你也可以去修改成你想要的ip和端口。</p>
@@ -455,7 +455,7 @@
 <li><p>2.第二件事情就是我们需要关闭这个文件，然后去重新打开是为了能够通过fexecve去执行它，所以在while接收完文件之后我们需要关闭文件，然后重启新开文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">  close (fd);</div><div class="line"></div><div class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
 </li>
-<li><p>然而，主要注意的是，这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
+<li><p>这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
 <h4 id="那如果fexecve不存在呢"><a href="#那如果fexecve不存在呢" class="headerlink" title="那如果fexecve不存在呢"></a>那如果fexecve不存在呢</h4></li>
 <li><p>当你知道fexecve是怎么工作的，这个就很简单，怎么去知道这个函数是怎么工作的，google一下看看源代码，man page有一个提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NOTES</div><div class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</div></pre></td></tr></table></figure>
@@ -466,7 +466,7 @@
 </ul>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
-<li>这篇文章中作者是以打开xeye程序为示例，还有其它猥琐的利用场景吗？<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗？  ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
 <li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="external">Super-Stealthy Droppers</a></li>
 </ul>
 

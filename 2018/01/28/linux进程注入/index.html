@@ -113,7 +113,7 @@
 <meta property="og:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/testinject.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/poc.png">
-<meta property="og:updated_time" content="2018-03-20T16:13:45.000Z">
+<meta property="og:updated_time" content="2019-01-04T17:03:40.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux进程注入(-)">
 <meta name="twitter:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
@@ -399,10 +399,10 @@
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
 <li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
-<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上面。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多的花销。因为这个原因，所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
+<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多不必要的花销。所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
 <li>另外一个主要的应用场景就是调试器以及逆向工具的开发。例如radare2…通过这篇文章你将学习它们是如何工作的。</li>
-<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’的且正在运行的进程中。</li>
-<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节吧。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
+<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’且正在运行的进程中。</li>
+<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
 <li>从技术上说，获取其它的进程并修改它一般是通过操作系统提供的调试接口来实现的，在linux中具有调试功能的工具有ptrace、Gdb、radare2、ddd、strace等，这些工具都是使用ptrace这个系统调用来提供服务的。</li>
 <li>ptrace系统调用允许一个进程去调试另外一个进程，使用ptrace能够使我们停止一个目标进程的执行并且能够让我们去查看和修改目标进程中各个寄存器的值以及内存的值。</li>
 <li>这里用两种方式去调试一个进程，第一种(也是最直接的一种)就是让我们的调试器去开启我们的进程…fork和exec，这种一般是传入被调试程序的名字参数给gdb或者strace。</li>
@@ -425,7 +425,7 @@
 </ol>
 <ul>
 <li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
-<li><p>下面的代码注入我们的“恶意代码”到目标进程：</p>
+<li><p>下面代码注入我们的“恶意代码”到目标进程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">printf (&quot;+ Getting Registers\n&quot;);</div><div class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">  &#123;</div><div class="line">    perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">    exit (1);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</div><div class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</div><div class="line">regs.rip += 2;</div></pre></td></tr></table></figure>
 </li>
 <li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
@@ -448,9 +448,9 @@
 <li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
 </li>
 <li>是的，我们修改了IP寄存器的值，这也是为什么我们能够成功分离并将程序控制权交还给目标进程的原因所在。<h4 id="如何去算出这两个字节"><a href="#如何去算出这两个字节" class="headerlink" title="如何去算出这两个字节"></a>如何去算出这两个字节</h4></li>
-<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易去发现，我来告诉你们，来满足大家的好奇心。</li>
-<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个原因是我的目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
-<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧;）,所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
+<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易，我来告诉大家。</li>
+<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个可能的原因是目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
+<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧; ）所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ Tracing process 15333</div><div class="line">+ Waiting for process...</div><div class="line">+ Getting Registers</div><div class="line">+ Injecting shell code at 0x7ffe9a708728</div><div class="line">+ Setting instruction pointer to 0x7ffe9a708708</div><div class="line">+ Run it!</div></pre></td></tr></table></figure>
 <ul>

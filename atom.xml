@@ -398,7 +398,7 @@
     <link href="http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/"/>
     <id>http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/</id>
     <published>2018-02-20T03:51:50.000Z</published>
-    <updated>2018-07-22T03:05:19.848Z</updated>
+    <updated>2019-01-04T17:18:50.225Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</div></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -407,7 +407,7 @@
 </li>
 <li><p>我之前没有听过memfd_create和fexecve…就是这里引发了我的好奇，我决定学习和研究一下。</p>
 </li>
-<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们的系统更加安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
+<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们系统更加的安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
 <li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="external">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
 <li>memfd_create 能做同样的事情，但是它在内存中的存储并不会被映射到文件系统中，因此不能简单的通过ls命令进行查看。</li>
 <li>第二个函数，fexecve同样的功能很强大，它能使我们执行一个程序（同execve），但是传递给这个函数的是文件描述符，而不是文件的绝对路径，也就是说搭配起来memfd_create使用简直完美！</li>
@@ -426,7 +426,7 @@
 <h4 id="调用memfd-create"><a href="#调用memfd-create" class="headerlink" title="调用memfd_create"></a>调用memfd_create</h4></li>
 <li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="external">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
 <li>首先我们需要找到memfd_create在系统调用中的索引，通过一些在线的系统调用表，这个索引在不同的架构下是不同的，如果你想将上面的代码应用在ARM和MIPS上,可能需要不同的索引，在X86_64系统架构下的索引是319.</li>
-<li>我使用了libc的syscall去对memfd_create进行了封装。</li>
+<li>我使用了libc的syscall去对memfd_create进行了简单封装。</li>
 <li>这个程序主要做了下面的事情</li>
 <li>1.创建了一个TCP socket</li>
 <li><p>2，使用AF_INET连接了127.0.0.1的0x1111端口，我们可以把这些所有的打包到一个变量里面这样可以使我们的代码看起来更短一点儿，同样你也可以去修改成你想要的ip和端口。</p>
@@ -460,7 +460,7 @@
 <li><p>2.第二件事情就是我们需要关闭这个文件，然后去重新打开是为了能够通过fexecve去执行它，所以在while接收完文件之后我们需要关闭文件，然后重启新开文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">  close (fd);</div><div class="line"></div><div class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
 </li>
-<li><p>然而，主要注意的是，这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
+<li><p>这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
 <h4 id="那如果fexecve不存在呢"><a href="#那如果fexecve不存在呢" class="headerlink" title="那如果fexecve不存在呢"></a>那如果fexecve不存在呢</h4></li>
 <li><p>当你知道fexecve是怎么工作的，这个就很简单，怎么去知道这个函数是怎么工作的，google一下看看源代码，man page有一个提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NOTES</div><div class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</div></pre></td></tr></table></figure>
@@ -471,7 +471,7 @@
 </ul>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
-<li>这篇文章中作者是以打开xeye程序为示例，还有其它猥琐的利用场景吗？<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗？  ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
 <li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="external">Super-Stealthy Droppers</a></li>
 </ul>
 ]]></content>
@@ -545,16 +545,16 @@
     <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
     <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
     <published>2018-01-28T09:18:28.000Z</published>
-    <updated>2018-03-20T16:13:45.000Z</updated>
+    <updated>2019-01-04T17:03:40.266Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
 <li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
-<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上面。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多的花销。因为这个原因，所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
+<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多不必要的花销。所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
 <li>另外一个主要的应用场景就是调试器以及逆向工具的开发。例如radare2…通过这篇文章你将学习它们是如何工作的。</li>
-<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’的且正在运行的进程中。</li>
-<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节吧。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
+<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’且正在运行的进程中。</li>
+<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
 <li>从技术上说，获取其它的进程并修改它一般是通过操作系统提供的调试接口来实现的，在linux中具有调试功能的工具有ptrace、Gdb、radare2、ddd、strace等，这些工具都是使用ptrace这个系统调用来提供服务的。</li>
 <li>ptrace系统调用允许一个进程去调试另外一个进程，使用ptrace能够使我们停止一个目标进程的执行并且能够让我们去查看和修改目标进程中各个寄存器的值以及内存的值。</li>
 <li>这里用两种方式去调试一个进程，第一种(也是最直接的一种)就是让我们的调试器去开启我们的进程…fork和exec，这种一般是传入被调试程序的名字参数给gdb或者strace。</li>
@@ -577,7 +577,7 @@
 </ol>
 <ul>
 <li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
-<li><p>下面的代码注入我们的“恶意代码”到目标进程：</p>
+<li><p>下面代码注入我们的“恶意代码”到目标进程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">printf (&quot;+ Getting Registers\n&quot;);</div><div class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">  &#123;</div><div class="line">    perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">    exit (1);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</div><div class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</div><div class="line">regs.rip += 2;</div></pre></td></tr></table></figure>
 </li>
 <li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
@@ -600,9 +600,9 @@
 <li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
 </li>
 <li>是的，我们修改了IP寄存器的值，这也是为什么我们能够成功分离并将程序控制权交还给目标进程的原因所在。<h4 id="如何去算出这两个字节"><a href="#如何去算出这两个字节" class="headerlink" title="如何去算出这两个字节"></a>如何去算出这两个字节</h4></li>
-<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易去发现，我来告诉你们，来满足大家的好奇心。</li>
-<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个原因是我的目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
-<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧;）,所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
+<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易，我来告诉大家。</li>
+<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个可能的原因是目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
+<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧; ）所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ Tracing process 15333</div><div class="line">+ Waiting for process...</div><div class="line">+ Getting Registers</div><div class="line">+ Injecting shell code at 0x7ffe9a708728</div><div class="line">+ Setting instruction pointer to 0x7ffe9a708708</div><div class="line">+ Run it!</div></pre></td></tr></table></figure>
 <ul>
