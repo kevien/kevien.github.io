@@ -104,20 +104,20 @@
 
 
 
-<meta name="description" content="TL;DR mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/ruby -e">
+<meta name="description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python虚拟环境安装和使用">
 <meta property="og:url" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="TL;DR mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/ruby -e">
+<meta property="og:description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/pyenvversions.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/setpycharm.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/virtualenv.png">
-<meta property="og:updated_time" content="2018-10-18T02:12:07.546Z">
+<meta property="og:updated_time" content="2019-01-11T11:19:16.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python虚拟环境安装和使用">
-<meta name="twitter:description" content="TL;DR mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/ruby -e">
+<meta name="twitter:description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
 <meta name="twitter:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/pyenvversions.png">
 
 
@@ -397,7 +397,7 @@
 
       
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要介绍pyenv以及virtualenv的安装和使用。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
+<li>Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
 <li><p>推荐使用brew安装pyenv </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Install Homebrew</div><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; </div><div class="line"># Install pyenv</div><div class="line">brew install pyenv </div><div class="line"># Add pyenv initializer to shell startup script</div><div class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</div><div class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</div><div class="line">echo &apos;eval &quot;$(pyenv init -)&quot;&apos; &gt;&gt; ~/.bash_profile </div><div class="line"># Restart your shell for changes to take effect</div><div class="line">exec $SHELL</div></pre></td></tr></table></figure>
 </li>
