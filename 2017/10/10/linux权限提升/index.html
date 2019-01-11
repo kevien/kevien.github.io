@@ -104,13 +104,13 @@
 
 
 
-<meta name="description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11">
+<meta name="description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux权限提升">
 <meta property="og:url" content="http://kevien.github.io/2017/10/10/linux权限提升/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11">
+<meta property="og:description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/more.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/less.png">
@@ -119,10 +119,10 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/sudoabuse.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/find.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxkernalexploit.png">
-<meta property="og:updated_time" content="2018-12-14T09:57:59.224Z">
+<meta property="og:updated_time" content="2019-01-11T11:02:18.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux权限提升">
-<meta name="twitter:description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11">
+<meta name="twitter:description" content="Brief 当我们获取到一个低权限的shell的时候，我们往往需要提升权限，以方便后面任意读写任意文件、权限维持等操作。 这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括1.内核提权2.以root权限运行的程序3.已安装的软件4.弱口令和明文密码5.内部的服务6.suid的错误配置7.滥用sudo权限8.以root权限运行的脚本文件9.错误的路径配置10.计划任务11.未装">
 <meta name="twitter:image" content="http://kevien.github.io/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg">
 
 
@@ -403,7 +403,7 @@
       
         <p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
-<li>当我们获取到一个低权限的shell的时候，我们往往需要提升我们的权限，以方便后面任意读写任意文件、权限维持等操作。</li>
+<li>当我们获取到一个低权限的shell的时候，我们往往需要提升权限，以方便后面任意读写任意文件、权限维持等操作。</li>
 <li>这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
 <li>我之前用三个脚本来枚举一个机器的基本信息，这三个脚本有些不同，但是输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
 <li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
