@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-01-02T10:00:16.773Z</updated>
+  <updated>2019-01-11T11:12:05.418Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2019-01-02T10:00:16.773Z</updated>
+    <updated>2019-01-11T11:12:05.418Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -51,7 +51,8 @@
 <li>在centos7可能会遇到Docker error IPv4 forwarding is disabled的问题，<a href="http://mbacchi.github.io/2017/09/29/docker-ipv4-forwarding-disabled.html" target="_blank" rel="external">参考链接</a></li>
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi命令都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat等命令，可以直接使用 yum -y install net-tools 安装即可。</li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="external">参考链接</a>，docker volume  rm 就可以删除对应的数据库了。</li>
-<li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="external">stackoverflow</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="external">stackoverflow</a></li>
+<li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器会并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”，这个时候它会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示，但是不影响使用。<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
 <li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes项目、CoreOS项目、Etcd项目 and  more。。</li>
 </ul>
