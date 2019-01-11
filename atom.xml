@@ -398,7 +398,7 @@
     <link href="http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/"/>
     <id>http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/</id>
     <published>2018-02-20T03:51:50.000Z</published>
-    <updated>2019-01-04T17:18:50.225Z</updated>
+    <updated>2019-01-09T08:56:03.098Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</div></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -471,7 +471,7 @@
 </ul>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
-<li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗？  ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗 ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
 <li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="external">Super-Stealthy Droppers</a></li>
 </ul>
 ]]></content>
@@ -1005,7 +1005,7 @@
     <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
     <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
     <published>2017-10-01T03:39:24.000Z</published>
-    <updated>2018-12-16T11:28:20.290Z</updated>
+    <updated>2019-01-11T10:58:24.901Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
@@ -1142,7 +1142,8 @@
 </ul>
 <h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><ul>
 <li>这里有个问题，就是system权限是windows最高的权限，那么是不是就可以“为所欲为”？，那么你可以尝试删除一下c:\windows\system32目录下的某个文件(cmd.exe除外不排除有其它的程序)，发现竟然删除不了。<br><img src="/2017/10/01/windows权限提升(二)/TrustedInstaller.png" alt=""></li>
-<li>Files in System32 are typically owned by “TrustedInstaller” and are locked down really tightly. If you really, absolutely feel you must do this, the easiest way is to boot from a Linux LiveCD or a Windows install disk.<br><a href="https://superuser.com/questions/744589/cant-delete-system-files-from-system32-drivers-need-permission" target="_blank" rel="external">stackoverflow</a><br><a href="https://helpdeskgeek.com/windows-7/windows-7-how-to-delete-files-protected-by-trustedinstaller/" target="_blank" rel="external">Windows 7/8/10 – How to Delete Files Protected by TrustedInstaller</a><h2 id="后渗透模块"><a href="#后渗透模块" class="headerlink" title="后渗透模块"></a>后渗透模块</h2></li>
+<li>Files in System32 are typically owned by “TrustedInstaller” and are locked down really tightly. If you really, absolutely feel you must do this, the easiest way is to boot from a Linux LiveCD or a Windows install disk.<br><a href="https://superuser.com/questions/744589/cant-delete-system-files-from-system32-drivers-need-permission" target="_blank" rel="external">stackoverflow</a><br><a href="https://helpdeskgeek.com/windows-7/windows-7-how-to-delete-files-protected-by-trustedinstaller/" target="_blank" rel="external">Windows 7/8/10 – How to Delete Files Protected by TrustedInstaller</a></li>
+<li>这个TrustedInstaller是比较有趣的用户，可以理解为安装系统的人，一般的administrator组或者system组都是修改不了，所以想要修改这种所属TrustedInstaller的文件，只能通过修改所有者才能达到自己想要的结果。<br><img src="/2017/10/01/windows权限提升(二)/trustinstaller.png" alt=""><h2 id="后渗透模块"><a href="#后渗透模块" class="headerlink" title="后渗透模块"></a>后渗透模块</h2></li>
 <li>metasploit有一些有意思的后渗透模块，你需要有一个meterpreter shell 然后去运行这些后渗透模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">use exploit/windows/local/service_permissions</div><div class="line"></div><div class="line">post/windows/gather/credentials/gpp</div><div class="line"></div><div class="line">run post/windows/gather/credential_collector </div><div class="line"></div><div class="line">run post/multi/recon/local_exploit_suggester</div><div class="line"></div><div class="line">run post/windows/gather/enum_shares</div><div class="line"></div><div class="line">run post/windows/gather/enum_snmp</div><div class="line"></div><div class="line">run post/windows/gather/enum_applications</div><div class="line"></div><div class="line">run post/windows/gather/enum_logged_on_users</div><div class="line"></div><div class="line">run post/windows/gather/checkvm</div></pre></td></tr></table></figure>
 </li>
 </ul>
