@@ -107,16 +107,16 @@
 <meta name="description" content="前言 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考：1.http:">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="amazon云扩容">
-<meta property="og:url" content="http://kevien.github.io/2017/10/22/amazon云扩容/index.html">
+<meta property="og:title" content="Amazon云扩容">
+<meta property="og:url" content="http://kevien.github.io/2017/10/22/Amazon云扩容/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
 <meta property="og:description" content="前言 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考：1.http:">
-<meta property="og:image" content="http://kevien.github.io/2017/10/22/amazon云扩容/upgrade.png">
-<meta property="og:updated_time" content="2017-12-01T01:00:03.840Z">
+<meta property="og:image" content="http://kevien.github.io/2017/10/22/Amazon云扩容/upgrade.png">
+<meta property="og:updated_time" content="2019-01-21T10:47:42.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="amazon云扩容">
+<meta name="twitter:title" content="Amazon云扩容">
 <meta name="twitter:description" content="前言 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考：1.http:">
-<meta name="twitter:image" content="http://kevien.github.io/2017/10/22/amazon云扩容/upgrade.png">
+<meta name="twitter:image" content="http://kevien.github.io/2017/10/22/Amazon云扩容/upgrade.png">
 
 
 
@@ -144,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/10/22/amazon云扩容/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/10/22/Amazon云扩容/"/>
 
 
 
 
 
-  <title>amazon云扩容 | M0rk's Blog</title>
+  <title>Amazon云扩容 | M0rk's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -323,7 +323,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/10/22/amazon云扩容/">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/10/22/Amazon云扩容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
@@ -344,7 +344,7 @@
             
             
               
-                amazon云扩容
+                Amazon云扩容
               
             
           </h2>
@@ -399,7 +399,7 @@
 </li>
 </ul>
 <h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><ul>
-<li>国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。<br><img src="/2017/10/22/amazon云扩容/upgrade.png" alt=""></li>
+<li>国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。<br><img src="/2017/10/22/Amazon云扩容/upgrade.png" alt=""></li>
 </ul>
 
       
