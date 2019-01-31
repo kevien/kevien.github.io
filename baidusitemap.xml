@@ -4,6 +4,66 @@
 
     
   <url>
+    <loc>http://kevien.github.io/2019/02/01/linux%E5%B8%B8%E8%A7%81backdoor%E4%BB%A5%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2019-01-31T18:12:26.771Z</lastmod>
+    <data>
+        <display>
+        <title>linux常见backdoor以及排查技术</title>
+        <pubTime>2019-01-31T18:11:41.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kevien.github.io/2019/01/12/linux%E5%B8%B8%E8%A7%81backdoor%E4%BB%A5%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2019-01-31T18:09:31.406Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2019-01-12T05:23:02.731Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/</loc>
+    <lastmod>2019-01-23T10:46:56.750Z</lastmod>
+    <data>
+        <display>
+        <title>windows权限提升(二)</title>
+        <pubTime>2017-10-01T03:39:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2019-01-23T07:55:45.327Z</lastmod>
+    <data>
+        <display>
+        <title>windows域安全(持续更新)</title>
+        <pubTime>2017-09-28T06:40:42.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://kevien.github.io/2017/10/22/Amazon%E4%BA%91%E6%89%A9%E5%AE%B9/</loc>
     <lastmod>2019-01-21T10:47:42.929Z</lastmod>
     <data>
@@ -33,21 +93,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/</loc>
-    <lastmod>2019-01-16T16:46:54.206Z</lastmod>
-    <data>
-        <display>
-        <title>windows权限提升(二)</title>
-        <pubTime>2017-10-01T03:39:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://kevien.github.io/2017/10/28/%E5%A0%86%E6%BA%A2%E5%87%BA%E5%88%A9%E7%94%A8%E7%AC%94%E8%AE%B0/</loc>
@@ -161,21 +206,6 @@
         <display>
         <title>windows权限提升(-)</title>
         <pubTime>2017-09-13T12:22:48.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2018-12-11T09:56:23.178Z</lastmod>
-    <data>
-        <display>
-        <title>windows域安全(持续更新)</title>
-        <pubTime>2017-09-28T06:40:42.000Z</pubTime>
         
          
            
