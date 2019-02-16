@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-02-16T13:43:00.035Z</updated>
+  <updated>2019-02-16T13:56:29.712Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-02-16T13:43:00.035Z</updated>
+    <updated>2019-02-16T13:56:29.712Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -72,7 +72,7 @@
 <li>排查：这种sshd后门一般可能会有一定的特征，可以通过strings sshd |grep ‘[1-9]{1,3}.[1-9]{1,3}.’或者通过strace 查看是否有可疑的写文件操作。<h3 id="定时任务和开机启动项"><a href="#定时任务和开机启动项" class="headerlink" title="定时任务和开机启动项"></a>定时任务和开机启动项</h3></li>
 <li>一般的挖矿木马喜欢设置定时任务来进行驻留或者进行分时段的挖矿。<br><img src="/2019/02/16/linux常见backdoor及排查技术/crontab.png" alt=""></li>
 <li>排查：一般通过crontab -l命令即可检测到定时任务后门。不同的linux发行版可能查看开机启动项的文件不大相同，debian系linux系统一般是通过查看/etc/init.d目录有无最近修改和异常的开机启动项。而Redhat系的linux系统一般是查看/etc/rc.d/init.d或者/etc/systemd/system等目录。<br><img src="/2019/02/16/linux常见backdoor及排查技术/init.png" alt=""><h3 id="预加载型动态链接库后门-ld-so-preload"><a href="#预加载型动态链接库后门-ld-so-preload" class="headerlink" title="预加载型动态链接库后门 ld.so.preload"></a>预加载型动态链接库后门 ld.so.preload</h3></li>
-<li>可能有些人不太了解，简单说一下，就是我们在linux下执行某个可执行文件之前，系统会预先加载用户定义的动态链接库的一种技术，这个技术可以重写系统的库函数，导致发生hijack。<br><img src="/2019/02/16/linux常见backdoor及排查技术/strace.png" alt=""></li>
+<li>可能有些人不太了解，简单说一下，就是我们在linux下执行某个可执行文件之前，系统会预先加载用户定义的动态链接库的一种技术，这个技术可以重写系统的库函数，导致发生Hijack。<br><img src="/2019/02/16/linux常见backdoor及排查技术/strace.png" alt=""></li>
 <li>如上图所示，strace 命令id的时候可以发现有预先去读取/etc/ld.so.preload文件(也可使用设置LD_PRELAOD环境变量方式)，如果我们将我们事先写好的恶意so文件位置写入ld.so.preload文件，这个时候就会达到“劫持”的效果。</li>
 <li>比较好用的工具是Vegile和cub3<br><a href="https://github.com/Screetsec/Vegile/blob/master/Vegile#L112" target="_blank" rel="external">Vegile</a><br><a href="https://github.com/mempodippy/cub3" target="_blank" rel="external">cub3</a>,这个工具使用了LD_PRELOAD和系统的扩展属性去隐藏文件。</li>
 <li>更多参考：<br><a href="http://www.drupal001.com/2013/02/linux-extended-attributes/" target="_blank" rel="external">Linux文件系统扩展属性</a></li>
