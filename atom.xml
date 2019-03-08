@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-08T03:00:00.488Z</updated>
+  <updated>2019-03-08T03:38:46.768Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-08T03:00:00.488Z</updated>
+    <updated>2019-03-08T03:38:46.768Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
 <ul>
 <li>最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。</li>
 <li>在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及公开的工具进行剖析介绍。</li>
-<li><p>当然现在有一些公司在发现入侵之后直接重装系统，那么基本所有的后门就无法发挥权限维持的作用了，但作为一个安全从业人员还是需要对一些后门有一个基本的了解。</p>
+<li><p>现在有一些公司在发现入侵之后直接重装系统，那么基本所有的后门就无法发挥权限维持的作用了，但作为一个安全从业人员还是需要对一些后门有一个基本的了解。</p>
 <h2 id="常见技巧"><a href="#常见技巧" class="headerlink" title="常见技巧"></a>常见技巧</h2><h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
 </li>
 <li><p>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如python版本的正向后门监听11端口。</p>
@@ -79,13 +79,13 @@
 <li>其中还有一种是通过修改动态链接器来加载恶意动态链接库的后门，通过替换或者修改动态链接器中的默认预加载配置文件/etc/ld.so.preload路径的rootkit，此方法更加隐蔽，这个方法的较成熟的利用工具是Vlany，github地址<a href="https://github.com/mempodippy/vlany" target="_blank" rel="external">https://github.com/mempodippy/vlany</a><br><a href="https://www.freebuf.com/column/162604.html" target="_blank" rel="external">警惕利用Linux预加载型恶意动态链接库的后门</a></li>
 <li>优点：可以隐藏文件、网络、进程等。相对于普通用户空间rootkit而言，隐藏性较好，相对于内核模块rootkit来说，兼容性更好，编写难道低</li>
 <li>缺点：暂无</li>
-<li>排查：通过strace命令去跟踪预加载的文件是否为/etc/ld.so.preload，以及文件中是否有异常的动态链接库。以及检查是否设置LD_PRELOAD环境变量等。注意：在进行应急响应的时候有可能系统命令被替换或者关键系统函数被劫持（例如通过预加载型动态链接库后门），导致系统命令执行不正常，这个时候可以下载busybox。下载编译好的对应平台版本的busybox，或者下载源码进行编译通过U盘拷贝到系统上，因为busybox是静态编译的，不依赖于系统的动态链接库，busybox的使用类似如下 busybox ls，busybox ps -a<h3 id="进程注入"><a href="#进程注入" class="headerlink" title="进程注入"></a>进程注入</h3></li>
+<li>排查：通过strace命令去跟踪预加载的文件是否为/etc/ld.so.preload，以及文件中是否有异常的动态链接库。以及检查是否设置LD_PRELOAD环境变量等。注意：在进行应急响应的时候有可能系统命令被替换或者关键系统函数被劫持（例如通过预加载型动态链接库后门），导致系统命令执行不正常，这个时候可以下载busybox。下载编译好的对应平台版本的busybox，或者下载源码进行编译通过U盘拷贝到系统上，因为busybox是静态编译的，不依赖于系统的动态链接库，busybox的使用类似如下 busybox ls，busybox ps -a。<h3 id="进程注入"><a href="#进程注入" class="headerlink" title="进程注入"></a>进程注入</h3></li>
 <li>使用ptrace向进程中注入恶意so文件工具linux-inject，<a href="https://github.com/gaffe23/linux-inject/" target="_blank" rel="external">github地址</a><br><img src="/2019/02/16/linux常见backdoor及排查技术/processinject.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/evilso.png" alt=""><h3 id="内核级rootkit"><a href="#内核级rootkit" class="headerlink" title="内核级rootkit"></a>内核级rootkit</h3></li>
 <li>内核级的rootkit也很多，这里简单推荐一个Diamorphine<br><img src="/2019/02/16/linux常见backdoor及排查技术/lkm.png" alt=""><br><a href="https://github.com/m0nad/Diamorphine" target="_blank" rel="external">github地址</a></li>
 <li>优点：隐藏性较好</li>
 <li>缺点：编写难度有点儿高</li>
 <li>排查：可以通过unhide等工具进行排查<br><img src="/2019/02/16/linux常见backdoor及排查技术/unhide.png" alt=""><h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2></li>
-<li>以上介绍了几种backdoor的技巧，这里只是抛砖引玉，希望有更多人分享你的linux backdoor技巧、Write your own backdoor and MAKE BACKDOOR GREAT AGAIN : ）<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://github.com/d30sa1/RootKits-List-Download" target="_blank" rel="external">linux rootkits</a><br><a href="https://github.com/mfontanini/Programs-Scripts/" target="_blank" rel="external">https://github.com/mfontanini/Programs-Scripts/</a><br><a href="https://github.com/f0rb1dd3n/Reptile" target="_blank" rel="external">Reptile</a><br><a href="https://github.com/inquisb/icmpsh" target="_blank" rel="external">icmpsh</a><br><a href="https://isec.ne.jp/wp-content/uploads/2017/11/74LKM-rootkits-1.pdf" target="_blank" rel="external">Diamorphine</a></li>
+<li>以上介绍了几种backdoor的技巧，只是抛砖引玉，希望有更多人分享你的linux backdoor技巧、Write your own backdoor and MAKE BACKDOOR GREAT AGAIN : ）<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://github.com/d30sa1/RootKits-List-Download" target="_blank" rel="external">linux rootkits</a><br><a href="https://github.com/mfontanini/Programs-Scripts/" target="_blank" rel="external">https://github.com/mfontanini/Programs-Scripts/</a><br><a href="https://github.com/f0rb1dd3n/Reptile" target="_blank" rel="external">Reptile</a><br><a href="https://github.com/inquisb/icmpsh" target="_blank" rel="external">icmpsh</a><br><a href="https://isec.ne.jp/wp-content/uploads/2017/11/74LKM-rootkits-1.pdf" target="_blank" rel="external">Diamorphine</a></li>
 </ul>
 ]]></content>
     
