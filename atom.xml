@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-09T11:40:30.684Z</updated>
+  <updated>2019-03-09T11:48:22.752Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-09T11:40:30.684Z</updated>
+    <updated>2019-03-09T11:48:22.752Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -41,7 +41,7 @@
 </ul>
 <p><img src="/2019/02/16/linux常见backdoor及排查技术/passwdbackdoor.png" alt=""></p>
 <ul>
-<li>注意当我们拥有一个写文件的漏洞且为root权限，这个时候可以通过这种方法直接添加用户。</li>
+<li>注意当我们拥有一个命令执行漏洞或写文件漏洞且为root权限，这个时候就可以通过这种方法直接添加用户。</li>
 <li>优点：简单</li>
 <li>缺点：易被检测到</li>
 <li><p>排查：检查/etc/passwd文件是否有异常</p>
