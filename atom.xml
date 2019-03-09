@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-08T03:38:46.768Z</updated>
+  <updated>2019-03-09T08:16:47.007Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-08T03:38:46.768Z</updated>
+    <updated>2019-03-09T08:16:47.007Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -58,7 +58,7 @@
 <ul>
 <li>优点：改动较小</li>
 <li>缺点：易被检测到</li>
-<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc或~/.zshrc文件查看是否有恶意的alias问题。<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
+<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录的shell执行的，bashrc是在非登录的shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
 <li><p>一种是建立sshd的软连接方法，开启其它的端口例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ln -sf /usr/sbin/sshd /home/su</div><div class="line">/home/su -oport=2222</div></pre></td></tr></table></figure>
 </li>

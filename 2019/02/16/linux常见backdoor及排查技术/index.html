@@ -126,7 +126,7 @@
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/evilso.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/lkm.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/unhide.png">
-<meta property="og:updated_time" content="2019-03-08T03:38:46.768Z">
+<meta property="og:updated_time" content="2019-03-09T08:16:47.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常见backdoor及排查技术">
 <meta name="twitter:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/4090 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。 在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及">
@@ -444,7 +444,7 @@
 <ul>
 <li>优点：改动较小</li>
 <li>缺点：易被检测到</li>
-<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc或~/.zshrc文件查看是否有恶意的alias问题。<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
+<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录的shell执行的，bashrc是在非登录的shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
 <li><p>一种是建立sshd的软连接方法，开启其它的端口例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ln -sf /usr/sbin/sshd /home/su</div><div class="line">/home/su -oport=2222</div></pre></td></tr></table></figure>
 </li>
