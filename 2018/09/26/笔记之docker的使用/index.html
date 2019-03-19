@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/itdevelop.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-compose-version.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/bug.png">
-<meta property="og:updated_time" content="2019-02-18T07:45:18.775Z">
+<meta property="og:updated_time" content="2019-03-14T02:38:52.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   以前只是简单的使用，前段时间相对较”近距离”接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到">
@@ -417,9 +417,9 @@
 <li><p>docker-compose.yml 中version的释义就是compose的高版本需要高版本的docker engine支持，docker engine版本可以通过docker version命令查看。具体的对版本表见下图<br><img src="/2018/09/26/笔记之docker的使用/docker-compose-version.png" alt=""></p>
 </li>
 <li>如果想要在docker中运行多个后台程序，比如apache的web服务和ssh的服务，可以使用supervisord。更多可以参考<a href="https://riptutorial.com/docker/example/14132/dockerfile-plus-supervisord-conf" target="_blank" rel="external">链接</a></li>
-<li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分常用应用，非常方便修改和使用。且设计比较合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来非常的方便，基本就是docker-compose bulid 和docker-compose up -d 两条命令的事儿：)</li>
+<li>在由phith0n维护的<a href="https://github.com/vulhub/vulhub" target="_blank" rel="external">vulhub</a>项目里有很多Dockerfile，覆盖了绝大部分常用应用，非常方便修改和使用。且设计比较合理，web代码基本都是通过挂载www目录的方式进行部署，调试和部署起来非常的方便，基本就是docker-compose bulid 和docker-compose up -d 两条命令的事儿。</li>
 <li>把宿主机的一个目录挂载到容器中，当访问容器中的这个目录时，出现如下问题： ls: cannot open directory .: Permission denied 这个问题可以参考文章<a href="https://blog.csdn.net/CHENYUFENG1991/article/details/79842459" target="_blank" rel="external">docker挂载目录失败/权限拒绝 解决方案</a></li>
-<li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up通过查看log信息看具体是哪里出问题了。</li>
+<li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up通过查看详细的输出信息定位具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加可执行权限。</li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT 例如[“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
 <li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。</li>
