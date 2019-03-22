@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-19T08:45:39.372Z</updated>
+  <updated>2019-03-19T08:48:11.797Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-19T08:45:39.372Z</updated>
+    <updated>2019-03-19T08:48:11.797Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -99,7 +99,7 @@
 <li>排查：通过strace命令去跟踪预加载的文件是否为/etc/ld.so.preload，以及文件中是否有异常的动态链接库。以及检查是否设置LD_PRELOAD环境变量等。注意：在进行应急响应的时候有可能系统命令被替换或者关键系统函数被劫持（例如通过预加载型动态链接库后门），导致系统命令执行不正常，这个时候可以下载busybox。下载编译好的对应平台版本的busybox，或者下载源码进行编译通过U盘拷贝到系统上，因为busybox是静态编译的，不依赖于系统的动态链接库，busybox的使用类似如下 busybox ls，busybox ps -a。<h3 id="进程注入"><a href="#进程注入" class="headerlink" title="进程注入"></a>进程注入</h3></li>
 <li>使用ptrace向进程中注入恶意so文件工具linux-inject，<a href="https://github.com/gaffe23/linux-inject/" target="_blank" rel="external">github地址</a><br><img src="/2019/02/16/linux常见backdoor及排查技术/processinject.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/evilso.png" alt=""></li>
 <li>优点：隐藏性好</li>
-<li>缺点：编写难度高，可能会有兼容性、进程down掉等问题</li>
+<li>缺点：编写难度高，可能会有兼容性、被注入进程down掉等问题</li>
 <li>排查：很难<h3 id="内核级rootkit"><a href="#内核级rootkit" class="headerlink" title="内核级rootkit"></a>内核级rootkit</h3></li>
 <li>内核级的rootkit也很多，这里简单推荐一个Diamorphine<br><img src="/2019/02/16/linux常见backdoor及排查技术/lkm.png" alt=""><br><a href="https://github.com/m0nad/Diamorphine" target="_blank" rel="external">github地址</a></li>
 <li>优点：隐藏性较好</li>
