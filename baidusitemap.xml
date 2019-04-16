@@ -555,7 +555,7 @@
 
     
   <url>
-    <loc>http://kevien.github.io/2017/10/08/ELF%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://kevien.github.io/2017/10/08/ELF%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/ELF%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2017-11-29T08:45:53.000Z</lastmod>
     <data>
         <display>
@@ -639,21 +639,6 @@
         <display>
         <title>windbg使用</title>
         <pubTime>2017-08-21T01:00:27.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/07/05/unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2017-10-11T06:42:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>unix环境高级编程笔记</title>
-        <pubTime>2017-07-05T02:46:10.000Z</pubTime>
         
          
            
@@ -747,21 +732,6 @@
         <display>
         <title>进程与线程</title>
         <pubTime>2017-08-01T08:54:10.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/08/13/macOS%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2017-08-13T04:35:01.000Z</lastmod>
-    <data>
-        <display>
-        <title>macOS软件安全与逆向分析笔记</title>
-        <pubTime>2017-08-13T03:52:59.000Z</pubTime>
         
          
            
