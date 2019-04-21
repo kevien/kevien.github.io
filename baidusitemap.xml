@@ -200,21 +200,6 @@
 
     
   <url>
-    <loc>http://kevien.github.io/2017/09/14/UAC%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2018-12-02T15:36:31.936Z</lastmod>
-    <data>
-        <display>
-        <title>UAC原理</title>
-        <pubTime>2017-09-14T05:35:42.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://kevien.github.io/2017/08/26/%E5%8F%AF%E6%BF%80%E6%B4%BBwindows%E5%92%8Coffice%E7%9A%84KMS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2018-12-01T07:58:57.258Z</lastmod>
     <data>
@@ -510,36 +495,6 @@
 
     
   <url>
-    <loc>http://kevien.github.io/2017/08/03/windows-PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2017-12-15T11:40:28.868Z</lastmod>
-    <data>
-        <display>
-        <title>windows PE文件结构</title>
-        <pubTime>2017-08-03T01:43:57.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/06/19/PyCharm-The-project-at-%E2%80%A6-uses-a-non-standard-layout-and-cannot-be-attached-to-this-project/</loc>
-    <lastmod>2017-12-02T09:21:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>PyCharm: The project at … uses a non-standard layout and cannot be attached to this project</title>
-        <pubTime>2017-06-19T10:15:15.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://kevien.github.io/2017/08/31/defcon-25-workshop%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB-partII/</loc>
     <lastmod>2017-11-20T13:05:17.604Z</lastmod>
     <data>
@@ -618,21 +573,6 @@
 
     
   <url>
-    <loc>http://kevien.github.io/2017/09/21/Tomcat-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-CVE-2017-12615-%E4%BB%A5%E5%8F%8A%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E-CVE-2017-12616/</loc>
-    <lastmod>2017-09-24T16:26:35.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tomcat 远程代码执行漏洞(CVE-2017-12615)以及信息泄露漏洞(CVE-2017-12616)</title>
-        <pubTime>2017-09-21T07:20:42.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://kevien.github.io/2017/07/16/windows%20DLL%E6%B3%A8%E5%85%A5/</loc>
     <lastmod>2017-09-15T04:26:42.000Z</lastmod>
     <data>
@@ -645,21 +585,6 @@
              
               <breadCrumb title="windows安全" url="http://kevien.github.io/categories/windows%E5%AE%89%E5%85%A8/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2017/09/04/window%E6%B6%88%E6%81%AF%E9%92%A9%E5%8F%96/</loc>
-    <lastmod>2017-09-05T03:45:00.000Z</lastmod>
-    <data>
-        <display>
-        <title>window消息钩取</title>
-        <pubTime>2017-09-04T12:48:02.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
