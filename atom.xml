@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-03-19T08:48:11.797Z</updated>
+  <updated>2019-04-27T15:45:44.922Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-03-19T08:48:11.797Z</updated>
+    <updated>2019-04-27T15:45:44.922Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
 <ul>
 <li>最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。</li>
@@ -111,7 +111,7 @@
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;c
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
     
     </summary>
     
@@ -1262,10 +1262,10 @@
     <link href="http://kevien.github.io/2017/09/28/windows%E5%9F%9F%E5%AE%89%E5%85%A8/"/>
     <id>http://kevien.github.io/2017/09/28/windows域安全/</id>
     <published>2017-09-28T06:40:42.000Z</published>
-    <updated>2019-04-25T09:28:07.804Z</updated>
+    <updated>2019-04-25T09:29:17.510Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
-<li>域安全笔记整理<h2 id="域"><a href="#域" class="headerlink" title="域"></a>域</h2></li>
+<li>域安全笔记<h2 id="域"><a href="#域" class="headerlink" title="域"></a>域</h2></li>
 <li>域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。</li>
 <li>域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。</li>
 <li>一般情况下，域控制器集成了DNS服务，可以解析域内的计算机名称（基于TCP/IP），解决了工作组环境不同网段计算机不能使用计算机名互访的问题。</li>
@@ -1307,7 +1307,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;域安全笔记整理&lt;h2 id=&quot;域&quot;&gt;&lt;a href=&quot;#域&quot; class=&quot;headerlink&quot; ti
+&lt;li&gt;域安全笔记&lt;h2 id=&quot;域&quot;&gt;&lt;a href=&quot;#域&quot; class=&quot;headerlink&quot; titl
     
     </summary>
     

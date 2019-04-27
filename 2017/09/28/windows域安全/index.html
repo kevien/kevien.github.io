@@ -104,13 +104,13 @@
 
 
 
-<meta name="description" content="TL;DR 域安全笔记整理域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计">
+<meta name="description" content="TL;DR 域安全笔记域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计算机">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows域安全">
 <meta property="og:url" content="http://kevien.github.io/2017/09/28/windows域安全/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="TL;DR 域安全笔记整理域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计">
+<meta property="og:description" content="TL;DR 域安全笔记域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计算机">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/finddc.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/adfind.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/passhash.png">
@@ -118,10 +118,10 @@
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/cmdkey.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/mimikatzdumpcredman.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/smbrelay.png">
-<meta property="og:updated_time" content="2019-04-25T09:28:07.804Z">
+<meta property="og:updated_time" content="2019-04-25T09:29:17.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows域安全">
-<meta name="twitter:description" content="TL;DR 域安全笔记整理域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计">
+<meta name="twitter:description" content="TL;DR 域安全笔记域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计算机">
 <meta name="twitter:image" content="http://kevien.github.io/2017/09/28/windows域安全/finddc.png">
 
 
@@ -401,7 +401,7 @@
 
       
         <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
-<li>域安全笔记整理<h2 id="域"><a href="#域" class="headerlink" title="域"></a>域</h2></li>
+<li>域安全笔记<h2 id="域"><a href="#域" class="headerlink" title="域"></a>域</h2></li>
 <li>域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。</li>
 <li>域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。</li>
 <li>一般情况下，域控制器集成了DNS服务，可以解析域内的计算机名称（基于TCP/IP），解决了工作组环境不同网段计算机不能使用计算机名互访的问题。</li>

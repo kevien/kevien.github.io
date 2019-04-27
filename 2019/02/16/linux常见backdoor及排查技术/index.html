@@ -104,13 +104,13 @@
 
 
 
-<meta name="description" content="12原文已发布至先知平台https://xz.aliyun.com/t/4090 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。 在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及">
+<meta name="description" content="12345原文已发布至先知平台linux常见backdoor及排查技术https://xz.aliyun.com/t/4090windows常见backdoor、权限维持方法及排查技术https://xz.aliyun.com/t/4842 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下win">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux常见backdoor及排查技术">
 <meta property="og:url" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/4090 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。 在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及">
+<meta property="og:description" content="12345原文已发布至先知平台linux常见backdoor及排查技术https://xz.aliyun.com/t/4090windows常见backdoor、权限维持方法及排查技术https://xz.aliyun.com/t/4842 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下win">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/passwdbackdoor.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/vimversion.png">
@@ -127,10 +127,10 @@
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/evilso.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/lkm.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/unhide.png">
-<meta property="og:updated_time" content="2019-03-19T08:48:11.797Z">
+<meta property="og:updated_time" content="2019-04-27T15:45:44.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常见backdoor及排查技术">
-<meta name="twitter:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/4090 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。 在服务器被入侵后进行应急响应无非通过文件排查、网络排查、进程排查、系统信息排查等方法进行入侵排查。下面就一些常见技巧以及">
+<meta name="twitter:description" content="12345原文已发布至先知平台linux常见backdoor及排查技术https://xz.aliyun.com/t/4090windows常见backdoor、权限维持方法及排查技术https://xz.aliyun.com/t/4842 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下win">
 <meta name="twitter:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg">
 
 
@@ -409,7 +409,7 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">https://xz.aliyun.com/t/4090</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
 <ul>
 <li>最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下windows backdoor方面的技术。</li>
