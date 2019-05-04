@@ -85,7 +85,7 @@
   <entry>
     <title><![CDATA[Amazon云扩容笔记]]></title>
     <url>%2F2017%2F10%2F22%2FAmazon%E4%BA%91%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[前言 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考：1.http://naonao.blog.51cto.com/1135983/15579942.https://stackoverflow.com/questions/6151695/ec2-instance-on-amazon-and-i-am-greeted-with-no-space-left-on-the-disk 更新 国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。]]></content>
+    <content type="text"><![CDATA[aws扩容TL；DR 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考：1.http://naonao.blog.51cto.com/1135983/15579942.https://stackoverflow.com/questions/6151695/ec2-instance-on-amazon-and-i-am-greeted-with-no-space-left-on-the-disk 更新 国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。kali linux虚拟机扩容 参考文章Use GParted to increase disk size of a Linux native partition]]></content>
   </entry>
   <entry>
     <title><![CDATA[linux权限提升]]></title>
