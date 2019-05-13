@@ -119,12 +119,14 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/psexec-admintosystem.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/sc-admintosystem.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/xpn-admintosystem.jpg">
+<meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/mimikatzdriver.png">
+<meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/mimikatzprocess.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/TrustedInstaller.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/trustinstaller.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/allcheck.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/windowskernelexploit.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/incognito.png">
-<meta property="og:updated_time" content="2019-04-10T07:39:25.857Z">
+<meta property="og:updated_time" content="2019-05-13T09:03:36.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows权限提升(二)">
 <meta name="twitter:description" content="TL;DR A privilege is the right of an account, such as a user or group account, to perform various system-related operations on the local computer, such as shutting down the system, loading device dri">
@@ -529,9 +531,10 @@
 <p><img src="/2017/10/01/windows权限提升(二)/sc-admintosystem.png" alt=""></p>
 <h3 id="使用metasploit"><a href="#使用metasploit" class="headerlink" title="使用metasploit"></a>使用metasploit</h3><ul>
 <li>如果你有个metasploit的meterpreter的会话，直接运行getsystem就可以</li>
-<li>xpn专门写了篇文章分析了getsystem中使用的技术<br><img src="/2017/10/01/windows权限提升(二)/xpn-admintosystem.jpg" alt=""><br><a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-%E4%BB%8EAdmin%E6%9D%83%E9%99%90%E5%88%87%E6%8D%A2%E5%88%B0System%E6%9D%83%E9%99%90/" target="_blank" rel="external">referer</a><h3 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">privilege::debug</div><div class="line">token::whoami</div><div class="line">token::elevate</div><div class="line">lsadump::sam</div><div class="line"></div><div class="line">使用 mimikatz的驱动进行提权</div><div class="line">![](mimikatzdriver.png)</div><div class="line">使用mimikatz的继承父进程权限方法</div><div class="line">![](mimikatzprocess.png)</div></pre></td></tr></table></figure>
+<li>xpn专门写了篇文章分析了getsystem中使用的技术<br><img src="/2017/10/01/windows权限提升(二)/xpn-admintosystem.jpg" alt=""><br><a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-%E4%BB%8EAdmin%E6%9D%83%E9%99%90%E5%88%87%E6%8D%A2%E5%88%B0System%E6%9D%83%E9%99%90/" target="_blank" rel="external">referer</a><h3 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">privilege::debug</div><div class="line">token::whoami</div><div class="line">token::elevate</div><div class="line">lsadump::sam</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>使用 mimikatz的驱动进行提权<br><img src="/2017/10/01/windows权限提升(二)/mimikatzdriver.png" alt=""><br>使用mimikatz的继承父进程权限方法<br><img src="/2017/10/01/windows权限提升(二)/mimikatzprocess.png" alt=""></p>
 <h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><ul>
 <li>这里有个问题，就是system权限是windows最高的权限，那么是不是就可以“为所欲为”？，那么你可以尝试删除一下c:\windows\system32目录下的某个文件(cmd.exe除外不排除有其它的程序)，发现竟然删除不了。<br><img src="/2017/10/01/windows权限提升(二)/TrustedInstaller.png" alt=""></li>
 <li>Files in System32 are typically owned by “TrustedInstaller” and are locked down really tightly. If you really, absolutely feel you must do this, the easiest way is to boot from a Linux LiveCD or a Windows install disk.<br><a href="https://superuser.com/questions/744589/cant-delete-system-files-from-system32-drivers-need-permission" target="_blank" rel="external">stackoverflow</a><br><a href="https://helpdeskgeek.com/windows-7/windows-7-how-to-delete-files-protected-by-trustedinstaller/" target="_blank" rel="external">Windows 7/8/10 – How to Delete Files Protected by TrustedInstaller</a></li>
