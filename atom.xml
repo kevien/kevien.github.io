@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-07-10T03:18:53.472Z</updated>
+  <updated>2019-08-27T08:40:07.954Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2019-07-10T03:18:53.472Z</updated>
+    <updated>2019-08-27T08:40:07.954Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -106,7 +106,9 @@
 <li>缺点：编写难度有点儿高</li>
 <li>排查：可以通过unhide等工具进行排查<br><img src="/2019/02/16/linux常见backdoor及排查技术/unhide.png" alt=""></li>
 <li>此外还有<a href="https://github.com/f0rb1dd3n/Reptile" target="_blank" rel="external">Reptile工具</a></li>
-<li><a href="https://github.com/milabs/awesome-linux-rootkits" target="_blank" rel="external">awesome-linux-rootkits</a><h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2></li>
+<li><a href="https://github.com/milabs/awesome-linux-rootkits" target="_blank" rel="external">awesome-linux-rootkits</a><h3 id="软件后门"><a href="#软件后门" class="headerlink" title="软件后门"></a>软件后门</h3></li>
+<li>除了系统后门，还有针对一些常用软件的后门，比如apache服务器后门</li>
+<li><a href="https://github.com/WangYihang/Apache-HTTP-Server-Module-Backdoor" target="_blank" rel="external">A Backdoor For Apache HTTP Server Written in C</a><h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2></li>
 <li>以上介绍了几种backdoor的技巧，只是抛砖引玉，希望有更多人分享你的linux backdoor技巧、Write your own backdoor and MAKE BACKDOOR GREAT AGAIN : ）<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://nnc3.com/mags/LM10/Magazine/Archive/2007/77/022-028_backdoors/article.html" target="_blank" rel="external">Techniques for building a hidden backdoor</a><br><a href="https://github.com/d30sa1/RootKits-List-Download" target="_blank" rel="external">linux rootkits</a><br><a href="https://github.com/mfontanini/Programs-Scripts/" target="_blank" rel="external">https://github.com/mfontanini/Programs-Scripts/</a><br><a href="https://github.com/f0rb1dd3n/Reptile" target="_blank" rel="external">Reptile</a><br><a href="https://github.com/inquisb/icmpsh" target="_blank" rel="external">icmpsh</a><br><a href="https://isec.ne.jp/wp-content/uploads/2017/11/74LKM-rootkits-1.pdf" target="_blank" rel="external">Diamorphine</a></li>
 </ul>
 ]]></content>
