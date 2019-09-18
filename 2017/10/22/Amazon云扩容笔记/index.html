@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="M0rk's Blog">
 <meta property="og:description" content="aws扩容TL；DR 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考">
 <meta property="og:image" content="http://kevien.github.io/2017/10/22/Amazon云扩容笔记/upgrade.png">
-<meta property="og:updated_time" content="2019-05-04T08:27:07.292Z">
+<meta property="og:updated_time" content="2019-09-18T07:35:09.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Amazon云扩容笔记">
 <meta name="twitter:description" content="aws扩容TL；DR 用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑1234按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).参考">
@@ -400,7 +400,8 @@
 </ul>
 <h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><ul>
 <li>国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。<br><img src="/2017/10/22/Amazon云扩容笔记/upgrade.png" alt=""><h2 id="kali-linux虚拟机扩容"><a href="#kali-linux虚拟机扩容" class="headerlink" title="kali linux虚拟机扩容"></a>kali linux虚拟机扩容</h2></li>
-<li>参考文章<a href="https://www.rootusers.com/use-gparted-to-increase-disk-size-of-a-linux-native-partition/" target="_blank" rel="external">Use GParted to increase disk size of a Linux native partition</a></li>
+<li>参考文章<a href="https://www.rootusers.com/use-gparted-to-increase-disk-size-of-a-linux-native-partition/" target="_blank" rel="external">Use GParted to increase disk size of a Linux native partition</a><h2 id="ubunut虚拟机扩容"><a href="#ubunut虚拟机扩容" class="headerlink" title="ubunut虚拟机扩容"></a>ubunut虚拟机扩容</h2></li>
+<li>坑点 要先删除swap分区，才能扩大主分区，参考文章<a href="https://blog.csdn.net/ldzm_edu/article/details/78893721" target="_blank" rel="external">vmware中ubuntu虚拟机扩容</a></li>
 </ul>
 
       
@@ -653,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#aws扩容"><span class="nav-number">1.</span> <span class="nav-text">aws扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL；DR"><span class="nav-number">1.0.1.</span> <span class="nav-text">TL；DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新"><span class="nav-number">1.0.2.</span> <span class="nav-text">更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kali-linux虚拟机扩容"><span class="nav-number">2.</span> <span class="nav-text">kali linux虚拟机扩容</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#aws扩容"><span class="nav-number">1.</span> <span class="nav-text">aws扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL；DR"><span class="nav-number">1.0.1.</span> <span class="nav-text">TL；DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新"><span class="nav-number">1.0.2.</span> <span class="nav-text">更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kali-linux虚拟机扩容"><span class="nav-number">2.</span> <span class="nav-text">kali linux虚拟机扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubunut虚拟机扩容"><span class="nav-number">3.</span> <span class="nav-text">ubunut虚拟机扩容</span></a></li></ol></div>
             
 
           </div>
