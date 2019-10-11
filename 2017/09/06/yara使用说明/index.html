@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/yarapython.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/help.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/rerule.png">
-<meta property="og:updated_time" content="2018-03-14T08:08:01.000Z">
+<meta property="og:updated_time" content="2019-10-11T10:03:20.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yara使用说明">
 <meta name="twitter:description" content="简介 yara工具用来帮助安全研究人员鉴别和对恶意软件进行分类的工具。我们可以通过编写规则来进行恶意软件的识别。yara 规则最新规则官方文档V3.6.3规则示例：12345678910111213rule silent_banker : banker&amp;#123;    meta:        description = &amp;quot;This is just an example&amp;quot;">
@@ -475,7 +475,7 @@ $c = &quot;dummy3&quot;
 </li>
 </ul>
 <h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><ul>
-<li>容易踩坑的点<br>当扫描的是某个进程文件时候，这个时候是没有filesize属性的，也就永远不会满足的。此外还有通过文件偏移来判断PE也是不可行的。</li>
+<li>容易踩坑的点<br>当进程扫描的时候，这时是没有filesize属性的，也就永远不会满足的。此外还有通过文件偏移来判断PE也是不可行的。</li>
 <li>web<br><a href="https://github.com/Tigzy/yaraeditor" target="_blank" rel="external">https://github.com/Tigzy/yaraeditor</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="http://www.freebuf.com/articles/system/26373.html" target="_blank" rel="external">恶意软件模式匹配利器 – YARA</a><br><a href="http://www.freebuf.com/articles/96903.html" target="_blank" rel="external">YARA：抗击恶意代码的神兵利器</a><br><a href="https://www.aldeid.com/wiki/Pescanner" target="_blank" rel="external">PEScanner</a><br><a href="https://github.com/Neo23x0/yarGen" target="_blank" rel="external">yara规则自动生成</a><br><a href="https://countuponsecurity.com/tag/pescanner-py/" target="_blank" rel="external">UNLEASHING YARA – PART 2</a><br><a href="http://www.freebuf.com/sectool/92399.html" target="_blank" rel="external">教你构建自己的yara数据库</a><br><a href="https://github.com/Neo23x0/yarAnalyzer" target="_blank" rel="external">yarAnalyzer</a><br><a href="http://www.aptno1.com/YC/249.html" target="_blank" rel="external">yara简介及API解析</a><br><a href="http://blog.csdn.net/wowolook/article/details/44307283" target="_blank" rel="external">两个开源恶意代码的查杀引擎 clamav yara</a><br><a href="http://bruteforcelab.com/yara-a-beginners-guide.html" target="_blank" rel="external">http://bruteforcelab.com/yara-a-beginners-guide.html</a><br><a href="https://blog.malwarebytes.com/threat-analysis/2013/10/using-yara-to-attribute-malware/" target="_blank" rel="external">https://blog.malwarebytes.com/threat-analysis/2013/10/using-yara-to-attribute-malware/</a><br><a href="https://securityintelligence.com/signature-based-detection-with-yara/" target="_blank" rel="external">https://securityintelligence.com/signature-based-detection-with-yara/</a></li>
 </ul>
 
