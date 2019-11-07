@@ -127,7 +127,7 @@
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/evilso.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/lkm.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/unhide.png">
-<meta property="og:updated_time" content="2019-09-16T06:27:12.451Z">
+<meta property="og:updated_time" content="2019-11-07T08:03:34.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常见backdoor及排查技术">
 <meta name="twitter:description" content="12345原文已发布至先知平台linux常见backdoor及排查技术https://xz.aliyun.com/t/4090windows常见backdoor、权限维持方法及排查技术https://xz.aliyun.com/t/4842 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下win">
@@ -473,7 +473,8 @@
 <li>另外一种就是通过在openssh源码中插入恶意代码重新编译并替换原有sshd文件。插入的恶意代码可以是将登录成功的用户密码发送到远程服务器或者记录到某个log文件中。</li>
 <li>优点：隐蔽性较好</li>
 <li>缺点：暂无</li>
-<li>排查：这种sshd后门一般可能会有一定的特征，可以通过strings sshd |grep ‘[1-9]{1,3}.[1-9]{1,3}.[1-9]{1,3}’或者通过strace 查看是否有可疑的写文件操作。<h3 id="定时任务和开机启动项"><a href="#定时任务和开机启动项" class="headerlink" title="定时任务和开机启动项"></a>定时任务和开机启动项</h3></li>
+<li>排查：这种sshd后门一般可能会有一定的特征，可以通过strings sshd |grep ‘[1-9]{1,3}.[1-9]{1,3}.[1-9]{1,3}’或者通过strace 查看是否有可疑的写文件操作。</li>
+<li>此外还有一种给openssh打补丁的方式添加ssh后门的方法，具体见<a href="https://www.cnblogs.com/bigdevilking/p/9535427.html" target="_blank" rel="external">利用Openssh后门 劫持root密码</a><h3 id="定时任务和开机启动项"><a href="#定时任务和开机启动项" class="headerlink" title="定时任务和开机启动项"></a>定时任务和开机启动项</h3></li>
 <li>一般的挖矿木马喜欢设置定时任务来进行驻留或者进行分时段的挖矿。<br><img src="/2019/02/16/linux常见backdoor及排查技术/crontab.png" alt=""></li>
 <li>排查：一般通过crontab -l命令即可检测到定时任务后门。不同的linux发行版可能查看开机启动项的文件不大相同，Debian系linux系统一般是通过查看/etc/init.d目录有无最近修改和异常的开机启动项。而Redhat系的linux系统一般是查看/etc/rc.d/init.d或者/etc/systemd/system等目录。<br><img src="/2019/02/16/linux常见backdoor及排查技术/init.png" alt=""><h3 id="预加载型动态链接库后门-ld-so-preload"><a href="#预加载型动态链接库后门-ld-so-preload" class="headerlink" title="预加载型动态链接库后门 ld.so.preload"></a>预加载型动态链接库后门 ld.so.preload</h3></li>
 <li>可能有些人不太了解，简单说一下，就是我们在linux下执行某个可执行文件之前，系统会预先加载用户定义的动态链接库的一种技术，这个技术可以重写系统的库函数，导致发生Hijack。<br><img src="/2019/02/16/linux常见backdoor及排查技术/strace.png" alt=""></li>
