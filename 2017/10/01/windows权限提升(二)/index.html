@@ -126,7 +126,7 @@
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/allcheck.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/windowskernelexploit.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/01/windows权限提升(二)/incognito.png">
-<meta property="og:updated_time" content="2019-12-04T10:38:47.919Z">
+<meta property="og:updated_time" content="2019-12-16T07:22:42.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows权限提升(二)">
 <meta name="twitter:description" content="TL;DR A privilege is the right of an account, such as a user or group account, to perform various system-related operations on the local computer, such as shutting down the system, loading device dri">
@@ -448,12 +448,14 @@
 </ul>
 <h2 id="脆弱的服务权限"><a href="#脆弱的服务权限" class="headerlink" title="脆弱的服务权限"></a>脆弱的服务权限</h2><ul>
 <li>服务是windows上没有图形化界面运行在后台的程序。如果你发现一个服务允许everyone写，那么你可以将你的二进制文件写到这个目录并让它去执行。</li>
-<li>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">accesschk.exe -uwcqv &quot;Authenticated Users&quot; * /accepteula</div></pre></td></tr></table></figure>
+<li><p>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">accesschk.exe -uwcqv &quot;Authenticated Users&quot; * /accepteula</div></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>2019年12月9日更新，工具<a href="https://github.com/antonioCoco/RogueWinRM" target="_blank" rel="external">RogueWinRM</a></p>
 <h3 id="WMIC"><a href="#WMIC" class="headerlink" title="WMIC"></a>WMIC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service list brief</div></pre></td></tr></table></figure>
-<ul>
-<li>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</li>
+</li>
+<li><p>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</p>
+</li>
 <li>如下的命令用于查看运行文件在非system32目录下的服务，并且使用icacls查看对应的权限。前提是你能够使用wmic，且你在c:\windows\temp目录有些权限。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for /f &quot;tokens=2 delims=&apos;=&apos;&quot; %a in (&apos;wmic service list full^|find /i &quot;pathname&quot;^|find /i /v &quot;system32&quot;&apos;) do @echo %a &gt;&gt; c:\windows\temp\permissions.txt</div><div class="line"></div><div class="line">for /f eol^=^&quot;^ delims^=^&quot; %a in (c:\windows\temp\permissions.txt) do cmd.exe /c icacls &quot;%a&quot;</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -558,7 +560,8 @@
 <li>这里推荐一个工具<a href="https://github.com/rasta-mouse/Watson" target="_blank" rel="external">Watson.exe</a> </li>
 <li>或者是通过metasploit的post/windows/gather/enum_patches 补丁枚举进而查找对应的提权漏洞进行提权。<h3 id="python-转换成二进制文件"><a href="#python-转换成二进制文件" class="headerlink" title="python 转换成二进制文件"></a>python 转换成二进制文件</h3></li>
 <li>如果我们的exploit是用python写的，但是受害机又没有python环境，这个时候可以使用pyinstaller或者其它工具将其转换成二进制文件。<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc" target="_blank" rel="external">PowerUp</a><br><a href="https://github.com/fdiskyou/incognito2" target="_blank" rel="external">token窃取和debug权限滥用利用工具incognito</a><br><img src="/2017/10/01/windows权限提升(二)/incognito.png" alt=""><h2 id="other-1"><a href="#other-1" class="headerlink" title="other"></a>other</h2></li>
-<li><a href="https://github.com/apt69/COMahawk" target="_blank" rel="external">Privilege Escalation: Weaponizing CVE-2019-1405 and CVE-2019-1322</a><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_windows.html" target="_blank" rel="external">Privilege Escalation Windows</a><br><a href="https://www.youtube.com/watch?v=DlJyKgfkoKQ" target="_blank" rel="external">Windows Privilege Escalation Techniques (Local)</a><br><a href="https://www.slideshare.net/jakx_/level-up-practical-windows-privilege-escalation" target="_blank" rel="external">Level Up! - Practical Windows Privilege Escalation</a><br><a href="https://www.youtube.com/watch?v=G9yn3qNq7Vw" target="_blank" rel="external">Windows Privilege Escalation Unquoted Service part1/2/3</a><br><a href="https://www.youtube.com/watch?v=vRivLCELwEY" target="_blank" rel="external">RomHack 2018 - show me your Windows privileges and I will lead you to SYSTEM - Pierini</a></li>
+<li><a href="https://github.com/apt69/COMahawk" target="_blank" rel="external">Privilege Escalation: Weaponizing CVE-2019-1405 and CVE-2019-1322</a></li>
+<li><a href="https://www.zerodayinitiative.com/blog/2019/11/19/thanksgiving-treat-easy-as-pie-windows-7-secure-desktop-escalation-of-privilege" target="_blank" rel="external">CVE-2019-1388： Windows UAC 提权</a> 感觉这个挺有意思的，利用了运行consent.exe程序的高权限,使用浏览器打开网页之后再通过浏览器运行cmd.exe。<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://chryzsh.gitbooks.io/pentestbook/privilege_escalation_windows.html" target="_blank" rel="external">Privilege Escalation Windows</a><br><a href="https://www.youtube.com/watch?v=DlJyKgfkoKQ" target="_blank" rel="external">Windows Privilege Escalation Techniques (Local)</a><br><a href="https://www.slideshare.net/jakx_/level-up-practical-windows-privilege-escalation" target="_blank" rel="external">Level Up! - Practical Windows Privilege Escalation</a><br><a href="https://www.youtube.com/watch?v=G9yn3qNq7Vw" target="_blank" rel="external">Windows Privilege Escalation Unquoted Service part1/2/3</a><br><a href="https://www.youtube.com/watch?v=vRivLCELwEY" target="_blank" rel="external">RomHack 2018 - show me your Windows privileges and I will lead you to SYSTEM - Pierini</a></li>
 </ul>
 
       
