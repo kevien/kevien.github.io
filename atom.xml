@@ -706,7 +706,7 @@
     <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
     <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
     <published>2018-01-28T09:18:28.000Z</published>
-    <updated>2019-01-04T17:03:40.266Z</updated>
+    <updated>2020-01-02T08:38:27.690Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
@@ -788,7 +788,8 @@
 <li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="external">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
 <li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
 <li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="external">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
-<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""></li>
+<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""><h4 id="20200102更新"><a href="#20200102更新" class="headerlink" title="20200102更新"></a>20200102更新</h4></li>
+<li><a href="inject a shared library (i.e. arbitrary code">https://github.com/DavidBuchanan314/dlinject</a> into a live linux process, without ptrace)</li>
 </ul>
 ]]></content>
     

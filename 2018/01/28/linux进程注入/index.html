@@ -113,7 +113,7 @@
 <meta property="og:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/testinject.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/poc.png">
-<meta property="og:updated_time" content="2019-01-04T17:03:40.266Z">
+<meta property="og:updated_time" content="2020-01-02T08:38:27.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux进程注入(-)">
 <meta name="twitter:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
@@ -475,7 +475,8 @@
 <li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="external">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
 <li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
 <li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="external">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
-<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""></li>
+<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""><h4 id="20200102更新"><a href="#20200102更新" class="headerlink" title="20200102更新"></a>20200102更新</h4></li>
+<li><a href="inject a shared library (i.e. arbitrary code">https://github.com/DavidBuchanan314/dlinject</a> into a live linux process, without ptrace)</li>
 </ul>
 
       
@@ -728,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在linux中进行进程调试"><span class="nav-number">3.</span> <span class="nav-text">在linux中进行进程调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附加到正在运行的进程"><span class="nav-number">4.</span> <span class="nav-text">附加到正在运行的进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入代码"><span class="nav-number">5.</span> <span class="nav-text">注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取寄存器和内存信息"><span class="nav-number">6.</span> <span class="nav-text">获取寄存器和内存信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行注入代码"><span class="nav-number">7.</span> <span class="nav-text">运行注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何去算出这两个字节"><span class="nav-number">8.</span> <span class="nav-text">如何去算出这两个字节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试程序"><span class="nav-number">9.</span> <span class="nav-text">测试程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结束语"><span class="nav-number">10.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180320更新"><span class="nav-number">12.</span> <span class="nav-text">20180320更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在linux中进行进程调试"><span class="nav-number">3.</span> <span class="nav-text">在linux中进行进程调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附加到正在运行的进程"><span class="nav-number">4.</span> <span class="nav-text">附加到正在运行的进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入代码"><span class="nav-number">5.</span> <span class="nav-text">注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取寄存器和内存信息"><span class="nav-number">6.</span> <span class="nav-text">获取寄存器和内存信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行注入代码"><span class="nav-number">7.</span> <span class="nav-text">运行注入代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何去算出这两个字节"><span class="nav-number">8.</span> <span class="nav-text">如何去算出这两个字节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试程序"><span class="nav-number">9.</span> <span class="nav-text">测试程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结束语"><span class="nav-number">10.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180320更新"><span class="nav-number">12.</span> <span class="nav-text">20180320更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20200102更新"><span class="nav-number">13.</span> <span class="nav-text">20200102更新</span></a></li></ol></div>
             
 
           </div>
@@ -754,7 +755,7 @@
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
