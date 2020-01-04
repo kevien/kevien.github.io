@@ -1021,12 +1021,12 @@
     <link href="http://kevien.github.io/2017/10/10/linux%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/"/>
     <id>http://kevien.github.io/2017/10/10/linux权限提升/</id>
     <published>2017-10-10T04:35:24.000Z</published>
-    <updated>2020-01-03T10:24:14.914Z</updated>
+    <updated>2020-01-04T06:39:10.560Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/10/linux权限提升/linuxprivilegeescalation.jpg" alt=""></p>
 <h2 id="Brief"><a href="#Brief" class="headerlink" title="Brief"></a>Brief</h2><ul>
 <li>当我们获取到一个低权限的shell的时候，我们往往需要提升权限，以方便后面任意读写任意文件、权限维持等操作。</li>
-<li>这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<br>11.未装载的文件系统<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
+<li>这篇文章中我们主要介绍一些常见的linux的权限提升的技巧，这其中包括<br>1.内核提权<br>2.以root权限运行的程序<br>3.已安装的软件<br>4.弱口令和明文密码<br>5.内部的服务<br>6.suid的错误配置<br>7.滥用sudo权限<br>8.以root权限运行的脚本文件<br>9.错误的路径配置<br>10.计划任务<h2 id="枚举脚本"><a href="#枚举脚本" class="headerlink" title="枚举脚本"></a>枚举脚本</h2></li>
 <li>我之前用这三个脚本来枚举linux机器的基本信息，这三个脚本略有不同，但输出都很相似，所以选择一个你喜欢的就可以。<br><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="external">LinEnum</a></li>
 <li>以下是基本的选项：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-k Enter keyword</div><div class="line">-e Enter export location</div><div class="line">-t Include thorough (lengthy) tests</div><div class="line">-r Enter report name</div><div class="line">-h Displays this help text</div></pre></td></tr></table></figure>
 </li>
@@ -1116,8 +1116,7 @@
 <li>查看属于高权限用户但是你有写权限的文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">crontab -l</div><div class="line">ls -alh /var/spool/cron</div><div class="line">ls -al /etc/ | grep cron</div><div class="line">ls -al /etc/cron*</div><div class="line">cat /etc/cron*</div><div class="line">cat /etc/at.allow</div><div class="line">cat /etc/at.deny</div><div class="line">cat /etc/cron.allow</div><div class="line">cat /etc/cron.deny</div><div class="line">cat /etc/crontab</div><div class="line">cat /etc/anacrontab</div><div class="line">cat /var/spool/cron/crontabs/root</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="未挂载的文件系统"><a href="#未挂载的文件系统" class="headerlink" title="未挂载的文件系统"></a>未挂载的文件系统</h2><ul>
-<li>查看未挂载的系统磁盘，如果成功挂载之后，那么就可以如上文所说的在进行一次提权操作尝试。<h2 id="NFS共享"><a href="#NFS共享" class="headerlink" title="NFS共享"></a>NFS共享</h2></li>
+<h2 id="NFS共享"><a href="#NFS共享" class="headerlink" title="NFS共享"></a>NFS共享</h2><ul>
 <li><p>如果远程服务器开启了NFS共享，这个时候可以挂在远程共享服务磁盘，例如 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount 192.168.1.101:/ /tmp/</div></pre></td></tr></table></figure>
 </li>
