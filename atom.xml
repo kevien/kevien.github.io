@@ -1159,7 +1159,7 @@
     <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
     <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
     <published>2017-10-01T03:39:24.000Z</published>
-    <updated>2020-01-04T05:31:12.723Z</updated>
+    <updated>2020-01-04T06:26:20.068Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
@@ -1265,8 +1265,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
 </li>
 <li><p>这个配置错误的不多，更多可以看向这里<a href="https://xz.aliyun.com/t/203" target="_blank" rel="external">https://xz.aliyun.com/t/203</a><br><img src="/2017/10/01/windows权限提升(二)/AlwaysInstallElevated.png" alt=""><br><img src="/2017/10/01/windows权限提升(二)/backdoor.png" alt=""></p>
-<h2 id="hotpotato"><a href="#hotpotato" class="headerlink" title="hotpotato"></a>hotpotato</h2></li>
-<li>Hot Potatok利用了windows中已有的一些问题，在windows默认配置下进行本地权限提升。实际是利用了NTLM重放(更确切的说是HTPP-&gt;SMB重放)，和NBNS欺骗。<br><img src="/2017/10/01/windows权限提升(二)/hotpotato.png" alt=""><h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2></li>
+<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2></li>
 <li>如果一个机器是加入域了的，当前用户可以查看系统信息卷，这里可能有敏感的文件。</li>
 <li><p>首先我们需要装载这个卷，为了查找到域控机器的ip地址，我们先看一下环境变量。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># Output environment-variables</div><div class="line">set</div><div class="line"></div><div class="line"># Look for the following:</div><div class="line">LOGONSERVER=\\NAMEOFSERVER</div><div class="line">USERDNSDOMAIN=WHATEVER.LOCAL</div><div class="line"></div><div class="line"># Look up ip-addres</div><div class="line">nslookup nameofserver.whatever.local</div><div class="line"></div><div class="line"># It will output something like this</div><div class="line">Address:  192.168.1.101</div><div class="line"></div><div class="line"># Now we mount it</div><div class="line">net use z: \\192.168.1.101\SYSVOL</div><div class="line"></div><div class="line"># And enter it</div><div class="line">z:</div><div class="line"></div><div class="line"># Now we search for the groups.xml file</div><div class="line">dir Groups.xml /s</div></pre></td></tr></table></figure>
@@ -1307,7 +1306,11 @@
 <li>一些驱动程序也可以帮助我们提权，对这块儿没怎么研究，待更。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># List all drivers</div><div class="line">driverquery</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="内核漏洞提权"><a href="#内核漏洞提权" class="headerlink" title="内核漏洞提权"></a>内核漏洞提权</h2><ul>
+<h2 id="漏洞提权"><a href="#漏洞提权" class="headerlink" title="漏洞提权"></a>漏洞提权</h2><h3 id="hotpotato"><a href="#hotpotato" class="headerlink" title="hotpotato"></a>hotpotato</h3><ul>
+<li>Hot Potatok利用了windows中已有的一些问题，在windows默认配置下进行本地权限提升。实际是利用了NTLM重放(更确切的说是HTPP-&gt;SMB重放)，和NBNS欺骗。<br><img src="/2017/10/01/windows权限提升(二)/hotpotato.png" alt=""><h3 id="ms16032"><a href="#ms16032" class="headerlink" title="ms16032"></a>ms16032</h3></li>
+<li></li>
+<li>适用Win7-Win10 &amp; 2k8-2k12 &lt;== 32/64 bit!</li>
+<li>漏洞详情 <a href="https://googleprojectzero.blogspot.com/2016/03/exploiting-leaked-thread-handle.html" target="_blank" rel="external">https://googleprojectzero.blogspot.com/2016/03/exploiting-leaked-thread-handle.html</a><br><img src="/2017/10/01/windows权限提升(二)/ms16-032.png" alt=""><h3 id="内核漏洞提权"><a href="#内核漏洞提权" class="headerlink" title="内核漏洞提权"></a>内核漏洞提权</h3></li>
 <li>内核提权应该是我们最后万不得已才使用的方法，因为它往往容易导致系统不稳定或造成其它方面的问题。</li>
 <li><p>首先来看一下系统的补丁情况</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">systeminfo</div><div class="line"># or</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line"># metasploit enumerate missing patches</div><div class="line">post/windows/gather/enum_patches</div><div class="line">post/multi/recon/local_exploit_suggester</div><div class="line"># posershell </div><div class="line">get-hotfix | Sort-Object HotfixID |format-table</div></pre></td></tr></table></figure>
