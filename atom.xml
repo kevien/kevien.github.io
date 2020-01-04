@@ -1159,7 +1159,7 @@
     <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
     <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
     <published>2017-10-01T03:39:24.000Z</published>
-    <updated>2019-12-17T11:05:02.834Z</updated>
+    <updated>2020-01-04T05:31:12.723Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
@@ -1201,10 +1201,13 @@
 </ul>
 <h2 id="脆弱的服务权限"><a href="#脆弱的服务权限" class="headerlink" title="脆弱的服务权限"></a>脆弱的服务权限</h2><ul>
 <li>服务是windows上没有图形化界面运行在后台的程序。如果你发现一个服务允许everyone写，那么你可以将你的二进制文件写到这个目录并让它去执行。</li>
-<li><p>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">accesschk.exe -uwcqv &quot;Authenticated Users&quot; * /accepteula</div></pre></td></tr></table></figure>
+<li>首先我们可以使用wmic或者sc.exe去发现服务，wmic并不是每台windows机器上都有，且有可能对你当前的用户不可用，如果你用不了它，你可以使用sc.exe<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">accesschk.exe -uwcqv &quot;Authenticated Users&quot; * /accepteula</div></pre></td></tr></table></figure>
 </li>
-<li><p>2019年12月9日更新，工具<a href="https://github.com/antonioCoco/RogueWinRM" target="_blank" rel="external">RogueWinRM</a></p>
+</ul>
+<p><img src="/2017/10/01/windows权限提升(二)/servicedllhijack.png" alt=""></p>
+<ul>
+<li>服务程序路径每个人均可修改<br><img src="/2017/10/01/windows权限提升(二)/binpath.png" alt=""></li>
+<li><p>2019年12月9日更新，工具<a href="https://github.com/antonioCoco/RogueWinRM" target="_blank" rel="external">RogueWinRM</a><br><a href="https://www.youtube.com/watch?v=9s8jYwx9FSA&amp;list=PLjG9EfEtwbvIrGFTx4XctK8IxkUJkAEqP&amp;index=4&amp;t=0s" target="_blank" rel="external">link</a></p>
 <h3 id="WMIC"><a href="#WMIC" class="headerlink" title="WMIC"></a>WMIC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wmic service list brief</div></pre></td></tr></table></figure>
 </li>
 <li><p>这个命令将会输出当前机器所运行的服务，这个时候我们需要找到这些有权限漏洞的服务，为了检查权限问题我们可以使用icacls这个命令，注意这个命令从vista才开始支持，xp或者以下用的是cacls命令。</p>
@@ -1262,7 +1265,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div><div class="line">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</div></pre></td></tr></table></figure>
 </li>
 <li><p>这个配置错误的不多，更多可以看向这里<a href="https://xz.aliyun.com/t/203" target="_blank" rel="external">https://xz.aliyun.com/t/203</a><br><img src="/2017/10/01/windows权限提升(二)/AlwaysInstallElevated.png" alt=""><br><img src="/2017/10/01/windows权限提升(二)/backdoor.png" alt=""></p>
-<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2></li>
+<h2 id="hotpotato"><a href="#hotpotato" class="headerlink" title="hotpotato"></a>hotpotato</h2></li>
+<li>Hot Potatok利用了windows中已有的一些问题，在windows默认配置下进行本地权限提升。实际是利用了NTLM重放(更确切的说是HTPP-&gt;SMB重放)，和NBNS欺骗。<br><img src="/2017/10/01/windows权限提升(二)/hotpotato.png" alt=""><h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2></li>
 <li>如果一个机器是加入域了的，当前用户可以查看系统信息卷，这里可能有敏感的文件。</li>
 <li><p>首先我们需要装载这个卷，为了查找到域控机器的ip地址，我们先看一下环境变量。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># Output environment-variables</div><div class="line">set</div><div class="line"></div><div class="line"># Look for the following:</div><div class="line">LOGONSERVER=\\NAMEOFSERVER</div><div class="line">USERDNSDOMAIN=WHATEVER.LOCAL</div><div class="line"></div><div class="line"># Look up ip-addres</div><div class="line">nslookup nameofserver.whatever.local</div><div class="line"></div><div class="line"># It will output something like this</div><div class="line">Address:  192.168.1.101</div><div class="line"></div><div class="line"># Now we mount it</div><div class="line">net use z: \\192.168.1.101\SYSVOL</div><div class="line"></div><div class="line"># And enter it</div><div class="line">z:</div><div class="line"></div><div class="line"># Now we search for the groups.xml file</div><div class="line">dir Groups.xml /s</div></pre></td></tr></table></figure>
