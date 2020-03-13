@@ -131,7 +131,7 @@
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/lkm.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/unhide.png">
 <meta property="og:image" content="http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/guli.jpg">
-<meta property="og:updated_time" content="2020-03-13T09:23:30.806Z">
+<meta property="og:updated_time" content="2020-03-13T09:29:36.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常见backdoor及排查技术">
 <meta name="twitter:description" content="12345原文已发布至先知平台linux常见backdoor及排查技术https://xz.aliyun.com/t/4090windows常见backdoor、权限维持方法及排查技术https://xz.aliyun.com/t/4842 TL；DR  最近遇到一些和后门相关的技术，所以就把之前的linux backdoor相关笔记重新整理和学习了一下。在这里做一下记录，后续有时间整理一下win">
@@ -436,7 +436,10 @@
 <li>优点：简单</li>
 <li>缺点：易被检测到</li>
 <li>排查：检查/etc/passwd文件是否有异常<h3 id="nologin后门"><a href="#nologin后门" class="headerlink" title="nologin后门"></a>nologin后门</h3></li>
-<li>目前在其它的文章中还没有看到过，自己想出来的，就是将nologin程序替换为bash，很多时候应急人员查看passwd，发现账户对应的shell为nologin认为就是系统的账号且这个账号是不能远程登陆的或者是登陆之后没有shell的，所以就可以将nologin设置成bash<br><img src="/2019/02/16/linux常见backdoor及排查技术/passwd.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/bash.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/login.png" alt=""></li>
+<li>目前在其它的文章中还没有看到过，自己想出来的，就是将nologin程序替换为bash，很多时候应急人员查看passwd，发现账户对应的shell为nologin认为就是系统的账号且这个账号是不能远程登陆的或者是登陆之后没有shell的，可能就认为这个账号是安全的，所以我们就可以将nologin设置成bash，并且修改这个账号的密码，如系统自带的backup账号就是一个很好用账户<br><img src="/2019/02/16/linux常见backdoor及排查技术/passwd.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/bash.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/login.png" alt=""></li>
+<li>优点：简单</li>
+<li>缺点：暂无</li>
+<li>排查：检查nologin是否被替换</li>
 </ul>
 <h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
 <ul>
