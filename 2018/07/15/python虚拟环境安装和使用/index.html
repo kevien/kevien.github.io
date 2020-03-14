@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/pyenvversions.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/setpycharm.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/virtualenv.png">
-<meta property="og:updated_time" content="2019-12-12T07:00:51.396Z">
+<meta property="og:updated_time" content="2020-03-14T10:10:48.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python虚拟环境安装和使用">
 <meta name="twitter:description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
@@ -405,7 +405,7 @@
 </li>
 <li>使用pyenv install  3.6.* 安装特定版本的python（建议安装个python2 和python3的环境即可）</li>
 <li>查看已安装的版本 pyenv versions<br><img src="/2018/07/15/python虚拟环境安装和使用/pyenvversions.png" alt=""></li>
-<li>python环境切换 使用pyenv global xxx 或者pyenv local ,其中前者是全局的设置，而后者是针对当前项目python环境的设置。</li>
+<li>python环境切换 使用pyenv global xxx 或者pyenv local ,其中前者是全局的设置，而后者是针对当前项目python环境的设置,还可以使用pyenv shell xxx 设置当前shell的python版本，退出shell后失效。</li>
 <li>在进行版本切换的时候，可能会出现AttributeError: module ‘enum’ has no attribute ‘IntFlag’或者raise ImportError(‘This package should not be accessible on Python 3. ‘<br>ImportError: This package should not be accessible on Python 3. Either you are trying to run from the python-future src folder or your installation of python-future is corrupted.这个错误，这个时候使用unset PYTHONPATH可以解决问题。<h4 id="配置pycharm"><a href="#配置pycharm" class="headerlink" title="配置pycharm"></a>配置pycharm</h4></li>
 <li>现实中我们往往可能需要使用pycharm这种IDE进行python的开发，那么如何在pycharm中进行python版本的自由切换呢？</li>
 <li>其实pycharm 和idea都属于 jetbrains家族产品，使用上面很是类似。</li>
@@ -421,7 +421,8 @@
 <li>安装对应版本的第三方包 pip install django==1.10<br><img src="/2018/07/15/python虚拟环境安装和使用/virtualenv.png" alt=""></li>
 <li>如上图所示，就相当于进一步定制化了环境（python2.7.14 and django==1.10）。</li>
 <li>此外和上面配置pycharm一样对pycharm进行相应开发环境的配置。</li>
-<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4>*<a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="external">Python Development on macOS with pyenv-virtualenv</a></li>
+<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="external">Python Development on macOS with pyenv-virtualenv</a>
+</em><a href="https://www.cnblogs.com/kevingrace/p/10130801.html" target="_blank" rel="external">Python多版本管理器-pyenv 介绍及部署记录</a></li>
 </ul>
 
       
