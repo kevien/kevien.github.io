@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/cs.png">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/profile.png">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/checkin.png">
-<meta property="og:updated_time" content="2020-03-24T11:35:37.321Z">
+<meta property="og:updated_time" content="2020-03-24T11:39:06.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cobaltstrike dns beacon">
 <meta name="twitter:description" content="TL;DR cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然而过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个a记录  将malw">
@@ -401,7 +401,7 @@
 <li>cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然而过程是崎岖的，中间踩了几个坑记录一下。<h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2></li>
 <li>首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个a记录  将malware.com 的一个子域名指向我们的vps地址，如c2.malware.com</li>
 <li>之后我们需要添加一个cname记录 主机记录可以是dns  记录值是c2.malware.com ，cname记录就是将解析任务交由一个指定的权威dns服务器</li>
-<li>梳理一下请求的流程，当我们请求dns.malware.com的时候，首先通过顶级域名查找到malware.com,之后发现dns.malware.com 是由c2.malware.com 负责解析，然后这个c2.malware又是有A记录的对应的ip地址是1.2.3.4，这个时候就可以通信了，注意这里要事先在vps上设置dns listener，负责无法处理过来的dns请求。<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2></li>
+<li>梳理一下请求的流程，当我们请求dns.malware.com的时候，首先通过顶级域名查找到malware.com,之后发现dns.malware.com 是由c2.malware.com 负责解析，然后这个c2.malware又是有A记录的对应的ip地址是1.2.3.4，这个时候就可以通信了，注意这里要事先在vps上设置dns listener(cs中listener的dns hosts设置为dns.malware.com)，负责无法处理过来的dns请求。<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2></li>
 <li>原理明白测试就简单了，配置好cs的dns listener和dns解析之后可以进行一下测试，可以使用nslookup，也可以使用dig<br>dig +trace dns.malware.com 或者  nslookup dns.malware.com c2.malware.com ,最后应该会收到来自vps 53端口的回复地址是 0.0.0.0，但如果你的cs 设置了profile，且设置了dns_idle,那就不是默认的0.0.0.0，而是你dns_idle的值，这个是cs作者用来逃避检测的一种技巧，只能说作者考虑的有点儿全面orz(之前测试的时候我一直没注意到这个点，简单逆了一下cobaltstrike.jar 大概看了一下流程没怎么看懂，也看了teamserve的log也没发现异常，在服务器上抓了流量也没发现异常，也怀疑是vps限制或者是dns厂商问题，各种弯路都走了…最后事实证明其实都是正常的)。<br><img src="/2020/03/24/cobaltstrike-dns-beacon/profile.png" alt=""></li>
 <li>在beacon上线之后，图标是个黑框，且和http和tcp beacon不一样他没有默认的睡眠60秒，你甚至可能会以为beacon死掉了，其实不然如果想要和beacon交互这个时候需要checkin命令，help checkin可以看到帮助信息，大意就是会让dns beacon强制回连你的teamserver,checkin之后就会发现图标变了，也可以进行交互了，但是非常慢，有时候甚至还回不来，这个时候需要修改一下dns模式，help mode 可以看一下具体有什么不同,默认的mode dns数据传输比较慢，这个时候可以修改为mode dns-txt 传输会比较快，每次传输189比特的输入，相比A记录每次携带4比特的数据很快了。<br><img src="/2020/03/24/cobaltstrike-dns-beacon/checkin.png" alt=""><br>至此，踩坑完毕。。。<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://blog.cobaltstrike.com/2016/07/29/cobalt-strike-3-4-operational-details/" target="_blank" rel="external">New Malleable C2 Options</a><br><a href="https://www.i0day.com/1957.html" target="_blank" rel="external">Cobalt Strike 3.13</a></li>
 </ul>
