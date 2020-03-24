@@ -104,21 +104,21 @@
 
 
 
-<meta name="description" content="TL;DR cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malw">
+<meta name="description" content="TL;DR cs作者曾说过dns beacon是cs一重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malwa">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cobaltstrike dns beacon">
 <meta property="og:url" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/index.html">
 <meta property="og:site_name" content="M0rk's Blog">
-<meta property="og:description" content="TL;DR cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malw">
+<meta property="og:description" content="TL;DR cs作者曾说过dns beacon是cs一重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malwa">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/cs.png">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/profile.png">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/help.png">
 <meta property="og:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/checkin.png">
-<meta property="og:updated_time" content="2020-03-24T12:06:24.837Z">
+<meta property="og:updated_time" content="2020-03-24T12:07:49.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cobaltstrike dns beacon">
-<meta name="twitter:description" content="TL;DR cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malw">
+<meta name="twitter:description" content="TL;DR cs作者曾说过dns beacon是cs一重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malwa">
 <meta name="twitter:image" content="http://kevien.github.io/2020/03/24/cobaltstrike-dns-beacon/cs.png">
 
 
@@ -399,7 +399,7 @@
       
         <p><img src="/2020/03/24/cobaltstrike-dns-beacon/cs.png" alt=""></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
-<li>cs作者曾说过dns beacon是其中一个重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。<h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2></li>
+<li>cs作者曾说过dns beacon是cs一重要的特色，原因其在绕过防火墙方面比较有优势，之前测试的时候有点儿问题没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。<h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2></li>
 <li>首先我们需要申请一个域名做好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录  将malware.com 的一个子域名指向我们的vps地址，如c2.malware.com</li>
 <li>之后我们需要添加一个CNAME记录,主机记录可以是dns,记录值是c2.malware.com,CNAME记录就是将解析任务交由一个指定的权威dns服务器</li>
 <li>梳理一下请求的流程，当我们请求xxx.dns.malware.com的时候，首先通过递归查询查找到malware.com,之后发现dns.malware.com是由c2.malware.com负责解析，然后这个c2.malware又是有A记录的对应ip地址是1.2.3.4，这个时候就可以通信了，注意这里需要事先在vps上设置dns listener(cs中listener的dns hosts设置为dns.malware.com)，否则无法处理过来的dns请求。<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2></li>
