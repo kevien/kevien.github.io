@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if('123456'){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="ReferenceWinDbg学习笔记（一）–认识WinDbg从Ollydbg说起—–WinDbg用户态调试教程Windbg基本调试技术Windows 调试器 WinDBG 和 KD 学习系列 PPT(https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://ww">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windbg使用">
 <meta property="og:url" content="http://kevien.github.io/2017/08/21/windbg使用/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="ReferenceWinDbg学习笔记（一）–认识WinDbg从Ollydbg说起—–WinDbg用户态调试教程Windbg基本调试技术Windows 调试器 WinDBG 和 KD 学习系列 PPT(https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://ww">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-18T06:47:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windbg使用">
@@ -142,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/21/windbg使用/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/21/windbg使用/">
 
 
 
@@ -151,7 +151,7 @@
   <title>windbg使用 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -176,13 +176,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -212,7 +212,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -222,7 +222,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -232,7 +232,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -242,7 +242,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -252,7 +252,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -265,7 +265,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -286,9 +286,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -320,16 +318,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/21/windbg使用/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -423,7 +421,7 @@
       
 
       
-        <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-94457.htm" target="_blank" rel="external">WinDbg学习笔记（一）–认识WinDbg</a><br><a href="http://bbs.pediy.com/thread-34379.htm" target="_blank" rel="external">从Ollydbg说起—–WinDbg用户态调试教程</a><br><a href="http://bbs.pediy.com/thread-34958.htm" target="_blank" rel="external">Windbg基本调试技术</a><br><a href="http://1drv.ms/1q2aPk6" target="_blank" rel="external">Windows 调试器 WinDBG 和 KD 学习系列 PPT</a>(<a href="https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens" target="_blank" rel="external">https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens</a>)</p>
+        <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-94457.htm" target="_blank" rel="noopener">WinDbg学习笔记（一）–认识WinDbg</a><br><a href="http://bbs.pediy.com/thread-34379.htm" target="_blank" rel="noopener">从Ollydbg说起—–WinDbg用户态调试教程</a><br><a href="http://bbs.pediy.com/thread-34958.htm" target="_blank" rel="noopener">Windbg基本调试技术</a><br><a href="http://1drv.ms/1q2aPk6" target="_blank" rel="noopener">Windows 调试器 WinDBG 和 KD 学习系列 PPT</a>(<a href="https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens" target="_blank" rel="noopener">https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens</a>)</p>
 
       
     </div>
@@ -460,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/22/OllyDbg使用入门/" rel="next" title="OllyDbg使用入门">
-                <i class="fa fa-chevron-left"></i> OllyDbg使用入门
+              <a href="/2017/08/18/IDA使用/" rel="next" title="IDA使用">
+                <i class="fa fa-chevron-left"></i> IDA使用
               </a>
             
           </div>
@@ -470,8 +468,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/18/IDA使用/" rel="prev" title="IDA使用">
-                IDA使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/22/OllyDbg使用入门/" rel="prev" title="OllyDbg使用入门">
+                OllyDbg使用入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -520,7 +518,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -530,10 +528,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -660,7 +656,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

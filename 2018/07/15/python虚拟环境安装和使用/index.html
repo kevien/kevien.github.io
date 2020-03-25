@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python虚拟环境安装和使用">
 <meta property="og:url" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/pyenvversions.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/setpycharm.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/virtualenv.png">
@@ -146,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/">
 
 
 
@@ -155,7 +155,7 @@
   <title>python虚拟环境安装和使用 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -180,13 +180,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -216,7 +216,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -226,7 +226,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -236,7 +236,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -246,7 +246,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -256,7 +256,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -269,7 +269,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -290,9 +290,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -324,16 +322,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -430,7 +428,7 @@
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
 <li><p>推荐使用brew安装pyenv </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Install Homebrew</div><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; </div><div class="line"># Install pyenv</div><div class="line">brew install pyenv </div><div class="line"># Add pyenv initializer to shell startup script</div><div class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</div><div class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</div><div class="line">echo &apos;eval &quot;$(pyenv init -)&quot;&apos; &gt;&gt; ~/.bash_profile </div><div class="line"># Restart your shell for changes to take effect</div><div class="line">exec $SHELL</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Install Homebrew</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; </span><br><span class="line"># Install pyenv</span><br><span class="line">brew install pyenv </span><br><span class="line"># Add pyenv initializer to shell startup script</span><br><span class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</span><br><span class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</span><br><span class="line">echo &apos;eval &quot;$(pyenv init -)&quot;&apos; &gt;&gt; ~/.bash_profile </span><br><span class="line"># Restart your shell for changes to take effect</span><br><span class="line">exec $SHELL</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用pyenv install –list 查看可用的python版本</p>
 </li>
@@ -444,7 +442,7 @@
 <li>之后就可以通过添加完的Python Interpreter选择对应版本的Interpreter进行解释执行了。<h4 id="virtualenv的安装和使用"><a href="#virtualenv的安装和使用" class="headerlink" title="virtualenv的安装和使用"></a>virtualenv的安装和使用</h4></li>
 <li>pyenv用于不同python版本之间的切换，还有一种场景就是在确定了python版本之后，需要第三方包不同版本之间的切换，比如不同版本的django版本之间的版本切换，于是就有了virutalenv。</li>
 <li><p>安装（还是brew）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Install Homebrew</div><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div><div class="line"># Install pyenv-virtualenv</div><div class="line">brew install pyenv-virtualenv</div><div class="line"># Add pyenv-virtualenv initializer to shell startup script</div><div class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</div><div class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</div><div class="line">echo &apos;eval &quot;$(pyenv virtualenv-init -)&quot;&apos; &gt;&gt; ~/.bash_profile</div><div class="line"># Restart your shell for changes to take effect</div><div class="line">exec $SHELL</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Install Homebrew</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line"># Install pyenv-virtualenv</span><br><span class="line">brew install pyenv-virtualenv</span><br><span class="line"># Add pyenv-virtualenv initializer to shell startup script</span><br><span class="line"># ZSH USERS: use ~/.zshrc instead of ~/.bash_profile</span><br><span class="line"># LINUX USERS: use ~/.bashrc instead of ~/.bash_profile</span><br><span class="line">echo &apos;eval &quot;$(pyenv virtualenv-init -)&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line"># Restart your shell for changes to take effect</span><br><span class="line">exec $SHELL</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建一个虚拟环境 例如 pyenv virtualenv 3.6.1 django-1.10</p>
 </li>
@@ -452,8 +450,8 @@
 <li>安装对应版本的第三方包 pip install django==1.10<br><img src="/2018/07/15/python虚拟环境安装和使用/virtualenv.png" alt=""></li>
 <li>如上图所示，就相当于进一步定制化了环境（python2.7.14 and django==1.10）。</li>
 <li>此外和上面配置pycharm一样对pycharm进行相应开发环境的配置。</li>
-<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="external">Python Development on macOS with pyenv-virtualenv</a>
-</em><a href="https://www.cnblogs.com/kevingrace/p/10130801.html" target="_blank" rel="external">Python多版本管理器-pyenv 介绍及部署记录</a></li>
+<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="noopener">Python Development on macOS with pyenv-virtualenv</a>
+</em><a href="https://www.cnblogs.com/kevingrace/p/10130801.html" target="_blank" rel="noopener">Python多版本管理器-pyenv 介绍及部署记录</a></li>
 </ul>
 
       
@@ -491,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/26/笔记之docker的使用/" rel="next" title="笔记之docker的使用">
-                <i class="fa fa-chevron-left"></i> 笔记之docker的使用
+              <a href="/2018/06/18/FastJson反序列化漏洞(续)/" rel="next" title="FastJson反序列化漏洞(续)">
+                <i class="fa fa-chevron-left"></i> FastJson反序列化漏洞(续)
               </a>
             
           </div>
@@ -501,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/18/FastJson反序列化漏洞(续)/" rel="prev" title="FastJson反序列化漏洞(续)">
-                FastJson反序列化漏洞(续) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/26/笔记之docker的使用/" rel="prev" title="笔记之docker的使用">
+                笔记之docker的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,7 +549,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -561,10 +559,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -691,7 +687,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

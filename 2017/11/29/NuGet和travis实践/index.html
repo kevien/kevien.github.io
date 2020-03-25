@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="S;CR工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根目">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NuGet和travis实践">
 <meta property="og:url" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="S;CR工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者Victor M. Alvarez用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。 vs Solution实际测试 下面就以openssl库为例进行一下测试。 首先需要在项目的根目">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/projectwithui.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/ui.png">
 <meta property="og:image" content="http://kevien.github.io/2017/11/29/NuGet和travis实践/out.png">
@@ -156,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/11/29/NuGet和travis实践/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/11/29/NuGet和travis实践/">
 
 
 
@@ -165,7 +165,7 @@
   <title>NuGet和travis实践 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -190,13 +190,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -226,7 +226,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -236,7 +236,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -246,7 +246,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -256,7 +256,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -266,7 +266,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -279,7 +279,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -300,9 +300,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -334,16 +332,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/11/29/NuGet和travis实践/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -437,27 +435,27 @@
       
 
       
-        <h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="external">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
+        <h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="noopener">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
 <h4 id="vs-Solution实际测试"><a href="#vs-Solution实际测试" class="headerlink" title="vs Solution实际测试"></a>vs Solution实际测试</h4><ul>
 <li>下面就以openssl库为例进行一下测试。</li>
 <li><p>首先需要在项目的根目录下创建一个NuGet.Config 的文件,这个应该是方便vs的NuGet进行索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;packageSources&gt;</div><div class="line">    &lt;add key=&quot;YARA.OpenSSL&quot;</div><div class="line">         value=&quot;https://ci.appveyor.com/nuget/openssl-oaib8n7lvvtp&quot; /&gt;</div><div class="line">    &lt;add key=&quot;YARA.Jansson&quot;</div><div class="line">         value=&quot;https://ci.appveyor.com/nuget/jansson-41we82mn284d&quot; /&gt;</div><div class="line">  &lt;/packageSources&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;packageSources&gt;</span><br><span class="line">    &lt;add key=&quot;YARA.OpenSSL&quot;</span><br><span class="line">         value=&quot;https://ci.appveyor.com/nuget/openssl-oaib8n7lvvtp&quot; /&gt;</span><br><span class="line">    &lt;add key=&quot;YARA.Jansson&quot;</span><br><span class="line">         value=&quot;https://ci.appveyor.com/nuget/jansson-41we82mn284d&quot; /&gt;</span><br><span class="line">  &lt;/packageSources&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>vs的默认项目会带一个界面，可以直观的去下载，如下图。<br><img src="/2017/11/29/NuGet和travis实践/projectwithui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/ui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/out.png" alt=""><br>然后在项目中添加一下头文件的路径以及静态链接库的路径就可以使用了。<br><img src="/2017/11/29/NuGet和travis实践/1.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/2.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/3.png" alt=""></p>
 </li>
-<li>vs的cmake项目<br><del>vs的cmake项目稍微有些不同，就是他没有图形界面，这个时候可以使用Package Manager Console来进行查找和下载第三方库。</del><br><a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-console" target="_blank" rel="external">官方说明</a><br>使用Find-Package openssl 进行搜索，可以发现有很多<br><img src="/2017/11/29/NuGet和travis实践/4.png" alt=""><br>使用Install-Package YARA.OPENSSL.X64 命令进行下载<br><img src="/2017/11/29/NuGet和travis实践/5.png" alt=""><br><del>效果是一样的，都会在项目的主目录的下面创建一个packages的目录并就对应的库下载到其中。这个时候就可以通过CmakeLists.txt进行头文件以及静态链接库的包含就可以使用了</del><br>更新：<br>cmake的项目在install-package的时候会找不到default solution的问题，所以只能通过将之前下载的packages的内容复制到cmake的项目下了。<br>CMakeLists.txt的内容如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cmake_minimum_required(VERSION 3.8)</div><div class="line">include_directories(&quot;$&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/include&quot;)</div><div class="line"></div><div class="line">set(libcrypto $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libcrypto.lib)</div><div class="line">set(libssl $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libssl.lib)</div><div class="line">add_executable(Demo test.cpp)</div><div class="line"></div><div class="line">target_link_libraries(Demo $&#123;libcrypto&#125; $&#123;libssl&#125;)</div></pre></td></tr></table></figure>
+<li>vs的cmake项目<br><del>vs的cmake项目稍微有些不同，就是他没有图形界面，这个时候可以使用Package Manager Console来进行查找和下载第三方库。</del><br><a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-console" target="_blank" rel="noopener">官方说明</a><br>使用Find-Package openssl 进行搜索，可以发现有很多<br><img src="/2017/11/29/NuGet和travis实践/4.png" alt=""><br>使用Install-Package YARA.OPENSSL.X64 命令进行下载<br><img src="/2017/11/29/NuGet和travis实践/5.png" alt=""><br><del>效果是一样的，都会在项目的主目录的下面创建一个packages的目录并就对应的库下载到其中。这个时候就可以通过CmakeLists.txt进行头文件以及静态链接库的包含就可以使用了</del><br>更新：<br>cmake的项目在install-package的时候会找不到default solution的问题，所以只能通过将之前下载的packages的内容复制到cmake的项目下了。<br>CMakeLists.txt的内容如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.8)</span><br><span class="line">include_directories(&quot;$&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/include&quot;)</span><br><span class="line"></span><br><span class="line">set(libcrypto $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libcrypto.lib)</span><br><span class="line">set(libssl $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libssl.lib)</span><br><span class="line">add_executable(Demo test.cpp)</span><br><span class="line"></span><br><span class="line">target_link_libraries(Demo $&#123;libcrypto&#125; $&#123;libssl&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>测试通过。<br>代码已上传至Github<br><a href="https://github.com/kevien/democode" target="_blank" rel="external">https://github.com/kevien/democode</a></p>
+<p>测试通过。<br>代码已上传至Github<br><a href="https://github.com/kevien/democode" target="_blank" rel="noopener">https://github.com/kevien/democode</a></p>
 <h4 id="打包自己的package"><a href="#打包自己的package" class="headerlink" title="打包自己的package"></a>打包自己的package</h4><ul>
 <li>yara项目中openssl库是作者自己打包到appveyor上的，那是如何上传自己打的包呢</li>
-<li>nuget包的制作可以通过 NuGetPackageExplorer <a href="https://github.com/NuGetPackageExplorer/NuGetPackageExplorer" target="_blank" rel="external">link</a><br>这个工具还是挺方便的。<br><img src="/2017/11/29/NuGet和travis实践/6.png" alt=""></li>
+<li>nuget包的制作可以通过 NuGetPackageExplorer <a href="https://github.com/NuGetPackageExplorer/NuGetPackageExplorer" target="_blank" rel="noopener">link</a><br>这个工具还是挺方便的。<br><img src="/2017/11/29/NuGet和travis实践/6.png" alt=""></li>
 <li>而且这个工具还可以进行上传，如下图所示<br><img src="/2017/11/29/NuGet和travis实践/7.png" alt=""></li>
 <li>当然也可以直接使用nuget工具进行上传<br><img src="/2017/11/29/NuGet和travis实践/8.png" alt=""></li>
 <li>这样我们就完成了自定义包的上传。<br><img src="/2017/11/29/NuGet和travis实践/9.png" alt=""><br>(现在的方式还是需要进行验证的，也就是需要输入appveyor的用户名和密码，public的方式暂时还没找到方法)<h4 id="利用travis进行持续化集成"><a href="#利用travis进行持续化集成" class="headerlink" title="利用travis进行持续化集成"></a>利用travis进行持续化集成</h4></li>
-<li>首先在github创建一个token，并赋予适当的权限。可参考如下链接<br><a href="https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/" target="_blank" rel="external">https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/</a><br><a href="https://docs.travis-ci.com/user/github-oauth-scopes/" target="_blank" rel="external">https://docs.travis-ci.com/user/github-oauth-scopes/</a></li>
-<li>然后在github的项目当中添加.travish.yml 文件，可参考<br><a href="https://docs.travis-ci.com/user/deployment/releases/" target="_blank" rel="external">https://docs.travis-ci.com/user/deployment/releases/</a></li>
-<li>测试项目<br><a href="https://github.com/kevien/travisTest/" target="_blank" rel="external">https://github.com/kevien/travisTest/</a><br><img src="/2017/11/29/NuGet和travis实践/10.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">部署的时候有几个坑(MDZZ)，一个是file 的位置，这个会在travis的job log的展开中看到(看log、看log、看log)。</div><div class="line">第二个就是要在deploy项下加上键值 skip_cleanup: true</div></pre></td></tr></table></figure>
+<li>首先在github创建一个token，并赋予适当的权限。可参考如下链接<br><a href="https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/" target="_blank" rel="noopener">https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/</a><br><a href="https://docs.travis-ci.com/user/github-oauth-scopes/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/github-oauth-scopes/</a></li>
+<li>然后在github的项目当中添加.travish.yml 文件，可参考<br><a href="https://docs.travis-ci.com/user/deployment/releases/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/deployment/releases/</a></li>
+<li>测试项目<br><a href="https://github.com/kevien/travisTest/" target="_blank" rel="noopener">https://github.com/kevien/travisTest/</a><br><img src="/2017/11/29/NuGet和travis实践/10.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">部署的时候有几个坑(MDZZ)，一个是file 的位置，这个会在travis的job log的展开中看到(看log、看log、看log)。</span><br><span class="line">第二个就是要在deploy项下加上键值 skip_cleanup: true</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
@@ -499,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/24/CVE-2017-17562的一些零碎点/" rel="next" title="有关CVE-2017-17562的一些零碎点">
-                <i class="fa fa-chevron-left"></i> 有关CVE-2017-17562的一些零碎点
+              <a href="/2017/10/28/堆溢出利用笔记/" rel="next" title="一个简单的堆溢出">
+                <i class="fa fa-chevron-left"></i> 一个简单的堆溢出
               </a>
             
           </div>
@@ -509,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/28/堆溢出利用笔记/" rel="prev" title="一个简单的堆溢出">
-                一个简单的堆溢出 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/24/CVE-2017-17562的一些零碎点/" rel="prev" title="有关CVE-2017-17562的一些零碎点">
+                有关CVE-2017-17562的一些零碎点 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +557,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -569,10 +567,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -699,7 +695,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

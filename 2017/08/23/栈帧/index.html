@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="TL;DR 栈帧 stack frame前言 主要通过od来跟踪调试一下，理解一下windows栈的调用情况。环境及代码环境win7 32位+vc6.012345678910111213141516#include &amp;quot;stdio.h&amp;quot;long add(long a, long b)&amp;#123;    long x = a, y = b;    return (x + y);&amp;#">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈帧">
 <meta property="og:url" content="http://kevien.github.io/2017/08/23/栈帧/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR 栈帧 stack frame前言 主要通过od来跟踪调试一下，理解一下windows栈的调用情况。环境及代码环境win7 32位+vc6.012345678910111213141516#include &amp;quot;stdio.h&amp;quot;long add(long a, long b)&amp;#123;    long x = a, y = b;    return (x + y);&amp;#">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/23/栈帧/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/23/栈帧/2.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/23/栈帧/3.png">
@@ -151,7 +151,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/23/栈帧/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/23/栈帧/">
 
 
 
@@ -160,7 +160,7 @@
   <title>栈帧 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -185,13 +185,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -221,7 +221,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -231,7 +231,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -241,7 +241,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -251,7 +251,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -261,7 +261,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -274,7 +274,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -295,9 +295,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -329,16 +327,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/23/栈帧/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -434,13 +432,13 @@
       
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>栈帧 stack frame<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4></li>
-<li>主要通过od来跟踪调试一下，理解一下windows栈的调用情况。<h4 id="环境及代码"><a href="#环境及代码" class="headerlink" title="环境及代码"></a>环境及代码</h4>环境win7 32位+vc6.0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">long add(long a, long b)</div><div class="line">&#123;</div><div class="line">    long x = a, y = b;</div><div class="line">    return (x + y);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    long a = 1, b = 2;</div><div class="line">    </div><div class="line">    printf(&quot;%d\n&quot;, add(a, b));</div><div class="line">	</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>主要通过od来跟踪调试一下，理解一下windows栈的调用情况。<h4 id="环境及代码"><a href="#环境及代码" class="headerlink" title="环境及代码"></a>环境及代码</h4>环境win7 32位+vc6.0<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line"></span><br><span class="line">long add(long a, long b)</span><br><span class="line">&#123;</span><br><span class="line">    long x = a, y = b;</span><br><span class="line">    return (x + y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    long a = 1, b = 2;</span><br><span class="line">    </span><br><span class="line">    printf(&quot;%d\n&quot;, add(a, b));</span><br><span class="line">	</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>在这之前，首先找到main函数，并加上一定的注释以及对应的断点。<br>1.首先是进入main函数之前，我们查看一下ebp的值是0012ff88，esp是0012ff50，注意此时下一条指令的地址是00401279，如下图<br><img src="/2017/08/23/栈帧/1.png" alt=""><br>2.这个时候f7进入main函数，这个时候esp变成0012ff4c即减小了4，ebp不变<br><img src="/2017/08/23/栈帧/2.png" alt=""><br>3.然后有一个跳转到push ebp，所以执行这个代码时候，ebp的值会入栈，esp的值加4，变成00112ff48<br><img src="/2017/08/23/栈帧/3.png" alt=""><br>4.f8执行 mov ebp,esp命令，这个时候ebp的值发生变化，变成和esp一样的值都是0012ff48<br><img src="/2017/08/23/栈帧/4.png" alt=""><br>5.f8执行 sub esp,48 扩展栈空间，esp减小48h个长度，ebp保持不变<br><img src="/2017/08/23/栈帧/5.png" alt=""><br>6.f8 然后就是将ebx，esi，edi等入栈的操作等<br>。。。<br>7.函数的返回要注意清场,栈顶和栈底是一样的都是0012ff48<br><img src="/2017/08/23/栈帧/6.png" alt=""><br>8.f8执行pop ebp，这个时候是将栈顶中的值0012ff88放到ebp中，那么ebp的值发生变化成为0012ff88，执行pop操作，esp+4 为0012ff4c<br><img src="/2017/08/23/栈帧/7.png" alt=""><br>9.f8 执行retn指令，esp发生变化+4变为0012ff50，ebp的值为0012ff88，eip指向00401279，即call main函数的下一条指令执行<br><img src="/2017/08/23/栈帧/8.png" alt=""></p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li>main函数的过程中，进入之前栈底指针ebp是0012ff88，栈顶指针是0012ff50，结束函数之后，没有发生变化，即栈维持这平衡。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
-<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
+<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="noopener">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
 </ul>
 
       
@@ -478,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/24/window逆向基础/" rel="next" title="window逆向基础">
-                <i class="fa fa-chevron-left"></i> window逆向基础
+              <a href="/2017/08/22/OllyDbg使用入门/" rel="next" title="OllyDbg使用入门">
+                <i class="fa fa-chevron-left"></i> OllyDbg使用入门
               </a>
             
           </div>
@@ -488,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/22/OllyDbg使用入门/" rel="prev" title="OllyDbg使用入门">
-                OllyDbg使用入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/24/window逆向基础/" rel="prev" title="window逆向基础">
+                window逆向基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -538,7 +536,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -548,10 +546,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -678,7 +674,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

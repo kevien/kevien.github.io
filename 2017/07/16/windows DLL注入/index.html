@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="概述DLL远程注入dll的注入和卸载关键性代码如下: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DLL注入">
 <meta property="og:url" content="http://kevien.github.io/2017/07/16/windows DLL注入/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="概述DLL远程注入dll的注入和卸载关键性代码如下: 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/2.png">
 <meta property="og:image" content="http://kevien.github.io/2017/07/16/windows%20DLL注入/3.png">
@@ -150,7 +150,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/07/16/windows DLL注入/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/07/16/windows DLL注入/">
 
 
 
@@ -159,7 +159,7 @@
   <title>DLL注入 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -184,13 +184,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -260,7 +260,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -273,7 +273,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -294,9 +294,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -328,16 +326,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/07/16/windows DLL注入/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -376,7 +374,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -387,7 +385,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
                   <a href="/categories/windows安全/" itemprop="url" rel="index">
                     <span itemprop="name">windows安全</span>
                   </a>
@@ -454,14 +452,14 @@
 
       
         <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><h4 id="DLL远程注入"><a href="#DLL远程注入" class="headerlink" title="DLL远程注入"></a>DLL远程注入</h4><p>dll的注入和卸载<br><img src="/2017/07/16/windows DLL注入/1.png" alt=""><br>关键性代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">VOID CInjectDllDlg::InjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    char *pFunName = &quot;LoadLibraryA&quot;;</div><div class="line"></div><div class="line">    // 打开目标进程</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 计算欲注入DLL文件完整路径的长度</div><div class="line">    int nDllLen = lstrlen(szDllName) + sizeof(char);</div><div class="line"></div><div class="line">    // 在目标进程申请一块长度为nDllLen大小的内存空间</div><div class="line">    PVOID pDllAddr = VirtualAllocEx(hProcess,</div><div class="line">                                    NULL, nDllLen,</div><div class="line">                                    MEM_COMMIT,</div><div class="line">                                    PAGE_READWRITE);</div><div class="line"></div><div class="line">    if ( pDllAddr == NULL )</div><div class="line">    &#123;</div><div class="line">        CloseHandle(hProcess);</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line"></div><div class="line">    // 将欲注入DLL文件的完整路径写入在目标进程中申请的空间内</div><div class="line">    WriteProcessMemory(hProcess, pDllAddr, szDllName, </div><div class="line">                       nDllLen, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 获得LoadLibraryA()函数的地址</div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    // 创建远程线程</div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess,</div><div class="line">                         NULL, 0,</div><div class="line">                         (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                         pDllAddr, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void CInjectDllDlg::OnBtnUninject() </div><div class="line">&#123;</div><div class="line">    // TODO: Add your control notification handler code here</div><div class="line">    char szDllName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    char szProcessName[MAXBYTE] = &#123; 0 &#125;;</div><div class="line">    DWORD dwPid = 0;</div><div class="line">    </div><div class="line">    GetDlgItemText(IDC_EDIT_DLLFILE, szDllName, MAX_PATH);</div><div class="line">    GetDlgItemText(IDC_EDIT_PROCESSNAME, szProcessName, MAXBYTE);</div><div class="line">    </div><div class="line">    // 由进程名获得PID</div><div class="line">    dwPid = GetProcId(szProcessName);</div><div class="line">    </div><div class="line">    // 注入szDllName到dwPid</div><div class="line">    UnInjectDll(dwPid, szDllName);</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CInjectDllDlg::UnInjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hSnap = CreateToolhelp32Snapshot(</div><div class="line">                            TH32CS_SNAPMODULE, </div><div class="line">                            dwPid);</div><div class="line"></div><div class="line">    MODULEENTRY32 me32;</div><div class="line">    me32.dwSize = sizeof(me32);</div><div class="line"></div><div class="line">    // 查找匹配的进程名称</div><div class="line">    BOOL bRet = Module32First(hSnap, &amp;me32);</div><div class="line">    while ( bRet )</div><div class="line">    &#123;</div><div class="line">        if ( lstrcmp(strupr(me32.szExePath), </div><div class="line">                     strupr(szDllName)) == 0 )</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        bRet = Module32Next(hSnap, &amp;me32);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    CloseHandle(hSnap);</div><div class="line"></div><div class="line">    char *pFunName = &quot;FreeLibrary&quot;;</div><div class="line"></div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, </div><div class="line">                                        (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                                        me32.hModule, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">VOID CInjectDllDlg::InjectDll(DWORD dwPid, char *szDllName)</span><br><span class="line">&#123;</span><br><span class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char *pFunName = &quot;LoadLibraryA&quot;;</span><br><span class="line"></span><br><span class="line">    // 打开目标进程</span><br><span class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </span><br><span class="line">                                  FALSE, dwPid);</span><br><span class="line"></span><br><span class="line">    if ( hProcess == NULL )</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 计算欲注入DLL文件完整路径的长度</span><br><span class="line">    int nDllLen = lstrlen(szDllName) + sizeof(char);</span><br><span class="line"></span><br><span class="line">    // 在目标进程申请一块长度为nDllLen大小的内存空间</span><br><span class="line">    PVOID pDllAddr = VirtualAllocEx(hProcess,</span><br><span class="line">                                    NULL, nDllLen,</span><br><span class="line">                                    MEM_COMMIT,</span><br><span class="line">                                    PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">    if ( pDllAddr == NULL )</span><br><span class="line">    &#123;</span><br><span class="line">        CloseHandle(hProcess);</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DWORD dwWriteNum = 0;</span><br><span class="line"></span><br><span class="line">    // 将欲注入DLL文件的完整路径写入在目标进程中申请的空间内</span><br><span class="line">    WriteProcessMemory(hProcess, pDllAddr, szDllName, </span><br><span class="line">                       nDllLen, &amp;dwWriteNum);</span><br><span class="line"></span><br><span class="line">    // 获得LoadLibraryA()函数的地址</span><br><span class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                      pFunName);</span><br><span class="line"></span><br><span class="line">    // 创建远程线程</span><br><span class="line">    HANDLE hThread = CreateRemoteThread(hProcess,</span><br><span class="line">                         NULL, 0,</span><br><span class="line">                         (LPTHREAD_START_ROUTINE)pFunAddr,</span><br><span class="line">                         pDllAddr, 0, NULL);</span><br><span class="line">    WaitForSingleObject(hThread, INFINITE);</span><br><span class="line"></span><br><span class="line">    CloseHandle(hThread);</span><br><span class="line">    CloseHandle(hProcess);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void CInjectDllDlg::OnBtnUninject() </span><br><span class="line">&#123;</span><br><span class="line">    // TODO: Add your control notification handler code here</span><br><span class="line">    char szDllName[MAX_PATH] = &#123; 0 &#125;;</span><br><span class="line">    char szProcessName[MAXBYTE] = &#123; 0 &#125;;</span><br><span class="line">    DWORD dwPid = 0;</span><br><span class="line">    </span><br><span class="line">    GetDlgItemText(IDC_EDIT_DLLFILE, szDllName, MAX_PATH);</span><br><span class="line">    GetDlgItemText(IDC_EDIT_PROCESSNAME, szProcessName, MAXBYTE);</span><br><span class="line">    </span><br><span class="line">    // 由进程名获得PID</span><br><span class="line">    dwPid = GetProcId(szProcessName);</span><br><span class="line">    </span><br><span class="line">    // 注入szDllName到dwPid</span><br><span class="line">    UnInjectDll(dwPid, szDllName);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">VOID CInjectDllDlg::UnInjectDll(DWORD dwPid, char *szDllName)</span><br><span class="line">&#123;</span><br><span class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    HANDLE hSnap = CreateToolhelp32Snapshot(</span><br><span class="line">                            TH32CS_SNAPMODULE, </span><br><span class="line">                            dwPid);</span><br><span class="line"></span><br><span class="line">    MODULEENTRY32 me32;</span><br><span class="line">    me32.dwSize = sizeof(me32);</span><br><span class="line"></span><br><span class="line">    // 查找匹配的进程名称</span><br><span class="line">    BOOL bRet = Module32First(hSnap, &amp;me32);</span><br><span class="line">    while ( bRet )</span><br><span class="line">    &#123;</span><br><span class="line">        if ( lstrcmp(strupr(me32.szExePath), </span><br><span class="line">                     strupr(szDllName)) == 0 )</span><br><span class="line">        &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        bRet = Module32Next(hSnap, &amp;me32);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CloseHandle(hSnap);</span><br><span class="line"></span><br><span class="line">    char *pFunName = &quot;FreeLibrary&quot;;</span><br><span class="line"></span><br><span class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </span><br><span class="line">                                  FALSE, dwPid);</span><br><span class="line">    if ( hProcess == NULL )</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                      pFunName);</span><br><span class="line"></span><br><span class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, </span><br><span class="line">                                        (LPTHREAD_START_ROUTINE)pFunAddr,</span><br><span class="line">                                        me32.hModule, 0, NULL);</span><br><span class="line">    WaitForSingleObject(hThread, INFINITE);</span><br><span class="line"></span><br><span class="line">    CloseHandle(hThread);</span><br><span class="line">    CloseHandle(hProcess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp; 整个注入与卸载的过程其实就是让远程线程执行一次LoadLibrary()函数或FreeLibrary()函数。</p>
 <h4 id="无DLL的代码注入"><a href="#无DLL的代码注入" class="headerlink" title="无DLL的代码注入"></a>无DLL的代码注入</h4><p>  <img src="/2017/07/16/windows DLL注入/2.png" alt=""><br>关键性代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">typedef struct _DATA</div><div class="line">&#123;</div><div class="line">    DWORD dwLoadLibrary;</div><div class="line">    DWORD dwGetProcAddress;</div><div class="line">    DWORD dwGetModuleHandle;</div><div class="line">    DWORD dwGetModuleFileName;</div><div class="line"></div><div class="line">    char User32Dll[STRLEN];</div><div class="line">    char MessageBox[STRLEN];</div><div class="line">    char Str[STRLEN];</div><div class="line">&#125;DATA, *PDATA;</div><div class="line"></div><div class="line">DWORD WINAPI RemoteThreadProc(LPVOID lpParam)</div><div class="line">&#123;</div><div class="line">    PDATA pData = (PDATA)lpParam;</div><div class="line"></div><div class="line">    // 定义API函数原型</div><div class="line">    HMODULE (__stdcall *MyLoadLibrary)(LPCTSTR);</div><div class="line">    FARPROC (__stdcall *MyGetProcAddress)(HMODULE, LPCSTR);</div><div class="line">    HMODULE (__stdcall *MyGetModuleHandle)(LPCTSTR);</div><div class="line">    int (__stdcall *MyMessageBox)(HWND, LPCTSTR, LPCTSTR, UINT);</div><div class="line">    DWORD (__stdcall *MyGetModuleFileName)(HMODULE, LPTSTR, DWORD);</div><div class="line"></div><div class="line">    MyLoadLibrary = (HMODULE (__stdcall *)(LPCTSTR))</div><div class="line">                                            pData-&gt;dwLoadLibrary;</div><div class="line">    MyGetProcAddress = (FARPROC (__stdcall *)(HMODULE, LPCSTR))</div><div class="line">                                            pData-&gt;dwGetProcAddress;</div><div class="line">    MyGetModuleHandle = (HMODULE (__stdcall *)(LPCSTR))</div><div class="line">                                            pData-&gt;dwGetModuleHandle;</div><div class="line">    MyGetModuleFileName = (DWORD (__stdcall *)(HMODULE, LPTSTR, DWORD))</div><div class="line">                                            pData-&gt;dwGetModuleFileName;</div><div class="line"></div><div class="line">    HMODULE hModule = MyLoadLibrary(pData-&gt;User32Dll);</div><div class="line">    MyMessageBox = (int (__stdcall *)(HWND, LPCTSTR, LPCTSTR, UINT))</div><div class="line">                                  MyGetProcAddress(hModule, pData-&gt;MessageBox);</div><div class="line"></div><div class="line">    char szModuleFileName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    MyGetModuleFileName(NULL, szModuleFileName, MAX_PATH);</div><div class="line"></div><div class="line">    MyMessageBox(NULL, pData-&gt;Str, szModuleFileName, MB_OK);</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CNoDllInjectDlg::InjectCode(DWORD dwPid)</div><div class="line">&#123;</div><div class="line">    // 打开进程并获取进程句柄</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DATA Data = &#123; 0 &#125;;</div><div class="line"></div><div class="line">    // 获取kernel32.dll中相关的导出函数</div><div class="line">    Data.dwLoadLibrary = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;LoadLibraryA&quot;);</div><div class="line">    Data.dwGetProcAddress = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetProcAddress&quot;);</div><div class="line">    Data.dwGetModuleHandle = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleHandleA&quot;);</div><div class="line">    Data.dwGetModuleFileName = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleFileNameA&quot;);</div><div class="line"></div><div class="line">    // 需要的其他DLL和导出函数</div><div class="line">    lstrcpy(Data.User32Dll, &quot;user32.dll&quot;);</div><div class="line">    lstrcpy(Data.MessageBox, &quot;MessageBoxA&quot;);</div><div class="line">    // MessageBoxA()弹出的字符串</div><div class="line">    lstrcpy(Data.Str, &quot;Inject Code !!!&quot;);</div><div class="line"></div><div class="line">    // 在目标进程申请空间</div><div class="line">    LPVOID lpData = VirtualAllocEx(hProcess, NULL, sizeof(Data),</div><div class="line">                                   MEM_COMMIT | MEM_RESERVE,</div><div class="line">                                   PAGE_READWRITE);</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line">    WriteProcessMemory(hProcess, lpData, &amp;Data, </div><div class="line">                       sizeof(Data), &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 在目标进程空间申请的用于保存代码的长度</div><div class="line">    DWORD dwFunSize = 0x1000;</div><div class="line">    LPVOID lpCode = VirtualAllocEx(hProcess, NULL, dwFunSize,</div><div class="line">                                   MEM_COMMIT, </div><div class="line">                                   PAGE_EXECUTE_READWRITE);</div><div class="line"></div><div class="line">    BOOL bRet = WriteProcessMemory(hProcess, lpCode, &amp;RemoteThreadProc, </div><div class="line">                       dwFunSize, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    if ( bRet == FALSE )</div><div class="line">    &#123;</div><div class="line">        int n = GetLastError();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0,</div><div class="line">                                        (LPTHREAD_START_ROUTINE)lpCode,</div><div class="line">                                        lpData, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _DATA</span><br><span class="line">&#123;</span><br><span class="line">    DWORD dwLoadLibrary;</span><br><span class="line">    DWORD dwGetProcAddress;</span><br><span class="line">    DWORD dwGetModuleHandle;</span><br><span class="line">    DWORD dwGetModuleFileName;</span><br><span class="line"></span><br><span class="line">    char User32Dll[STRLEN];</span><br><span class="line">    char MessageBox[STRLEN];</span><br><span class="line">    char Str[STRLEN];</span><br><span class="line">&#125;DATA, *PDATA;</span><br><span class="line"></span><br><span class="line">DWORD WINAPI RemoteThreadProc(LPVOID lpParam)</span><br><span class="line">&#123;</span><br><span class="line">    PDATA pData = (PDATA)lpParam;</span><br><span class="line"></span><br><span class="line">    // 定义API函数原型</span><br><span class="line">    HMODULE (__stdcall *MyLoadLibrary)(LPCTSTR);</span><br><span class="line">    FARPROC (__stdcall *MyGetProcAddress)(HMODULE, LPCSTR);</span><br><span class="line">    HMODULE (__stdcall *MyGetModuleHandle)(LPCTSTR);</span><br><span class="line">    int (__stdcall *MyMessageBox)(HWND, LPCTSTR, LPCTSTR, UINT);</span><br><span class="line">    DWORD (__stdcall *MyGetModuleFileName)(HMODULE, LPTSTR, DWORD);</span><br><span class="line"></span><br><span class="line">    MyLoadLibrary = (HMODULE (__stdcall *)(LPCTSTR))</span><br><span class="line">                                            pData-&gt;dwLoadLibrary;</span><br><span class="line">    MyGetProcAddress = (FARPROC (__stdcall *)(HMODULE, LPCSTR))</span><br><span class="line">                                            pData-&gt;dwGetProcAddress;</span><br><span class="line">    MyGetModuleHandle = (HMODULE (__stdcall *)(LPCSTR))</span><br><span class="line">                                            pData-&gt;dwGetModuleHandle;</span><br><span class="line">    MyGetModuleFileName = (DWORD (__stdcall *)(HMODULE, LPTSTR, DWORD))</span><br><span class="line">                                            pData-&gt;dwGetModuleFileName;</span><br><span class="line"></span><br><span class="line">    HMODULE hModule = MyLoadLibrary(pData-&gt;User32Dll);</span><br><span class="line">    MyMessageBox = (int (__stdcall *)(HWND, LPCTSTR, LPCTSTR, UINT))</span><br><span class="line">                                  MyGetProcAddress(hModule, pData-&gt;MessageBox);</span><br><span class="line"></span><br><span class="line">    char szModuleFileName[MAX_PATH] = &#123; 0 &#125;;</span><br><span class="line">    MyGetModuleFileName(NULL, szModuleFileName, MAX_PATH);</span><br><span class="line"></span><br><span class="line">    MyMessageBox(NULL, pData-&gt;Str, szModuleFileName, MB_OK);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">VOID CNoDllInjectDlg::InjectCode(DWORD dwPid)</span><br><span class="line">&#123;</span><br><span class="line">    // 打开进程并获取进程句柄</span><br><span class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </span><br><span class="line">                                  FALSE, dwPid);</span><br><span class="line"></span><br><span class="line">    if ( hProcess == NULL )</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DATA Data = &#123; 0 &#125;;</span><br><span class="line"></span><br><span class="line">    // 获取kernel32.dll中相关的导出函数</span><br><span class="line">    Data.dwLoadLibrary = (DWORD)GetProcAddress(</span><br><span class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                    &quot;LoadLibraryA&quot;);</span><br><span class="line">    Data.dwGetProcAddress = (DWORD)GetProcAddress(</span><br><span class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                    &quot;GetProcAddress&quot;);</span><br><span class="line">    Data.dwGetModuleHandle = (DWORD)GetProcAddress(</span><br><span class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                    &quot;GetModuleHandleA&quot;);</span><br><span class="line">    Data.dwGetModuleFileName = (DWORD)GetProcAddress(</span><br><span class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</span><br><span class="line">                                    &quot;GetModuleFileNameA&quot;);</span><br><span class="line"></span><br><span class="line">    // 需要的其他DLL和导出函数</span><br><span class="line">    lstrcpy(Data.User32Dll, &quot;user32.dll&quot;);</span><br><span class="line">    lstrcpy(Data.MessageBox, &quot;MessageBoxA&quot;);</span><br><span class="line">    // MessageBoxA()弹出的字符串</span><br><span class="line">    lstrcpy(Data.Str, &quot;Inject Code !!!&quot;);</span><br><span class="line"></span><br><span class="line">    // 在目标进程申请空间</span><br><span class="line">    LPVOID lpData = VirtualAllocEx(hProcess, NULL, sizeof(Data),</span><br><span class="line">                                   MEM_COMMIT | MEM_RESERVE,</span><br><span class="line">                                   PAGE_READWRITE);</span><br><span class="line"></span><br><span class="line">    DWORD dwWriteNum = 0;</span><br><span class="line">    WriteProcessMemory(hProcess, lpData, &amp;Data, </span><br><span class="line">                       sizeof(Data), &amp;dwWriteNum);</span><br><span class="line"></span><br><span class="line">    // 在目标进程空间申请的用于保存代码的长度</span><br><span class="line">    DWORD dwFunSize = 0x1000;</span><br><span class="line">    LPVOID lpCode = VirtualAllocEx(hProcess, NULL, dwFunSize,</span><br><span class="line">                                   MEM_COMMIT, </span><br><span class="line">                                   PAGE_EXECUTE_READWRITE);</span><br><span class="line"></span><br><span class="line">    BOOL bRet = WriteProcessMemory(hProcess, lpCode, &amp;RemoteThreadProc, </span><br><span class="line">                       dwFunSize, &amp;dwWriteNum);</span><br><span class="line"></span><br><span class="line">    if ( bRet == FALSE )</span><br><span class="line">    &#123;</span><br><span class="line">        int n = GetLastError();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0,</span><br><span class="line">                                        (LPTHREAD_START_ROUTINE)lpCode,</span><br><span class="line">                                        lpData, 0, NULL);</span><br><span class="line">    WaitForSingleObject(hThread, INFINITE);</span><br><span class="line"></span><br><span class="line">    CloseHandle(hThread);</span><br><span class="line">    CloseHandle(hProcess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过peid可以查看DLL的导出函数<br><img src="/2017/07/16/windows DLL注入/3.png" alt=""><br>还可以通过vc6自带的dependency Walker以及CFF Explorer<br><img src="/2017/07/16/windows DLL注入/4.png" alt=""><br><img src="/2017/07/16/windows DLL注入/5.png" alt=""></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;这种方式是直接把想要使用的API函数以及API函数所在的DLL文件都封装在一个结构体中，直接写入目标进程的空间中，最后调用CreateRemoteThread()函数即可将其运行。</p>
 <h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>通过windows自带工具运行DLL的两种方法<br>1.通过regsvr32.exe 调用  例如 regsvr32  /i  c:\test.dll<br>2.通过rundll32.exe 调用  例如 rundll32.exe  “c:\test.dll” ,RundllFunc FunParam<br>3.通过Dependency Walker工具查看应用程序所使用到的动态链接库文件,此外还可以使用dumpbin工具<br><img src="/2017/07/16/windows DLL注入/dependency.png" alt=""><br><img src="/2017/07/16/windows DLL注入/dumpbin.png" alt=""></p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-66452.htm" target="_blank" rel="external">神奇的马甲Dll By 海风月影</a><br><a href="http://www.freebuf.com/articles/system/94693.html" target="_blank" rel="external">DLL注入的几种姿势（二）：CreateRemoteThread And More</a><br><a href="https://i.blackhat.com/USA-19/Thursday/us-19-Kotler-Process-Injection-Techniques-Gotta-Catch-Them-All-wp.pdf" target="_blank" rel="external">windows进程注入</a></p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-66452.htm" target="_blank" rel="noopener">神奇的马甲Dll By 海风月影</a><br><a href="http://www.freebuf.com/articles/system/94693.html" target="_blank" rel="noopener">DLL注入的几种姿势（二）：CreateRemoteThread And More</a><br><a href="https://i.blackhat.com/USA-19/Thursday/us-19-Kotler-Process-Injection-Techniques-Gotta-Catch-Them-All-wp.pdf" target="_blank" rel="noopener">windows进程注入</a></p>
 
       
     </div>
@@ -498,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/24/windows注册表/" rel="next" title="windows注册表">
-                <i class="fa fa-chevron-left"></i> windows注册表
+              <a href="/2017/07/08/s2-048漏洞分析/" rel="next" title="s2-048漏洞分析">
+                <i class="fa fa-chevron-left"></i> s2-048漏洞分析
               </a>
             
           </div>
@@ -508,8 +506,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/08/s2-048漏洞分析/" rel="prev" title="s2-048漏洞分析">
-                s2-048漏洞分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/24/windows注册表/" rel="prev" title="windows注册表">
+                windows注册表 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -558,7 +556,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -568,10 +566,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -698,7 +694,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

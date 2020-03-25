@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="概述 先来了解一下lsass进程。Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows认证机制以及常见密码获取工具分析">
 <meta property="og:url" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="概述 先来了解一下lsass进程。Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/sam.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/regeditsam.png">
 <meta property="og:image" content="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png">
@@ -156,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/">
 
 
 
@@ -165,7 +165,7 @@
   <title>windows认证机制以及常见密码获取工具分析 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -190,13 +190,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -226,7 +226,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -236,7 +236,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -246,7 +246,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -256,7 +256,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -266,7 +266,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -279,7 +279,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -300,9 +300,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -334,16 +332,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/09/20/windows认证机制以及常见密码获取工具分析/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -438,18 +436,18 @@
 
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>先来了解一下lsass进程。<br>Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies users logging on to a Windows computer or server, handles password changes, and creates access tokens.<a href="https://www.wikiwand.com/en/Local_Security_Authority_Subsystem_Service" target="_blank" rel="external">link</a></li>
+<li>先来了解一下lsass进程。<br>Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system. It verifies users logging on to a Windows computer or server, handles password changes, and creates access tokens.<a href="https://www.wikiwand.com/en/Local_Security_Authority_Subsystem_Service" target="_blank" rel="noopener">link</a></li>
 <li>NTLM</li>
 <li>Kerberos<h2 id="SAM"><a href="#SAM" class="headerlink" title="SAM"></a>SAM</h2></li>
-<li>SAM security account manager 账户安全管理。存放位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">%SystemRoot%/system32/config/SAM</div><div class="line"> HKEY_LOCAL_MACHINE\SAM</div></pre></td></tr></table></figure>
+<li>SAM security account manager 账户安全管理。存放位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%SystemRoot%/system32/config/SAM</span><br><span class="line"> HKEY_LOCAL_MACHINE\SAM</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>Windows一旦启动 无法读取，但是可以通过读取内存的方法进行读取。<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/sam.png" alt=""><br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/regeditsam.png" alt=""></p>
 <ul>
-<li>这里有个点就是rid劫持(修改F键中值F5位F4)<br><a href="https://www.youtube.com/watch?v=hilLHF37ng8" target="_blank" rel="external">rid劫持参考</a><h2 id="LM-hash、NTLM-hash和NetNTLM"><a href="#LM-hash、NTLM-hash和NetNTLM" class="headerlink" title="LM hash、NTLM hash和NetNTLM"></a>LM hash、NTLM hash和NetNTLM</h2></li>
+<li>这里有个点就是rid劫持(修改F键中值F5位F4)<br><a href="https://www.youtube.com/watch?v=hilLHF37ng8" target="_blank" rel="noopener">rid劫持参考</a><h2 id="LM-hash、NTLM-hash和NetNTLM"><a href="#LM-hash、NTLM-hash和NetNTLM" class="headerlink" title="LM hash、NTLM hash和NetNTLM"></a>LM hash、NTLM hash和NetNTLM</h2></li>
 <li><p>在Windows系统中，比较常见是从系统导出来的NTLM hash，通过Hashcat能够破解出明文密码。</p>
 </li>
-<li><p>Hashcat支持超过200种高度优化的hash算法，其中和NTLM hash相关的有4个，分别为NetNTLMv1、NetNTLMv1+ESS、NetNTLMv2和NTLM。Hashcat支持的哈希算法：<a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank" rel="external">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
+<li><p>Hashcat支持超过200种高度优化的hash算法，其中和NTLM hash相关的有4个，分别为NetNTLMv1、NetNTLMv1+ESS、NetNTLMv2和NTLM。Hashcat支持的哈希算法：<a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank" rel="noopener">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
 </li>
 <li><p>自Windows Vista和Windows Server 2008开始,Windows取消LM hash,但某些工具的参数需要填写固定格式LM hash:NT hash，可以将LM hash填0(LM hash可以为任意值)，即00000000000000000000000000000000:NT hash</p>
 </li>
@@ -457,13 +455,13 @@
 </li>
 <li><p>Net-NTMLv1/v2 是指网络环境下NTLM认证中的哈希，也可使用hashcat进行破解。</p>
 </li>
-<li><p>Net-NTLM hash在渗透测试中，通常有以下两种利用方法<br>1.使用中间人攻击的方式来获取Net-NTLM hash，常用工具为Responder和Inveigh，方法见<a href="https://github.com/incredibleindishell/Windows-AD-environment-related/tree/master/Responder" target="_blank" rel="external">How to use responder tool to perform exploitation in windows environment by stealing NTLMv2 hashes.</a><br>2.通过多种方式强制目标客户端向伪造的服务器发起SMB连接，在伪造的服务器上捕获数据包，获得Net-NTLM hash<br><a href="https://3gstudent.github.io/Windows%E4%B8%8B%E7%9A%84%E5%AF%86%E7%A0%81hash-NTLM-hash%E5%92%8CNet-NTLM-hash%E4%BB%8B%E7%BB%8D/" target="_blank" rel="external">Windows下的密码hash-NTLM-hash和Net-NTLM-hash介绍</a><br><a href="http://www.mannulinux.org/2018/12/how-to-steal-ntlmv2-hashes-using-file.html" target="_blank" rel="external">How to steal NTLMv2 hashes using file download vulnerability in web application</a><br><a href="https://www.hackingarticles.in/capture-ntlm-hashes-using-pdf-bad-pdf/" target="_blank" rel="external">Capture NTLM Hashes using PDF (Bad-Pdf)</a></p>
+<li><p>Net-NTLM hash在渗透测试中，通常有以下两种利用方法<br>1.使用中间人攻击的方式来获取Net-NTLM hash，常用工具为Responder和Inveigh，方法见<a href="https://github.com/incredibleindishell/Windows-AD-environment-related/tree/master/Responder" target="_blank" rel="noopener">How to use responder tool to perform exploitation in windows environment by stealing NTLMv2 hashes.</a><br>2.通过多种方式强制目标客户端向伪造的服务器发起SMB连接，在伪造的服务器上捕获数据包，获得Net-NTLM hash<br><a href="https://3gstudent.github.io/Windows%E4%B8%8B%E7%9A%84%E5%AF%86%E7%A0%81hash-NTLM-hash%E5%92%8CNet-NTLM-hash%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">Windows下的密码hash-NTLM-hash和Net-NTLM-hash介绍</a><br><a href="http://www.mannulinux.org/2018/12/how-to-steal-ntlmv2-hashes-using-file.html" target="_blank" rel="noopener">How to steal NTLMv2 hashes using file download vulnerability in web application</a><br><a href="https://www.hackingarticles.in/capture-ntlm-hashes-using-pdf-bad-pdf/" target="_blank" rel="noopener">Capture NTLM Hashes using PDF (Bad-Pdf)</a></p>
 <h2 id="获取明文密码的几种方式"><a href="#获取明文密码的几种方式" class="headerlink" title="获取明文密码的几种方式"></a>获取明文密码的几种方式</h2></li>
 <li>虽然在内网中可以通过PTH或者PTK就可以进行横向渗透，但是只能通过命令行进行操作，但当你有了明文密码时候就可以可以直接登录web、vpn、远程桌面等。<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3></li>
-<li>Group Policy Preference,<br><a href="https://www.youtube.com/watch?v=wT4aemT9SZQ" target="_blank" rel="external">参考</a><h3 id="mimikatz的lsass-mimidumps"><a href="#mimikatz的lsass-mimidumps" class="headerlink" title="mimikatz的lsass mimidumps"></a>mimikatz的lsass mimidumps</h3></li>
+<li>Group Policy Preference,<br><a href="https://www.youtube.com/watch?v=wT4aemT9SZQ" target="_blank" rel="noopener">参考</a><h3 id="mimikatz的lsass-mimidumps"><a href="#mimikatz的lsass-mimidumps" class="headerlink" title="mimikatz的lsass mimidumps"></a>mimikatz的lsass mimidumps</h3></li>
 <li>首先可以使用ProcDump工具将lsass进程内存dump出来，使用mimikatz也可以直接获取用户明文密码或哈希，但是可能会被杀软给查杀。此外在windows高版本(NT6)上还可以通过任务管理器中的创建存储文件进行lsass进程内存dump。</li>
 <li>通过mimikatz导入dump的内存文件，进行解密.<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png" alt=""><br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/createdump.png" alt=""><br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/minidump.png" alt=""><br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/minidump1.png" alt=""><h3 id="WDigest"><a href="#WDigest" class="headerlink" title="WDigest"></a>WDigest</h3></li>
-<li>Digest认证最早出现在windows XP中，主要用来<a href="https://technet.microsoft.com/en-us/library/cc778868(v=ws.10" target="_blank" rel="external">HTTP和SASL认证</a>.aspx),它会在本地保存明文密码。在2014年微软打了个<a href="https://support.microsoft.com/en-us/help/2871997/microsoft-security-advisory-update-to-improve-credentials-protection-a" target="_blank" rel="external">补丁</a>用来去禁止保存用户密码，但是很多服务器和PC并没有禁止WDigest。<h3 id="可逆加密"><a href="#可逆加密" class="headerlink" title="可逆加密"></a>可逆加密</h3></li>
+<li>Digest认证最早出现在windows XP中，主要用来<a href="https://technet.microsoft.com/en-us/library/cc778868(v=ws.10" target="_blank" rel="noopener">HTTP和SASL认证</a>.aspx),它会在本地保存明文密码。在2014年微软打了个<a href="https://support.microsoft.com/en-us/help/2871997/microsoft-security-advisory-update-to-improve-credentials-protection-a" target="_blank" rel="noopener">补丁</a>用来去禁止保存用户密码，但是很多服务器和PC并没有禁止WDigest。<h3 id="可逆加密"><a href="#可逆加密" class="headerlink" title="可逆加密"></a>可逆加密</h3></li>
 <li><h2 id="NTLM"><a href="#NTLM" class="headerlink" title="NTLM"></a>NTLM</h2><h3 id="NTLM协议"><a href="#NTLM协议" class="headerlink" title="NTLM协议"></a>NTLM协议</h3></li>
 <li>NTLM认证是Challenge – Response 模式<br>在使用NTLM协议时，客户端发送用户名到服务器端；服务器生成一个challenge并发送给客户端；客户端使用用户的密码来加密这个challenge，然后发送response到服务器端。如果该账号是一个本机账号，那么服务器使用Security Account Manager来验证用户；如果账号是一个域账号，那么服务器把这个response请求转送到域控制器(DC)上来让域控制器调用组安全策略来做用户认证，然后服务器就可以构建一个安全令牌并建立一个session。<h2 id="kerberos"><a href="#kerberos" class="headerlink" title="kerberos"></a>kerberos</h2><h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/kerberos.png" alt=""></li>
 <li>Kerberos认证提供一种服务器和客户端相互认证的机制。Kerberos包含了三个关键组件：Key Distribution Center (KDC)，客户端用户，和一个运行所需服务的服务器。KDC是域控制器的一部分，它执行两个任务：认证服务(AS)和票据许可服务(TGS)。当客户端用户登录到网络上时，它会向用户所在域的AS去请求一个“票据请求票据”（TGT）。然后，当客户端想要访问网络上的某个资源的话，它就出示以下东西：TGT，认证码，Server Principal Name（SPN）；有了这些东西，客户端就可以从服务所在的域中的TGS获得session票据。使用这个session票据，客户端就可以和网络上的服务进行交流，该服务会验证“认证码”然后创建一个访问令牌给客户端用户，接下来客户端就可以登录上该服务了。</li>
@@ -473,27 +471,27 @@
 <li>先假设这么一种情况,原先已拿到的域内所有的账户hash,包括krbtgt这个账户,由于有些原因导致域管权限丢失,但好在你还有一个普通域用户权限,碰巧管理员在域内加固时忘记重置krbtgt密码,基于此条件,我们还能利用该票据重新获得域管理员权限,利用krbtgt的HASH值可以伪造生成任意的TGT(mimikatz),能够绕过对任意用户的账号策略,让用户成为任意组的成员,可用于Kerberos认证的任何服务.</li>
 <li>在后渗透阶段，攻击者一般会导出golden ticket，当在“丢失”域控权限的时候(比如修改了域管的账号密码但没有修改krbtgt账号密码)就可以通过注入golden ticket的方式再次拿下并控制域控服务器。注：这个时候需要一台域内或者域外机器(域外机器需要配置dns为域控或域内dns服务器)，此外由于票据中都是以域名为区分的，所以在利用的时候也应该使用域名，而不能是IP地址。</li>
 <li>说到底还是利用了krbtgt的密码不发生改变的特性。<h3 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h3></li>
-<li>通过观察Kerberos协议的认证过程不难发现,如果我们获取了Server秘钥Ks(服务器口令散列值),就可以跳过KDC的认证，直接伪造票据和目标Server通信<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><a href="https://files.sans.org/summit/hackfest2014/PDFs/Kicking%20the%20Guard%20Dog%20of%20Hades%20-%20Attacking%20Microsoft%20Kerberos%20%20-%20Tim%20Medin(1" target="_blank" rel="external">Attacking Kerberos</a>.pdf)<br><a href="https://github.com/nidem/kerberoast" target="_blank" rel="external">kerberoast</a><h2 id="Crack"><a href="#Crack" class="headerlink" title="Crack"></a>Crack</h2><a href="http://smartechverse.blogspot.com/2015/06/crack-windows-admin-password-and-sam.html" target="_blank" rel="external">Crack windows Admin Password and Sam Files</a><br><a href="http://davenport.sourceforge.net/ntlm.html" target="_blank" rel="external">The NTLM Authentication Protocol and Security Support Provider</a><h2 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h2><h3 id="内存导出"><a href="#内存导出" class="headerlink" title="内存导出"></a>内存导出</h3><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png" alt=""></li>
+<li>通过观察Kerberos协议的认证过程不难发现,如果我们获取了Server秘钥Ks(服务器口令散列值),就可以跳过KDC的认证，直接伪造票据和目标Server通信<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><a href="https://files.sans.org/summit/hackfest2014/PDFs/Kicking%20the%20Guard%20Dog%20of%20Hades%20-%20Attacking%20Microsoft%20Kerberos%20%20-%20Tim%20Medin(1" target="_blank" rel="noopener">Attacking Kerberos</a>.pdf)<br><a href="https://github.com/nidem/kerberoast" target="_blank" rel="noopener">kerberoast</a><h2 id="Crack"><a href="#Crack" class="headerlink" title="Crack"></a>Crack</h2><a href="http://smartechverse.blogspot.com/2015/06/crack-windows-admin-password-and-sam.html" target="_blank" rel="noopener">Crack windows Admin Password and Sam Files</a><br><a href="http://davenport.sourceforge.net/ntlm.html" target="_blank" rel="noopener">The NTLM Authentication Protocol and Security Support Provider</a><h2 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h2><h3 id="内存导出"><a href="#内存导出" class="headerlink" title="内存导出"></a>内存导出</h3><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/procdump.png" alt=""></li>
 <li>从本地获取密码<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzdmp.png" alt=""></li>
-<li>自动获取内存密码bat脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line">&gt;nul 2&gt;&amp;1 &quot;%SYSTEMROOT%\system32\cacls.exe&quot; &quot;%SYSTEMROOT%\system32\config\system&quot;</div><div class="line">if &apos;%errorlevel%&apos; NEQ &apos;0&apos; (</div><div class="line">goto UACPrompt</div><div class="line">) else ( goto gotAdmin )</div><div class="line">:UACPrompt</div><div class="line">echo Set UAC = CreateObject^(&quot;Shell.Application&quot;^) &gt; &quot;%temp%\getadmin.vbs&quot;</div><div class="line">echo UAC.ShellExecute &quot;%~s0&quot;, &quot;&quot;, &quot;&quot;, &quot;runas&quot;, 1 &gt;&gt; &quot;%temp%\getadmin.vbs&quot;</div><div class="line">&quot;%temp%\getadmin.vbs&quot;</div><div class="line">exit /B</div><div class="line">:gotAdmin</div><div class="line">if exist &quot;%temp%\getadmin.vbs&quot; ( del &quot;%temp%\getadmin.vbs&quot; )</div><div class="line">pushd &quot;%CD%&quot;</div><div class="line">CD /D &quot;%~dp0&quot;</div><div class="line"></div><div class="line">mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords full&quot;&quot; exit &gt;&gt; log.txt</div></pre></td></tr></table></figure>
+<li>自动获取内存密码bat脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">&gt;nul 2&gt;&amp;1 &quot;%SYSTEMROOT%\system32\cacls.exe&quot; &quot;%SYSTEMROOT%\system32\config\system&quot;</span><br><span class="line">if &apos;%errorlevel%&apos; NEQ &apos;0&apos; (</span><br><span class="line">goto UACPrompt</span><br><span class="line">) else ( goto gotAdmin )</span><br><span class="line">:UACPrompt</span><br><span class="line">echo Set UAC = CreateObject^(&quot;Shell.Application&quot;^) &gt; &quot;%temp%\getadmin.vbs&quot;</span><br><span class="line">echo UAC.ShellExecute &quot;%~s0&quot;, &quot;&quot;, &quot;&quot;, &quot;runas&quot;, 1 &gt;&gt; &quot;%temp%\getadmin.vbs&quot;</span><br><span class="line">&quot;%temp%\getadmin.vbs&quot;</span><br><span class="line">exit /B</span><br><span class="line">:gotAdmin</span><br><span class="line">if exist &quot;%temp%\getadmin.vbs&quot; ( del &quot;%temp%\getadmin.vbs&quot; )</span><br><span class="line">pushd &quot;%CD%&quot;</span><br><span class="line">CD /D &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords full&quot;&quot; exit &gt;&gt; log.txt</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="mimikatz-skeleton-key"><a href="#mimikatz-skeleton-key" class="headerlink" title="mimikatz skeleton key"></a>mimikatz skeleton key</h3><ul>
 <li>这个主要用于域控权限维持。</li>
 <li>Skeleton Key被安装在64位的域控服务器上，支持Windows Server2003—Windows Server2012 R2，能够让所有域用户使用同一个万能密码进行登录，现有的所有域用户使用原密码仍能继续登录，重启后失效。</li>
-<li>可以试试你们的域控是不是已经安装这个后门了哦；）<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzskeleton.png" alt=""><br><a href="https://www.youtube.com/watch?v=3gnZ4e1T_cs" target="_blank" rel="external">视频链接</a><h3 id="mimikatz-绕过cmd、regedit、taskmgr限制"><a href="#mimikatz-绕过cmd、regedit、taskmgr限制" class="headerlink" title="mimikatz 绕过cmd、regedit、taskmgr限制"></a>mimikatz 绕过cmd、regedit、taskmgr限制</h3></li>
-<li>如果管理员禁用了cmd、regedit、taskmgr的话，可以分别使用misc::cmd、<br>misc::regedit、misc::taskmgr进行绕过。<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzrestrictionbypass.png" alt=""><h3 id="dump-sam"><a href="#dump-sam" class="headerlink" title="dump sam"></a>dump sam</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">privilege::debug</div><div class="line">token::whoami</div><div class="line">token::elevate</div><div class="line">lsadump::sam</div></pre></td></tr></table></figure>
+<li>可以试试你们的域控是不是已经安装这个后门了哦；）<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzskeleton.png" alt=""><br><a href="https://www.youtube.com/watch?v=3gnZ4e1T_cs" target="_blank" rel="noopener">视频链接</a><h3 id="mimikatz-绕过cmd、regedit、taskmgr限制"><a href="#mimikatz-绕过cmd、regedit、taskmgr限制" class="headerlink" title="mimikatz 绕过cmd、regedit、taskmgr限制"></a>mimikatz 绕过cmd、regedit、taskmgr限制</h3></li>
+<li>如果管理员禁用了cmd、regedit、taskmgr的话，可以分别使用misc::cmd、<br>misc::regedit、misc::taskmgr进行绕过。<br><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/mimikatzrestrictionbypass.png" alt=""><h3 id="dump-sam"><a href="#dump-sam" class="headerlink" title="dump sam"></a>dump sam</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">token::whoami</span><br><span class="line">token::elevate</span><br><span class="line">lsadump::sam</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/09/20/windows认证机制以及常见密码获取工具分析/lsadumpsam.png" alt=""></p>
 <h2 id="other-1"><a href="#other-1" class="headerlink" title="other"></a>other</h2><ul>
 <li>建议有时间精力可以读读mimikatz的源码。<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2></li>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ee663293(v=vs.85).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/windows/desktop/ee663293(v=vs.85).aspx</a></li>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa378749(v=vs.85).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/windows/desktop/aa378749(v=vs.85).aspx</a></li>
-<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa378747(v=vs.85).aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/windows/desktop/aa378747(v=vs.85).aspx</a></li>
-<li><a href="http://blog.csdn.net/qq_26886929/article/details/53905654" target="_blank" rel="external">http://blog.csdn.net/qq_26886929/article/details/53905654</a></li>
-<li><a href="http://blog.csdn.net/wulantian/article/details/42418231" target="_blank" rel="external">http://blog.csdn.net/wulantian/article/details/42418231</a></li>
-<li><a href="https://github.com/gentilkiwi/mimikatz/wiki" target="_blank" rel="external">https://github.com/gentilkiwi/mimikatz/wiki</a><br><a href="https://room362.com/post/2013/2013-06-07-using-mimikatz-alpha-or-getting-clear-text-passwords-with-a/" target="_blank" rel="external">USING MIMIKATZ ALPHA OR GETTING CLEAR TEXT PASSWORDS WITH A MICROSOFT TOOL</a><br><a href="http://www.vuln.cn/6816" target="_blank" rel="external">域渗透——Skeleton Key – 三好学生</a><br><a href="https://blogs.msdn.microsoft.com/apgcdsd/2011/09/26/kerberosntlm-sql-server/" target="_blank" rel="external">Kerberos和NTLM – SQL Server连接的那点事</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ee663293(v=vs.85).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/windows/desktop/ee663293(v=vs.85).aspx</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa378749(v=vs.85).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/windows/desktop/aa378749(v=vs.85).aspx</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa378747(v=vs.85).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/windows/desktop/aa378747(v=vs.85).aspx</a></li>
+<li><a href="http://blog.csdn.net/qq_26886929/article/details/53905654" target="_blank" rel="noopener">http://blog.csdn.net/qq_26886929/article/details/53905654</a></li>
+<li><a href="http://blog.csdn.net/wulantian/article/details/42418231" target="_blank" rel="noopener">http://blog.csdn.net/wulantian/article/details/42418231</a></li>
+<li><a href="https://github.com/gentilkiwi/mimikatz/wiki" target="_blank" rel="noopener">https://github.com/gentilkiwi/mimikatz/wiki</a><br><a href="https://room362.com/post/2013/2013-06-07-using-mimikatz-alpha-or-getting-clear-text-passwords-with-a/" target="_blank" rel="noopener">USING MIMIKATZ ALPHA OR GETTING CLEAR TEXT PASSWORDS WITH A MICROSOFT TOOL</a><br><a href="http://www.vuln.cn/6816" target="_blank" rel="noopener">域渗透——Skeleton Key – 三好学生</a><br><a href="https://blogs.msdn.microsoft.com/apgcdsd/2011/09/26/kerberosntlm-sql-server/" target="_blank" rel="noopener">Kerberos和NTLM – SQL Server连接的那点事</a></li>
 </ul>
 
       
@@ -531,8 +529,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/28/CmakeVSautotools/" rel="next" title="Cmake VS Autotools">
-                <i class="fa fa-chevron-left"></i> Cmake VS Autotools
+              <a href="/2017/09/17/struts-052和struts-053分析/" rel="next" title="struts-052和struts-053分析">
+                <i class="fa fa-chevron-left"></i> struts-052和struts-053分析
               </a>
             
           </div>
@@ -541,8 +539,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/17/struts-052和struts-053分析/" rel="prev" title="struts-052和struts-053分析">
-                struts-052和struts-053分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/28/CmakeVSautotools/" rel="prev" title="Cmake VS Autotools">
+                Cmake VS Autotools <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +589,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -601,10 +599,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -731,7 +727,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

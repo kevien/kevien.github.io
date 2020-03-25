@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="0x01 前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本来觉得应该不是一件很复杂的事，结果搞了三个小时才搞定(可能是我太菜吧)，里面有几个坑，记录一下。一直以来想去做蜜罐这么个东西，ssh is only the begining!ssh secure shell，就是安全的shell，至于为什么安全呢？怎么就安全了呢？  较rlogin、rsh等这些不加密的协议，ssh传输是加密的，历史">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssh蜜罐搭建">
 <meta property="og:url" content="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="0x01 前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本来觉得应该不是一件很复杂的事，结果搞了三个小时才搞定(可能是我太菜吧)，里面有几个坑，记录一下。一直以来想去做蜜罐这么个东西，ssh is only the begining!ssh secure shell，就是安全的shell，至于为什么安全呢？怎么就安全了呢？  较rlogin、rsh等这些不加密的协议，ssh传输是加密的，历史">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/2.png">
 <meta property="og:updated_time" content="2017-07-17T06:57:59.000Z">
@@ -145,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/">
 
 
 
@@ -154,7 +154,7 @@
   <title>ssh蜜罐搭建 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -179,13 +179,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -215,7 +215,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -225,7 +225,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -235,7 +235,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -245,7 +245,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -255,7 +255,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -268,7 +268,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -289,9 +289,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -323,16 +321,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/06/25/ssh蜜罐搭建/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -371,7 +369,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -382,7 +380,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
                   <a href="/categories/日常分享/" itemprop="url" rel="index">
                     <span itemprop="name">日常分享</span>
                   </a>
@@ -451,19 +449,19 @@
         <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;本来觉得应该不是一件很复杂的事，结果搞了三个小时才搞定(可能是我太菜吧)，里面有几个坑，记录一下。<br>一直以来想去做蜜罐这么个东西，ssh is only the begining!<br>ssh secure shell，就是安全的shell，至于为什么安全呢？怎么就安全了呢？</p>
 <ol>
 <li>较rlogin、rsh等这些不加密的协议，ssh传输是加密的，历史上ssh协议的实现有openssh和ossh，前者是主流，后面非特殊情况涉及到的ssh实现均指的是openssh。</li>
-<li>ssh协议有两个版本SSH-1 and SSH-2。ssh提供了两种方式的认证，一种是密码登录方式的认证，另外一种是基于秘钥的认证。第一种就是提供的默认加密算法是椭圆曲线加密算法ecdsa-sha2-nistp256，第二种是将rsa的公钥写到服务器的authorized_keys中实现免密码登录。<h4 id="0x02-具体安装步骤"><a href="#0x02-具体安装步骤" class="headerlink" title="0x02 具体安装步骤"></a>0x02 具体安装步骤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">本次测试是在ubuntu14.04X64环境下测试</div></pre></td></tr></table></figure>
+<li>ssh协议有两个版本SSH-1 and SSH-2。ssh提供了两种方式的认证，一种是密码登录方式的认证，另外一种是基于秘钥的认证。第一种就是提供的默认加密算法是椭圆曲线加密算法ecdsa-sha2-nistp256，第二种是将rsa的公钥写到服务器的authorized_keys中实现免密码登录。<h4 id="0x02-具体安装步骤"><a href="#0x02-具体安装步骤" class="headerlink" title="0x02 具体安装步骤"></a>0x02 具体安装步骤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本次测试是在ubuntu14.04X64环境下测试</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>1.首先git clone这两个资源<a href="https://github.com/openssh/openssh-portable" target="_blank" rel="external">https://github.com/openssh/openssh-portable</a><br><a href="https://github.com/w8rbt/sshlog" target="_blank" rel="external">https://github.com/w8rbt/sshlog</a><br>2.’打补丁’。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ patch --dry-run &lt; sshlog.patch</div><div class="line">$ patch &lt; sshlog.patch</div></pre></td></tr></table></figure></p>
+<p>1.首先git clone这两个资源<a href="https://github.com/openssh/openssh-portable" target="_blank" rel="noopener">https://github.com/openssh/openssh-portable</a><br><a href="https://github.com/w8rbt/sshlog" target="_blank" rel="noopener">https://github.com/w8rbt/sshlog</a><br>2.’打补丁’。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ patch --dry-run &lt; sshlog.patch</span><br><span class="line">$ patch &lt; sshlog.patch</span><br></pre></td></tr></table></figure></p>
 <p>运行上面两条命令，其实就是在auth-passwd.c中加上几行代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">struct ssh *ssh = active_state;</div><div class="line"></div><div class="line">       if(authctxt-&gt;user &amp;&amp; password &amp;&amp; ssh) &#123;</div><div class="line">	logit(&quot;sshlog: %.100s %s %.200s %lu&quot;, </div><div class="line">		authctxt-&gt;user, </div><div class="line">		password, </div><div class="line">		ssh_remote_ipaddr(ssh),</div><div class="line">		(unsigned long)time(NULL));</div><div class="line">&#125;</div><div class="line"></div><div class="line">       else &#123;</div><div class="line">	logit(&quot;sshlog: unable to log attempt&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>3.安装前检查<br>发现源码中没有configure文件，原来是需要自己运行autoreconf这个来生成configure文件,参考官方说明：<a href="http://www.openssh.com/portable.html" target="_blank" rel="external">http://www.openssh.com/portable.html</a><br>4.编译<br>编译的时候需要安装依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install libz-dev</div><div class="line">$ sudo apt-get install libssl-dev</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">struct ssh *ssh = active_state;</span><br><span class="line"></span><br><span class="line">       if(authctxt-&gt;user &amp;&amp; password &amp;&amp; ssh) &#123;</span><br><span class="line">	logit(&quot;sshlog: %.100s %s %.200s %lu&quot;, </span><br><span class="line">		authctxt-&gt;user, </span><br><span class="line">		password, </span><br><span class="line">		ssh_remote_ipaddr(ssh),</span><br><span class="line">		(unsigned long)time(NULL));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">       else &#123;</span><br><span class="line">	logit(&quot;sshlog: unable to log attempt&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.安装前检查<br>发现源码中没有configure文件，原来是需要自己运行autoreconf这个来生成configure文件,参考官方说明：<a href="http://www.openssh.com/portable.html" target="_blank" rel="noopener">http://www.openssh.com/portable.html</a><br>4.编译<br>编译的时候需要安装依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libz-dev</span><br><span class="line">$ sudo apt-get install libssl-dev</span><br></pre></td></tr></table></figure>
 <p>5.链接和安装<br>这个时候又会报一个错<br>Privilege separation user sshd does not exist<br>这个时候需要在/etc/passwd文件中加入 ： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br></pre></td></tr></table></figure>
 <p>6.Done!<br><img src="/2017/06/25/ssh蜜罐搭建/1.png" alt=""><br><img src="/2017/06/25/ssh蜜罐搭建/2.png" alt=""></p>
-<h4 id="0x03-待续"><a href="#0x03-待续" class="headerlink" title="0x03 待续"></a>0x03 待续</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">图形化界面实时展示ssh被爆破记录</div></pre></td></tr></table></figure>
-<h4 id="0x04-reference"><a href="#0x04-reference" class="headerlink" title="0x04 reference"></a>0x04 reference</h4><p>1.<a href="https://www.wikiwand.com/en/Secure_Shell" target="_blank" rel="external">https://www.wikiwand.com/en/Secure_Shell</a><br>2.<a href="https://www.wikiwand.com/en/Elliptic_curve_cryptography" target="_blank" rel="external">https://www.wikiwand.com/en/Elliptic_curve_cryptography</a><br>3.<a href="https://my.oschina.net/realfighter/blog/388486" target="_blank" rel="external">https://my.oschina.net/realfighter/blog/388486</a><br>4.<a href="https://m14.cc/magic-behind-compiling-software/" target="_blank" rel="external">https://m14.cc/magic-behind-compiling-software/</a></p>
+<h4 id="0x03-待续"><a href="#0x03-待续" class="headerlink" title="0x03 待续"></a>0x03 待续</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">图形化界面实时展示ssh被爆破记录</span><br></pre></td></tr></table></figure>
+<h4 id="0x04-reference"><a href="#0x04-reference" class="headerlink" title="0x04 reference"></a>0x04 reference</h4><p>1.<a href="https://www.wikiwand.com/en/Secure_Shell" target="_blank" rel="noopener">https://www.wikiwand.com/en/Secure_Shell</a><br>2.<a href="https://www.wikiwand.com/en/Elliptic_curve_cryptography" target="_blank" rel="noopener">https://www.wikiwand.com/en/Elliptic_curve_cryptography</a><br>3.<a href="https://my.oschina.net/realfighter/blog/388486" target="_blank" rel="noopener">https://my.oschina.net/realfighter/blog/388486</a><br>4.<a href="https://m14.cc/magic-behind-compiling-software/" target="_blank" rel="noopener">https://m14.cc/magic-behind-compiling-software/</a></p>
 
       
     </div>
@@ -500,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/08/s2-048漏洞分析/" rel="next" title="s2-048漏洞分析">
-                <i class="fa fa-chevron-left"></i> s2-048漏洞分析
+              <a href="/2017/06/12/c-易混淆点笔记/" rel="next" title="c和c++易混淆点笔记">
+                <i class="fa fa-chevron-left"></i> c和c++易混淆点笔记
               </a>
             
           </div>
@@ -510,8 +508,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/12/c-易混淆点笔记/" rel="prev" title="c和c++易混淆点笔记">
-                c和c++易混淆点笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/08/s2-048漏洞分析/" rel="prev" title="s2-048漏洞分析">
+                s2-048漏洞分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -560,7 +558,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -570,10 +568,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -700,7 +696,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

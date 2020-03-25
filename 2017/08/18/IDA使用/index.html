@@ -6,10 +6,10 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script>
     (function(){
         if(''){
@@ -28,8 +28,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -81,23 +81,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="M0rk's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
@@ -105,12 +105,12 @@
 
 
 <meta name="description" content="前言 先说说反汇编软件IDA原理，反汇编软件去识别二进制文件格式，比如文件的格式是PE，那么它会利用其针对PE的内置“规则“对该二进制文件进行分析，最终将其转换为“好看”一点儿，方便人们阅读的格式(其中包括视图展现形式、伪c代码、汇编代码等)，其本身并不会像ollydbg去加载程序执行。(当然IDA也能动态调试) IDA(Interactive Disassembler Professional)">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDA使用">
 <meta property="og:url" content="http://kevien.github.io/2017/08/18/IDA使用/index.html">
-<meta property="og:site_name" content="M0rk's Blog">
+<meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="前言 先说说反汇编软件IDA原理，反汇编软件去识别二进制文件格式，比如文件的格式是PE，那么它会利用其针对PE的内置“规则“对该二进制文件进行分析，最终将其转换为“好看”一点儿，方便人们阅读的格式(其中包括视图展现形式、伪c代码、汇编代码等)，其本身并不会像ollydbg去加载程序执行。(当然IDA也能动态调试) IDA(Interactive Disassembler Professional)">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/18/IDA使用/2.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/18/IDA使用/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/18/IDA使用/3.png">
@@ -149,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/18/IDA使用/"/>
+  <link rel="canonical" href="http://kevien.github.io/2017/08/18/IDA使用/">
 
 
 
@@ -158,7 +158,7 @@
   <title>IDA使用 | M0rk's Blog</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -183,13 +183,13 @@
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">M0rk's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -219,7 +219,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -229,7 +229,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -239,7 +239,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -249,7 +249,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -259,7 +259,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -272,7 +272,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -293,9 +293,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -327,16 +325,16 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/18/IDA使用/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="M0rk's Blog">
     </span>
 
@@ -437,7 +435,7 @@
 <li>跳转到指定内存地址 快捷键G，可以调到相应的地址</li>
 <li>寻找关键特征字符串，打开字符串参考窗口 shift+f12 ，类似于od中plugins中的中文搜索引擎中的智能搜索功能<br><img src="/2017/08/18/IDA使用/1.png" alt=""></li>
 <li>函数的收缩和展开功能<br><img src="/2017/08/18/IDA使用/3.png" alt=""></li>
-<li>在vc6中main()不是程序运行的第一个函数，而是程序员编写程序的第一个函数，main()函数是由启动函数来调用的，vc6中入口点是_mainCRTStartup()函数，如下图所示<br><img src="/2017/08/18/IDA使用/4.png" alt=""><br>双击即可到达这个函数的位置，<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">.text:00401130                 push    ebp</div><div class="line">.text:00401131                 mov     ebp, esp</div><div class="line">.text:00401133                 push    0FFFFFFFFh</div><div class="line">.text:00401135                 push    offset stru_422130</div><div class="line">.text:0040113A                 push    offset __except_handler3</div><div class="line">.text:0040113F                 mov     eax, large fs:0</div><div class="line">.text:00401145                 push    eax</div><div class="line">.text:00401146                 mov     large fs:0, esp</div><div class="line">.text:0040114D                 add     esp, 0FFFFFFF0h</div><div class="line">.text:00401150                 push    ebx</div><div class="line">.text:00401151                 push    esi</div><div class="line">.text:00401152                 push    edi</div><div class="line">.text:00401153                 mov     [ebp+ms_exc.old_esp], esp</div><div class="line">.text:00401156                 call    ds:__imp__GetVersion@0 ; GetVersion()</div><div class="line">.text:0040115C                 mov     __osver, eax</div><div class="line">.text:00401161                 mov     eax, __osver</div><div class="line">.text:00401166                 shr     eax, 8</div><div class="line">.text:00401169                 and     eax, 0FFh</div><div class="line">.text:0040116E                 mov     __winminor, eax</div><div class="line">.text:00401173                 mov     ecx, __osver</div><div class="line">.text:00401179                 and     ecx, 0FFh</div><div class="line">.text:0040117F                 mov     __winmajor, ecx</div><div class="line">.text:00401185                 mov     edx, __winmajor</div><div class="line">.text:0040118B                 shl     edx, 8</div><div class="line">.text:0040118E                 add     edx, __winminor</div><div class="line">.text:00401194                 mov     __winver, edx</div><div class="line">.text:0040119A                 mov     eax, __osver</div><div class="line">.text:0040119F                 shr     eax, 10h</div><div class="line">.text:004011A2                 and     eax, 0FFFFh</div><div class="line">.text:004011A7                 mov     __osver, eax</div><div class="line">.text:004011AC                 push    0</div><div class="line">.text:004011AE                 call    __heap_init</div><div class="line">.text:004011B3                 add     esp, 4</div><div class="line">.text:004011B6                 test    eax, eax</div><div class="line">.text:004011B8                 jnz     short loc_4011C4</div><div class="line">.text:004011BA                 push    1Ch</div><div class="line">.text:004011BC                 call    fast_error_exit</div><div class="line">.text:004011C1 ; ---------------------------------------------------------------------------</div><div class="line">.text:004011C1                 add     esp, 4</div><div class="line">.text:004011C4</div><div class="line">.text:004011C4 loc_4011C4:                             ; CODE XREF: _mainCRTStartup+88j</div><div class="line">.text:004011C4                 mov     [ebp+ms_exc.registration.TryLevel], 0</div><div class="line">.text:004011CB                 call    __ioinit</div><div class="line">.text:004011D0                 call    ds:__imp__GetCommandLineA@0 ; GetCommandLineA()</div><div class="line">.text:004011D6                 mov     __acmdln, eax</div><div class="line">.text:004011DB                 call    ___crtGetEnvironmentStringsA</div><div class="line">.text:004011E0                 mov     __aenvptr, eax</div><div class="line">.text:004011E5                 call    __setargv</div><div class="line">.text:004011EA                 call    __setenvp</div><div class="line">.text:004011EF                 call    __cinit</div><div class="line">.text:004011F4                 mov     ecx, __environ</div><div class="line">.text:004011FA                 mov     ___initenv, ecx</div><div class="line">.text:00401200                 mov     edx, __environ</div><div class="line">.text:00401206                 push    edx             ; envp</div><div class="line">.text:00401207                 mov     eax, ___argv</div><div class="line">.text:0040120C                 push    eax             ; argv</div><div class="line">.text:0040120D                 mov     ecx, ___argc</div><div class="line">.text:00401213                 push    ecx             ; argc</div><div class="line">.text:00401214                 call    _main_0</div></pre></td></tr></table></figure>
+<li>在vc6中main()不是程序运行的第一个函数，而是程序员编写程序的第一个函数，main()函数是由启动函数来调用的，vc6中入口点是_mainCRTStartup()函数，如下图所示<br><img src="/2017/08/18/IDA使用/4.png" alt=""><br>双击即可到达这个函数的位置，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.text:00401130                 push    ebp</span><br><span class="line">.text:00401131                 mov     ebp, esp</span><br><span class="line">.text:00401133                 push    0FFFFFFFFh</span><br><span class="line">.text:00401135                 push    offset stru_422130</span><br><span class="line">.text:0040113A                 push    offset __except_handler3</span><br><span class="line">.text:0040113F                 mov     eax, large fs:0</span><br><span class="line">.text:00401145                 push    eax</span><br><span class="line">.text:00401146                 mov     large fs:0, esp</span><br><span class="line">.text:0040114D                 add     esp, 0FFFFFFF0h</span><br><span class="line">.text:00401150                 push    ebx</span><br><span class="line">.text:00401151                 push    esi</span><br><span class="line">.text:00401152                 push    edi</span><br><span class="line">.text:00401153                 mov     [ebp+ms_exc.old_esp], esp</span><br><span class="line">.text:00401156                 call    ds:__imp__GetVersion@0 ; GetVersion()</span><br><span class="line">.text:0040115C                 mov     __osver, eax</span><br><span class="line">.text:00401161                 mov     eax, __osver</span><br><span class="line">.text:00401166                 shr     eax, 8</span><br><span class="line">.text:00401169                 and     eax, 0FFh</span><br><span class="line">.text:0040116E                 mov     __winminor, eax</span><br><span class="line">.text:00401173                 mov     ecx, __osver</span><br><span class="line">.text:00401179                 and     ecx, 0FFh</span><br><span class="line">.text:0040117F                 mov     __winmajor, ecx</span><br><span class="line">.text:00401185                 mov     edx, __winmajor</span><br><span class="line">.text:0040118B                 shl     edx, 8</span><br><span class="line">.text:0040118E                 add     edx, __winminor</span><br><span class="line">.text:00401194                 mov     __winver, edx</span><br><span class="line">.text:0040119A                 mov     eax, __osver</span><br><span class="line">.text:0040119F                 shr     eax, 10h</span><br><span class="line">.text:004011A2                 and     eax, 0FFFFh</span><br><span class="line">.text:004011A7                 mov     __osver, eax</span><br><span class="line">.text:004011AC                 push    0</span><br><span class="line">.text:004011AE                 call    __heap_init</span><br><span class="line">.text:004011B3                 add     esp, 4</span><br><span class="line">.text:004011B6                 test    eax, eax</span><br><span class="line">.text:004011B8                 jnz     short loc_4011C4</span><br><span class="line">.text:004011BA                 push    1Ch</span><br><span class="line">.text:004011BC                 call    fast_error_exit</span><br><span class="line">.text:004011C1 ; ---------------------------------------------------------------------------</span><br><span class="line">.text:004011C1                 add     esp, 4</span><br><span class="line">.text:004011C4</span><br><span class="line">.text:004011C4 loc_4011C4:                             ; CODE XREF: _mainCRTStartup+88j</span><br><span class="line">.text:004011C4                 mov     [ebp+ms_exc.registration.TryLevel], 0</span><br><span class="line">.text:004011CB                 call    __ioinit</span><br><span class="line">.text:004011D0                 call    ds:__imp__GetCommandLineA@0 ; GetCommandLineA()</span><br><span class="line">.text:004011D6                 mov     __acmdln, eax</span><br><span class="line">.text:004011DB                 call    ___crtGetEnvironmentStringsA</span><br><span class="line">.text:004011E0                 mov     __aenvptr, eax</span><br><span class="line">.text:004011E5                 call    __setargv</span><br><span class="line">.text:004011EA                 call    __setenvp</span><br><span class="line">.text:004011EF                 call    __cinit</span><br><span class="line">.text:004011F4                 mov     ecx, __environ</span><br><span class="line">.text:004011FA                 mov     ___initenv, ecx</span><br><span class="line">.text:00401200                 mov     edx, __environ</span><br><span class="line">.text:00401206                 push    edx             ; envp</span><br><span class="line">.text:00401207                 mov     eax, ___argv</span><br><span class="line">.text:0040120C                 push    eax             ; argv</span><br><span class="line">.text:0040120D                 mov     ecx, ___argc</span><br><span class="line">.text:00401213                 push    ecx             ; argc</span><br><span class="line">.text:00401214                 call    _main_0</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>如上所示，是进入这个函数后的汇编代码，可以看到main函数在00401214位置处，启动函数从00401130地址处开始，期间调用了GetVersion()函数获得了系统版本号，调用__heap_init函数初始化了程序所使用的堆空间，调用了GetCommandLineA()函数获取了命令行参数,调用_crtGetEnvironmentStringsA()获取了环境变量字符串，在完成一系列启动所需的工作之后，终于在00401214处调用了main()函数。</p>
@@ -447,7 +445,7 @@
 <li>名称与命名<br>在进行样本分析时，ID A识别出来的函数名都是sub_xxxxxx，这种命名方式不适合我们阅读和分析，在我们进行分析后，知道函数或者变量的意义，那么我们可以对其进行重命名。方法是鼠标点击函数名或者变量，然后按下键盘上的N键，在弹出的窗口中写入新的名字即可。</li>
 <li>交叉引用<br>IDA提供了大量显示和访问交叉引用数据的机制，它以更加直观的方式显示代码和数据之间的关系。在IDA中有两种交叉引用，一种是代码交叉引用，一种是数据交叉引用。如下就是一个代码交叉引用<br><img src="/2017/08/18/IDA使用/xref.png" alt=""><br>在图中可以知道被引用者是?test@@YAXXZ,_main+18是引用者，向下的键条表示引用者的地址要比?test@@YAXXZ的地址高，上行反之。还有其后面的P表示由函数调用导致的交叉引用使用后缀↓p（看做是Procedure）。而跳转交叉引用使用后缀↑j（看做是Jump）。此外还有数据的交叉引用又分为数据读取交叉引用、数据写入交叉引用、数据偏移量交叉引用。</li>
 <li>快捷键R 将数字串转换为char字符串</li>
-<li>IDA是一款非常复杂且非常非常强大，更多见《IDA Pro权威指南》<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="http://www.pediy.com/kssd/pediy12/ida.html" target="_blank" rel="external">IDA简易教程</a><br><a href="https://www.zybuluo.com/oro-oro/note/137244" target="_blank" rel="external">《IDA Pro权威指南》入门笔记</a><br><a href="https://blog.csdn.net/hgy413/article/details/50594320" target="_blank" rel="external">IDA-XREF（交叉引用）概述</a></li>
+<li>IDA是一款非常复杂且非常非常强大，更多见《IDA Pro权威指南》<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="http://www.pediy.com/kssd/pediy12/ida.html" target="_blank" rel="noopener">IDA简易教程</a><br><a href="https://www.zybuluo.com/oro-oro/note/137244" target="_blank" rel="noopener">《IDA Pro权威指南》入门笔记</a><br><a href="https://blog.csdn.net/hgy413/article/details/50594320" target="_blank" rel="noopener">IDA-XREF（交叉引用）概述</a></li>
 </ul>
 
       
@@ -485,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/21/windbg使用/" rel="next" title="windbg使用">
-                <i class="fa fa-chevron-left"></i> windbg使用
+              <a href="/2017/08/16/linux栈溢出学习笔记/" rel="next" title="linux栈溢出学习笔记">
+                <i class="fa fa-chevron-left"></i> linux栈溢出学习笔记
               </a>
             
           </div>
@@ -495,8 +493,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/16/linux栈溢出学习笔记/" rel="prev" title="linux栈溢出学习笔记">
-                linux栈溢出学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/21/windbg使用/" rel="prev" title="windbg使用">
+                windbg使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -545,7 +543,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -555,10 +553,8 @@
       
 
       <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="M0rk" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="M0rk">
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -685,7 +681,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<div class="copyright" >
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
