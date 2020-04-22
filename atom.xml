@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2020-04-05T02:24:14.640Z</updated>
+  <updated>2020-04-22T02:59:09.660Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/"/>
     <id>http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/</id>
     <published>2020-04-05T01:29:59.000Z</published>
-    <updated>2020-04-05T02:24:14.640Z</updated>
+    <updated>2020-04-22T02:59:09.660Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/2020/04/05/cobaltstrike-dns-beacon/cs.png" alt=""></p>
+    <content type="html"><![CDATA[<p><img src="/2020/04/05/cobaltstrike-dns-beacon/cs.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">cobaltstrike dns beacon知多少</span><br><span class="line">https://xz.aliyun.com/t/7488</span><br></pre></td></tr></table></figure></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。<h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2></li>
 <li>首先我们需要申请一个域名配置好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录，将malware.com的一个子域名指向我们的vps地址，如c2.malware.com</li>
@@ -39,8 +39,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;/2020/04/05/cobaltstrike-dns-beacon/cs.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL
+      &lt;p&gt;&lt;img src=&quot;/2020/04/05/cobaltstrike-dns-beacon/cs.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
     
     </summary>
     

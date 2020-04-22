@@ -77,21 +77,21 @@
 
 
 
-<meta name="description" content="TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名配置好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录，将malw">
+<meta name="description" content="123原文已发布至先知平台cobaltstrike dns beacon知多少https://xz.aliyun.com/t/7488 TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cobaltstrike dns beacon">
 <meta property="og:url" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名配置好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录，将malw">
+<meta property="og:description" content="123原文已发布至先知平台cobaltstrike dns beacon知多少https://xz.aliyun.com/t/7488 TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/cs.png">
 <meta property="og:image" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/profile.png">
 <meta property="og:image" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/help.png">
 <meta property="og:image" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/checkin.png">
-<meta property="og:updated_time" content="2020-04-05T02:24:14.640Z">
+<meta property="og:updated_time" content="2020-04-22T02:59:09.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cobaltstrike dns beacon">
-<meta name="twitter:description" content="TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名配置好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录，将malw">
+<meta name="twitter:description" content="123原文已发布至先知平台cobaltstrike dns beacon知多少https://xz.aliyun.com/t/7488 TL;DR cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。原理简介 首先我们需要申请一个域名">
 <meta name="twitter:image" content="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/cs.png">
 
 
@@ -399,7 +399,7 @@
       
 
       
-        <p><img src="/2020/04/05/cobaltstrike-dns-beacon/cs.png" alt=""></p>
+        <p><img src="/2020/04/05/cobaltstrike-dns-beacon/cs.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">cobaltstrike dns beacon知多少</span><br><span class="line">https://xz.aliyun.com/t/7488</span><br></pre></td></tr></table></figure></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>cs作者曾说过dns beacon是cs一重要特色，其原因在于绕过防火墙方面比较有优势，之前测试的时候有点儿问题也没有深入研究原理，在最新的cs4.0出来之后又重新测试了一下，然鹅过程是崎岖的，中间踩了几个坑记录一下。<h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2></li>
 <li>首先我们需要申请一个域名配置好域名解析，例如这里的域名是 malware.com, vps ip地址1.2.3.4，我们需要设置dns的一个A记录，将malware.com的一个子域名指向我们的vps地址，如c2.malware.com</li>
