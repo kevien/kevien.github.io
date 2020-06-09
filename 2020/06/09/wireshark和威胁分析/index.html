@@ -77,12 +77,12 @@
 
 
 
-<meta name="description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
+<meta name="description" content="12文章已首发至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wireshark和威胁分析">
 <meta property="og:url" content="http://kevien.github.io/2020/06/09/wireshark和威胁分析/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
+<meta property="og:description" content="12文章已首发至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200604182512-acc5b930-a64d-1.png">
@@ -96,10 +96,10 @@
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211227-8dbeb130-9a9b-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211248-9a4992d0-9a9b-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211306-a50b6cf2-9a9b-1.png">
-<meta property="og:updated_time" content="2020-06-09T11:18:22.896Z">
+<meta property="og:updated_time" content="2020-06-09T11:21:42.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wireshark和威胁分析">
-<meta name="twitter:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
+<meta name="twitter:description" content="12文章已首发至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
 <meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg">
 
 
@@ -407,7 +407,7 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">https://xz.aliyun.com/t/7802</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文章已首发至先知平台</span><br><span class="line">https://xz.aliyun.com/t/7802</span><br></pre></td></tr></table></figure>
 <p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg" alt=""></p>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
 <li>前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。</li>
