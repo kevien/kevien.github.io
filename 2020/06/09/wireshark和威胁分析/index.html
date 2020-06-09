@@ -77,21 +77,30 @@
 
 
 
-<meta name="description" content="简介 yara工具用来帮助安全研究人员鉴别和对恶意软件进行分类的工具。我们可以通过编写规则来进行恶意软件的识别。yara 规则最新规则官方文档V3.6.3规则示例：12345678910111213rule silent_banker : banker&amp;#123;    meta:        description = &amp;quot;This is just an example&amp;quot;">
+<meta name="description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yara使用说明">
-<meta property="og:url" content="http://kevien.github.io/2017/09/06/yara使用说明/index.html">
+<meta property="og:title" content="wireshark和威胁分析">
+<meta property="og:url" content="http://kevien.github.io/2020/06/09/wireshark和威胁分析/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="简介 yara工具用来帮助安全研究人员鉴别和对恶意软件进行分类的工具。我们可以通过编写规则来进行恶意软件的识别。yara 规则最新规则官方文档V3.6.3规则示例：12345678910111213rule silent_banker : banker&amp;#123;    meta:        description = &amp;quot;This is just an example&amp;quot;">
+<meta property="og:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/yarapython.png">
-<meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/help.png">
-<meta property="og:image" content="http://kevien.github.io/2017/09/06/yara使用说明/rerule.png">
-<meta property="og:updated_time" content="2019-10-11T10:03:20.602Z">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200604182512-acc5b930-a64d-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520210923-1ff91b86-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211027-45d5093c-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211058-5886cb38-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211114-61d8a166-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211132-6cca579a-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211151-78457c76-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211206-80ed6712-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211227-8dbeb130-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211248-9a4992d0-9a9b-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200520211306-a50b6cf2-9a9b-1.png">
+<meta property="og:updated_time" content="2020-06-09T11:18:22.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yara使用说明">
-<meta name="twitter:description" content="简介 yara工具用来帮助安全研究人员鉴别和对恶意软件进行分类的工具。我们可以通过编写规则来进行恶意软件的识别。yara 规则最新规则官方文档V3.6.3规则示例：12345678910111213rule silent_banker : banker&amp;#123;    meta:        description = &amp;quot;This is just an example&amp;quot;">
-<meta name="twitter:image" content="http://kevien.github.io/2017/09/06/yara使用说明/yarapython.png">
+<meta name="twitter:title" content="wireshark和威胁分析">
+<meta name="twitter:description" content="12原文已发布至先知平台https://xz.aliyun.com/t/7802  TL；DR 前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。 由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。  wireshark">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg">
 
 
 
@@ -119,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/09/06/yara使用说明/">
+  <link rel="canonical" href="http://kevien.github.io/2020/06/09/wireshark和威胁分析/">
 
 
 
 
 
-  <title>yara使用说明 | M0rk's Blog</title>
+  <title>wireshark和威胁分析 | M0rk's Blog</title>
 </head>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +305,7 @@
   
 
   <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/09/06/yara使用说明/">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2020/06/09/wireshark和威胁分析/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
@@ -317,7 +326,7 @@
             
             
               
-                yara使用说明
+                wireshark和威胁分析
               
             
           </h2>
@@ -332,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T16:55:40+08:00">
-                2017-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T19:14:54+08:00">
+                2020-06-09
               </time>
             
 
@@ -398,88 +407,65 @@
       
 
       
-        <h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
-<li>yara工具用来帮助安全研究人员鉴别和对恶意软件进行分类的工具。我们可以通过编写规则来进行恶意软件的识别。<h4 id="yara-规则"><a href="#yara-规则" class="headerlink" title="yara 规则"></a>yara 规则</h4><a href="http://yara.readthedocs.io/en/v3.6.3/index.html" target="_blank" rel="noopener">最新规则官方文档V3.6.3</a><br><br>规则示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rule silent_banker : banker</span><br><span class="line">&#123;</span><br><span class="line">    meta:</span><br><span class="line">        description = &quot;This is just an example&quot;</span><br><span class="line">        thread_level = 3</span><br><span class="line">        in_the_wild = true</span><br><span class="line">    strings:</span><br><span class="line">        $a = &#123;6A 40 68 00 30 00 00 6A 14 8D 91&#125;</span><br><span class="line">        $b = &#123;8D 4D B0 2B C1 83 C0 27 99 6A 4E 59 F7 F9&#125;</span><br><span class="line">        $c = &quot;UVODFRYSIHLNWPEJXQZAKCBGMT&quot;</span><br><span class="line">    condition:</span><br><span class="line">        $a or $b or $c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">https://xz.aliyun.com/t/7802</span><br></pre></td></tr></table></figure>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg" alt=""></p>
+<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
+<li>前段时间看了一个介绍wireshark和威胁分析相关的议题（视频演讲和pdf见参考链接），现在抽出点儿时间总结和记录一下。</li>
+<li>由于工作需要，那段时间搜集和整理了wireshark基本使用和技巧相关资料，但是总感觉不太完整不够深入，直到看到这个议题之后，深深感觉外国佬是真的细，真的强。</li>
 </ul>
-<p>这个就是一个名为rule silent_banker的规则，其中banker是规则的tag字段(可以有多个tag)，meta字段是规则的描述信息，strings是规则字段，condition则是条件判断的字段，这个规则的意思就是只要满足了字符串或a或b或c就会命中规则。<br>这里只是一个简单的规则，规则的创建可以使用通配符、大小写非敏感的字符串、正则表达式、特殊的操作符号等其它的特征。<br>通过python使用yara<br><img src="/2017/09/06/yara使用说明/yarapython.png" alt=""><br><img src="/2017/09/06/yara使用说明/help.png" alt=""><br>yara语法<br><br>silent-_banker叫做identifiers，是大小写敏感的且不能超过128个字符，且不能用以下的关键词，因为这些是yara的关键词<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">all	and	any	ascii	at	condition	contains</span><br><span class="line">entrypoint	false	filesize	fullword	for	global	in</span><br><span class="line">import	include	int8	int16	int32	int8be	int16be</span><br><span class="line">int32be	matches	meta	nocase	not	or	of</span><br><span class="line">private	rule	strings	them	true	uint8	uint16</span><br><span class="line">uint32	uint8be	uint16be	uint32be	wide</span><br></pre></td></tr></table></figure></p>
-<p>字符串可以是文本字符串也可以是十六进制，ascii类型的使用双引号包裹，十六进制字符串使用大括号包裹。<br><br>注释语法和c语言相同。<br></p>
-<p>* 三种string；<br><br>1.文本类型字符串<br><br>2.十六进制字符串<br><br>3.正则表达式</p>
-<ul>
-<li>十六进制Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rule AlternativesExample1</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">       $hex_string = &#123; F4 23 ( 62 B4 | 56 ) 45 &#125;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">       $hex_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h2><h3 id="wireshark简述"><a href="#wireshark简述" class="headerlink" title="wireshark简述"></a>wireshark简述</h3><ul>
+<li>wireshark主要用在网络故障排查、协议分析、流量统计、威胁发现等方面，是安全、运维、开发等从业人员必备技能之一。wireshark抓取OSI七层协议所有数据包并根据内置规则进行协议解析为友好可读的数据实时展示给用户，也可保存下来留后分析。此外类似的抓包工具还有tshark和tcpdump，但由于tshark和tcpdump都是没有GUI且不够友好,所以目前使用wireshark的人更多一些。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200604182512-acc5b930-a64d-1.png" alt=""></li>
 </ul>
-<p>valid<br>F42362B445或者F4235645</p>
-<ul>
-<li>字符串Example<br><br>默认是敏感的,但是可以通过nocase关键字设置成不敏感的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rule CaseInsensitiveTextExample</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $text_string = &quot;foobar&quot; nocase</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $text_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><ul>
+<li>这里要注意区分一下捕获过滤器和应用显示过滤器，捕获过滤器是有选择性的捕获特定数据包，而应用显示过滤器是在开始抓包之后，过滤显示已经抓到的包。捕获过滤器的优先级更高，它能够避免抓取的数据包过大但也可能会错失一些“重要”数据包。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520210923-1ff91b86-9a9b-1.png" alt=""></li>
+<li><p>捕获过滤器遵循BPF（Berkeley Packet Filter）语法<br>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">host xxx.xxx.xxx.xxx</span><br><span class="line">not ar</span><br><span class="line">net xxx.xxx.xxx.xxx/xx</span><br><span class="line">dst host xxx.xxx.xxx.xxx</span><br><span class="line">port xx</span><br><span class="line">ip</span><br><span class="line">tcp port xx</span><br><span class="line">tcp portrange xx-xx</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>一些恶意软件的捕获过滤器语句<br>Blasater Worm:<br>• dst port 135 and tcp port 135 and ip[2:2]==48<br>Welchia Worm:<br>• icmp[icmptype]==icmp-echo and ip[2:2]==92 and icmp[8:4]==0xAAAAAAAA<br>Looking for worms calling C2s:<br>• dst port 135 or dst port 445 or dst port 1433 and tcp[tcpflags] &amp; (tcp-syn) != 0 and tcp[tcpflags] &amp; (tcp-ack) = 0 and src net 192.168.0.0/24<br>Heartbleed Exploit:<br>• tcp src port 443 and (tcp[((tcp[12] &amp; 0xF0) &gt;&gt; 4 ) <em> 4] = 0x18) and (tcp[((tcp[12] &amp; 0xF0) &gt;&gt; 4 ) </em> 4 + 1] = 0x03) and (tcp[((tcp[12] &amp; 0xF0) &gt;&gt; 4 ) <em> 4 + 2] &lt; 0x04) and ((ip[2:2] - 4 </em> (ip[0] &amp; 0x0F) - 4 * ((tcp[12] &amp; 0xF0) &gt;&gt; 4) &gt; 69))</p>
+</li>
+<li>应用显示过滤器常用语法<br>• ICMP traffic: icmp<br>• Source or Destination IP: ip.addr==[x.x.x.x]<br>• Source IP: ip.src==[x.x.x.x/x]<br>• Windows Services: smb || nbns || dcerpc || nbss || dns<br>• Filter out noise: !(arp or icmp or dns)<br>• Search exact ASCII text in TCP packets: tcp contains [blah]</li>
 </ul>
-<p>这样Foobar, FOOBAR, and fOoBaR都会被匹配到。</p>
-<ul>
-<li><p>宽字节的匹配<br><br>一个字符占两个字节</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rule WideCharTextExample1</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $wide_string = &quot;Borland&quot; wide</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">       $wide_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>fullword关键词<br><br>rule WideCharTextExample1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $fullword_string = &quot;domain&quot; fullword</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">       $fullword_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>www.mydomain.com  www.my-domain.com www.domain.com</p>
-<ul>
-<li>正则表达式<br><br>使用斜线包裹，而非双引号或者大括号。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> rule RegExpExample1</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $re1 = /md5: [0-9a-fA-F]&#123;32&#125;/</span><br><span class="line">        $re2 = /state: (on|off)/</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $re1 and $re2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="wireshark导出对象"><a href="#wireshark导出对象" class="headerlink" title="wireshark导出对象"></a>wireshark导出对象</h3><ul>
+<li>wireshark导出对象功能可以导出压缩包、图片、二进制文件等，打过ctf的可能使用过这个技巧。这里不做展开介绍。</li>
 </ul>
-<p><img src="/2017/09/06/yara使用说明/rerule.png" alt=""></p>
-<ul>
-<li><p>条件判断语句Conditions<br><br>可以没有特征strings但是不能没有strings字段<br><br>可以设定特征出现的次数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> rule CountExample</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $a = &quot;dummy1&quot;</span><br><span class="line">        $b = &quot;dummy2&quot;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        #a == 6 and #b &gt; 10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>偏移地址offset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rule InExample</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $a = &quot;dummy1&quot;</span><br><span class="line">        $b = &quot;dummy2&quot;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $a in (0..100) and $b in (100..filesize)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="wireshark个人配置"><a href="#wireshark个人配置" class="headerlink" title="wireshark个人配置"></a>wireshark个人配置</h3><ul>
+<li>常见的软件一般都有个人配置的功能，wireshark也一样，你可以定制显示颜色规则、显示的列、对不同协议的定制等等。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211027-45d5093c-9a9b-1.png" alt=""></li>
+<li>这里重点关注一下定制化显示不同的列，wireshark默认只是显示包编号、时间戳、源ip、目的ip、协议、数据包长度、数据包简要信息，但我们可以根据不同的需求进行定制.<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211058-5886cb38-9a9b-1.png" alt=""><br>例如我们可以显示端口的信息。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211114-61d8a166-9a9b-1.png" alt=""></li>
+<li>友好的显示时间<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211132-6cca579a-9a9b-1.png" alt=""></li>
+<li>导出个人配置，可以讲自己常用的配置保存下来移植到其它电脑或者分享给他人。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211151-78457c76-9a9b-1.png" alt=""></li>
+<li>将协议中的某个字段设置为列（也可以将某个字段设置为过滤器）<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211206-80ed6712-9a9b-1.png" alt=""></li>
+<li>显示ip地址归属地 可参考<a href="https://wiki.wireshark.org/HowToUseGeoIP" target="_blank" rel="noopener">How To Use GeoIP With Wireshark</a><br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211227-8dbeb130-9a9b-1.png" alt=""></li>
 </ul>
-<p>特征a出现在0-0x100偏移且特征b出现在0x100之后。</p>
-<ul>
-<li>文件大小<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> rule FileSizeExample</span><br><span class="line">&#123;</span><br><span class="line">    condition:</span><br><span class="line">       filesize &gt; 200KB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="wireshark协议统计和分析"><a href="#wireshark协议统计和分析" class="headerlink" title="wireshark协议统计和分析"></a>wireshark协议统计和分析</h3><ul>
+<li>这里主要能够看到抓包的一些属性（时间、大小等）还有流量中协议的分级占比、以及通信时长等信息。</li>
 </ul>
-<p>这个只能匹配文件，如果是运行着的程序的话，那么将永远不会匹配，因为这个时候filesize没有意义。</p>
-<ul>
-<li>特定位置的数据获取<br>PE文件的判断<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> rule IsPE</span><br><span class="line">&#123;</span><br><span class="line">  condition:</span><br><span class="line">     // MZ signature at offset 0 and ...</span><br><span class="line">     uint16(0) == 0x5A4D and</span><br><span class="line">     // ... PE signature at offset stored in MZ header at 0x3C</span><br><span class="line">     uint32(uint32(0x3C)) == 0x00004550</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="小问题"><a href="#小问题" class="headerlink" title="小问题"></a>小问题</h3><ul>
+<li>不知道大家有没有遇到并思考过这样一个问题，就是我明明通过无线连接的网络，但使用wireshark抓包抓到的是ethernet协议数据包，而不是802.11协议的数据包，这是因为操作系统或网卡驱动程序已经把802.11 转换成以太网协议了，当然你也设置成抓到802.11协议，这个时候需要修改捕获接口选项为监控模式。</li>
+<li>参考链接</li>
+<li><a href="https://superuser.com/questions/1242454/why-do-i-see-ethernet-ii-protocol-in-wireshark-in-wireless-connection" target="_blank" rel="noopener">why-do-i-see-ethernet-ii-protocol-in-wireshark-in-wireless-connection</a></li>
+<li><a href="https://medium.com/debookee/promiscuous-vs-monitoring-mode-d603601f5fa" target="_blank" rel="noopener">promiscuous-vs-monitoring-mode-d603601f5fa</a></li>
 </ul>
-<p>PE文件结构中的前两个字节是DOS签名5A4D,即“MZ”。</p>
-<ul>
-<li><p>特征集合<br>rule OfExample1<br>{<br>strings:</p>
-<pre><code>$a = &quot;dummy1&quot;
-$b = &quot;dummy2&quot;
-$c = &quot;dummy3&quot;
-</code></pre><p>condition:</p>
-<pre><code>2 of ($a,$b,$c)
-</code></pre><p>}<br>满足两个特征即可</p>
-</li>
+<h2 id="威胁分析"><a href="#威胁分析" class="headerlink" title="威胁分析"></a>威胁分析</h2><h3 id="基础协议"><a href="#基础协议" class="headerlink" title="基础协议"></a>基础协议</h3><ul>
+<li>在分析威胁之前首先应该先了解一些基础的协议流量特征例如icmp、snmp、telnet、ssh、smb等，这里议题作者已经专门制作好了，大家可以去下载并熟悉相应协议的结构和流量的特征。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211248-9a4992d0-9a9b-1.png" alt=""></li>
 </ul>
-</li>
-<li><p>引用其他规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">rule Rule1</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $a = &quot;dummy1&quot;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $a</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rule Rule2</span><br><span class="line">&#123;</span><br><span class="line">    strings:</span><br><span class="line">        $a = &quot;dummy2&quot;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $a and Rule1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>全局规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">global rule SizeLimit</span><br><span class="line">&#123;</span><br><span class="line">    condition:</span><br><span class="line">        filesize &lt; 2MB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规则标签<br>方便对输出的信息进行归类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rule TagsExample1 : Foo Bar Baz</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rule TagsExample2 : Bar</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Metadata</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rule MetadataExample</span><br><span class="line">&#123;</span><br><span class="line">    meta:</span><br><span class="line">        my_identifier_1 = &quot;Some string data&quot;</span><br><span class="line">        my_identifier_2 = 24</span><br><span class="line">        my_identifier_3 = true</span><br><span class="line"></span><br><span class="line">    strings:</span><br><span class="line">        $my_text_string = &quot;text here&quot;</span><br><span class="line">        $my_hex_string = &#123; E2 34 A1 C8 23 FB &#125;</span><br><span class="line"></span><br><span class="line">    condition:</span><br><span class="line">        $my_text_string or $my_hex_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>模块引用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &quot;pe&quot;</span><br><span class="line"></span><br><span class="line">rule Test</span><br><span class="line">&#123;</span><br><span class="line">  strings:</span><br><span class="line">      $a = &quot;some string&quot;</span><br><span class="line"></span><br><span class="line">  condition:</span><br><span class="line">      $a and pe.entry_point == 0x1000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件包含</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include &quot;other.yar&quot;</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="在线流量分析"><a href="#在线流量分析" class="headerlink" title="在线流量分析"></a>在线流量分析</h3><ul>
+<li><a href="https://cloudshark.io/" target="_blank" rel="noopener">cloudshark</a> 在线分析流量，高亮显示恶意流量和行为，30天试用期</li>
+<li><a href="https://packettotal.com/" target="_blank" rel="noopener">PacketTotal</a> 在线分析流量，高亮显示恶意流量和行为，免费使用</li>
+<li><a href="NetworkMiner">NetworkMiner工具</a> 图形化界面流量分析工具，有免费和收费版本</li>
+<li><a href="http://malware-traffic-analysis.net/" target="_blank" rel="noopener">malware-traffic-analysis.net</a> 1300+恶意软件流量样本，由著名防火墙palo alto公司威胁狩猎团队维护</li>
+<li>此外还有一些其它有用的链接<br><a href="https://github.com/Security-Onion-Solutions/security-onion/wiki/Pcaps" target="_blank" rel="noopener">https://github.com/Security-Onion-Solutions/security-onion/wiki/Pcaps</a><br><a href="https://wiki.wireshark.org/Tools" target="_blank" rel="noopener">https://wiki.wireshark.org/Tools</a><br><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">https://wiki.wireshark.org/SampleCaptures</a></li>
 </ul>
-<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><ul>
-<li>容易踩坑的点<br>当进程扫描的时候，这时是没有filesize属性的，也就永远不会满足的。此外还有通过文件偏移来判断PE也是不可行的。</li>
-<li>web<br><a href="https://github.com/Tigzy/yaraeditor" target="_blank" rel="noopener">https://github.com/Tigzy/yaraeditor</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="http://www.freebuf.com/articles/system/26373.html" target="_blank" rel="noopener">恶意软件模式匹配利器 – YARA</a><br><a href="http://www.freebuf.com/articles/96903.html" target="_blank" rel="noopener">YARA：抗击恶意代码的神兵利器</a><br><a href="https://www.aldeid.com/wiki/Pescanner" target="_blank" rel="noopener">PEScanner</a><br><a href="https://github.com/Neo23x0/yarGen" target="_blank" rel="noopener">yara规则自动生成</a><br><a href="https://countuponsecurity.com/tag/pescanner-py/" target="_blank" rel="noopener">UNLEASHING YARA – PART 2</a><br><a href="http://www.freebuf.com/sectool/92399.html" target="_blank" rel="noopener">教你构建自己的yara数据库</a><br><a href="https://github.com/Neo23x0/yarAnalyzer" target="_blank" rel="noopener">yarAnalyzer</a><br><a href="http://www.aptno1.com/YC/249.html" target="_blank" rel="noopener">yara简介及API解析</a><br><a href="http://blog.csdn.net/wowolook/article/details/44307283" target="_blank" rel="noopener">两个开源恶意代码的查杀引擎 clamav yara</a><br><a href="http://bruteforcelab.com/yara-a-beginners-guide.html" target="_blank" rel="noopener">http://bruteforcelab.com/yara-a-beginners-guide.html</a><br><a href="https://blog.malwarebytes.com/threat-analysis/2013/10/using-yara-to-attribute-malware/" target="_blank" rel="noopener">https://blog.malwarebytes.com/threat-analysis/2013/10/using-yara-to-attribute-malware/</a><br><a href="https://securityintelligence.com/signature-based-detection-with-yara/" target="_blank" rel="noopener">https://securityintelligence.com/signature-based-detection-with-yara/</a></li>
+<h3 id="恶意样本分析"><a href="#恶意样本分析" class="headerlink" title="恶意样本分析"></a>恶意样本分析</h3><ul>
+<li>恶意样本分析有如下的网站资源<br>• VirusTotal<br>• Hybrid-Analysis<br>• Malwr<br>• Reverse.it<br>• Cuckoosandbox (on-prem)</li>
 </ul>
+<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><ul>
+<li>Indicators of Compromise ，可以理解为拥有某个特征之后就可以被打标记为某个恶意软件了，这个特征可能是url、ip、样本的哈希值等。</li>
+</ul>
+<h3 id="实战分析"><a href="#实战分析" class="headerlink" title="实战分析"></a>实战分析</h3><ul>
+<li>在作者议题中作者提供了几个非常精彩的威胁分析实验场景，其中包括imcp隧道、netcat文件传输、netcat反连shell、数据泄漏、勒索软件、供应链攻击等。感兴趣的话大家可以去下载并进行练习。<br><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200520211306-a50b6cf2-9a9b-1.png" alt=""></li>
+<li>当然我这里只是对议题进行简单总结概括，如果感兴趣的话大家可以去看一下Reference链接里原作者的视频和课件。<br>最后如果你有一些更好的trick欢迎留言XD</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.meetup.com/Santa-Barbara-OWASP-Chapter/events/269632100/" target="_blank" rel="noopener">议题介绍</a><br><a href="https://drive.google.com/drive/folders/1HKQCOBlPsqAC1JpRN40kc_Z8hOWcftm1?usp=sharing" target="_blank" rel="noopener">议题资料下载</a></p>
 
       
     </div>
@@ -516,8 +502,8 @@ $c = &quot;dummy3&quot;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/31/defcon-25-workshop代码解读-partII/" rel="next" title="defcon-25-workshop代码解读 partII">
-                <i class="fa fa-chevron-left"></i> defcon-25-workshop代码解读 partII
+              <a href="/2020/04/05/cobaltstrike-dns-beacon/" rel="next" title="cobaltstrike dns beacon">
+                <i class="fa fa-chevron-left"></i> cobaltstrike dns beacon
               </a>
             
           </div>
@@ -525,10 +511,6 @@ $c = &quot;dummy3&quot;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/17/struts-052和struts-053分析/" rel="prev" title="struts-052和struts-053分析">
-                struts-052和struts-053分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -691,7 +673,7 @@ $c = &quot;dummy3&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yara-规则"><span class="nav-number">2.</span> <span class="nav-text">yara 规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">3.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL；DR"><span class="nav-number">1.</span> <span class="nav-text">TL；DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wireshark"><span class="nav-number">2.</span> <span class="nav-text">wireshark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark简述"><span class="nav-number">2.1.</span> <span class="nav-text">wireshark简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器"><span class="nav-number">2.2.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark导出对象"><span class="nav-number">2.3.</span> <span class="nav-text">wireshark导出对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark个人配置"><span class="nav-number">2.4.</span> <span class="nav-text">wireshark个人配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark协议统计和分析"><span class="nav-number">2.5.</span> <span class="nav-text">wireshark协议统计和分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小问题"><span class="nav-number">2.6.</span> <span class="nav-text">小问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#威胁分析"><span class="nav-number">3.</span> <span class="nav-text">威胁分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础协议"><span class="nav-number">3.1.</span> <span class="nav-text">基础协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线流量分析"><span class="nav-number">3.2.</span> <span class="nav-text">在线流量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恶意样本分析"><span class="nav-number">3.3.</span> <span class="nav-text">恶意样本分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.4.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战分析"><span class="nav-number">3.5.</span> <span class="nav-text">实战分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
