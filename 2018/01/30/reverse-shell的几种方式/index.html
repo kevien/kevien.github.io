@@ -77,20 +77,20 @@
 
 
 
-<meta name="description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5 20200208更新–更多反弹shell方式见Reverse Shell Cheat Sheet例子 下面的一些例子中使用A代表攻击者（Attacker），T代表T">
+<meta name="description" content="20200611 upate 在线生成各种形式的反弹shell命令  https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;amp;port=8080前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系">
 <meta property="og:type" content="article">
 <meta property="og:title" content="reverse shell的几种方式">
 <meta property="og:url" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5 20200208更新–更多反弹shell方式见Reverse Shell Cheat Sheet例子 下面的一些例子中使用A代表攻击者（Attacker），T代表T">
+<meta property="og:description" content="20200611 upate 在线生成各种形式的反弹shell命令  https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;amp;port=8080前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/2.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/4.png">
 <meta property="og:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/5.png">
-<meta property="og:updated_time" content="2020-02-08T09:12:20.696Z">
+<meta property="og:updated_time" content="2020-06-11T02:23:48.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="reverse shell的几种方式">
-<meta name="twitter:description" content="前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系统中是通用的。 这里主要重点关注一下4和5 20200208更新–更多反弹shell方式见Reverse Shell Cheat Sheet例子 下面的一些例子中使用A代表攻击者（Attacker），T代表T">
+<meta name="twitter:description" content="20200611 upate 在线生成各种形式的反弹shell命令  https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;amp;port=8080前言 这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。 linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。 下文中的几个例子在大多数的系">
 <meta name="twitter:image" content="http://kevien.github.io/2018/01/30/reverse-shell的几种方式/2.png">
 
 
@@ -398,7 +398,9 @@
       
 
       
-        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+        <ul>
+<li>20200611 upate</li>
+<li>在线生成各种形式的反弹shell命令  <a href="https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080" target="_blank" rel="noopener">https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080</a><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4></li>
 <li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
 <li>linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。</li>
 <li>下文中的几个例子在大多数的系统中是通用的。</li>

@@ -774,9 +774,11 @@
     <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
     <published>2018-01-30T07:58:01.000Z</published>
-    <updated>2020-02-08T09:12:20.696Z</updated>
+    <updated>2020-06-11T02:23:48.474Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+    <content type="html"><![CDATA[<ul>
+<li>20200611 upate</li>
+<li>在线生成各种形式的反弹shell命令  <a href="https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080" target="_blank" rel="noopener">https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080</a><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4></li>
 <li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
 <li>linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。</li>
 <li>下文中的几个例子在大多数的系统中是通用的。</li>
@@ -814,9 +816,9 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。&lt;/li&gt;
-&lt;li&gt;linux有很多发行版，
+      &lt;ul&gt;
+&lt;li&gt;20200611 upate&lt;/li&gt;
+&lt;li&gt;在线生成各种形式的反弹shell命令  &lt;a href=&quot;https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;amp;port=8080&quot; target=&quot;
     
     </summary>
     
