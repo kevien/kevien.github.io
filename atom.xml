@@ -301,7 +301,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2020-07-11T05:34:25.413Z</updated>
+    <updated>2020-07-11T05:36:14.424Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -331,7 +331,7 @@
 <li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。</li>
 <li>在centos7可能会遇到Docker error IPv4 forwarding is disabled的问题，<a href="http://mbacchi.github.io/2017/09/29/docker-ipv4-forwarding-disabled.html" target="_blank" rel="noopener">参考链接</a></li>
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi命令都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat等命令，可以直接使用 yum -y install net-tools 安装即可。</li>
-<li>有时候在使用docker-compose up -d 报错 network not found，网络找不见，这个时候可以加参数 –force-recreate 即  docker-compose up -d  –force-recreate</li>
+<li>有时候在使用docker-compose up -d 报错 network <id> not found，网络找不见，这个时候可以加参数 –force-recreate 即  docker-compose up -d  –force-recreate</id></li>
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="noopener">参考链接</a>，docker volume  rm 就可以删除对应的数据库了。</li>
 <li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="noopener">stackoverflow</a></li>
 <li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”(暂且先这么叫吧)，这个时候会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示.<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""></li>
