@@ -302,7 +302,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2020-07-11T05:36:43.743Z</updated>
+    <updated>2020-08-29T08:30:25.557Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -336,7 +336,8 @@
 <li>有时候mysql就是起不来，这个时候 使用docker volume list查看 然后删除数据就可以了，其它情况也是 全部删除，<a href="https://github.com/laradock/laradock/issues/421" target="_blank" rel="noopener">参考链接</a>，docker volume  rm 就可以删除对应的数据库了。</li>
 <li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="noopener">stackoverflow</a></li>
 <li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”(暂且先这么叫吧)，这个时候会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示.<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""></li>
-<li>docker-compose时候报错 ERROR: invalid reference format,有可能是路径中包含中文所导致的<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li>docker-compose时候报错 ERROR: invalid reference format,有可能是路径中包含中文所导致的</li>
+<li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
 <li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS、Etcd项目等。<br><img src="/2018/09/26/笔记之docker的使用/guli.jpg" alt=""></li>
 </ul>
