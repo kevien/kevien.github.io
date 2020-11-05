@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2020-06-09T11:21:42.315Z</updated>
+  <updated>2020-11-05T03:15:00.908Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>蓝队必备技能之-systeminternal工具集使用</title>
+    <link href="http://kevien.github.io/2020/11/05/%E8%93%9D%E9%98%9F%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E4%B9%8B-systeminternal%E5%B7%A5%E5%85%B7%E9%9B%86%E4%BD%BF%E7%94%A8/"/>
+    <id>http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/</id>
+    <published>2020-11-05T03:13:36.000Z</published>
+    <updated>2020-11-05T03:15:00.908Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>在windows应急的时候经常会使用systeminternals suite，这个套件是由<a href="https://twitter.com/markrussinovich" target="_blank" rel="noopener">Mark Russinovich</a>开发，systeminternals suite工具套件是免费的，大家可以从<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" target="_blank" rel="noopener">这里</a>下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形界面。</li>
+<li>systeminternals 套件有非常多好用的工具，这些工具能够帮助我们很深入的去分析系统或者应急响应，同样当攻击者上传这些工具到系统上的时候，它同样能够提供给攻击者很多有价值的信息，例如psexec.exe、ShellRunas都是攻击者的利器。</li>
+<li>可以说无论是攻击方还是防守方都需要对systeminternals这个工具套件进行了解，本篇文件就依次对常见的工具做简单介绍以及对autoruns、procexp、procmon、tcpview工具使用注意事项进行介绍。<h2 id="常见工具介绍"><a href="#常见工具介绍" class="headerlink" title="常见工具介绍"></a>常见工具介绍</h2>当我们下载完成打开文件夹的时候会发现很多的工具，现在简单列举一些常用工具。</li>
+<li>AccessChk　权限检查工具，可以检查文件、文件夹、注册表等权限</li>
+<li>AccessEnum　文件系统全览以及注册表安全设置</li>
+<li>AdExplorer 域环境活动目录查看和编辑器</li>
+<li>AdInsight LDAP实时监控工具，用来域环境的一些应用</li>
+<li>AdRestore 恢复删除的AD对象</li>
+<li>Autologon 快速设置自动登录</li>
+<li>Autoruns 显示所有登录启动项</li>
+<li>BgInfo 显示计算机相关信息，例如计算机名称、IP地址信息等</li>
+<li>DBgview 输出和显示debug信息</li>
+<li>DiskMon 记录和显示所有磁盘活动信息</li>
+<li>ListDLLs 显示进程所加载的dlls</li>
+<li>LogonSessions 列举当前活动的登录sessions</li>
+<li>Procexp 显示进程相关信息</li>
+<li>Procmon 进程实时监控</li>
+<li>PsExec 允许你在远程的系统上执行命令</li>
+<li>PsPing  ping功能的补充</li>
+<li>PsKill 结束本地或者远程操作系统上的进程</li>
+<li>PsList 显示当前计算机上进程相关信息，包括进程名、进程号、内存信息等</li>
+<li>PsLoggedOn 显示谁登录在本机或者远程机器上</li>
+<li>PsLogList 允许本地或者远程对日志进行查询、保存以及删除等</li>
+<li>PsPasswd 允许本地或者远程修改密码</li>
+<li>ShellRunas 允许你使用不同的账号运行程序</li>
+<li>Sysmon 监视和记录系统活动</li>
+<li>TCPView  显示当前所有tcp和udp信息</li>
+<li>ZoomIt 非常好用的放大镜</li>
+<li>当然官方网站已经对这些工具做了很好的分类，分别为文件和磁盘工具集、网络工具集、进程工具集、安全相关工具集、系统信息工具集、其它工具。如下图所示：<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/catalog.png" alt=""><h2 id="Autoruns"><a href="#Autoruns" class="headerlink" title="Autoruns"></a>Autoruns</h2><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/autoruns.png" alt=""></li>
+<li>在系统入侵之后，攻击者为了权限维持极有可能在系统上留后门，那么autoruns可以说是最强大的开机启动项检查工具了(没有之一)，其检查项包括计划任务、服务、驱动、注册表、WMI等。</li>
+<li>注意右键及管理员方式运行autoruns工具，否则可能会有一些登录启动项查看不到，当你运行的时候那么这个工具就会扫描系统上的一些常见启动项。</li>
+<li>除了查看功能，当选中某个条目时候还有删除、打开路径、上传virustotal检测、属性等功能。</li>
+<li>autoruns会默认隐藏windows条目，就是有windows签名的在会被隐藏，这个时候要留意时候有windows自带工具的权限维持，在查看的时候要注意将options-&gt;hide microsoft entries的勾去掉。<h2 id="ProcExp"><a href="#ProcExp" class="headerlink" title="ProcExp"></a>ProcExp</h2></li>
+<li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer" target="_blank" rel="noopener">官方介绍</a><br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/procexp.png" alt=""></li>
+<li>ProcExp 即process explorer，进程浏览器。用来查看计算机上运行的进程的状态。(CPU、内存、句柄、加载dll、线程及堆栈等)。</li>
+<li>打开程序之后会显示一些默认的列，这些显示的列可根据个人喜好进行定制化，比如进程描述、进程状态等。</li>
+<li>此外显示项中不同颜色也代表了不同的含义，例如绿色代表新创建的进程，红色代表进程结束、紫色代表当前用户所运行的进程、粉色代表服务、灰色代表挂起了的进程，而且这个颜色方案也可以自定义。</li>
+<li>选中某个进程之后，右键可以结束进程、结束进程树、重启进程、挂起进程、dump进程等，双击条目之后可以看到进程的可执行文件以及参数信息、线程、TCP/IP、权限、环境变量、可打印字符串等信息。<h2 id="ProcMon"><a href="#ProcMon" class="headerlink" title="ProcMon"></a>ProcMon</h2></li>
+<li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon" target="_blank" rel="noopener">官方介绍</a></li>
+<li>当怀疑某个进程有问题的时候进行深入排查实时查看这个进程进行了哪些操作，或者实时检测系统某类活动（例如创建、删除文件、修改注册表等）的时候都可以使用procmon，这个工具提供了非常强大的过滤查询语句。这个工具有点类似linux下的strace命令。<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/procmon.png" alt=""></li>
+<li>此外渗透中也可能用到procmon例如<a href="https://www.jianshu.com/p/638fc1014bdc" target="_blank" rel="noopener">渗透中的procmon</a><h2 id="TcpView"><a href="#TcpView" class="headerlink" title="TcpView"></a>TcpView</h2></li>
+<li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview" target="_blank" rel="noopener">官方介绍</a></li>
+<li>TcpView不仅仅可以监测tcp的网络连接还可以监测UDP的，如图所示<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/tcpview.png" alt=""></li>
+<li>如果需要将ip解析成域名可以在options下拉菜单勾选Resolve Address.Address.</li>
+<li>当然也有命令版本的tcpview  Tcpvcon<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在windows应急的时候经常会使用systeminternals suite，这个套件是由&lt;a hre
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>wireshark和威胁分析</title>
@@ -1109,33 +1175,6 @@
     <summary type="html">
     
       &lt;h4 id=&quot;漏洞代码&quot;&gt;&lt;a href=&quot;#漏洞代码&quot; class=&quot;headerlink&quot; title=&quot;漏洞代码&quot;&gt;&lt;/a&gt;漏洞代码&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Amazon云扩容笔记</title>
-    <link href="http://kevien.github.io/2017/10/22/Amazon%E4%BA%91%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/"/>
-    <id>http://kevien.github.io/2017/10/22/Amazon云扩容笔记/</id>
-    <published>2017-10-22T15:20:53.000Z</published>
-    <updated>2019-09-18T07:35:09.580Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="aws扩容"><a href="#aws扩容" class="headerlink" title="aws扩容"></a>aws扩容</h2><h4 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h4><ul>
-<li>用了亚马逊的云，但是最近8G的存储不够了。看了一下，好像有没有什么可删除的东西了。然后查了一下，原来亚马逊云是可以扩容的，暂时还不知道扩容收不收费。。为什么要记录一下呢，因为这里有一个小坑<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">按照参考1中的方法，前面几个步骤没有问题，但是最后就是报错，大概是找不到快照中的对应的目录，原来是在挂载卷的时候，目录选错了，设置成这个就可以了。/dev/sda1(见参考2).</span><br><span class="line">参考：</span><br><span class="line">1.http://naonao.blog.51cto.com/1135983/1557994</span><br><span class="line">2.https://stackoverflow.com/questions/6151695/ec2-instance-on-amazon-and-i-am-greeted-with-no-space-left-on-the-disk</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><ul>
-<li>国内的文章真是坑啊，参考1的步骤是有问题的，建议还是用第二个参考链接，参考1的方法，没有先deteach掉volume就创建快照了，这种方法会导致后面启动实例失败，按照参考2的步骤来就没有问题。<br><img src="/2017/10/22/Amazon云扩容笔记/upgrade.png" alt=""><h2 id="kali-linux虚拟机扩容"><a href="#kali-linux虚拟机扩容" class="headerlink" title="kali linux虚拟机扩容"></a>kali linux虚拟机扩容</h2></li>
-<li>参考文章<a href="https://www.rootusers.com/use-gparted-to-increase-disk-size-of-a-linux-native-partition/" target="_blank" rel="noopener">Use GParted to increase disk size of a Linux native partition</a><h2 id="ubunut虚拟机扩容"><a href="#ubunut虚拟机扩容" class="headerlink" title="ubunut虚拟机扩容"></a>ubunut虚拟机扩容</h2></li>
-<li>坑点 要先删除swap分区，才能扩大主分区，参考文章<a href="https://blog.csdn.net/ldzm_edu/article/details/78893721" target="_blank" rel="noopener">vmware中ubuntu虚拟机扩容</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;aws扩容&quot;&gt;&lt;a href=&quot;#aws扩容&quot; class=&quot;headerlink&quot; title=&quot;aws扩容&quot;&gt;&lt;/a&gt;aws扩容&lt;/h2&gt;&lt;h4 id=&quot;TL；DR&quot;&gt;&lt;a href=&quot;#TL；DR&quot; class=&quot;headerlink&quot; title=&quot;TL；
     
     </summary>
     
