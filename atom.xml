@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2020-11-05T03:48:59.416Z</updated>
+  <updated>2021-06-01T10:53:41.460Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虚拟化笔记</title>
+    <link href="http://kevien.github.io/2021/06/01/%E8%99%9A%E6%8B%9F%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
+    <id>http://kevien.github.io/2021/06/01/虚拟化笔记/</id>
+    <published>2021-06-01T09:35:06.000Z</published>
+    <updated>2021-06-01T10:53:41.460Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
+<li>此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.<h3 id="qcow2转换成vmware格式"><a href="#qcow2转换成vmware格式" class="headerlink" title="qcow2转换成vmware格式"></a>qcow2转换成vmware格式</h3></li>
+<li><a href="https://stackoverflow.com/questions/37794846/convert-qcow2-to-vmdk-and-make-it-esxi-6-0-compatible" target="_blank" rel="noopener">qcow2转换成vmdk</a></li>
+<li><a href="https://kb.vmware.com/s/article/2010196?lang=zh_CN" target="_blank" rel="noopener">如何使用vmware软件导入vmdk</a></li>
+<li><p><a href="https://stackoverflow.com/questions/66042320/migrating-kvm-guest-to-vmware-stuck-on-error-recovery-screen" target="_blank" rel="noopener">server2008转换后启动蓝屏如何解决</a></p>
+<h3 id="qcow2转换成virtual-box格式"><a href="#qcow2转换成virtual-box格式" class="headerlink" title="qcow2转换成virtual box格式"></a>qcow2转换成virtual box格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#from https://gist.github.com/mamonu/671038b09f5ae9e034e8</span><br><span class="line">qemu-img convert -O vdi gnome.qcow2 gnome.vdi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://blog.csdn.net/technologyleader/article/details/95094982" target="_blank" rel="noopener">VirtualBox虚拟机怎么导入已经存在的vdi文件</a></p>
+<h3 id="mac上运行qcow2"><a href="#mac上运行qcow2" class="headerlink" title="mac上运行qcow2"></a>mac上运行qcow2</h3></li>
+<li><p><a href="http://blog.leanote.com/post/7wlnk13/%E5%88%9B%E5%BB%BAKVM%E8%99%9A%E6%8B%9F%E6%9C%BA" target="_blank" rel="noopener">qemu-system-x86_64命令总结</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#常用命令</span><br><span class="line">qemu-system-x86_64 -m 4096 -smp 1 -drive file=xxx.qcow2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://bytefreaks.net/gnulinux/send-altctrldelete-to-qemu-virtual-machine" target="_blank" rel="noopener">如何在虚拟机上发送control+alt+del键</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.ALT+CTRL+2进入命令行界面</span><br><span class="line">2.命令行输入sendkey alt-ctrl-delete</span><br><span class="line">3.ALT+CTRL+1切换回图形界面</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TL；DR&quot;&gt;&lt;a href=&quot;#TL；DR&quot; class=&quot;headerlink&quot; title=&quot;TL；DR&quot;&gt;&lt;/a&gt;TL；DR&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.&lt;h3 id=
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>学习参考</title>
+    <link href="http://kevien.github.io/2021/05/28/%E5%AD%A6%E4%B9%A0%E5%8F%82%E8%80%83/"/>
+    <id>http://kevien.github.io/2021/05/28/学习参考/</id>
+    <published>2021-05-28T03:21:21.000Z</published>
+    <updated>2021-05-28T03:24:22.290Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>因为会不断有学员问如何学习xx领域的经验，所以搜集整理了一些网上的参考资源供学习者参考<h2 id="java代码审计"><a href="#java代码审计" class="headerlink" title="java代码审计"></a>java代码审计</h2></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NjgzOTAyMg==&amp;mid=2247493775&amp;idx=1&amp;sn=570dc6150abc7fb7d2751d82d9c7c842&amp;chksm=fc3c518ecb4bd89878c057faca76677096c712a26c840e4b5f3ba1e3b2fe427b764ee7ebbaae&amp;mpshare=1&amp;scene=23&amp;srcid=0527A6VCmMnSMUEgi6mhK5ri&amp;sharer_sharetime=1622126601868&amp;sharer_shareid=f03c6e14fd46540b4a58dc4fc29ad18f%23rd" target="_blank" rel="noopener">学习Java代码审计时4个常见问题，几乎每个学员都会遇到</a></li>
+<li><a href="https://www.cnblogs.com/afanti/p/13156152.html" target="_blank" rel="noopener">java代码审计之路</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;因为会不断有学员问如何学习xx领域的经验，所以搜集整理了一些网上的参考资源供学习者参考&lt;h2 id=&quot;j
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>蓝队必备技能之-systeminternal工具集使用</title>
@@ -369,7 +428,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2020-08-29T08:30:25.557Z</updated>
+    <updated>2021-06-01T15:01:52.269Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -377,7 +436,7 @@
 <li>什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><img src="/2018/09/26/笔记之docker的使用/itdevelop.png" alt=""></li>
 <li>如上图所示计算机的发展经历了从物理机到虚拟机的过程，最后出现了共享底层OS的容器。</li>
 <li>docker里面有两个概念需要稍微理解一下，Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
-<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
+<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker logs [OPTIONS] CONTAINER 用来查看容器日志，常用于容器启动失败排错等。</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>以上是常用的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="noopener">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
@@ -404,7 +463,8 @@
 <li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="noopener">stackoverflow</a></li>
 <li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”(暂且先这么叫吧)，这个时候会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示.<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""></li>
 <li>docker-compose时候报错 ERROR: invalid reference format,有可能是路径中包含中文所导致的</li>
-<li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。</li>
+<li><a href="https://www.cnblogs.com/kevingrace/p/9599988.html" target="_blank" rel="noopener">通过容器提交镜像（docker commit）以及推送镜像（docker push）笔记</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
 <li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS、Etcd项目等。<br><img src="/2018/09/26/笔记之docker的使用/guli.jpg" alt=""></li>
 </ul>
@@ -1081,101 +1141,6 @@
     
       &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>NuGet和travis实践</title>
-    <link href="http://kevien.github.io/2017/11/29/NuGet%E5%92%8Ctravis%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://kevien.github.io/2017/11/29/NuGet和travis实践/</id>
-    <published>2017-11-29T10:56:16.000Z</published>
-    <updated>2018-11-19T16:10:10.372Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="S-CR"><a href="#S-CR" class="headerlink" title="S;CR"></a>S;CR</h4><p>工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的第三方库，其中作者<a href="https://github.com/plusvic" target="_blank" rel="noopener">Victor M. Alvarez</a>用的是nuget进行三方库管理的，感觉这个解决方案还不错，可能比自己去下载源码编译lib稍微方便一点儿，所以记录一下。</p>
-<h4 id="vs-Solution实际测试"><a href="#vs-Solution实际测试" class="headerlink" title="vs Solution实际测试"></a>vs Solution实际测试</h4><ul>
-<li>下面就以openssl库为例进行一下测试。</li>
-<li><p>首先需要在项目的根目录下创建一个NuGet.Config 的文件,这个应该是方便vs的NuGet进行索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;packageSources&gt;</span><br><span class="line">    &lt;add key=&quot;YARA.OpenSSL&quot;</span><br><span class="line">         value=&quot;https://ci.appveyor.com/nuget/openssl-oaib8n7lvvtp&quot; /&gt;</span><br><span class="line">    &lt;add key=&quot;YARA.Jansson&quot;</span><br><span class="line">         value=&quot;https://ci.appveyor.com/nuget/jansson-41we82mn284d&quot; /&gt;</span><br><span class="line">  &lt;/packageSources&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>vs的默认项目会带一个界面，可以直观的去下载，如下图。<br><img src="/2017/11/29/NuGet和travis实践/projectwithui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/ui.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/out.png" alt=""><br>然后在项目中添加一下头文件的路径以及静态链接库的路径就可以使用了。<br><img src="/2017/11/29/NuGet和travis实践/1.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/2.png" alt=""><br><img src="/2017/11/29/NuGet和travis实践/3.png" alt=""></p>
-</li>
-<li>vs的cmake项目<br><del>vs的cmake项目稍微有些不同，就是他没有图形界面，这个时候可以使用Package Manager Console来进行查找和下载第三方库。</del><br><a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-console" target="_blank" rel="noopener">官方说明</a><br>使用Find-Package openssl 进行搜索，可以发现有很多<br><img src="/2017/11/29/NuGet和travis实践/4.png" alt=""><br>使用Install-Package YARA.OPENSSL.X64 命令进行下载<br><img src="/2017/11/29/NuGet和travis实践/5.png" alt=""><br><del>效果是一样的，都会在项目的主目录的下面创建一个packages的目录并就对应的库下载到其中。这个时候就可以通过CmakeLists.txt进行头文件以及静态链接库的包含就可以使用了</del><br>更新：<br>cmake的项目在install-package的时候会找不到default solution的问题，所以只能通过将之前下载的packages的内容复制到cmake的项目下了。<br>CMakeLists.txt的内容如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.8)</span><br><span class="line">include_directories(&quot;$&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/include&quot;)</span><br><span class="line"></span><br><span class="line">set(libcrypto $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libcrypto.lib)</span><br><span class="line">set(libssl $&#123;PROJECT_SOURCE_DIR&#125;/packages/YARA.OpenSSL.x86.1.1.0/lib/libssl.lib)</span><br><span class="line">add_executable(Demo test.cpp)</span><br><span class="line"></span><br><span class="line">target_link_libraries(Demo $&#123;libcrypto&#125; $&#123;libssl&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>测试通过。<br>代码已上传至Github<br><a href="https://github.com/kevien/democode" target="_blank" rel="noopener">https://github.com/kevien/democode</a></p>
-<h4 id="打包自己的package"><a href="#打包自己的package" class="headerlink" title="打包自己的package"></a>打包自己的package</h4><ul>
-<li>yara项目中openssl库是作者自己打包到appveyor上的，那是如何上传自己打的包呢</li>
-<li>nuget包的制作可以通过 NuGetPackageExplorer <a href="https://github.com/NuGetPackageExplorer/NuGetPackageExplorer" target="_blank" rel="noopener">link</a><br>这个工具还是挺方便的。<br><img src="/2017/11/29/NuGet和travis实践/6.png" alt=""></li>
-<li>而且这个工具还可以进行上传，如下图所示<br><img src="/2017/11/29/NuGet和travis实践/7.png" alt=""></li>
-<li>当然也可以直接使用nuget工具进行上传<br><img src="/2017/11/29/NuGet和travis实践/8.png" alt=""></li>
-<li>这样我们就完成了自定义包的上传。<br><img src="/2017/11/29/NuGet和travis实践/9.png" alt=""><br>(现在的方式还是需要进行验证的，也就是需要输入appveyor的用户名和密码，public的方式暂时还没找到方法)<h4 id="利用travis进行持续化集成"><a href="#利用travis进行持续化集成" class="headerlink" title="利用travis进行持续化集成"></a>利用travis进行持续化集成</h4></li>
-<li>首先在github创建一个token，并赋予适当的权限。可参考如下链接<br><a href="https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/" target="_blank" rel="noopener">https://blog.wyrihaximus.net/2015/09/github-auth-token-on-travis/</a><br><a href="https://docs.travis-ci.com/user/github-oauth-scopes/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/github-oauth-scopes/</a></li>
-<li>然后在github的项目当中添加.travish.yml 文件，可参考<br><a href="https://docs.travis-ci.com/user/deployment/releases/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/deployment/releases/</a></li>
-<li>测试项目<br><a href="https://github.com/kevien/travisTest/" target="_blank" rel="noopener">https://github.com/kevien/travisTest/</a><br><img src="/2017/11/29/NuGet和travis实践/10.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">部署的时候有几个坑(MDZZ)，一个是file 的位置，这个会在travis的job log的展开中看到(看log、看log、看log)。</span><br><span class="line">第二个就是要在deploy项下加上键值 skip_cleanup: true</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>用NuGet进行第三方库的操作还是比较方便的,还有就是开源项目的持续集成使用travis工具是个不错的选择。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;S-CR&quot;&gt;&lt;a href=&quot;#S-CR&quot; class=&quot;headerlink&quot; title=&quot;S;CR&quot;&gt;&lt;/a&gt;S;CR&lt;/h4&gt;&lt;p&gt;工作中接触到了yara，yara项目在windows上的编译是使用的vs2015，其中用到了openssl和jansson的
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>一个简单的堆溢出</title>
-    <link href="http://kevien.github.io/2017/10/28/%E5%A0%86%E6%BA%A2%E5%87%BA%E5%88%A9%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
-    <id>http://kevien.github.io/2017/10/28/堆溢出利用笔记/</id>
-    <published>2017-10-28T03:18:28.000Z</published>
-    <updated>2019-01-16T16:17:22.643Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">void usage(char *prog_name, char *filename) &#123;</span><br><span class="line">   printf(&quot;Usage: %s &lt;data to add to %s&gt;\n&quot;, prog_name, filename);</span><br><span class="line">   exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">   int userid, fd; // file descriptor</span><br><span class="line">   char *buffer, *datafile;</span><br><span class="line"></span><br><span class="line">   buffer = (char *) malloc(100);</span><br><span class="line">   datafile = (char *) malloc(20);</span><br><span class="line">   strcpy(datafile, &quot;/var/notes&quot;);</span><br><span class="line"></span><br><span class="line">   if(argc &lt; 2)                // If there aren&apos;t commandline arguments</span><br><span class="line">      usage(argv[0], datafile); // display usage message and exit</span><br><span class="line"></span><br><span class="line">   strcpy(buffer, argv[1]);  // copy into buffer</span><br><span class="line"></span><br><span class="line">   printf(&quot;[DEBUG] buffer   @ %p: \&apos;%s\&apos;\n&quot;, buffer, buffer);</span><br><span class="line">   printf(&quot;[DEBUG] datafile @ %p: \&apos;%s\&apos;\n&quot;, datafile, datafile);</span><br><span class="line"></span><br><span class="line"> // Opening the file</span><br><span class="line">   fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);</span><br><span class="line">   if(fd == -1)</span><br><span class="line">      printf(&quot;in main() while opening file&quot;);</span><br><span class="line">   printf(&quot;[DEBUG] file descriptor is %d\n&quot;, fd);</span><br><span class="line"></span><br><span class="line">   userid = getuid(); // get the real user ID</span><br><span class="line"></span><br><span class="line">// Writing data</span><br><span class="line">   if(write(fd, &amp;userid, 4) == -1) // write user ID before note data</span><br><span class="line">      printf(&quot;in main() while writing userid to file&quot;);</span><br><span class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</span><br><span class="line"></span><br><span class="line">   if(write(fd, buffer, strlen(buffer)) == -1) // write note</span><br><span class="line">      printf(&quot;in main() while writing buffer to file&quot;);</span><br><span class="line">   write(fd, &quot;\n&quot;, 1); // terminate line</span><br><span class="line"></span><br><span class="line">// Closing file</span><br><span class="line">   if(close(fd) == -1)</span><br><span class="line">      printf(&quot;in main() while closing file&quot;);</span><br><span class="line"></span><br><span class="line">   printf(&quot;Note has been saved.\n&quot;);</span><br><span class="line">   free(buffer);</span><br><span class="line">   free(datafile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h4><ul>
-<li>这段代码程序中有两个buffer是存放在堆上面的，这个程序会接收一个参数，并将参数最终写入到/var/notes 这个文件中。<br><img src="/2017/10/28/堆溢出利用笔记/notetaker.png" alt=""></li>
-<li>如图所示我们可以计算出两个buffer地址之间的距离是0x70（即112个字节），我们知道第一个buffer是以null为结束的，当我们写入这个buffer长度为112个字节的时候，那么第二个buffer将会被写入到datafile这个buffer开始的部分。<br><img src="/2017/10/28/堆溢出利用笔记/nulloverflow.png" alt=""></li>
-<li>如我们所预期的，第二个buffer被我们写入了空.那么如果被覆盖的不是null，而是其他的呢？会是什么情况<br><img src="/2017/10/28/堆溢出利用笔记/testfile.png" alt=""></li>
-<li>这次，溢出导致第一个buffer写入到了当前文件下的testfile文件中，而不再是/var/notes 这个文件中 ，可以看到当使用free释放内存的时候报错了，这个其实就类似于栈溢出覆盖了返回地址一样。<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4></li>
-<li>从上面可以看出，文件名可以控制，而且可以append到文件中。这里可能会有几种利用的方式，其中最常见的利用方式就是写文件/etc/passwd，这个文件包含了系统的所有的用户名、ID、登录的shell等信息(对这个文件操作之前请注意先备份O！)</li>
-<li>这个文件是以分号分隔开的，依次是登录名、密码、用户ID、组ID，用户名、用户的根目录以及登录的shell，其中密码处可以是x(代表加密，存放在/etc/shadow文件中)，也可以直接是加密后的密文，此外用户id为0代表用户会是root的权限，这个时候我们的目标就是在这个文件中追加一条，一个带有密文且id为0的账号。</li>
-<li>关于密码加密我们可以使用下面的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ perl -e &apos;print crypt(&quot;M0rk&quot;, &quot;AA&quot;). &quot;\n&quot;&apos;</span><br><span class="line">AAhmo1jgYI0HE</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>所以我们最终想要在passwd文件中的条目大概是这个样子的<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/bin/bash</p>
-<ul>
-<li><p>然而，这个特殊的堆溢出并不允许我们直接这么操作，因为我们必须以/etc/passwd为结束，但是这个限制我们可以使用符号链接来”绕过”,”绕过”方法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ mkdir /tmp/etc</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ln -s /bin/bash /tmp/etc/passwd</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ ls -l /tmp/etc/passwd</span><br><span class="line">lrwxrwxrwx 1 xxx xxx 9 Nov 16 20:56 /tmp/etc/passwd -&gt; /bin/bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这个时候/tmp/etc/passwd指向了/bin/bash,这就意味着我们有了可登陆的shell，这个时候就变成了<br>myroot:AAhmo1jgYI0HE:0:0:me:/root:/tmp/etc/passwd</p>
-</li>
-<li>此外这里还需要计算一下me这里需要填充多长才能满足112个字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ echo &quot;myroot:AAhmo1jgYI0HE:0:0::/root:/tmp&quot; |wc -c</span><br><span class="line">37</span><br><span class="line">xxx@ubuntu:~/Desktop/heapoverflow$ bc</span><br><span class="line">bc 1.06.95</span><br><span class="line">Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006 Free Software Foundation, Inc.</span><br><span class="line">This is free software with ABSOLUTELY NO WARRANTY.</span><br><span class="line">For details type `warranty&apos;. </span><br><span class="line">112-37+1</span><br><span class="line">76</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2017/10/28/堆溢出利用笔记/final.png" alt=""></p>
-<ul>
-<li>如上图所示，通过堆溢出成功添加了账号并登陆。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
-<li>这里只是举例了一个发生在堆内存上的溢出漏洞，并没有涉及到像是unlink或者UAF等技巧（后面有时间再研究分享），但像是通过写/etc/passwd以及软链接的trick还是不错的。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
-<li>《hacking the art of exploitation》chapter 0x340</li>
-</ul>
-</li>
-<li><a href="http://www.freebuf.com/articles/system/151407.html" target="_blank" rel="noopener">Dance In Heap（二）：一些堆利用的方法（上） </a></li>
-<li><a href="http://yunnigu.dropsec.xyz/2017/04/05/%E5%A0%86%E6%BA%A2%E5%87%BA%E4%B9%8Bunlink%E7%9A%84%E5%88%A9%E7%94%A8/" target="_blank" rel="noopener">堆溢出之unlink的利用</a></li>
-<li><a href="https://jaq.alibaba.com/community/art/show?spm=a313e.7916648.0.0.71405f33KyLlt6&amp;articleid=315" target="_blank" rel="noopener">Linux堆内存管理深入分析</a></li>
-<li><a href="https://github.com/LunaM00n/LOL-Sec-Collection/tree/master/Notes/the-heap" target="_blank" rel="noopener">The Heap</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;漏洞代码&quot;&gt;&lt;a href=&quot;#漏洞代码&quot; class=&quot;headerlink&quot; title=&quot;漏洞代码&quot;&gt;&lt;/a&gt;漏洞代码&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
     
     </summary>
     

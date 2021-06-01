@@ -89,7 +89,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-compose-version.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/bug.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/guli.jpg">
-<meta property="og:updated_time" content="2020-08-29T08:30:25.557Z">
+<meta property="og:updated_time" content="2021-06-01T15:01:52.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   以前只是简单的使用，前段时间相对较”近距离”接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到">
@@ -406,7 +406,7 @@
 <li>什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><img src="/2018/09/26/笔记之docker的使用/itdevelop.png" alt=""></li>
 <li>如上图所示计算机的发展经历了从物理机到虚拟机的过程，最后出现了共享底层OS的容器。</li>
 <li>docker里面有两个概念需要稍微理解一下，Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
-<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
+<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker logs [OPTIONS] CONTAINER 用来查看容器日志，常用于容器启动失败排错等。</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>以上是常用的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="noopener">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
@@ -433,7 +433,8 @@
 <li>pull回来的镜像如果想修改其中的用户密码，可以在Dockerfile中写如下的命令 RUN echo “root:Docker!” | chpasswd或者RUN echo “Docker!” | passwd –stdin root 即修改root的密码为Docker！。<a href="https://stackoverflow.com/questions/28721699/root-password-inside-a-docker-container" target="_blank" rel="noopener">stackoverflow</a></li>
 <li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”(暂且先这么叫吧)，这个时候会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示.<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""></li>
 <li>docker-compose时候报错 ERROR: invalid reference format,有可能是路径中包含中文所导致的</li>
-<li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。<h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。</li>
+<li><a href="https://www.cnblogs.com/kevingrace/p/9599988.html" target="_blank" rel="noopener">通过容器提交镜像（docker commit）以及推送镜像（docker push）笔记</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
 <li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS、Etcd项目等。<br><img src="/2018/09/26/笔记之docker的使用/guli.jpg" alt=""></li>
 </ul>
@@ -555,7 +556,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
