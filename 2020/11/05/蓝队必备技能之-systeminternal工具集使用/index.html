@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmon.png">
 <meta property="og:image" content="http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmonlog.png">
 <meta property="og:image" content="http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/dnslog.png">
-<meta property="og:updated_time" content="2021-07-01T14:56:50.984Z">
+<meta property="og:updated_time" content="2021-07-01T14:58:34.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蓝队必备技能之-systeminternal工具集使用">
 <meta name="twitter:description" content="TL;DR 在应急遇到windows系统的时候经常会使用systeminterna suite套件，这个套件是由Mark Russinovich开发，systeminternals suite工具套件是免费的，大家可以从这里下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形化界面。 systeminternals 套件有非常多好用的工具，这些工具能够帮助我们很深入的去">
@@ -458,7 +458,8 @@
 </li>
 <li>Sysmon.exe -accepteula -i -n<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmon.png" alt=""></li>
 <li>注意：32 位系统用 Sysmon.exe，64 位 Windows 推荐使用 Sysmon64.exe。<br>注册完成后，在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」下会多出一项「Sysmon」文件夹，其中记录了 Sysmon 写入到 Event Log 中的所有事件。如果要取消 Sysmon 对系统的监控以及对事件日志的写入操作，可以使用以下命令：<br>Sysmon64.exe -u<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmonlog.png" alt=""></li>
-<li>此外如果想要单看DNS查询日志，也可在事件查看器中单独设置。在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」——「DNS ClientEvents 」，右键「Operational 」——选择「启用日志」即可。<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/dnslog.png" alt=""><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
+<li>此外如果想要单看DNS查询日志，也可在事件查看器中单独设置。在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」——「DNS ClientEvents 」，右键「Operational 」——选择「启用日志」即可。<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/dnslog.png" alt=""></li>
+<li>更多使用技巧可参考 <a href="https://www.secrss.com/articles/12585" target="_blank" rel="noopener">应急响应：三款实用的Sysmon辅助分析工具</a><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
 </ul>
 
       
