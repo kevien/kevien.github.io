@@ -79,7 +79,7 @@
     <link href="http://kevien.github.io/2020/11/05/%E8%93%9D%E9%98%9F%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E4%B9%8B-systeminternal%E5%B7%A5%E5%85%B7%E9%9B%86%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/</id>
     <published>2020-11-05T03:13:36.000Z</published>
-    <updated>2020-11-05T03:48:59.416Z</updated>
+    <updated>2021-07-01T14:56:50.984Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>在应急遇到windows系统的时候经常会使用systeminterna suite套件，这个套件是由<a href="https://twitter.com/markrussinovich" target="_blank" rel="noopener">Mark Russinovich</a>开发，systeminternals suite工具套件是免费的，大家可以从<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" target="_blank" rel="noopener">这里</a>下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形化界面。</li>
@@ -127,7 +127,16 @@
 <li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview" target="_blank" rel="noopener">官方介绍</a></li>
 <li>TcpView不仅仅可以监测tcp的网络连接还可以监测UDP的，如图所示<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/tcpview.png" alt=""></li>
 <li>如果需要将ip解析成域名可以在options下拉菜单勾选Resolve Address.Address.</li>
-<li>当然也有命令版本的tcpview  Tcpvcon<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
+<li>当然也有命令版本的tcpview  Tcpvcon<h2 id="Sysmon"><a href="#Sysmon" class="headerlink" title="Sysmon"></a>Sysmon</h2></li>
+<li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon" target="_blank" rel="noopener">官方介绍</a></li>
+<li><p>Sysmon用来监视和记录系统活动，并记录到windows事件日志，可以提供相关进程创建、网络连接和文件创建更改时间等详细信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">使用方法:</span><br><span class="line">-c 更新或显示配置</span><br><span class="line">-h 指定hash记录的算法</span><br><span class="line">-i 安装，可用xml文件来更新配置文件</span><br><span class="line">-l 记录加载模块，可指定进程</span><br><span class="line">-m 安装事件清单</span><br><span class="line">-n 记录网络链接</span><br><span class="line">-r 检测证书是否撤销</span><br><span class="line">-u 卸载服务和驱动</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将Sysmon注册到Windows系统中</p>
+</li>
+<li>Sysmon.exe -accepteula -i -n<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmon.png" alt=""></li>
+<li>注意：32 位系统用 Sysmon.exe，64 位 Windows 推荐使用 Sysmon64.exe。<br>注册完成后，在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」下会多出一项「Sysmon」文件夹，其中记录了 Sysmon 写入到 Event Log 中的所有事件。如果要取消 Sysmon 对系统的监控以及对事件日志的写入操作，可以使用以下命令：<br>Sysmon64.exe -u<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmonlog.png" alt=""></li>
+<li>此外如果想要单看DNS查询日志，也可在事件查看器中单独设置。在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」——「DNS ClientEvents 」，右键「Operational 」——选择「启用日志」即可。<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/dnslog.png" alt=""><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
 </ul>
 ]]></content>
     
@@ -428,7 +437,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2021-06-01T15:01:52.269Z</updated>
+    <updated>2021-06-01T15:51:24.660Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -464,7 +473,8 @@
 <li>在此记录一下，不知道是不是docker的一个bug，当我在虚拟机里面创建一个文件，并且通过chattr +i 赋予文件不可修改属性的时候，当你关闭容器，一般容器并不会主动保存，除非你主动打包成镜像，所以它会去删除这个文件以保持“镜像不变性质”(暂且先这么叫吧)，这个时候会去删除这个文件，因为设置了不可修改属性，这个时候就会报错，如下图所示.<br><img src="/2018/09/26/笔记之docker的使用/bug.png" alt=""></li>
 <li>docker-compose时候报错 ERROR: invalid reference format,有可能是路径中包含中文所导致的</li>
 <li>docker-compose时候报错 ERROR：could not find an available，non-overlapping IPv4 address pool among the defaults to assign to the netowrk，可能是你创建的网络达到了最大限制，可以使用docker network prune命令去删除一些不用的网络。</li>
-<li><a href="https://www.cnblogs.com/kevingrace/p/9599988.html" target="_blank" rel="noopener">通过容器提交镜像（docker commit）以及推送镜像（docker push）笔记</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
+<li><a href="https://www.cnblogs.com/kevingrace/p/9599988.html" target="_blank" rel="noopener">通过容器提交镜像（docker commit）以及推送镜像（docker push）笔记</a></li>
+<li><a href="https://blog.csdn.net/shenghuiping2001/article/details/103713885" target="_blank" rel="noopener">docker push时即使账户密码正确也显示 [denied: requested access to the resource is denied]</a><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h4></li>
 <li>最后还是多写或多修改几个Dockerfile和docker-compose.yml实际去体验一下，你会发现用他们来搭建漏洞环境very棒 ；P</li>
 <li>当然docker的应用不仅仅是搭建漏洞环境，技术也不仅仅有Dockerfile、docker-compose，还有更多与docker相关优秀的开源项目像是Kubernetes、CoreOS、Etcd项目等。<br><img src="/2018/09/26/笔记之docker的使用/guli.jpg" alt=""></li>
 </ul>
