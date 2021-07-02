@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[虚拟化笔记]]></title>
     <url>%2F2021%2F06%2F01%2F%E8%99%9A%E6%8B%9F%E5%8C%96%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.qcow2转换成vmware格式 qcow2转换成vmdk 如何使用vmware软件导入vmdk server2008转换后启动蓝屏如何解决 qcow2转换成virtual box格式12#from https://gist.github.com/mamonu/671038b09f5ae9e034e8qemu-img convert -O vdi gnome.qcow2 gnome.vdi VirtualBox虚拟机怎么导入已经存在的vdi文件 mac上运行qcow2 qemu-system-x86_64命令总结 12#常用命令qemu-system-x86_64 -m 4096 -smp 1 -drive file=xxx.qcow2 如何在虚拟机上发送control+alt+del键 1231.ALT+CTRL+2进入命令行界面2.命令行输入sendkey alt-ctrl-delete3.ALT+CTRL+1切换回图形界面]]></content>
+    <content type="text"><![CDATA[TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk qcow2转换成vmdk 如何使用vmware软件导入vmdk server2008转换后启动蓝屏如何解决 qcow2转换成virtual box格式12#from https://gist.github.com/mamonu/671038b09f5ae9e034e8qemu-img convert -O vdi gnome.qcow2 gnome.vdi VirtualBox虚拟机怎么导入已经存在的vdi文件 mac上运行qcow2 qemu-system-x86_64命令总结 12#常用命令qemu-system-x86_64 -m 4096 -smp 1 -drive file=xxx.qcow2 如何在虚拟机上发送control+alt+del键 1231.ALT+CTRL+2进入命令行界面2.命令行输入sendkey alt-ctrl-delete3.ALT+CTRL+1切换回图形界面]]></content>
   </entry>
   <entry>
     <title><![CDATA[学习参考]]></title>

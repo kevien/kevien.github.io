@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2021-06-01T10:53:41.460Z</updated>
+  <updated>2021-07-02T09:52:46.691Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,11 +20,14 @@
     <link href="http://kevien.github.io/2021/06/01/%E8%99%9A%E6%8B%9F%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
     <id>http://kevien.github.io/2021/06/01/虚拟化笔记/</id>
     <published>2021-06-01T09:35:06.000Z</published>
-    <updated>2021-06-01T10:53:41.460Z</updated>
+    <updated>2021-07-02T09:52:46.691Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
-<li>此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.<h3 id="qcow2转换成vmware格式"><a href="#qcow2转换成vmware格式" class="headerlink" title="qcow2转换成vmware格式"></a>qcow2转换成vmware格式</h3></li>
-<li><a href="https://stackoverflow.com/questions/37794846/convert-qcow2-to-vmdk-and-make-it-esxi-6-0-compatible" target="_blank" rel="noopener">qcow2转换成vmdk</a></li>
+<li><p>此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.</p>
+<h3 id="qcow2转换成vmware格式"><a href="#qcow2转换成vmware格式" class="headerlink" title="qcow2转换成vmware格式"></a>qcow2转换成vmware格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/37794846/convert-qcow2-to-vmdk-and-make-it-esxi-6-0-compatible" target="_blank" rel="noopener">qcow2转换成vmdk</a></p>
+</li>
 <li><a href="https://kb.vmware.com/s/article/2010196?lang=zh_CN" target="_blank" rel="noopener">如何使用vmware软件导入vmdk</a></li>
 <li><p><a href="https://stackoverflow.com/questions/66042320/migrating-kvm-guest-to-vmware-stuck-on-error-recovery-screen" target="_blank" rel="noopener">server2008转换后启动蓝屏如何解决</a></p>
 <h3 id="qcow2转换成virtual-box格式"><a href="#qcow2转换成virtual-box格式" class="headerlink" title="qcow2转换成virtual box格式"></a>qcow2转换成virtual box格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#from https://gist.github.com/mamonu/671038b09f5ae9e034e8</span><br><span class="line">qemu-img convert -O vdi gnome.qcow2 gnome.vdi</span><br></pre></td></tr></table></figure>
@@ -43,7 +46,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;TL；DR&quot;&gt;&lt;a href=&quot;#TL；DR&quot; class=&quot;headerlink&quot; title=&quot;TL；DR&quot;&gt;&lt;/a&gt;TL；DR&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.&lt;h3 id=
+&lt;li&gt;&lt;p&gt;此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.&lt;/p&gt;
     
     </summary>
     
