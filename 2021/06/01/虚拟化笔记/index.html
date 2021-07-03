@@ -77,17 +77,17 @@
 
 
 
-<meta name="description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk server2008转换后启动蓝屏如何解决 qcow2转换成vir">
+<meta name="description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk1 如何使用vmware软件导入vmdk2 server2008转换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚拟化笔记">
 <meta property="og:url" content="http://kevien.github.io/2021/06/01/虚拟化笔记/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk server2008转换后启动蓝屏如何解决 qcow2转换成vir">
+<meta property="og:description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk1 如何使用vmware软件导入vmdk2 server2008转换">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-07-02T09:52:46.691Z">
+<meta property="og:updated_time" content="2021-07-03T13:30:24.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟化笔记">
-<meta name="twitter:description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk server2008转换后启动蓝屏如何解决 qcow2转换成vir">
+<meta name="twitter:description" content="TL；DR 此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2. qcow2转换成vmware格式1qemu-img convert -f qcow2 myImage.qcow2 -O vmdk myNewImage.vmdk  qcow2转换成vmdk  如何使用vmware软件导入vmdk1 如何使用vmware软件导入vmdk2 server2008转换">
 
 
 
@@ -400,7 +400,8 @@
 </li>
 <li><p><a href="https://stackoverflow.com/questions/37794846/convert-qcow2-to-vmdk-and-make-it-esxi-6-0-compatible" target="_blank" rel="noopener">qcow2转换成vmdk</a></p>
 </li>
-<li><a href="https://kb.vmware.com/s/article/2010196?lang=zh_CN" target="_blank" rel="noopener">如何使用vmware软件导入vmdk</a></li>
+<li><a href="https://kb.vmware.com/s/article/2010196?lang=zh_CN" target="_blank" rel="noopener">如何使用vmware软件导入vmdk1</a></li>
+<li><a href="https://jingyan.baidu.com/article/9113f81b2796852b3214c705.html" target="_blank" rel="noopener">如何使用vmware软件导入vmdk2</a></li>
 <li><p><a href="https://stackoverflow.com/questions/66042320/migrating-kvm-guest-to-vmware-stuck-on-error-recovery-screen" target="_blank" rel="noopener">server2008转换后启动蓝屏如何解决</a></p>
 <h3 id="qcow2转换成virtual-box格式"><a href="#qcow2转换成virtual-box格式" class="headerlink" title="qcow2转换成virtual box格式"></a>qcow2转换成virtual box格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#from https://gist.github.com/mamonu/671038b09f5ae9e034e8</span><br><span class="line">qemu-img convert -O vdi gnome.qcow2 gnome.vdi</span><br></pre></td></tr></table></figure>
 </li>
