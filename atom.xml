@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2021-07-03T13:30:24.477Z</updated>
+  <updated>2021-07-03T14:42:58.368Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2021/06/01/%E8%99%9A%E6%8B%9F%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
     <id>http://kevien.github.io/2021/06/01/虚拟化笔记/</id>
     <published>2021-06-01T09:35:06.000Z</published>
-    <updated>2021-07-03T13:30:24.477Z</updated>
+    <updated>2021-07-03T14:42:58.368Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
 <li><p>此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.</p>
@@ -41,6 +41,9 @@
 <li><p><a href="https://bytefreaks.net/gnulinux/send-altctrldelete-to-qemu-virtual-machine" target="_blank" rel="noopener">如何在虚拟机上发送control+alt+del键</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.ALT+CTRL+2进入命令行界面</span><br><span class="line">2.命令行输入sendkey alt-ctrl-delete</span><br><span class="line">3.ALT+CTRL+1切换回图形界面</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a href="https://sysin.org/blog/change-vmware-fusion-networking/" target="_blank" rel="noopener">如何修改 VMware Fusion 中的虚机网络 IP 地址段</a></li>
 </ul>
 ]]></content>
     
