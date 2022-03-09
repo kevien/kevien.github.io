@@ -86,7 +86,7 @@
     <link href="http://kevien.github.io/2020/11/05/%E8%93%9D%E9%98%9F%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E4%B9%8B-systeminternal%E5%B7%A5%E5%85%B7%E9%9B%86%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/</id>
     <published>2020-11-05T03:13:36.000Z</published>
-    <updated>2021-07-24T15:14:44.912Z</updated>
+    <updated>2022-03-09T10:31:22.675Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>在应急遇到windows系统的时候经常会使用systeminterna suite套件，这个套件是由<a href="https://twitter.com/markrussinovich" target="_blank" rel="noopener">Mark Russinovich</a>开发，systeminternals suite工具套件是免费的，大家可以从<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" target="_blank" rel="noopener">这里</a>下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形化界面。</li>
@@ -145,6 +145,7 @@
 <li>Sysmon.exe -accepteula -i -n<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmon.png" alt=""></li>
 <li>注意：32 位系统用 Sysmon.exe，64 位 Windows 推荐使用 Sysmon64.exe。<br>注册完成后，在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」下会多出一项「Sysmon」文件夹，其中记录了 Sysmon 写入到 Event Log 中的所有事件。如果要取消 Sysmon 对系统的监控以及对事件日志的写入操作，可以使用以下命令：<br>Sysmon64.exe -u<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/sysmonlog.png" alt=""></li>
 <li>此外如果想要单看DNS查询日志，也可在事件查看器中单独设置。在「事件查看器」——「应用程序和服务日志」——「Microsoft」——「Windows」——「DNS ClientEvents 」，右键「Operational 」——选择「启用日志」即可。<br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/dnslog.png" alt=""></li>
+<li><a href="https://github.com/nshalabi/SysmonTools" target="_blank" rel="noopener">Sysmon tools</a></li>
 <li><a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank" rel="noopener">Sysmon configuration file template with default high-quality event tracing</a></li>
 <li>更多使用技巧可参考 <a href="https://www.secrss.com/articles/12585" target="_blank" rel="noopener">应急响应：三款实用的Sysmon辅助分析工具</a><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://www.hackers-arise.com/post/2016/11/29/digital-forensics-part-7-live-analysis-with-sysinternals" target="_blank" rel="noopener">Live Analysis with sysinternals</a></li>
 </ul>
