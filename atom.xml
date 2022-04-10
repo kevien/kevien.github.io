@@ -86,7 +86,7 @@
     <link href="http://kevien.github.io/2020/11/05/%E8%93%9D%E9%98%9F%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E4%B9%8B-systeminternal%E5%B7%A5%E5%85%B7%E9%9B%86%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/</id>
     <published>2020-11-05T03:13:36.000Z</published>
-    <updated>2022-03-09T10:31:22.000Z</updated>
+    <updated>2022-04-10T11:01:15.296Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>在应急遇到windows系统的时候经常会使用systeminterna suite套件，这个套件是由<a href="https://twitter.com/markrussinovich" target="_blank" rel="noopener">Mark Russinovich</a>开发，systeminternals suite工具套件是免费的，大家可以从<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" target="_blank" rel="noopener">这里</a>下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形化界面。</li>
@@ -121,7 +121,10 @@
 <li>在系统入侵之后，攻击者为了权限维持极有可能在系统上留后门，那么autoruns可以说是最强大的开机启动项检查工具了(没有之一)，其检查项包括计划任务、服务、驱动、注册表、WMI等。</li>
 <li>注意右键以管理员方式运行autoruns工具，否则可能会有一些登录启动项查看不到，当你运行的时候那么这个工具就会扫描系统上的一些常见启动项。</li>
 <li>除了查看功能，当选中某个条目时候还有删除、打开路径、上传virustotal检测、属性等功能。</li>
-<li>autoruns默认会隐藏windows条目，就是有windows签名的在会被隐藏，这个时候要留意时候有windows自带工具的权限维持，在查看的时候要注意将options-&gt;hide microsoft entries的勾去掉。<h2 id="ProcExp"><a href="#ProcExp" class="headerlink" title="ProcExp"></a>ProcExp</h2></li>
+<li>autoruns默认会隐藏windows条目，就是有windows签名的在会被隐藏，这个时候要留意时候有windows自带工具的权限维持，在查看的时候要注意将options-&gt;hide microsoft entries的勾去掉。</li>
+<li>关于autoruns检查项细节可参考文章<a href="https://www.microsoftpressstore.com/articles/article.aspx?p=2762082&amp;seqNum=2" target="_blank" rel="noopener">Autoruns</a></li>
+</ul>
+<h2 id="ProcExp"><a href="#ProcExp" class="headerlink" title="ProcExp"></a>ProcExp</h2><ul>
 <li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer" target="_blank" rel="noopener">官方介绍</a><br><img src="/2020/11/05/蓝队必备技能之-systeminternal工具集使用/procexp.png" alt=""></li>
 <li>ProcExp 即process explorer，进程浏览器。用来查看计算机上运行的进程的状态。(CPU、内存、句柄、加载dll、线程及堆栈等)。</li>
 <li>打开程序之后会显示一些默认的列，这些显示的列可根据个人喜好进行定制化，比如进程描述、进程状态等。</li>
