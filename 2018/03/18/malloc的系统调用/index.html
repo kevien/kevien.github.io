@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/mmapbefore.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/mmapafter.png">
 <meta property="og:image" content="http://kevien.github.io/2018/03/18/malloc的系统调用/aftermunmap.png">
-<meta property="og:updated_time" content="2018-11-19T15:55:39.627Z">
+<meta property="og:updated_time" content="2018-11-19T15:55:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="malloc的系统调用">
 <meta name="twitter:description" content="TL;DR 在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是brk和mmap。/prco/$pid/maps文件 先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。brk brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。 当ASLR关闭的时候，star">

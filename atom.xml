@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2021-07-03T14:42:58.368Z</updated>
+  <updated>2021-07-03T14:42:58.000Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2021/06/01/%E8%99%9A%E6%8B%9F%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
     <id>http://kevien.github.io/2021/06/01/虚拟化笔记/</id>
     <published>2021-06-01T09:35:06.000Z</published>
-    <updated>2021-07-03T14:42:58.368Z</updated>
+    <updated>2021-07-03T14:42:58.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><ul>
 <li><p>此笔记用于记录qcow2后缀的文件如何转换成vmware格式 以及如何直接运行qcow2.</p>
@@ -62,7 +62,7 @@
     <link href="http://kevien.github.io/2021/05/28/%E5%AD%A6%E4%B9%A0%E5%8F%82%E8%80%83/"/>
     <id>http://kevien.github.io/2021/05/28/学习参考/</id>
     <published>2021-05-28T03:21:21.000Z</published>
-    <updated>2021-05-28T03:24:22.290Z</updated>
+    <updated>2021-05-28T03:24:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>因为会不断有学员问如何学习xx领域的经验，所以搜集整理了一些网上的参考资源供学习者参考<h2 id="java代码审计"><a href="#java代码审计" class="headerlink" title="java代码审计"></a>java代码审计</h2></li>
@@ -86,7 +86,7 @@
     <link href="http://kevien.github.io/2020/11/05/%E8%93%9D%E9%98%9F%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E4%B9%8B-systeminternal%E5%B7%A5%E5%85%B7%E9%9B%86%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2020/11/05/蓝队必备技能之-systeminternal工具集使用/</id>
     <published>2020-11-05T03:13:36.000Z</published>
-    <updated>2022-03-09T10:31:22.675Z</updated>
+    <updated>2022-03-09T10:31:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
 <li>在应急遇到windows系统的时候经常会使用systeminterna suite套件，这个套件是由<a href="https://twitter.com/markrussinovich" target="_blank" rel="noopener">Mark Russinovich</a>开发，systeminternals suite工具套件是免费的，大家可以从<a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" target="_blank" rel="noopener">这里</a>下载的到。最早的这些工具都只是命令行的，后面被微软采购之后在很多工具上增加了图形化界面。</li>
@@ -166,7 +166,7 @@
     <link href="http://kevien.github.io/2020/06/09/wireshark%E5%92%8C%E5%A8%81%E8%83%81%E5%88%86%E6%9E%90/"/>
     <id>http://kevien.github.io/2020/06/09/wireshark和威胁分析/</id>
     <published>2020-06-09T11:14:54.000Z</published>
-    <updated>2020-06-09T11:21:42.315Z</updated>
+    <updated>2020-06-09T11:21:42.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文章已首发至先知平台</span><br><span class="line">https://xz.aliyun.com/t/7802</span><br></pre></td></tr></table></figure>
 <p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200602145619-29aa870c-a49e-1.jpeg" alt=""></p>
@@ -243,7 +243,7 @@
     <link href="http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/"/>
     <id>http://kevien.github.io/2020/04/05/cobaltstrike-dns-beacon/</id>
     <published>2020-04-05T01:29:59.000Z</published>
-    <updated>2020-04-22T02:59:09.660Z</updated>
+    <updated>2020-04-22T02:59:09.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2020/04/05/cobaltstrike-dns-beacon/cs.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">cobaltstrike dns beacon知多少</span><br><span class="line">https://xz.aliyun.com/t/7488</span><br></pre></td></tr></table></figure></p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
@@ -274,7 +274,7 @@
     <link href="http://kevien.github.io/2019/11/14/2019-note/"/>
     <id>http://kevien.github.io/2019/11/14/2019-note/</id>
     <published>2019-11-14T09:08:58.000Z</published>
-    <updated>2020-08-01T02:43:34.774Z</updated>
+    <updated>2020-08-01T02:43:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录一些乱七八糟的"><a href="#记录一些乱七八糟的" class="headerlink" title="记录一些乱七八糟的"></a>记录一些乱七八糟的</h2><ul>
 <li>free hackbar <a href="https://github.com/Mr-xn/hackbar2.1.3" target="_blank" rel="noopener">https://github.com/Mr-xn/hackbar2.1.3</a></li>
@@ -305,7 +305,7 @@
     <link href="http://kevien.github.io/2019/09/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%BA%BF%E5%95%A6%EF%BC%81%EF%BC%81%EF%BC%81/"/>
     <id>http://kevien.github.io/2019/09/05/网络安全平台上线啦！！！/</id>
     <published>2019-09-05T02:13:51.000Z</published>
-    <updated>2019-12-24T09:27:22.216Z</updated>
+    <updated>2019-12-24T09:27:22.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="网络安全平台上线啦"><a href="#网络安全平台上线啦" class="headerlink" title="网络安全平台上线啦"></a>网络安全平台上线啦</h3><ul>
 <li>大家好，网络安全平台上线啦，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象戒宽油系，是兄弟就来pwn我(pwnme.cn)，大家来玩叭~</li>
@@ -329,7 +329,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-03-15T06:45:12.718Z</updated>
+    <updated>2020-03-15T06:45:12.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">linux常见backdoor及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4090</span><br><span class="line">windows常见backdoor、权限维持方法及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4842</span><br></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -448,7 +448,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2021-06-01T15:51:24.660Z</updated>
+    <updated>2021-06-01T15:51:24.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -506,7 +506,7 @@
     <link href="http://kevien.github.io/2018/07/15/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/</id>
     <published>2018-07-15T05:30:41.000Z</published>
-    <updated>2020-03-14T10:10:48.303Z</updated>
+    <updated>2020-03-14T10:10:48.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
@@ -553,7 +553,7 @@
     <link href="http://kevien.github.io/2018/06/18/FastJson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E(%E7%BB%AD)/"/>
     <id>http://kevien.github.io/2018/06/18/FastJson反序列化漏洞(续)/</id>
     <published>2018-06-17T18:47:07.000Z</published>
-    <updated>2018-06-28T06:55:02.823Z</updated>
+    <updated>2018-06-28T06:55:02.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>之前写了篇fastjson反序列化漏洞的分析文章，见<a href="https://www.cnblogs.com/mrchang/p/6789060.html" target="_blank" rel="noopener">Fastjson反序列化漏洞研究</a>,最近<br>读了这篇文章<a href="http://www.freebuf.com/articles/others-articles/167932.html" target="_blank" rel="noopener">DefineClass在Java反序列化当中的利用</a>深受启发，学习到了另外的利用姿势.本来很早就应该填的坑，因为一些其它事情导致现在才更 :(</li>
@@ -600,7 +600,7 @@
     <link href="http://kevien.github.io/2018/04/07/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"/>
     <id>http://kevien.github.io/2018/04/07/格式化字符串漏洞/</id>
     <published>2018-04-06T21:37:24.000Z</published>
-    <updated>2018-08-24T04:26:49.546Z</updated>
+    <updated>2018-08-24T04:26:49.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。</li>
@@ -677,7 +677,7 @@
     <link href="http://kevien.github.io/2018/03/22/BSS%E6%AE%B5%E7%9A%84%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB/"/>
     <id>http://kevien.github.io/2018/03/22/BSS段的溢出攻击/</id>
     <published>2018-03-21T17:30:17.000Z</published>
-    <updated>2018-11-19T15:50:00.386Z</updated>
+    <updated>2018-11-19T15:50:00.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至seebug</span><br><span class="line">https://paper.seebug.org/548/</span><br></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -742,7 +742,7 @@
     <link href="http://kevien.github.io/2018/03/18/malloc%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/03/18/malloc的系统调用/</id>
     <published>2018-03-17T17:27:46.000Z</published>
-    <updated>2018-11-19T15:55:39.627Z</updated>
+    <updated>2018-11-19T15:55:39.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="noopener">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="noopener">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
@@ -795,7 +795,7 @@
     <link href="http://kevien.github.io/2018/02/26/%E9%80%9A%E8%BF%87return-to-libc%E7%BB%95%E8%BF%87NX-bit/"/>
     <id>http://kevien.github.io/2018/02/26/通过return-to-libc绕过NX-bit/</id>
     <published>2018-02-26T15:13:31.000Z</published>
-    <updated>2018-11-19T15:59:02.803Z</updated>
+    <updated>2018-11-19T15:59:02.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li>读此文章之前建议先读一下这篇文章<a href="https://kevien.github.io/2017/08/16/linux%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux栈溢出学习笔记</a></li>
@@ -833,7 +833,7 @@
     <link href="http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/"/>
     <id>http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/</id>
     <published>2018-02-20T03:51:50.000Z</published>
-    <updated>2019-01-09T08:56:03.098Z</updated>
+    <updated>2019-01-09T08:56:03.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -925,7 +925,7 @@
     <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
     <published>2018-01-30T07:58:01.000Z</published>
-    <updated>2020-06-11T02:23:48.474Z</updated>
+    <updated>2020-06-11T02:23:48.000Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>20200611 upate</li>
@@ -981,7 +981,7 @@
     <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
     <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
     <published>2018-01-28T09:18:28.000Z</published>
-    <updated>2020-01-02T08:38:27.691Z</updated>
+    <updated>2020-01-02T08:38:27.000Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">译文声明</span><br><span class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</span><br><span class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</span><br><span class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</span><br><span class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</span><br></pre></td></tr></table></figure>
 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
@@ -1082,7 +1082,7 @@
     <link href="http://kevien.github.io/2018/01/16/%E4%BB%8E%E4%B8%80%E9%81%93pentesterlab%E7%9A%84%E9%A2%98%E7%9B%AE%E8%AF%B4%E8%B5%B7/"/>
     <id>http://kevien.github.io/2018/01/16/从一道pentesterlab的题目说起/</id>
     <published>2018-01-16T14:04:50.000Z</published>
-    <updated>2018-11-19T16:06:28.333Z</updated>
+    <updated>2018-11-19T16:06:28.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template Injection)的题目,目标是要执行任意命令，之前也没分析过SSTI的漏洞，所以简单看了下没搞定,后来有其它的事情就没看，这两天又看了下，觉得还是挺有意思的，就记录一下。<h4 id="method1"><a href="#method1" class="headerlink" title="method1"></a>method1</h4></li>
@@ -1135,7 +1135,7 @@
     <link href="http://kevien.github.io/2017/12/24/CVE-2017-17562%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%82%B9/"/>
     <id>http://kevien.github.io/2017/12/24/CVE-2017-17562的一些零碎点/</id>
     <published>2017-12-24T08:10:00.000Z</published>
-    <updated>2018-11-19T16:08:44.021Z</updated>
+    <updated>2018-11-19T16:08:44.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1247)以及shellshock漏洞(CVE-2014-6271),前两天只是简单的看了一下，今天有时间就整理一下，留个备忘。</li>
