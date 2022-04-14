@@ -77,22 +77,22 @@
 
 
 
-<meta name="description" content="笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己用的cs4.3，http的上线没有问题，故排除是cs工具问题  自己用的openjdk，当时怀疑是不是自己">
+<meta name="description" content="TL;DR 使用公众号写了一些文章，不太方便持续更新和修改，所以把一些公众号文章搬运过来，在博客留存一下。笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cobaltstrike cdn上线隐藏c2 ip">
 <meta property="og:url" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己用的cs4.3，http的上线没有问题，故排除是cs工具问题  自己用的openjdk，当时怀疑是不是自己">
+<meta property="og:description" content="TL;DR 使用公众号写了一些文章，不太方便持续更新和修改，所以把一些公众号文章搬运过来，在博客留存一下。笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/cloudflare-cdn.png">
 <meta property="og:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/cloudflare-cdn1.png">
 <meta property="og:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/beacon.png">
 <meta property="og:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/wireshark.png">
 <meta property="og:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/ip.png">
-<meta property="og:updated_time" content="2022-04-13T12:26:21.184Z">
+<meta property="og:updated_time" content="2022-04-13T12:56:09.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cobaltstrike cdn上线隐藏c2 ip">
-<meta name="twitter:description" content="笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己用的cs4.3，http的上线没有问题，故排除是cs工具问题  自己用的openjdk，当时怀疑是不是自己">
+<meta name="twitter:description" content="TL;DR 使用公众号写了一些文章，不太方便持续更新和修改，所以把一些公众号文章搬运过来，在博客留存一下。笔记记录 最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。  参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。  首先自己按照文章搭建好之后发现上不了线  首先排查一下是不是软件的问题，自己">
 <meta name="twitter:image" content="http://kevien.github.io/2022/03/29/cobaltstrike-cdn上线隐藏c2-ip/cloudflare-cdn.png">
 
 
@@ -400,7 +400,8 @@
       
 
       
-        <h2 id="笔记记录"><a href="#笔记记录" class="headerlink" title="笔记记录"></a>笔记记录</h2><ul>
+        <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>使用公众号写了一些文章，不太方便持续更新和修改，所以把一些公众号文章搬运过来，在博客留存一下。<h2 id="笔记记录"><a href="#笔记记录" class="headerlink" title="笔记记录"></a>笔记记录</h2></li>
 <li><p>最近测试了cobaltstrike cdn上线隐藏c2 ip，简短记录一下。</p>
 </li>
 <li><p>参考了文章  cobalt strike cdn上线笔记，文章没什么问题，但在实际测试过程当中遇到了一些坑点，特此记录一下。</p>
@@ -634,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记记录"><span class="nav-number">1.</span> <span class="nav-text">笔记记录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记记录"><span class="nav-number">2.</span> <span class="nav-text">笔记记录</span></a></li></ol></div>
             
 
           </div>
