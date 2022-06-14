@@ -77,17 +77,20 @@
 
 
 
-<meta name="description" content="About这里推荐一下github上的一个项目Awesome-Hacking安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广. listAndroid安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源 应用安全：了解学习应用程序安全的资源列表 漏洞赏金：漏洞赏金计划集合和著名赏金猎人博客列表 Cheatsheets：常见的渗透测试/安全备忘录 CTF：CTF框">
+<meta name="description" content="TL;DR 作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awvs比较多，vps上安装docker，现在awvs也都有docker版本的且为破解版的，pull一下很方便，当时也有不方便的地方，就是扫描速度比较慢，可能很早之前感兴趣的目标放进去了，过一段时间都快忘记了，所以并不太具有“实效”性。而发现现在使用xray+brup的这种组合比较好，被动">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Awosome Hacking系列">
-<meta property="og:url" content="http://kevien.github.io/2017/08/09/Awosome-Hacking系列/index.html">
+<meta property="og:title" content="web扫描笔记">
+<meta property="og:url" content="http://kevien.github.io/2022/04/17/web扫描/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="About这里推荐一下github上的一个项目Awesome-Hacking安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广. listAndroid安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源 应用安全：了解学习应用程序安全的资源列表 漏洞赏金：漏洞赏金计划集合和著名赏金猎人博客列表 Cheatsheets：常见的渗透测试/安全备忘录 CTF：CTF框">
+<meta property="og:description" content="TL;DR 作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awvs比较多，vps上安装docker，现在awvs也都有docker版本的且为破解版的，pull一下很方便，当时也有不方便的地方，就是扫描速度比较慢，可能很早之前感兴趣的目标放进去了，过一段时间都快忘记了，所以并不太具有“实效”性。而发现现在使用xray+brup的这种组合比较好，被动">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-09T07:01:20.000Z">
+<meta property="og:image" content="http://kevien.github.io/2022/04/17/web扫描/xray.png">
+<meta property="og:image" content="http://kevien.github.io/2022/04/17/web扫描/burpscan.png">
+<meta property="og:updated_time" content="2022-04-17T12:05:34.644Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Awosome Hacking系列">
-<meta name="twitter:description" content="About这里推荐一下github上的一个项目Awesome-Hacking安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广. listAndroid安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源 应用安全：了解学习应用程序安全的资源列表 漏洞赏金：漏洞赏金计划集合和著名赏金猎人博客列表 Cheatsheets：常见的渗透测试/安全备忘录 CTF：CTF框">
+<meta name="twitter:title" content="web扫描笔记">
+<meta name="twitter:description" content="TL;DR 作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awvs比较多，vps上安装docker，现在awvs也都有docker版本的且为破解版的，pull一下很方便，当时也有不方便的地方，就是扫描速度比较慢，可能很早之前感兴趣的目标放进去了，过一段时间都快忘记了，所以并不太具有“实效”性。而发现现在使用xray+brup的这种组合比较好，被动">
+<meta name="twitter:image" content="http://kevien.github.io/2022/04/17/web扫描/xray.png">
 
 
 
@@ -115,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://kevien.github.io/2017/08/09/Awosome-Hacking系列/">
+  <link rel="canonical" href="http://kevien.github.io/2022/04/17/web扫描/">
 
 
 
 
 
-  <title>Awosome Hacking系列 | M0rk's Blog</title>
+  <title>web扫描笔记 | M0rk's Blog</title>
 </head>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -292,7 +295,7 @@
   
 
   <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2017/08/09/Awosome-Hacking系列/">
+    <link itemprop="mainEntityOfPage" href="http://kevien.github.io/2022/04/17/web扫描/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="M0rk">
@@ -313,7 +316,7 @@
             
             
               
-                Awosome Hacking系列
+                web扫描笔记
               
             
           </h2>
@@ -328,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T14:56:42+08:00">
-                2017-08-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-17T19:49:39+08:00">
+                2022-04-17
               </time>
             
 
@@ -394,67 +397,10 @@
       
 
       
-        <h4 id="About"><a href="#About" class="headerlink" title="About"></a>About</h4><p>这里推荐一下github上的一个项目<a href="https://github.com/Hack-with-Github/Awesome-Hacking" target="_blank" rel="noopener">Awesome-Hacking</a><br>安全研究方向的一些参考资源，质量还是不错的,涵盖的方面比较的广.</p>
-<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>Android安全：收集了各种Android工具、报告/研究/书籍、漏洞/利用代码等资源</p>
-<p>应用安全：了解学习应用程序安全的资源列表</p>
-<p>漏洞赏金：漏洞赏金计划集合和著名赏金猎人博客列表</p>
-<p>Cheatsheets：常见的渗透测试/安全备忘录</p>
-<p>CTF：CTF框架、类库、资源、软件和教程清单</p>
-<p>网络攻击环境：可以合法地锻炼培养自己攻击技能的环境集合</p>
-<p>安全开发运维：devsecops.org社区贡献的权威devsecops工具列表</p>
-<p>Exploit开发：学习exploit开发的资源</p>
-<p>Fuzzing：各种fuzzing图书、课程、工具、教程和易受攻击应用集合</p>
-<p>Hacking：Awesome Hacking资源列表</p>
-<p>蜜罐：包括不同类型的蜜罐、蜜罐工具、蜜罐分析等</p>
-<p>事件响应：旨在帮助安全分析师和数字取证人员</p>
-<p>工控安全：包括工具、蜜罐、数据、警报和新闻、会议各种工控安全等</p>
-<p>信息安全：有各种信息安全公开课、培训信息</p>
-<p>IoT安全：聚合了大量IoT破解案例，如RFID、门铃、中控、可穿戴等</p>
-<p>恶意软件分析：包括恶意软件收集、开源威胁情报、检测、沙箱等</p>
-<p>开源情报：情报界的各种开源情报来源</p>
-<p>OS X和iOS安全：OS X和iOS安全工具集合</p>
-<p>Pcaptools：流量处理的命令集、捕获工具、分析检查、DNS配置等工具资源</p>
-<p>渗透测试：在线渗透测试资源、Shellcode开发、开源情报资源、社会工程资源等</p>
-<p>PHP安全：PHP生成安全随机数、加密数据、检查漏洞等类库</p>
-<p>逆向：关于逆向的图书、培训、实战、工具等</p>
-<p>安全演讲：收集了2013-2017年各类安全大会演讲视频</p>
-<p>SecLists：安全测试人员进行评估检查需要用到的技能</p>
-<p>Security：Awesome Security，一个社区驱动的知名安全资源分类集合</p>
-<p>社会工程学：仅供网络安全人员、渗透测试人员在受控环境用于教育用途</p>
-<p>静态分析：针对各种编程语言的静态分析工具、linters、代码质量检查等</p>
-<p>威胁情报：包括常见威胁情报来源、格式、架构、工具、研究标准书籍等</p>
-<p>车辆安全：关于车辆安全的学习资源、项目、软硬件、汽车黑客案例、Twitter follower列表等</p>
-<p>漏洞研究：相对偏学术方向，有不少书籍、会议、报告等推荐</p>
-<p>Web黑客：Web安全入门各种书籍、文档、工具</p>
-<p>Windows漏洞利用：Windows堆栈溢出、内核攻击、内存损坏、内存保护等内容资源</p>
-<p>WiFi兵工厂：针对802.11协议攻击的各类工具</p>
-<h4 id="可用知识库"><a href="#可用知识库" class="headerlink" title="可用知识库"></a>可用知识库</h4><p>API安全检查清单：当你设计、测试、发布API时，需要核对的安全细节清单</p>
-<p>APT Notes：2008年至今的所有APT行动披露报告汇总，中国出现了11次</p>
-<p>赏金漏洞披露列表：偏Web向的常见漏洞类型案例披露</p>
-<p>密码学：密码学的理论、工具、框架、资源等</p>
-<p>CFT工具：CTF从入门到了解各种工具</p>
-<p>CVE PoC库：博主从13年到现在收集的数十个CVE漏洞的PoC</p>
-<p>取证：数字取证的常见工具资源</p>
-<p>免费编程书：关于系统、数据库、IDE、编程语言等方面的免费书</p>
-<p>灰帽黑客资源：CTF、加密学、Linux Hacking、USB Hacking、漏洞等</p>
-<p>信息安全入门：包括信息安全博客、认证、课程、社区、播客、工具等</p>
-<p>安全资源：一个类似MITRE ATT&amp;C的框架</p>
-<p>IOC：常见IOC资源、工具</p>
-<p>Linux内核利用库：2005年至今的Linux内核利用技术演讲、漏洞、Writeups等</p>
-<p>网络安全领域的机器学习：相关研究的数据集、论文、书籍、演讲等</p>
-<p>恶意软件脚本：博主收集的二十几个脚本</p>
-<p>Payloads：一大波常见Web攻击Payloads</p>
-<p>Payloads集合：比上面这个更丰富的常见Web攻击Payloads</p>
-<p>五星级Cheatsheets：包括OS X命令行、PowerShell命令行、Google Dorks、Shodan、exploit开发、Java反序列化等最全备忘</p>
-<p>Pentest Wiki：博主收集的在线安全知识库，里边涵盖网络分析、Web应用、开源情报、漏洞分析、编程开发等多个领域</p>
-<p>字典：作者自称找了超过80GB密码库，从中总结出这个字典项目</p>
-<p>Resource List：零碎的GitHub安全项目汇总，涉及PWND、PowerShell、CTF、恶意软件等</p>
-<p>逆向工程：常见软件、类库、书籍、技术分析、开发等</p>
-<p>RF安全工具箱：国人@cn0xroot 聚合的各类射频资源集合，包括SDR、GSM、3G、4G LTE、NFC&amp;RFID、ZigBee等</p>
-<p>安全备忘录：收集了许多信息安全工具和主题</p>
-<p>安全清单：一大波详实的全系列安全资源</p>
-<p>Shell：一系列Shell命令行、工具、指南等</p>
-<p>威胁猎人攻略：帮助安全分析师利用Sysmon和Windows Events日志来进行事件分析，涉及Splunk、ELK、Sigma、GrayLog等工具</p>
+        <h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><ul>
+<li>作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awvs比较多，vps上安装docker，现在awvs也都有docker版本的且为破解版的，pull一下很方便，当时也有不方便的地方，就是<br>扫描速度比较慢，可能很早之前感兴趣的目标放进去了，过一段时间都快忘记了，所以并不太具有“实效”性。而发现现在使用xray+brup的这种组合比较好，被动式扫描，会基于你点击的链接进行扫描，我们一般在测试某个网站的时候必定使用的工具就是<br>burpsuite，可以使用burpsuite的重放功能对目标进行手动测试，而且现在的burp(破解版)也有扫描的功能，也比较强大，然后联动xray，有时候就一直开着xray在那里一顿操作，xray都会把你点击的url进行扫描，相当于多了一个帮手帮你去检测。</li>
+<li>关于xray如何联动burp网上有很多的教程，这里就不介绍了。<br><img src="/2022/04/17/web扫描/xray.png" alt=""><br><img src="/2022/04/17/web扫描/burpscan.png" alt=""></li>
+</ul>
 
       
     </div>
@@ -491,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/02/windows栈溢出入门/" rel="next" title="windows栈溢出入门">
-                <i class="fa fa-chevron-left"></i> windows栈溢出入门
+              <a href="/2022/04/13/捆绑钓鱼/" rel="next" title="捆绑钓鱼">
+                <i class="fa fa-chevron-left"></i> 捆绑钓鱼
               </a>
             
           </div>
@@ -501,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/16/linux栈溢出学习笔记/" rel="prev" title="linux栈溢出学习笔记">
-                linux栈溢出学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/04/19/CTF之RSA笔记/" rel="prev" title="CTF之RSA笔记">
+                CTF之RSA笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -573,7 +519,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -666,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#About"><span class="nav-number">1.</span> <span class="nav-text">About</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list"><span class="nav-number">2.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可用知识库"><span class="nav-number">3.</span> <span class="nav-text">可用知识库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li></ol></div>
             
 
           </div>

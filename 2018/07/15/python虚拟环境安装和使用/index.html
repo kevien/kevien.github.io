@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/pyenvversions.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/setpycharm.png">
 <meta property="og:image" content="http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/virtualenv.png">
-<meta property="og:updated_time" content="2020-03-14T10:10:48.000Z">
+<meta property="og:updated_time" content="2022-04-20T08:32:02.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python虚拟环境安装和使用">
 <meta name="twitter:description" content="TL;DR Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。pyenv安装和使用 推荐使用brew安装pyenv  12345678910# Install Homebrew/usr/bin/r">
@@ -423,7 +423,9 @@
 <li>安装对应版本的第三方包 pip install django==1.10<br><img src="/2018/07/15/python虚拟环境安装和使用/virtualenv.png" alt=""></li>
 <li>如上图所示，就相当于进一步定制化了环境（python2.7.14 and django==1.10）。</li>
 <li>此外和上面配置pycharm一样对pycharm进行相应开发环境的配置。</li>
-<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="noopener">Python Development on macOS with pyenv-virtualenv</a>
+<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="python常见问题"><a href="#python常见问题" class="headerlink" title="python常见问题"></a>python常见问题</h4></li>
+<li>windows下pip安装速度慢解决方法 可以在使用pip的时候加参数-i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
+<li>例如：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a> pyspider，这样就会从清华这边的镜像去安装pyspider库。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="noopener">Python Development on macOS with pyenv-virtualenv</a>
 </em><a href="https://www.cnblogs.com/kevingrace/p/10130801.html" target="_blank" rel="noopener">Python多版本管理器-pyenv 介绍及部署记录</a></li>
 </ul>
 
@@ -544,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -637,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pyenv安装和使用"><span class="nav-number">2.</span> <span class="nav-text">pyenv安装和使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置pycharm"><span class="nav-number">3.</span> <span class="nav-text">配置pycharm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#virtualenv的安装和使用"><span class="nav-number">4.</span> <span class="nav-text">virtualenv的安装和使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pyenv安装和使用"><span class="nav-number">2.</span> <span class="nav-text">pyenv安装和使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置pycharm"><span class="nav-number">3.</span> <span class="nav-text">配置pycharm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#virtualenv的安装和使用"><span class="nav-number">4.</span> <span class="nav-text">virtualenv的安装和使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python常见问题"><span class="nav-number">5.</span> <span class="nav-text">python常见问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

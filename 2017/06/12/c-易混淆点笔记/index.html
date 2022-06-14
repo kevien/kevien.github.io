@@ -86,7 +86,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/06/12/c-易混淆点笔记/cpStandard.png">
 <meta property="og:image" content="http://kevien.github.io/2017/06/12/c-易混淆点笔记/cStandard.png">
-<meta property="og:updated_time" content="2019-04-17T00:26:09.000Z">
+<meta property="og:updated_time" content="2022-06-14T10:09:35.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c和c++易混淆点笔记">
 <meta name="twitter:description" content="简介 主要记录一些容易忽略和忘记的知识点，原因是有些知识点刚看过之后觉的懂了，但是过段时间可能又忘记了的情况。记录 基本数据类型Fundamental typesWindows Data Types.aspx) 指针类型和引用类型 构造函数初始化数据成员的方式，除了在函数体中使用复制和赋值等方法外，还可以使用初始化表，初始化表位于参数表和函数体之间，以：开头，由一个或多个初始化项构成，多个初始化项">
@@ -407,7 +407,7 @@
 <li>函数重载<br>函数重载是指多个函数使用相同的函数名。函数重载是多态性的体现，即用同一个函数名实现多种函数调用。函数重载一般是函数的参数个数或者参数类型不同，这个时候，编译器会根据这个差别来进行差别性编译。</li>
 <li>虚函数和纯虚函数<br>虚函数其实就是虚拟函数的意思，virtual function，感觉翻译成虚拟函数就挺好的，不知道为啥翻译到国内就是叫虚函数，感觉怪怪的。这个虚拟函数和函数重载的概念有点儿相似，在派生类中可以通过重写虚拟函数来实现对基类虚拟函数的覆盖。（感觉像是java里面的接口），这也是多态性的体现（注意这里是运行时的多态性，不同于函数重载编译时的多态性）。<a href="http://www.runoob.com/cplusplus/cpp-interfaces.html" target="_blank" rel="noopener">c++接口(抽象类)</a></li>
 <li>std standard的缩写，我们在使用c++的标准库的标识符的时候需要使用using namespace std；使用了命名空间std的有  cstdio cmath  csring string等。</li>
-<li>今天学习STL,才真正意识到什么是容器。也觉得以前都没有怎么去理解容器，每一种语言都有自己的容器，像python中有list、dict、tuple等容器，java中有arraylist、hashset、hashmap等容器，可以说容器是复杂的数据结构(相对于简单的数据结构int，float这种)。c++ 中标准STL序列容器：vector、string、deque和list。<br><br>标准STL关联容器：set、multiset、map和multimap。每种容器类型都定义了自己的迭代器类型，如vector<br><br>vector<int>::iterator iter;这条语句定义了一个名为iter的变量，它的数据类型是由vector<int>定义的iterator类型。<br><br>list<int>::iterator iter1;这条语句定义了一个名为iter1的变量，它的数据类型是由list<int>定义的iterator类型。<br><br><a href="https://www.wikiwand.com/zh-hans/%E5%AE%B9%E5%99%A8_(%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener">wiki对容器的介绍</a>)</int></int></int></int></li>
+<li>今天学习STL,才真正意识到什么是容器（用来放东西的）。也觉得以前都没有怎么去理解容器，每一种语言都有自己的容器，像python中有list、dict、tuple等容器，java中有arraylist、hashset、hashmap等容器，可以说容器是复杂的数据结构(相对于简单的数据结构int，float这种)。c++ 中标准STL序列容器：vector、string、deque和list。<br><br>标准STL关联容器：set、multiset、map和multimap。每种容器类型都定义了自己的迭代器类型，如vector<br><br>vector<int>::iterator iter;这条语句定义了一个名为iter的变量，它的数据类型是由vector<int>定义的iterator类型。<br><br>list<int>::iterator iter1;这条语句定义了一个名为iter1的变量，它的数据类型是由list<int>定义的iterator类型。<br><br><a href="https://www.wikiwand.com/zh-hans/%E5%AE%B9%E5%99%A8_(%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener">wiki对容器的介绍</a>)</int></int></int></int></li>
 <li>C++ 的可移植性和跨平台开发<br><a href="https://msdn.microsoft.com/zh-cn/library/dn707591.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/zh-cn/library/dn707591.aspx</a><br><a href="https://program-think.blogspot.com/2009/01/cxx-cross-platform-develop-0-overview.html" target="_blank" rel="noopener">https://program-think.blogspot.com/2009/01/cxx-cross-platform-develop-0-overview.html</a></li>
 <li>google c++ 编程规范<br><a href="http://google.github.io/styleguide/cppguide.html" target="_blank" rel="noopener">http://google.github.io/styleguide/cppguide.html</a></li>
 <li><p>预编译</p>
@@ -471,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/04/每周安全动态/" rel="next" title="每周安全动态">
-                <i class="fa fa-chevron-left"></i> 每周安全动态
+              <a href="/2017/04/28/hello-world/" rel="next" title="hello-world">
+                <i class="fa fa-chevron-left"></i> hello-world
               </a>
             
           </div>
@@ -553,7 +553,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

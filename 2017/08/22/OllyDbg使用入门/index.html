@@ -77,12 +77,12 @@
 
 
 
-<meta name="description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅">
+<meta name="description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅读，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OllyDbg使用入门">
 <meta property="og:url" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/index.html">
 <meta property="og:site_name" content="M0rk&#39;s Blog">
-<meta property="og:description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅">
+<meta property="og:description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅读，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/1.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/views.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/3.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/4.png">
 <meta property="og:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/5.png">
-<meta property="og:updated_time" content="2018-08-26T10:53:05.000Z">
+<meta property="og:updated_time" content="2022-06-14T09:33:35.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OllyDbg使用入门">
-<meta name="twitter:description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅">
+<meta name="twitter:description" content="TL;DR ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。常用快捷键 f8单步步过 f7单步步入 f9运行，执行到下个断点 f2下断点 ctrl + g 跳转到指定地址 ctrl+f9执行到返回，遇到断点会停下一些常用的操作 可通过双击汇编窗口注释区或者右键给汇编代码添加注释，方便自己后续阅读，">
 <meta name="twitter:image" content="http://kevien.github.io/2017/08/22/OllyDbg使用入门/1.png">
 
 
@@ -405,7 +405,7 @@
 
       
         <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。<h4 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h4></li>
+<li>ollydbg有官方的下载的版本，也有其它修改版，其中我们最常用的是吾爱破解版本的od，其插件较多，较为方便。后面的介绍也是基本以吾爱破解的版本为主。<h4 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h4></li>
 <li>f8单步步过</li>
 <li>f7单步步入</li>
 <li>f9运行，执行到下个断点</li>
@@ -547,7 +547,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

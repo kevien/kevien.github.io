@@ -84,15 +84,16 @@
 <meta property="og:site_name" content="M0rk&#39;s Blog">
 <meta property="og:description" content="cs免杀 在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会开启windows defender（后面都简称wd）以及uac。 第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/safengine.png">
 <meta property="og:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/hashdump.png">
 <meta property="og:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/checkvm.png">
 <meta property="og:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/wd.png">
 <meta property="og:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/wd1.png">
-<meta property="og:updated_time" content="2022-04-13T12:47:28.792Z">
+<meta property="og:updated_time" content="2022-04-20T07:45:39.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs免杀上线及使用注意事项">
 <meta name="twitter:description" content="cs免杀 在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会开启windows defender（后面都简称wd）以及uac。 第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章">
-<meta name="twitter:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/hashdump.png">
+<meta name="twitter:image" content="http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/safengine.png">
 
 
 
@@ -401,7 +402,7 @@
       
         <h2 id="cs免杀"><a href="#cs免杀" class="headerlink" title="cs免杀"></a>cs免杀</h2><ul>
 <li>在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会开启windows defender（后面都简称wd）以及uac。</li>
-<li>第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章<a href="https://www.anquanke.com/post/id/262666" target="_blank" rel="noopener">CS shellcode内存加载器免杀及实现</a>。需要使用golang进行编译，注意编译时候添加选项  -ldflags=”-H windowsgui”，这样就没有黑框了。</li>
+<li>第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章<a href="https://www.anquanke.com/post/id/262666" target="_blank" rel="noopener">CS shellcode内存加载器免杀及实现</a>。需要使用golang进行编译，注意编译时候添加选项  -ldflags=”-H windowsgui”，这样就没有黑框了。当然还可以进一步给程序加壳，加壳的话可以使用safengine。<br><img src="/2022/04/12/cs免杀上线及使用注意事项/safengine.png" alt=""></li>
 <li><p>第二个问题就是我们接收到的beacon一般是管理员组的用户，但想要执行一些特殊操作，比如想要执行hashdump或者其他特权命令的时候,需要bypass uac.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 1 /t REG_DWORD /f，</span><br><span class="line">开启wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 0 /t REG_DWORD /f）</span><br></pre></td></tr></table></figure>
 </li>
@@ -534,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

