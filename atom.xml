@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2022-04-19T09:41:10.450Z</updated>
+  <updated>2022-06-14T10:38:35.011Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://kevien.github.io/2022/04/19/CTF%E4%B9%8BRSA%E7%AC%94%E8%AE%B0/"/>
     <id>http://kevien.github.io/2022/04/19/CTF之RSA笔记/</id>
     <published>2022-04-19T09:34:26.000Z</published>
-    <updated>2022-04-19T09:41:10.450Z</updated>
+    <updated>2022-06-14T10:38:35.011Z</updated>
     
-    <content type="html"><![CDATA[<p>###</p>
-<h3 id="sagemath"><a href="#sagemath" class="headerlink" title="sagemath"></a>sagemath</h3><ul>
+    <content type="html"><![CDATA[<h3 id="sagemath"><a href="#sagemath" class="headerlink" title="sagemath"></a>sagemath</h3><ul>
 <li><a href="https://www.jianshu.com/p/47ec09e870c0" target="_blank" rel="noopener">sagemath安装</a></li>
 <li>有时候需要使用crypto库那么需要pip安装一下   pip install pycryptodome，注意 1.需要在sagemath shell中执行 2.可能需要fq 3.需要管理员权限执行</li>
 <li>sagemath 的目录和windows的目录关系，直接看图吧<br><img src="/2022/04/19/CTF之RSA笔记/sagemath-path.png" alt=""></li>
@@ -32,9 +31,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;###&lt;/p&gt;
-&lt;h3 id=&quot;sagemath&quot;&gt;&lt;a href=&quot;#sagemath&quot; class=&quot;headerlink&quot; title=&quot;sagemath&quot;&gt;&lt;/a&gt;sagemath&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.jianshu.
+      &lt;h3 id=&quot;sagemath&quot;&gt;&lt;a href=&quot;#sagemath&quot; class=&quot;headerlink&quot; title=&quot;sagemath&quot;&gt;&lt;/a&gt;sagemath&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/47ec0
     
     </summary>
     

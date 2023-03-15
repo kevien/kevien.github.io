@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[CTF之RSA笔记]]></title>
     <url>%2F2022%2F04%2F19%2FCTF%E4%B9%8BRSA%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[### sagemath sagemath安装 有时候需要使用crypto库那么需要pip安装一下 pip install pycryptodome，注意 1.需要在sagemath shell中执行 2.可能需要fq 3.需要管理员权限执行 sagemath 的目录和windows的目录关系，直接看图吧]]></content>
+    <content type="text"><![CDATA[sagemath sagemath安装 有时候需要使用crypto库那么需要pip安装一下 pip install pycryptodome，注意 1.需要在sagemath shell中执行 2.可能需要fq 3.需要管理员权限执行 sagemath 的目录和windows的目录关系，直接看图吧]]></content>
   </entry>
   <entry>
     <title><![CDATA[web扫描笔记]]></title>
