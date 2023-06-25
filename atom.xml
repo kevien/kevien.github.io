@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2022-06-14T10:38:35.011Z</updated>
+  <updated>2023-03-15T05:12:49.227Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pwn basic</title>
+    <link href="http://kevien.github.io/2023/03/15/pwn-basic/"/>
+    <id>http://kevien.github.io/2023/03/15/pwn-basic/</id>
+    <published>2023-03-15T04:59:26.000Z</published>
+    <updated>2023-03-15T05:12:49.227Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="栈溢出常见利用方式"><a href="#栈溢出常见利用方式" class="headerlink" title="栈溢出常见利用方式"></a>栈溢出常见利用方式</h4><h3 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h3><h3 id="ret2syscall"><a href="#ret2syscall" class="headerlink" title="ret2syscall"></a>ret2syscall</h3><h3 id="ret2shellcode"><a href="#ret2shellcode" class="headerlink" title="ret2shellcode"></a>ret2shellcode</h3><h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><h3 id="ropchain"><a href="#ropchain" class="headerlink" title="ropchain"></a>ropchain</h3><h4 id="栈溢出防护"><a href="#栈溢出防护" class="headerlink" title="栈溢出防护"></a>栈溢出防护</h4><h3 id="canary"><a href="#canary" class="headerlink" title="canary"></a>canary</h3><ul>
+<li>CANNARY(栈保护) –金丝雀 又称为stack guard<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">金丝雀，以前矿工进入矿坑时候会带一只金丝雀下去，如果矿坑内有有毒气体，金丝雀就会鸣叫甚至死亡，同样这个canary也是缓冲区溢出攻击一种检测手段，当启用栈保护后，函数开始执行的时候会先往栈里插入cookie（金丝雀）信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux中我们将cookie信息称为canary。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h3><ul>
+<li>NX（DEP）(数据执行保护 Data Execution Prevention)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NX即No-eXecute（不可执行）的意思，NX（DEP）的基本原理是将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。</span><br><span class="line">可执行的地方不能写，可写的地方不能执行</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ASLR"><a href="#ASLR" class="headerlink" title="ASLR"></a>ASLR</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">内存地址随机化机制（address space layout randomization)，有以下三种情况：</span><br><span class="line"></span><br><span class="line">0 - 表示关闭进程地址空间随机化</span><br><span class="line"></span><br><span class="line">1 - 表示将mmap的基址，stack和vdso页面随机化</span><br><span class="line"></span><br><span class="line">2 - 表示在1的基础上增加堆（heap）的随机化</span><br><span class="line"></span><br><span class="line">每次程序执行时，stack heap library的位置都不一样</span><br></pre></td></tr></table></figure>
+<h3 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h3><ul>
+<li>PIE (Position Independent Execution)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启后,code与data都会跟着ALSR</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Relocation Read-Only</span><br><span class="line"></span><br><span class="line">Partial RELRO</span><br><span class="line"></span><br><span class="line">    GOT可写</span><br><span class="line"></span><br><span class="line">Full RELRO</span><br><span class="line"></span><br><span class="line">    Load time 时会将所有function resolve完毕</span><br><span class="line"></span><br><span class="line">    GOT不可写</span><br></pre></td></tr></table></figure>
+<h4 id="got-hijacking"><a href="#got-hijacking" class="headerlink" title="got hijacking"></a>got hijacking</h4>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;栈溢出常见利用方式&quot;&gt;&lt;a href=&quot;#栈溢出常见利用方式&quot; class=&quot;headerlink&quot; title=&quot;栈溢出常见利用方式&quot;&gt;&lt;/a&gt;栈溢出常见利用方式&lt;/h4&gt;&lt;h3 id=&quot;ret2text&quot;&gt;&lt;a href=&quot;#ret2text&quot; class=&quot;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>CTF之RSA笔记</title>
@@ -518,7 +550,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2020-03-15T06:45:12.000Z</updated>
+    <updated>2023-06-25T08:42:52.365Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">linux常见backdoor及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4090</span><br><span class="line">windows常见backdoor、权限维持方法及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4842</span><br></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -582,7 +614,11 @@
 <ul>
 <li>优点：改动较小</li>
 <li>缺点：易被检测到</li>
-<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录shell执行的，bashrc是在非登录shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
+<li>排查：通过排查shell的配置文件或者alias命令即可发现，例如~/.bashrc和~/.bash_profile文件查看是否有恶意的alias问题。(注意bash_profile是在登录shell执行的，bashrc是在非登录shell执行,即如果你只是想每次在登录的时候让它去执行，这个时候你可以把你的命令写在.bash_profile,如果你想每次打开一个新的终端的时候都去执行，那么应该把命令写在.bashrc中)<h3 id="ssh连接监控"><a href="#ssh连接监控" class="headerlink" title="ssh连接监控"></a>ssh连接监控</h3></li>
+<li>这个后门可以用来监控连接到服务器上的客户端所进行的所有操作，也可进行记录和重放，但是需要当前有用户通过ssh登录<br>详细见<a href="https://github.com/nopernik/SSHPry2.0" target="_blank" rel="noopener">SSHPry2</a></li>
+<li>优点：简单且类似录屏清晰记录操作过程</li>
+<li>缺点：没有做进程隐藏，如果能够结合一些进程隐藏的技巧将会很好用。</li>
+<li>排查：主要是进程排查<h3 id="常见sshd后门"><a href="#常见sshd后门" class="headerlink" title="常见sshd后门"></a>常见sshd后门</h3></li>
 <li><p>一种是建立sshd的软连接方法，开启其它的端口例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/sbin/sshd /home/su</span><br><span class="line">/home/su -oport=2222</span><br></pre></td></tr></table></figure>
 </li>
@@ -637,7 +673,7 @@
     <link href="http://kevien.github.io/2018/09/26/%E7%AC%94%E8%AE%B0%E4%B9%8Bdocker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://kevien.github.io/2018/09/26/笔记之docker的使用/</id>
     <published>2018-09-26T06:19:25.000Z</published>
-    <updated>2021-06-01T15:51:24.000Z</updated>
+    <updated>2023-03-15T03:40:58.263Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2018/09/26/笔记之docker的使用/docker-friends.png" alt=""></p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
@@ -645,9 +681,10 @@
 <li>什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><img src="/2018/09/26/笔记之docker的使用/itdevelop.png" alt=""></li>
 <li>如上图所示计算机的发展经历了从物理机到虚拟机的过程，最后出现了共享底层OS的容器。</li>
 <li>docker里面有两个概念需要稍微理解一下，Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
-<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker logs [OPTIONS] CONTAINER 用来查看容器日志，常用于容器启动失败排错等。</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
+<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#镜像操作常用命令</span><br><span class="line">docker images    #查看当前的镜像</span><br><span class="line">docker search xxx   #查找xxx镜像</span><br><span class="line">docker push/pull xxx     #获取xxx镜像 默认是latest</span><br><span class="line">docker inspect image    #查看镜像的相关信息  主要要加上image的TAG</span><br><span class="line">docker commit  #更新镜像 –m:提交的描述信息 –a :指定镜像作者</span><br><span class="line">docker build  #从零开始构建一个新的镜像，需要创建Dockerfile文件来包含一组指令来告诉docker如何构建我们的镜像。</span><br><span class="line">docker rmi $(docker images -q)   #删除所有镜像</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">容器操作常用命令</span><br><span class="line">docker ps  -a  #查看所有容器(包括已停止的)，--no-trunc 参数</span><br><span class="line">docker run –it  -name centos-test centos  /bin/bash  #启动容器</span><br><span class="line">docker attach/exec  #进入容器，推荐使用exec，因为此命令会退出容器终端，但不会导致容器的停止。</span><br><span class="line">docker inspect #查看docker的底层信息，记录容器的配置和状态等。</span><br><span class="line">docker start/stop/rm containerid #开始/停止/删除某个容器</span><br><span class="line">docker stop $(docker ps -aq) #停止所有容器</span><br><span class="line">Docker rm containerid #删除容器</span><br><span class="line">docker logs #查看容器内部的标准输出</span><br><span class="line">docker top #查看容器内部运行的进程</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
 <p>以上是常用的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="noopener">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
 <h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
 <li><p>docker-compose helloworld版</p>
@@ -664,7 +701,7 @@
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up通过查看详细的输出信息定位具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加可执行权限。</li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT 例如[“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
-<li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。</li>
+<li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。再有就是有时候pip安装的python库的时候下载失败时候可以使用 pip install -r  $d/requirements.txt -i  <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a> 来提高下载速度</li>
 <li>在centos7可能会遇到Docker error IPv4 forwarding is disabled的问题，<a href="http://mbacchi.github.io/2017/09/29/docker-ipv4-forwarding-disabled.html" target="_blank" rel="noopener">参考链接</a></li>
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi命令都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat等命令，可以直接使用 yum -y install net-tools 安装即可。</li>
 <li>有时候在使用docker-compose up -d 报错 network <id> not found，网络找不见，这个时候可以加参数 –force-recreate 即  docker-compose up -d  –force-recreate</id></li>
@@ -922,59 +959,6 @@
     <summary type="html">
     
       &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>malloc的系统调用</title>
-    <link href="http://kevien.github.io/2018/03/18/malloc%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    <id>http://kevien.github.io/2018/03/18/malloc的系统调用/</id>
-    <published>2018-03-17T17:27:46.000Z</published>
-    <updated>2018-11-19T15:55:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是<a href="http://man7.org/linux/man-pages/man2/sbrk.2.html" target="_blank" rel="noopener">brk</a>和<a href="http://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="noopener">mmap</a>。<h4 id="prco-pid-maps文件"><a href="#prco-pid-maps文件" class="headerlink" title="/prco/$pid/maps文件"></a>/prco/$pid/maps文件</h4></li>
-<li>先来简单看下这个文件，这个文件会显示整个进程的地址空间分布情况。<br><img src="/2018/03/18/malloc的系统调用/maps.png" alt=""><h4 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h4></li>
-<li>brk从内核获取内存是通过增加程序中断地址方式的，开始于start_brk,结束于brk，初始的时候两者都指向的是同一个位置。</li>
-<li>当ASLR关闭的时候，start_brk和brk都是指向bss段的尾部的</li>
-<li>当ASLR开启的时候，start_brk和brk初始位置是bss段的尾部加一个随机的偏移。<br><img src="/2018/03/18/malloc的系统调用/linuxFlexibleAddressSpaceLayout.png" alt=""><br>nice pic，a ha ：D</li>
-<li>如上图虚拟内存地址空间分布图所示，start_brk即是堆空间的开始，brk即是堆空间的结束。</li>
-<li><p>!注意，后面的测试均是关闭ASLR后测试输出，此外测试系统使用的是ubuntu14.04.1X64操作系统。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭ASLR的方法</span><br><span class="line">#echo 0 &gt; /proc/sys/kernel/randomize_va_space</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>示例代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/* sbrk and brk example */</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        void *curr_brk, *tmp_brk = NULL;</span><br><span class="line"></span><br><span class="line">        printf(&quot;Welcome to sbrk example:%d\n&quot;, getpid());</span><br><span class="line"></span><br><span class="line">        /* sbrk(0) gives current program break location */</span><br><span class="line">        tmp_brk = curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program Break Location1:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        /* brk(addr) increments/decrements program break location */</span><br><span class="line">        brk(curr_brk+4096);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program break Location2:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        brk(tmp_brk);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(0);</span><br><span class="line">        printf(&quot;Program Break Location3:%p\n&quot;, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出分析：</p>
-</li>
-<li>在brk之前，我们可以看到进程中是没有堆块的，因此 start_brk=brk=end_data=0x602000<br><img src="/2018/03/18/malloc的系统调用/brkbefore.png" alt=""></li>
-<li>当程序执行brk调用的时候，如下的输出，我们看到有了堆块,因此 start_brk=end_data=0x602000,此时</li>
-<li>start_brk=end_data=0x602000</li>
-<li>brk = 0x603000<br><img src="/2018/03/18/malloc的系统调用/brkafter.png" alt=""></li>
-<li>解释一下新增加的一行：这里602000-603000就是动态分配的地址空间，对应的操作权限标志是rw-p即可读可写不可执行，私有的</li>
-<li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.<h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4></li>
-<li><p>malloc使用<a href="https://elixir.bootlin.com/linux/v3.8/source/mm/mmap.c#L1285" target="_blank" rel="noopener">mmap</a>来创建一个私有的匿名映射块，私有的匿名映射块主要的目的就是分配新的内存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/* Private anonymous mapping example using mmap syscall */</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/mman.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">void static inline errExit(const char* msg)</span><br><span class="line">&#123;</span><br><span class="line">        printf(&quot;%s failed. Exiting the process\n&quot;, msg);</span><br><span class="line">        exit(-1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        int ret = -1;</span><br><span class="line">        printf(&quot;Welcome to private anonymous mapping example::PID:%d\n&quot;, getpid());</span><br><span class="line">        printf(&quot;Before mmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line">        char* addr = NULL;</span><br><span class="line">        addr = mmap(NULL, (size_t)132*1024, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);</span><br><span class="line">        if (addr == MAP_FAILED)</span><br><span class="line">                errExit(&quot;mmap&quot;);</span><br><span class="line">        printf(&quot;After mmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        /* Unmap mapped region. */</span><br><span class="line">        ret = munmap(addr, (size_t)132*1024);</span><br><span class="line">        if(ret == -1)</span><br><span class="line">                errExit(&quot;munmap&quot;);</span><br><span class="line">        printf(&quot;After munmap\n&quot;);</span><br><span class="line">        getchar();</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出分析：</p>
-</li>
-<li>在使用mmap之前：我们注意下面的一个内存地址段<br><img src="/2018/03/18/malloc的系统调用/mmapbefore.png" alt=""></li>
-<li>当我们通过mmap申请了132KB的空间的时候，看到如下图<br><img src="/2018/03/18/malloc的系统调用/mmapafter.png" alt=""><br>b7df0000-b7e12000 其中这段虚拟内存地址就包含了我们刚刚申请到132KB大小的地址空间</li>
-<li>其中b7df0000-b7e12000 是这个块的地址范围，对应的操作权限标志是rw-p即可读可写不可执行，私有的</li>
-<li>000000的文件偏移是因为没有映射任何的文件，00：00 是主要/次要的设备数-由于没有映射任何文件，所以这里也是0，最后的0是inode number，还是由于没有映射任何的文件，所以这里也还是0.</li>
-<li>当munmap之后，下面的输出我们可以看的到申请的内存被释放（变成原来的b7e11000-b7e12000），又交还给了操作系统。<br><img src="/2018/03/18/malloc的系统调用/aftermunmap.png" alt=""><h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
-<li>在64位上brk和32的结果是相同的，但是mmap的会有不同，原因暂时不明。<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4></li>
-<li><a href="https://sploitfun.wordpress.com/2015/02/11/syscalls-used-by-malloc/" target="_blank" rel="noopener">Syscalls used by malloc.</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在读这篇文章的时候你应该知道c语言的malloc是使用系统调用从操作系统申请内存的，这两个系统调用分别是
     
     </summary>
     

@@ -89,7 +89,7 @@
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/docker-compose-version.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/bug.png">
 <meta property="og:image" content="http://kevien.github.io/2018/09/26/笔记之docker的使用/guli.jpg">
-<meta property="og:updated_time" content="2021-06-01T15:51:24.000Z">
+<meta property="og:updated_time" content="2023-03-15T03:40:58.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记之docker的使用">
 <meta name="twitter:description" content="TL;DR 好久没有更新了，主要比较忙：(   以前只是简单的使用，前段时间相对较”近距离”接触了下docker，发现用来搭建漏洞环境真的很方便。尤其是Dockerfile和docker-compose分别用来构建定制镜像和管理多个容器的功能让我非常惊讶，当然期间也踩了一些坑，把这些坑记录一下。简述 什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到">
@@ -406,9 +406,10 @@
 <li>什么是docker，docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。<br><img src="/2018/09/26/笔记之docker的使用/itdevelop.png" alt=""></li>
 <li>如上图所示计算机的发展经历了从物理机到虚拟机的过程，最后出现了共享底层OS的容器。</li>
 <li>docker里面有两个概念需要稍微理解一下，Image(镜像)和Container(容器)，他们两个的关系就像是面向对象程序设计中的 类 和 实例 一样，镜像是静态的定义，容器是镜像运行时的实体。</li>
-<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="基本常用命令"><a href="#基本常用命令" class="headerlink" title="基本常用命令"></a>基本常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看当前的镜像</span><br><span class="line">docker ps -a 查看当前的容器</span><br><span class="line">docker ps -a 有时候我们想要看完整的COMMAND的时候 可以添加参数   - - no-trunc</span><br><span class="line">docker exec -i -t CONTAINER ID  /bin/bash 进入对应容器</span><br><span class="line">docker start/stop/rm CONTAINER ID  开始/停止/删除某个容器</span><br><span class="line">docker rmi -f  IMAGE ID 强制删除某个镜像</span><br><span class="line">docker stop $(docker ps -aq) 停止所有容器</span><br><span class="line">docker rm $(docker ps -aq)  删除所有容器</span><br><span class="line">docker rmi $(docker images -q) 删除所有镜像</span><br><span class="line">docker search xxx 查找xxx镜像</span><br><span class="line">docker pull xxx 获取xxx镜像 默认是latest</span><br><span class="line">docker logs [OPTIONS] CONTAINER 用来查看容器日志，常用于容器启动失败排错等。</span><br><span class="line">docker build .  寻找当前目录下的dockerfile并且生成自定义镜像</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
+<li><a href="https://github.com/widuu/chinese_docker/blob/master/installation/mac.md" target="_blank" rel="noopener">Docker在Mac上的基本安装</a><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#镜像操作常用命令</span><br><span class="line">docker images    #查看当前的镜像</span><br><span class="line">docker search xxx   #查找xxx镜像</span><br><span class="line">docker push/pull xxx     #获取xxx镜像 默认是latest</span><br><span class="line">docker inspect image    #查看镜像的相关信息  主要要加上image的TAG</span><br><span class="line">docker commit  #更新镜像 –m:提交的描述信息 –a :指定镜像作者</span><br><span class="line">docker build  #从零开始构建一个新的镜像，需要创建Dockerfile文件来包含一组指令来告诉docker如何构建我们的镜像。</span><br><span class="line">docker rmi $(docker images -q)   #删除所有镜像</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">容器操作常用命令</span><br><span class="line">docker ps  -a  #查看所有容器(包括已停止的)，--no-trunc 参数</span><br><span class="line">docker run –it  -name centos-test centos  /bin/bash  #启动容器</span><br><span class="line">docker attach/exec  #进入容器，推荐使用exec，因为此命令会退出容器终端，但不会导致容器的停止。</span><br><span class="line">docker inspect #查看docker的底层信息，记录容器的配置和状态等。</span><br><span class="line">docker start/stop/rm containerid #开始/停止/删除某个容器</span><br><span class="line">docker stop $(docker ps -aq) #停止所有容器</span><br><span class="line">Docker rm containerid #删除容器</span><br><span class="line">docker logs #查看容器内部的标准输出</span><br><span class="line">docker top #查看容器内部运行的进程</span><br><span class="line">docker-compose build --no-cache 每次构建的时候不使用cache 或者在写dockerfile的时候添加或者修改一条无关紧要的命令，这样也会强制build，而不使用cache</span><br></pre></td></tr></table></figure>
 <p>以上是常用的命令，还有就是跟着<a href="https://yeasy.gitbooks.io/docker_practice/introduction/why.html" target="_blank" rel="noopener">Docker — 从入门到实践</a>基本操作一下没什么问题。</p>
 <h4 id="Tips-之Dockerfile和docker-compose"><a href="#Tips-之Dockerfile和docker-compose" class="headerlink" title="Tips 之Dockerfile和docker-compose"></a>Tips 之Dockerfile和docker-compose</h4><ul>
 <li><p>docker-compose helloworld版</p>
@@ -425,7 +426,7 @@
 <li>有时候docker-compose up -d 的时候 容器马上exit，这个时候一般是启动出现了问题，可以通过 docker-compose up  或者docker-compose  —verbose up通过查看详细的输出信息定位具体是哪里出问题了。</li>
 <li>在向docker中放shell脚本的时候 需要在外部添加可执行权限。</li>
 <li>在开启容器的时候如果需要执行多个命令，而且多个命令如果是”阻塞”的，可以在docker-compose.yml 文件中写入ENTRYPOINT 例如[“/usr/local/bin/docker-entrypoint.sh”]，这样在容器启动的时候会自动的运行docker-entrypoint.sh shell脚本里面可以写你想要其运行的多条命令。</li>
-<li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。</li>
+<li>有些镜像或者外部的资源下载比较的慢，这个时候使用proxychains给终端挂上代理，或者把资源下载到本地，在Dockerfile里面使用COPY命令进行本地拷贝。再有就是有时候pip安装的python库的时候下载失败时候可以使用 pip install -r  $d/requirements.txt -i  <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a> 来提高下载速度</li>
 <li>在centos7可能会遇到Docker error IPv4 forwarding is disabled的问题，<a href="http://mbacchi.github.io/2017/09/29/docker-ipv4-forwarding-disabled.html" target="_blank" rel="noopener">参考链接</a></li>
 <li>开始的时候不建议使用最精简的linux系统，不然你会发现怎么连个vi命令都没有，什么都还得需要 RUN 安装，比较麻烦。centos7 最小化安装之后，默认是没有 ifconfig,netstat等命令，可以直接使用 yum -y install net-tools 安装即可。</li>
 <li>有时候在使用docker-compose up -d 报错 network <id> not found，网络找不见，这个时候可以加参数 –force-recreate 即  docker-compose up -d  –force-recreate</id></li>
@@ -557,7 +558,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -650,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简述"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本常用命令"><span class="nav-number">3.</span> <span class="nav-text">基本常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tips-之Dockerfile和docker-compose"><span class="nav-number">4.</span> <span class="nav-text">Tips 之Dockerfile和docker-compose</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Finally"><span class="nav-number">5.</span> <span class="nav-text">Finally</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TL-DR"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简述"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">3.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tips-之Dockerfile和docker-compose"><span class="nav-number">4.</span> <span class="nav-text">Tips 之Dockerfile和docker-compose</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Finally"><span class="nav-number">5.</span> <span class="nav-text">Finally</span></a></li></ol></div>
             
 
           </div>
