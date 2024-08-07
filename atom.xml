@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2024-08-07T15:32:53.529Z</updated>
+  <updated>2024-08-07T15:38:01.679Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://kevien.github.io/2024/08/07/Linux-LKM-Rootkit%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%8E%92%E6%9F%A5/"/>
     <id>http://kevien.github.io/2024/08/07/Linux-LKM-Rootkit简介与排查/</id>
     <published>2024-08-07T13:38:03.000Z</published>
-    <updated>2024-08-07T15:32:53.529Z</updated>
+    <updated>2024-08-07T15:38:01.679Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2024/08/07/Linux-LKM-Rootkit简介与排查/1.png" alt=""><br><a href="https://xz.aliyun.com/t/14548" target="_blank" rel="noopener">https://xz.aliyun.com/t/14548</a> （记录某次”有趣的”挖矿木马排查），这篇关于应急的文章写的不错，排查点基本上都排查到了，感觉就是差了个在入侵时间点范围内被修改过的文件这个角度去排查，但瑕不掩瑜，整个文章的亮点还是比较多，尤其是LKM的发现，之前没对LKM什么了解，遂简单学习了下。</p>
 <p>Loadable Kernel Modules (LKMs) 是现代操作系统内核（如 Linux 内核）中的一个重要特性。它们允许在运行时动态加载和卸载内核功能，而无需重新编译或重启内核。以下是对 LKMs 的详细介绍。</p>
@@ -63,6 +63,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rmmod hello</span><br></pre></td></tr></table></figure>
 <p>再次查看内核日志以确认模块卸载成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/08/07/Linux-LKM-Rootkit简介与排查/1.5.jpg" alt=""></p>
 <h3 id="LKM-Rootkit-排查"><a href="#LKM-Rootkit-排查" class="headerlink" title="LKM Rootkit 排查"></a>LKM Rootkit 排查</h3><ul>
 <li>使用 dmesg 命令查看内核日志，寻找可疑的加载或卸载模块的日志。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep module</span><br></pre></td></tr></table></figure>
 </li>
