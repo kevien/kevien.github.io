@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://kevien.github.io/2025/04/06/OffSec%E8%93%9D%E9%98%9F%E8%AF%BE%E7%A8%8BIR-200%E5%8F%8AOSIR%E8%80%83%E8%AF%81%E4%B9%8B%E6%97%85/</loc>
+    <lastmod>2025-04-06T09:04:41.689Z</lastmod>
+    <data>
+        <display>
+        <title>OffSec蓝队课程IR-200及OSIR考证之旅</title>
+        <pubTime>2025-04-06T08:56:41.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2024-12-06T10:13:46.119Z</lastmod>
+    <data>
+        <display>
+        <title>linux常见backdoor及排查技术</title>
+        <pubTime>2019-02-16T13:38:54.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://kevien.github.io/2024/08/07/Linux-LKM-Rootkit%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%8E%92%E6%9F%A5/</loc>
     <lastmod>2024-08-07T15:38:01.679Z</lastmod>
     <data>
@@ -25,21 +55,6 @@
         <display>
         <title>笔记之docker的使用</title>
         <pubTime>2018-09-26T06:19:25.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kevien.github.io/2019/02/16/linux%E5%B8%B8%E8%A7%81backdoor%E5%8F%8A%E6%8E%92%E6%9F%A5%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-06-25T08:42:52.365Z</lastmod>
-    <data>
-        <display>
-        <title>linux常见backdoor及排查技术</title>
-        <pubTime>2019-02-16T13:38:54.000Z</pubTime>
         
          
            
